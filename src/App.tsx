@@ -1,8 +1,8 @@
 import "./App.css";
-import VerifyEmail from "./components/VerifyEmail";
+import CreateStudentAccount from "./components/CreateStudentAccount";
 
 function App() {
-  return <VerifyEmail />;
+  return <CreateStudentAccount />;
 }
 
 export default App;
