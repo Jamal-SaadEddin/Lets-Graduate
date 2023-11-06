@@ -1,8 +1,8 @@
 import "./App.css";
-import SignUp from "./components/SignUp";
+import VerifyEmail from "./components/VerifyEmail";
 
 function App() {
-  return <SignUp />;
+  return <VerifyEmail />;
 }
 
 export default App;
