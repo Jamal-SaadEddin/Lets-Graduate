@@ -9,7 +9,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import letsgraduateLogo from "../assets/letsgraduate-logo-with-text.png";
+import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 
 function Copyright(props: any) {
   return (
