@@ -70,7 +70,7 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-export default function Dashboard() {
+export default function StudentDashboard() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
