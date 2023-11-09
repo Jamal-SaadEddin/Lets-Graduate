@@ -1,7 +1,7 @@
-import ForgetPassword from "./pages/auth/ForgetPassword";
+import Dashboard from "./pages/student/Dashboard";
 
 function App() {
-  return <ForgetPassword />;
+  return <Dashboard />;
 }
 
 export default App;
