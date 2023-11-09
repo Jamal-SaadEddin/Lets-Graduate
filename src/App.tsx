@@ -1,4 +1,4 @@
-import ForgetPassword from "./components/auth/ForgetPassword"; // this one comes first
+import ForgetPassword from "./pages/auth/ForgetPassword";
 
 function App() {
   return <ForgetPassword />;
