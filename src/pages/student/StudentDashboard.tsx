@@ -24,7 +24,7 @@ import {
   Paper,
 } from "@mui/material";
 import { Copyright } from "@mui/icons-material";
-import Prerequisties from "./Prerequisties";
+import Prerequisites from "./Prerequisites";
 
 const drawerWidth: number = 240;
 
@@ -221,7 +221,7 @@ export default function StudentDashboard() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Prerequisties />
+                  <Prerequisites />
                 </Paper>
               </Grid>
             </Grid>

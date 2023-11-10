@@ -7,16 +7,16 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Title from "./Title";
-import { prerequisites, Prerequistie } from "../../constants/prerequisites";
+import { Prerequisite, prerequisites } from "../../constants/prerequisites";
 import { useState } from "react";
 import { Typography } from "@mui/material";
 import * as React from "react";
 
-export default function Prerequisties() {
-  const [savedPrerequisites, setSavedPrerequisties] = useState(prerequisites);
+export default function Prerequisites() {
+  const [savedPrerequisites, setSavedPrerequisites] = useState(prerequisites);
 
   const handleClick = (preId: number) => {
-    setSavedPrerequisties(
+    setSavedPrerequisites(
       savedPrerequisites.map((pre) =>
         pre.id === preId ? { ...pre, answer: !pre.answer } : pre
       )
@@ -25,11 +25,11 @@ export default function Prerequisties() {
 
   return (
     <React.Fragment>
-      <Title>Prerequisties - Graduation Project 1</Title>
+      <Title>Prerequisites - Graduation Project 1</Title>
       <Table size="medium">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontSize: 16 }}>Prerequistie</TableCell>
+            <TableCell sx={{ fontSize: 16 }}>Prerequisite</TableCell>
             <TableCell align="right" sx={{ fontSize: 16 }}>
               Answer
             </TableCell>
@@ -68,7 +68,7 @@ export default function Prerequisties() {
             </TableRow>
           ))}
           {savedPrerequisites.length >= 1 &&
-          savedPrerequisites.every((p: Prerequistie) => p.answer === true) ? (
+          savedPrerequisites.every((p: Prerequisite) => p.answer === true) ? (
             <TableRow key={0}>
               <TableCell
                 sx={{

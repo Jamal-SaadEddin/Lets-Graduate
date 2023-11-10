@@ -1,4 +1,4 @@
-export interface Prerequistie {
+export interface Prerequisite {
   id: number;
   content: string;
   answer: boolean;
