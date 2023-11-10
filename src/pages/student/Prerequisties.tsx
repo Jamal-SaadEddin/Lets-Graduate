@@ -3,9 +3,10 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Title from "./Title";
-import { prerequisites } from "../../constants/prerequisites";
+import { prerequisites, Prerequistie } from "../../constants/prerequisites";
 import { useState } from "react";
 import * as React from "react";
 
@@ -43,6 +44,30 @@ export default function Prerequisties() {
               </TableCell>
             </TableRow>
           ))}
+          {savedPrerequisites.length >= 1 &&
+          savedPrerequisites.every((p: Prerequistie) => p.answer === true) ? (
+            <TableRow key={0}>
+              <TableCell
+                sx={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  fontFamily: "Segoe UI Emoji",
+                }}
+              >
+                You've completed all the Prerequisties! <br /> Do you want to
+                register Graduation Project 1 this semester?
+              </TableCell>
+              <TableCell align="right">
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{ fontSize: 16 }}
+                >
+                  Yes, Register
+                </Button>
+              </TableCell>
+            </TableRow>
+          ) : null}
         </TableBody>
       </Table>
     </React.Fragment>
