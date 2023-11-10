@@ -1,3 +1,9 @@
+export interface Prerequistie {
+  id: number;
+  content: string;
+  answer: boolean;
+}
+
 export const prerequisites = [
   {
     id: 1,

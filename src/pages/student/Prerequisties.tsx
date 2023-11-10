@@ -6,9 +6,20 @@ import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
 import Title from "./Title";
 import { prerequisites } from "../../constants/prerequisites";
+import { useState } from "react";
 import * as React from "react";
 
 export default function Prerequisties() {
+  const [savedPrerequisites, setSavedPrerequisties] = useState(prerequisites);
+
+  const handleClick = (preId: number) => {
+    setSavedPrerequisties(
+      savedPrerequisites.map((pre) =>
+        pre.id === preId ? { ...pre, answer: !pre.answer } : pre
+      )
+    );
+  };
+
   return (
     <React.Fragment>
       <Title>Prerequisties - Graduation Project 1</Title>
@@ -22,13 +33,13 @@ export default function Prerequisties() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {prerequisites.map((prerequisite) => (
+          {savedPrerequisites.map((prerequisite) => (
             <TableRow key={prerequisite.id}>
               <TableCell sx={{ fontSize: 16 }}>
                 {prerequisite.content}
               </TableCell>
               <TableCell align="right" sx={{ fontSize: 16 }}>
-                <Checkbox />
+                <Checkbox onClick={() => handleClick(prerequisite.id)} />
               </TableCell>
             </TableRow>
           ))}
