@@ -1,3 +1,4 @@
+import CircleIcon from "@mui/icons-material/Circle";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,6 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Title from "./Title";
 import { prerequisites, Prerequistie } from "../../constants/prerequisites";
 import { useState } from "react";
+import { Typography } from "@mui/material";
 import * as React from "react";
 
 export default function Prerequisties() {
@@ -40,6 +42,27 @@ export default function Prerequisties() {
                 {prerequisite.content}
               </TableCell>
               <TableCell align="right" sx={{ fontSize: 16 }}>
+                {prerequisite.answer && (
+                  <Typography
+                    sx={{
+                      display: "inline",
+                      paddingLeft: "7px",
+                      paddingRight: "9px",
+                      background: "#DFECDC",
+                      color: "#233729",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <CircleIcon
+                      sx={{
+                        fontSize: "12px",
+                        color: "#77997E",
+                        marginRight: "3px",
+                      }}
+                    />
+                    Yes
+                  </Typography>
+                )}
                 <Checkbox onClick={() => handleClick(prerequisite.id)} />
               </TableCell>
             </TableRow>
