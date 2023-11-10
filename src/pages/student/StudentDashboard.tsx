@@ -14,7 +14,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { SideBar } from "./SideBar";
-import { Tooltip, Avatar, Menu, MenuItem } from "@mui/material";
+import {
+  Tooltip,
+  Avatar,
+  Menu,
+  MenuItem,
+  Container,
+  Grid,
+  Paper,
+} from "@mui/material";
+import { Copyright } from "@mui/icons-material";
+import Prerequisties from "./Prerequisties";
 
 const drawerWidth: number = 240;
 
@@ -192,6 +202,16 @@ export default function StudentDashboard() {
           }}
         >
           <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Prerequisties />
+                </Paper>
+              </Grid>
+            </Grid>
+            <Copyright sx={{ pt: 4 }} />
+          </Container>
         </Box>
       </Box>
     </ThemeProvider>
