@@ -5,7 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import ImageListItem from "@mui/material/ImageListItem";
 import InputLabel from "@mui/material/InputLabel";
-import Link from "@mui/material/Link";
+import { Link as MuiLink } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
+import { Link } from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -246,8 +247,10 @@ export default function CreateStudentAccount() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Already have an account? Sign In"}
+                  <Link to="/">
+                    <MuiLink href="#" variant="body2">
+                      Already have an account? Sign In
+                    </MuiLink>
                   </Link>
                 </Grid>
               </Grid>

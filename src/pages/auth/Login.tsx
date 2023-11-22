@@ -3,13 +3,14 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import ImageListItem from "@mui/material/ImageListItem";
-import Link from "@mui/material/Link";
+import { Link as MuiLink } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
+import { Link } from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -20,9 +21,9 @@ function Copyright(props: any) {
       {...props}
     >
       {"Copyright © "}
-      {/* <Link color="inherit" href="https://mui.com/"> */}
+      {/* <MuiLink color="inherit" href="https://mui.com/"> */}
       LetsGraduate
-      {/* </Link>{" "} */}
+      {/* </MuiLink>{" "} */}
       {" " + new Date().getFullYear()}
       {"."}
     </Typography>
@@ -142,13 +143,15 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
+                  <Link to="forget-password">
+                    <MuiLink variant="body2">Forgot password?</MuiLink>
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                  <Link to="sign-up">
+                    <MuiLink href="#" variant="body2">
+                      Don't have an account? Sign Up
+                    </MuiLink>
                   </Link>
                 </Grid>
               </Grid>
