@@ -134,10 +134,8 @@ export default function ForgetPassword() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link to="/">
-                    <MuiLink href="#" variant="body2">
-                      Back to Sign In?
-                    </MuiLink>
+                  <Link to="/login">
+                    <MuiLink variant="body2">Back to Sign In?</MuiLink>
                   </Link>
                 </Grid>
               </Grid>

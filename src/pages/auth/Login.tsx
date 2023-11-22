@@ -143,13 +143,13 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link to="forget-password">
+                  <Link to="/forget-password">
                     <MuiLink variant="body2">Forgot password?</MuiLink>
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="sign-up">
-                    <MuiLink href="#" variant="body2">
+                  <Link to="/sign-up">
+                    <MuiLink variant="body2">
                       Don't have an account? Sign Up
                     </MuiLink>
                   </Link>

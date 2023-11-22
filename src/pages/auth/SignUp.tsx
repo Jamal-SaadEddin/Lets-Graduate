@@ -134,8 +134,8 @@ export default function SignUp() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link to="/">
-                    <MuiLink href="#" variant="body2">
+                  <Link to="/login">
+                    <MuiLink variant="body2">
                       Already have an account? Sign In
                     </MuiLink>
                   </Link>
