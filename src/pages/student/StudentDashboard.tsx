@@ -25,6 +25,8 @@ import {
 } from "@mui/material";
 import { Copyright } from "@mui/icons-material";
 import Prerequisites from "./Prerequisites";
+import useAuth from "../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
 
 const drawerWidth: number = 240;
 
@@ -96,6 +98,10 @@ const defaultTheme = createTheme({
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export default function StudentDashboard() {
+  const { user } = useAuth();
+
+  if (!user) return <Navigate to="/login" />;
+
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
