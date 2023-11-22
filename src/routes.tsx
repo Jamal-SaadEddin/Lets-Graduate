@@ -6,9 +6,10 @@ import CreateStudentAccount from "./pages/auth/CreateStudentAccount";
 import ForgetPassword from "./pages/auth/ForgetPassword";
 import VerifyEmailForPassword from "./pages/auth/VerifyEmailForPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
+import ErrorPage from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Login /> },
+  { path: "/", element: <Login />, errorElement: <ErrorPage /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/verify-email", element: <VerifyEmail /> },
   { path: "/create-student-account", element: <CreateStudentAccount /> },
