@@ -27,24 +27,7 @@ import { Link, Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import sideBarButtons from "../../constants/sideBarButtons";
 import { AppBar, Drawer, defaultTheme } from "../../components/DashboardLayout";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      {/* <Link color="inherit" href="https://mui.com/"> */}
-      LetsGraduate
-      {/* </Link>{" "} */}
-      {" " + new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "../../components/Copyright";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
