@@ -7,10 +7,16 @@ import ForgetPassword from "./pages/auth/ForgetPassword";
 import VerifyEmailForPassword from "./pages/auth/VerifyEmailForPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import ErrorPage from "./pages/ErrorPage";
-import StudentDashboard from "./pages/student/StudentDashboard";
+import HomePage from "./pages/HomePage";
+import StudentPage from "./pages/StudentPage";
 
 const router = createBrowserRouter([
-  { path: "/", element: <StudentDashboard />, errorElement: <ErrorPage /> },
+  {
+    path: "/",
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
+    children: [{ index: true, element: <StudentPage /> }],
+  },
   { path: "/login", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/verify-email", element: <VerifyEmail /> },
