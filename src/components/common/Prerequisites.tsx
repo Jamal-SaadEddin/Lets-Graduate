@@ -22,6 +22,13 @@ export default function Prerequisites() {
     );
   };
 
+  if (!prerequisites || prerequisites.length === 0)
+    return (
+      <Typography component="h2" variant="h5" color="primary" gutterBottom>
+        No Prerequisites Available.
+      </Typography>
+    );
+
   return (
     <React.Fragment>
       <Typography component="h2" variant="h5" color="primary" gutterBottom>
@@ -78,8 +85,9 @@ export default function Prerequisites() {
                   fontFamily: "Segoe UI Emoji",
                 }}
               >
-                You've completed all the Prerequisties! <br /> Do you want to
-                register Graduation Project 1 this semester?
+                {"You've completed all the Prerequisties!"} <br />
+                Do you want to register Graduation Project {"1 " || "2 "}
+                this semester?
               </TableCell>
               <TableCell align="right">
                 <Button

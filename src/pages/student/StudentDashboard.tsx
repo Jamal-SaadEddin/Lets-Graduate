@@ -28,6 +28,7 @@ import Button from "@mui/material/Button";
 import sideBarButtons from "../../constants/sideBarButtons";
 import { AppBar, Drawer, defaultTheme } from "../../components/DashboardLayout";
 import Copyright from "../../components/Copyright";
+import Prerequisites from "../../components/common/Prerequisites";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -162,9 +163,10 @@ export default function StudentDashboard() {
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                   <Grid container spacing={3} columns={1}>
                     <Grid item xs={12}>
-                      <Typography variant="h4">
+                      {/* <Typography variant="h4">
                         Welcome {" " || "back,"} {"Jamal"}!
-                      </Typography>
+                      </Typography> */}
+                      <Prerequisites />
                     </Grid>
                   </Grid>
                 </Paper>
