@@ -3,6 +3,7 @@ import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import { ReactNode } from "react";
 
 export interface SideBarButton {
@@ -13,6 +14,11 @@ export interface SideBarButton {
 }
 
 const sideBarButtons = [
+  {
+    icon: <DashboardIcon />,
+    primaryText: "Dashboard",
+    link: "/",
+  },
   {
     icon: <QuestionAnswerIcon />,
     primaryText: "Prerequisites",

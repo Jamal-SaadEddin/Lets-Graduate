@@ -12,16 +12,17 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../components/Copyright";
 import { AppBar, Drawer, defaultTheme } from "../components/DashboardLayout";
 import SideBar from "../components/common/SideBar";
 import sideBarButtons from "../constants/sideBarButtons";
 import useAuth from "../hooks/useAuth";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { settings } from "../constants/settings";
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
   const { user } = useAuth();
 
   if (!user) return <Navigate to="/login" />;
@@ -34,8 +35,9 @@ export default function HomePage() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (link?: string) => {
     setAnchorElUser(null);
+    if (link) navigate(link);
   };
 
   const [open, setOpen] = React.useState(true);
@@ -104,11 +106,14 @@ export default function HomePage() {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClose={() => handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem
+                    key={setting.title}
+                    onClick={() => handleCloseUserMenu(setting.link)}
+                  >
+                    <Typography textAlign="center">{setting.title}</Typography>
                   </MenuItem>
                 ))}
               </Menu>

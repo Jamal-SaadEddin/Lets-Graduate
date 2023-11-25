@@ -15,6 +15,7 @@ import SupervisorsTable from "./components/SupervisorsTable";
 import ProjectDetails from "./components/ProjectDetails";
 import Submissions from "./components/Submissions";
 import ProfileDetails from "./components/ProfileDetails";
+import AccountSettings from "./components/AccountSettings";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "available-supervisors", element: <SupervisorsTable /> },
       { path: "my-project", element: <ProjectDetails /> },
       { path: "submissions", element: <Submissions /> },
+      { path: "account-settings", element: <AccountSettings /> },
       { path: ":username", element: <ProfileDetails /> },
     ],
   },
