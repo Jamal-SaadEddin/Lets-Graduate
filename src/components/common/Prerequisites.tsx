@@ -6,7 +6,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
-import Title from "./Title";
 import { Prerequisite, prerequisites } from "../../constants/prerequisites";
 import { useState } from "react";
 import { Typography } from "@mui/material";
@@ -25,7 +24,9 @@ export default function Prerequisites() {
 
   return (
     <React.Fragment>
-      <Title>Prerequisites - Graduation Project 1</Title>
+      <Typography component="h2" variant="h5" color="primary" gutterBottom>
+        Prerequisites - Graduation Project {"1" || "2"}
+      </Typography>
       <Table size="medium">
         <TableHead>
           <TableRow>
