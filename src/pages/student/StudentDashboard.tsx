@@ -13,7 +13,7 @@ import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { SideBar } from "./SideBar";
+import SideBar from "../../components/common/SideBar";
 import {
   Tooltip,
   Avatar,
@@ -27,6 +27,49 @@ import {
 import useAuth from "../../hooks/useAuth";
 import { Link, Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
+
+import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
+import GroupWorkIcon from "@mui/icons-material/GroupWork";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import { ReactNode } from "react";
+
+export interface SideBarButton {
+  icon: ReactNode;
+  primaryText: string;
+  secondaryText?: string;
+}
+
+const sideBarButtons = [
+  {
+    icon: <QuestionAnswerIcon />,
+    primaryText: "Prerequisites",
+    secondaryText: "Graduation Project 1",
+  },
+  {
+    icon: <QuestionAnswerIcon />,
+    primaryText: "Prerequisites",
+    secondaryText: "Graduation Project 2",
+  },
+  {
+    icon: <ConnectWithoutContactIcon />,
+    primaryText: "Connect to a Group",
+  },
+  {
+    icon: <GroupWorkIcon />,
+    primaryText: "My Project",
+    secondaryText: "Informations & Details",
+  },
+  {
+    icon: <SupervisedUserCircleIcon />,
+    primaryText: "Register to a Supervisor",
+  },
+  {
+    icon: <PictureAsPdfIcon />,
+    primaryText: "Submissions",
+  },
+];
 
 const drawerWidth: number = 240;
 
@@ -223,7 +266,9 @@ export default function StudentDashboard() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">{SideBar}</List>
+          <List component="nav">
+            <SideBar children={sideBarButtons} />
+          </List>
         </Drawer>
         <Box
           component="main"
