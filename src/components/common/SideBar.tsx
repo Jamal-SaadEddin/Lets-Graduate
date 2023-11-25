@@ -2,7 +2,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import * as React from "react";
-import { SideBarButton } from "../../pages/student/StudentDashboard";
+import { SideBarButton } from "../../constants/sideBarButtons";
 
 interface Props {
   children: SideBarButton[];
