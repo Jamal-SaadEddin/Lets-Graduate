@@ -9,13 +9,18 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import StudentPage from "./pages/StudentPage";
+import Prerequisites from "./components/common/Prerequisites";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <StudentPage /> }],
+    children: [
+      { index: true, element: <StudentPage /> },
+      { path: "prerequisites-gp1", element: <Prerequisites /> },
+      { path: "prerequisites-gp2", element: <Prerequisites /> },
+    ],
   },
   { path: "/login", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
