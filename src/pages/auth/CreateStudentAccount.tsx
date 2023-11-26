@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 import { Link } from "react-router-dom";
+import { departments } from "../../constants/departments";
 
 function Copyright(props: any) {
   return (
@@ -38,10 +39,10 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function CreateStudentAccount() {
-  const [department, setAge] = React.useState("");
+  const [department, setDepartment] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
+    setDepartment(event.target.value as string);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -164,50 +165,11 @@ export default function CreateStudentAccount() {
                     label="Department"
                     onChange={handleChange}
                   >
-                    <MenuItem value="Computer Engineering">
-                      Computer Engineering - هندسة الحاسوب
-                    </MenuItem>
-                    <MenuItem value="Industrial Engineering">
-                      Industrial Engineering - الهندسة الصناعية
-                    </MenuItem>
-                    <MenuItem value="Electrical Engineering">
-                      Electrical Engineering - الهندسة الكهربائية
-                    </MenuItem>
-                    <MenuItem value="Chemical Engineering">
-                      Chemical Engineering - الهندسة الكيميائية
-                    </MenuItem>
-                    <MenuItem value="Civil Engineering">
-                      Civil Engineering - الهندسة المدنية
-                    </MenuItem>
-                    <MenuItem value="Architecture Engineering">
-                      Architecture Engineering - الهندسة المعمارية
-                    </MenuItem>
-                    <MenuItem value="Mechanical Engineering">
-                      Mechanical Engineering - الهندسة الميكانيكية
-                    </MenuItem>
-                    <MenuItem value="Communications Engineering">
-                      Communications Engineering - هندسة الاتصالات
-                    </MenuItem>
-                    <MenuItem value="Construction Engineering">
-                      Construction Engineering - هندسة البناء
-                    </MenuItem>
-                    <MenuItem value="Planning Engineering and city technology">
-                      Planning Engineering and city technology - هندسة التخطيط
-                      وتكنولوجيا المدن
-                    </MenuItem>
-                    <MenuItem value="Geomatics Engineering">
-                      Geomatics Engineering - هندسة الجيومتكس
-                    </MenuItem>
-                    <MenuItem value="Energy and environmental Engineering">
-                      Energy and environmental Engineering - هندسة الطاقة
-                      والبيئة
-                    </MenuItem>
-                    <MenuItem value="Mechatronics Engineering">
-                      Mechatronics Engineering - هندسة الميكاترونكس
-                    </MenuItem>
-                    <MenuItem value="Materials science Engineering">
-                      Materials science Engineering - هندسة علوم المواد
-                    </MenuItem>
+                    {departments.map((department) => (
+                      <MenuItem key={department.name}>
+                        {department.name}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Box>
