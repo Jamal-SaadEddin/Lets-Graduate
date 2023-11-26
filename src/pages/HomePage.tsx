@@ -1,8 +1,10 @@
 import CssBaseline from "@mui/material/CssBaseline";
+import { Dashboard, Logout } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Avatar, Menu, MenuItem, Tooltip } from "@mui/material";
+import { Avatar, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -18,7 +20,6 @@ import { AppBar, Drawer, defaultTheme } from "../components/DashboardLayout";
 import SideBar from "../components/common/SideBar";
 import sideBarButtons from "../constants/sideBarButtons";
 import useAuth from "../hooks/useAuth";
-import { settings } from "../constants/settings";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function HomePage() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const openMenu = Boolean(anchorElUser);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -40,9 +42,9 @@ export default function HomePage() {
     if (link) navigate(link);
   };
 
-  const [open, setOpen] = React.useState(true);
+  const [openDrawer, setOpenDrawer] = React.useState(true);
   const toggleDrawer = () => {
-    setOpen(!open);
+    setOpenDrawer(!openDrawer);
   };
 
   return (
@@ -52,7 +54,7 @@ export default function HomePage() {
         <AppBar
           position="absolute"
           color="primary"
-          open={open}
+          open={openDrawer}
           enableColorOnDark
         >
           <Toolbar
@@ -67,7 +69,7 @@ export default function HomePage() {
               onClick={toggleDrawer}
               sx={{
                 marginRight: "36px",
-                ...(open && { display: "none" }),
+                ...(openDrawer && { display: "none" }),
               }}
             >
               <MenuIcon />
@@ -87,40 +89,84 @@ export default function HomePage() {
               </Badge>
             </IconButton>
             <Box sx={{ flexGrow: 0, mx: "1rem" }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Jamal SaadEddin" src="" />
+              <Tooltip title="Account settings">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ p: 0 }}
+                  aria-controls={openMenu ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openMenu ? "true" : undefined}
+                >
+                  <Avatar
+                    alt="Jamal SaadEddin"
+                    src="/src/assets/jamal_pp.jpg"
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
                 anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+                id="account-menu"
+                open={openMenu}
+                onClose={() => handleCloseUserMenu()}
+                onClick={() => handleCloseUserMenu()}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
                 }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={() => handleCloseUserMenu}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                {settings.map((setting) => (
-                  <MenuItem
-                    key={setting.title}
-                    onClick={() => handleCloseUserMenu(setting.link)}
-                  >
-                    <Typography textAlign="center">{setting.title}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={() => handleCloseUserMenu(user.name)}>
+                  <Avatar /> Profile
+                </MenuItem>
+                <MenuItem onClick={() => handleCloseUserMenu("/")}>
+                  <ListItemIcon>
+                    <Dashboard />
+                  </ListItemIcon>
+                  Dashboard
+                </MenuItem>
+                <Divider />
+                <MenuItem
+                  onClick={() => handleCloseUserMenu("account-settings")}
+                >
+                  <ListItemIcon>
+                    <ManageAccountsIcon />
+                  </ListItemIcon>
+                  Edit Account
+                </MenuItem>
+                <MenuItem onClick={() => handleCloseUserMenu("/login")}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={openDrawer}>
           <Toolbar
             sx={{
               display: "flex",
