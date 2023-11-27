@@ -18,7 +18,7 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 const ProfileDetails = () => {
   const { user } = useAuth();
-  const [currentUser, setCurrentUser] = React.useState(user);
+  const [currentUser, setCurrentUser] = React.useState<User>(user);
 
   const [disabled, setDisabled] = React.useState(true);
 
@@ -213,6 +213,11 @@ const ProfileDetails = () => {
                   px: 2,
                 }}
                 disableElevation
+                disabled={
+                  JSON.stringify(currentUser) === JSON.stringify(user)
+                    ? true
+                    : false
+                }
                 onClick={handleSave}
               >
                 <SaveIcon />

@@ -12,7 +12,7 @@ export interface User {
 }
 
 const useAuth = () => ({
-  user: {
+  user: <User>{
     id: "11923604",
     firstName: "Jamal",
     lastName: "SaadEddin",
