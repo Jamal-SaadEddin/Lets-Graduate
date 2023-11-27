@@ -1,4 +1,3 @@
-import CircleIcon from "@mui/icons-material/Circle";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import {
@@ -11,10 +10,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import useAuth, { User } from "../hooks/useAuth";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { InProgressBadge, NotStartedBadge } from "./StateBadges";
 
 const ProfileDetails = () => {
   const { user } = useAuth();
@@ -242,52 +242,12 @@ const ProfileDetails = () => {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="subtitle1">
-              Graduation Project 1 State:{" "}
-              <Typography
-                sx={{
-                  display: "inline",
-                  fontSize: "16px",
-                  paddingLeft: "7px",
-                  paddingRight: "9px",
-                  background: "#e3e2e0",
-                  color: "#32302c",
-                  borderRadius: "20px",
-                }}
-              >
-                <CircleIcon
-                  sx={{
-                    fontSize: "12px",
-                    color: "#91918e",
-                    marginRight: "3px",
-                  }}
-                />
-                Not started
-              </Typography>
+              Graduation Project 1 State: <NotStartedBadge />
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="subtitle1">
-              Graduation Project 2 State:{" "}
-              <Typography
-                sx={{
-                  display: "inline",
-                  fontSize: "16px",
-                  paddingLeft: "7px",
-                  paddingRight: "9px",
-                  background: "#d7e4ee",
-                  color: "#32302c",
-                  borderRadius: "20px",
-                }}
-              >
-                <CircleIcon
-                  sx={{
-                    fontSize: "12px",
-                    color: "#6c96bb",
-                    marginRight: "3px",
-                  }}
-                />
-                In progress
-              </Typography>
+              Graduation Project 2 State: <InProgressBadge />
             </Typography>
           </Grid>
         </Grid>

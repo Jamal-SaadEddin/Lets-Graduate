@@ -1,14 +1,14 @@
-import CircleIcon from "@mui/icons-material/Circle";
+import { Container, Grid, Paper, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import { Prerequisite, prerequisites } from "../../constants/prerequisites";
 import { useState } from "react";
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { Prerequisite, prerequisites } from "../../constants/prerequisites";
+import { DoneBadge } from "../StateBadges";
 
 export default function Prerequisites() {
   const [savedPrerequisites, setSavedPrerequisites] = useState(prerequisites);
@@ -57,27 +57,7 @@ export default function Prerequisites() {
                       {prerequisite.content}
                     </TableCell>
                     <TableCell align="right" sx={{ fontSize: 16 }}>
-                      {prerequisite.answer && (
-                        <Typography
-                          sx={{
-                            display: "inline",
-                            paddingLeft: "7px",
-                            paddingRight: "9px",
-                            background: "#DFECDC",
-                            color: "#233729",
-                            borderRadius: "20px",
-                          }}
-                        >
-                          <CircleIcon
-                            sx={{
-                              fontSize: "12px",
-                              color: "#77997E",
-                              marginRight: "3px",
-                            }}
-                          />
-                          Yes
-                        </Typography>
-                      )}
+                      {prerequisite.answer && <DoneBadge text="Yes" />}
                       <Checkbox onClick={() => handleClick(prerequisite.id)} />
                     </TableCell>
                   </TableRow>
