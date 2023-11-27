@@ -138,7 +138,7 @@ export default function HomePage() {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={() => handleCloseUserMenu(user.name)}>
+                <MenuItem onClick={() => handleCloseUserMenu(user.firstName)}>
                   <Avatar /> Profile
                 </MenuItem>
                 <MenuItem onClick={() => handleCloseUserMenu("/")}>

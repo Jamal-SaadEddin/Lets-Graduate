@@ -3,36 +3,51 @@ import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import {
   Avatar,
-  Box,
   Button,
   Container,
   Divider,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
   Paper,
-  Select,
-  SelectChangeEvent,
   TextField,
   Typography,
 } from "@mui/material";
 import React from "react";
-import { departments } from "../constants/departments";
+import useAuth, { User } from "../hooks/useAuth";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 const ProfileDetails = () => {
-  const [department, setDepartment] = React.useState(
-    "Computer Engineering - هندسة الحاسوب"
-  );
+  const { user } = useAuth();
+  const [currentUser, setCurrentUser] = React.useState(user);
 
   const [disabled, setDisabled] = React.useState(true);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setDepartment(event.target.value as string);
+  const handleCancel = (user: User) => {
+    setCurrentUser(user);
+    setDisabled(!disabled);
   };
 
   const handleClick = () => {
     setDisabled(!disabled);
+  };
+
+  const handleSave = () => {
+    // Save Changes to Backend
+    setDisabled(!disabled);
+    setOpenSnackbar(true);
+  };
+
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+  const handleCloseSnackbar = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
   };
 
   return (
@@ -73,114 +88,149 @@ const ProfileDetails = () => {
             <TextField
               fullWidth
               label="First Name"
-              defaultValue="Jamal"
+              value={currentUser.firstName}
               disabled={disabled}
               sx={{
                 "& .Mui-disabled": {
-                  color: "rgba(0, 0, 0, 0.7)",
+                  color: "black",
                 },
               }}
+              onChange={(event) =>
+                setCurrentUser({
+                  ...currentUser,
+                  firstName: event.target.value,
+                })
+              }
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               fullWidth
               label="Last Name"
-              defaultValue="SaadEddin"
+              value={currentUser.lastName}
               disabled={disabled}
               sx={{
                 "& .Mui-disabled": {
-                  color: "rgba(0, 0, 0, 0.7)",
+                  color: "black",
                 },
               }}
+              onChange={(event) =>
+                setCurrentUser({
+                  ...currentUser,
+                  lastName: event.target.value,
+                })
+              }
             />
           </Grid>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              label="Registeration Number"
-              defaultValue="11923604"
-              disabled={disabled}
-              sx={{
-                "& .Mui-disabled": {
-                  color: "rgba(0, 0, 0, 0.7)",
-                },
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            {disabled && (
+          {disabled && (
+            <Grid item xs={6}>
               <TextField
                 fullWidth
-                label="Department"
-                defaultValue={department}
-                disabled={disabled}
+                label="Registeration Number"
+                value={currentUser.id}
+                disabled
                 sx={{
                   "& .Mui-disabled": {
-                    color: "rgba(0, 0, 0, 0.7)",
+                    color: "black",
                   },
                 }}
               />
-            )}
-            {!disabled && (
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                  <InputLabel id="department">Department</InputLabel>
-                  <Select
-                    labelId="department"
-                    id="department"
-                    value={department}
-                    label="Department"
-                    onChange={handleChange}
-                  >
-                    {departments.map((department) => (
-                      <MenuItem key={department.name} value={department.name}>
-                        {department.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            )}
-          </Grid>
+            </Grid>
+          )}
+          {disabled && (
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Department"
+                value={currentUser.department}
+                disabled
+                sx={{
+                  "& .Mui-disabled": {
+                    color: "black",
+                  },
+                }}
+              />
+            </Grid>
+          )}
           <Grid item xs={6}>
             <TextField
               fullWidth
               label="Address - City/Village"
-              defaultValue="Nablus"
+              value={currentUser.address}
               disabled={disabled}
               sx={{
                 "& .Mui-disabled": {
-                  color: "rgba(0, 0, 0, 0.7)",
+                  color: "black",
                 },
               }}
+              onChange={(event) =>
+                setCurrentUser({
+                  ...currentUser,
+                  address: event.target.value,
+                })
+              }
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
               fullWidth
               label="Mobile Phone"
-              defaultValue="0599098598"
+              value={currentUser.mobileNumber}
               disabled={disabled}
               sx={{
                 "& .Mui-disabled": {
-                  color: "rgba(0, 0, 0, 0.7)",
+                  color: "black",
                 },
               }}
+              onChange={(event) =>
+                setCurrentUser({
+                  ...currentUser,
+                  mobileNumber: event.target.value,
+                })
+              }
             />
           </Grid>
-          <Grid item xs={3}>
-            <Button
-              variant="outlined"
-              sx={{
-                px: 2,
-              }}
-              onClick={handleClick}
-            >
-              {disabled && <EditIcon />}
-              {!disabled && <SaveIcon />} &nbsp;{" "}
-              {disabled ? "Edit Profile" : "Save Changes"}
-            </Button>
+          <Grid item xs={12}>
+            {!disabled && (
+              <Button
+                variant="contained"
+                color="inherit"
+                sx={{
+                  px: 2,
+                  mr: 2,
+                }}
+                disableElevation
+                onClick={() => handleCancel(user)}
+              >
+                Cancel
+              </Button>
+            )}
+            {!disabled && (
+              <Button
+                variant="contained"
+                color="success"
+                sx={{
+                  px: 2,
+                }}
+                disableElevation
+                onClick={handleSave}
+              >
+                <SaveIcon />
+                &nbsp; Save Changes
+              </Button>
+            )}
+            {disabled && (
+              <Button
+                variant="outlined"
+                sx={{
+                  px: 2,
+                }}
+                onClick={handleClick}
+              >
+                <EditIcon />
+                &nbsp; Edit Profile
+              </Button>
+            )}
           </Grid>
           <Grid item xs={12}>
             <Divider />
@@ -236,9 +286,29 @@ const ProfileDetails = () => {
             </Typography>
           </Grid>
         </Grid>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
+          onClose={handleCloseSnackbar}
+        >
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Saved Changes Successfully!
+          </Alert>
+        </Snackbar>
       </Paper>
     </Container>
   );
 };
 
 export default ProfileDetails;
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
