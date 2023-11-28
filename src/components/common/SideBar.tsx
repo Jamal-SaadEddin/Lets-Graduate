@@ -14,8 +14,8 @@ const SideBar = ({ children }: Props) => {
 
   return (
     <React.Fragment>
-      {children.map((item) => (
-        <ListItemButton onClick={() => navigate(item.link)}>
+      {children.map((item, index) => (
+        <ListItemButton onClick={() => navigate(item.link)} key={index}>
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText
             sx={{ ml: "-20px" }}

@@ -1,98 +1,54 @@
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
-import CancelIcon from "@mui/icons-material/Cancel";
-import SendIcon from "@mui/icons-material/Send";
-import { Button, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import { styled } from "@mui/material/styles";
+import { projects } from "../../constants/availableGroups";
+import useSearchboxStore from "../../state-management/searchboxStore";
+import StudentSearchbox from "../StudentSearchbox";
+import StudentsTable from "../StudentsTable";
 
 export default function GroupsTable() {
+  const filteredStudents = useSearchboxStore((s) => s.filteredStudents);
+  const filteredProjectsIds = filteredStudents.map((s) => s.projectId);
+
+  const filteredProjects = projects.filter(
+    ({ id }) => filteredProjectsIds.indexOf(id) !== -1
+  );
+
   return (
     <div>
       <Typography variant="h6" paddingBottom={2} color="primary">
         Available Groups
       </Typography>
+      <StudentSearchbox />
       <Typography variant="caption">
         Click on group to show more details
       </Typography>
-      <Group>
-        <GroupSummary>
-          <Grid container>
-            <Grid item xs={7} sm={9}>
-              <Typography>{"Jamal & Mohammad"}</Typography>
+      {filteredProjects.map((project) => (
+        <Group key={project.id}>
+          <GroupSummary>
+            <Grid container>
+              <Grid item xs={7} sm={9}>
+                <Typography>
+                  {project.students
+                    .map((student) => `${student.label}`)
+                    .join(", ")}
+                </Typography>
+              </Grid>
+              <Grid item xs={5} sm={3} textAlign="end">
+                <Typography>{project.students.length} Members</Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={5} sm={3} textAlign="end">
-              <Typography>{"2"} Members</Typography>
-            </Grid>
-          </Grid>
-        </GroupSummary>
-        <GroupDetails>
-          <BasicTable />
-        </GroupDetails>
-      </Group>
-      <Group>
-        <GroupSummary>
-          <Grid container>
-            <Grid item xs={7} sm={9}>
-              <Typography>{"Jamal & Mohammad"}</Typography>
-            </Grid>
-            <Grid item xs={5} sm={3} textAlign="end">
-              <Typography>{"2"} Members</Typography>
-            </Grid>
-          </Grid>
-        </GroupSummary>
-        <GroupDetails>
-          <BasicTable />
-        </GroupDetails>
-      </Group>
-      <Group>
-        <GroupSummary>
-          <Grid container>
-            <Grid item xs={7} sm={9}>
-              <Typography>{"Jamal & Mohammad"}</Typography>
-            </Grid>
-            <Grid item xs={5} sm={3} textAlign="end">
-              <Typography>{"2"} Members</Typography>
-            </Grid>
-          </Grid>
-        </GroupSummary>
-        <GroupDetails>
-          <BasicTable />
-        </GroupDetails>
-      </Group>
-      <Group>
-        <GroupSummary>
-          <Grid container>
-            <Grid item xs={7} sm={9}>
-              <Typography>{"Jamal & Mohammad"}</Typography>
-            </Grid>
-            <Grid item xs={5} sm={3} textAlign="end">
-              <Typography>{"2"} Members</Typography>
-            </Grid>
-          </Grid>
-        </GroupSummary>
-        <GroupDetails>
-          <BasicTable />
-        </GroupDetails>
-      </Group>
-      <Group>
-        <GroupSummary>
-          <Grid container>
-            <Grid item xs={7} sm={9}>
-              <Typography>{"Jamal & Mohammad"}</Typography>
-            </Grid>
-            <Grid item xs={5} sm={3} textAlign="end">
-              <Typography>{"2"} Members</Typography>
-            </Grid>
-          </Grid>
-        </GroupSummary>
-        <GroupDetails>
-          <BasicTable />
-        </GroupDetails>
-      </Group>
+          </GroupSummary>
+          <GroupDetails>
+            <StudentsTable students={project.students} />
+          </GroupDetails>
+        </Group>
+      ))}
     </div>
   );
 }
@@ -132,79 +88,3 @@ const GroupDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(0),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import * as React from "react";
-
-function createStudent(
-  name: string,
-  batchNumber: number,
-  address: string,
-  email: string
-) {
-  return { name, batchNumber, address, email };
-}
-
-const rows = [
-  createStudent("Jamal SaadEddin", 119, "Nablus", "jamalsa3d2001@gmail.com"),
-  createStudent(
-    "Mohammad Mohammad",
-    119,
-    "Nablus- Zawata",
-    "mohammadawi@gmail.com"
-  ),
-];
-
-export function BasicTable() {
-  const [requested, setRequested] = React.useState(false);
-  const handleRequest = () => {
-    setRequested(!requested);
-  };
-
-  return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Student Name</TableCell>
-            <TableCell>Batch Number</TableCell>
-            <TableCell>Address</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell align="right">
-              <Button
-                variant="contained"
-                startIcon={requested && <CancelIcon />}
-                endIcon={!requested && <SendIcon />}
-                size="small"
-                onClick={handleRequest}
-              >
-                {requested ? "cancel request" : "send request"}
-              </Button>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell>{row.batchNumber}</TableCell>
-              <TableCell>{row.address}</TableCell>
-              <TableCell colSpan={2}>{row.email}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-}
