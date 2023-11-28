@@ -10,7 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import StudentPage from "./pages/StudentPage";
 import Prerequisites from "./components/common/Prerequisites";
-import GroupsTable from "./components/GroupsTable";
+import AvailableGroups from "./components/AvailableGroups";
 import SupervisorsTable from "./components/SupervisorsTable";
 import ProjectDetails from "./components/ProjectDetails";
 import Submissions from "./components/Submissions";
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       { index: true, element: <StudentPage /> },
       { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
       { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
-      { path: "available-groups", element: <GroupsTable /> },
+      { path: "available-groups", element: <AvailableGroups /> },
       { path: "available-supervisors", element: <SupervisorsTable /> },
       { path: "my-project", element: <ProjectDetails /> },
       { path: "submissions", element: <Submissions /> },
