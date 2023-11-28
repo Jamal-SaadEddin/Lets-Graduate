@@ -23,13 +23,13 @@ const sideBarButtons = [
     icon: <QuestionAnswerIcon />,
     primaryText: "Prerequisites",
     secondaryText: "Graduation Project 1",
-    link: "prerequisites-gp1",
+    link: "prerequisites/gp/1",
   },
   {
     icon: <QuestionAnswerIcon />,
     primaryText: "Prerequisites",
     secondaryText: "Graduation Project 2",
-    link: "prerequisites-gp2",
+    link: "prerequisites/gp/2",
   },
   {
     icon: <ConnectWithoutContactIcon />,

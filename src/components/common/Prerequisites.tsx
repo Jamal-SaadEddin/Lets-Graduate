@@ -9,8 +9,12 @@ import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { Prerequisite, prerequisites } from "../../constants/prerequisites";
 import { DoneBadge } from "../StateBadges";
+import { useParams } from "react-router-dom";
 
 export default function Prerequisites() {
+  const params = useParams();
+  console.log(params);
+
   const [savedPrerequisites, setSavedPrerequisites] = useState(prerequisites);
 
   const handleClick = (preId: number) => {
@@ -39,7 +43,7 @@ export default function Prerequisites() {
               color="primary"
               gutterBottom
             >
-              Prerequisites - Graduation Project {"1" || "2"}
+              Prerequisites - Graduation Project {params["projectType"]}
             </Typography>
             <Table size="medium">
               <TableHead>

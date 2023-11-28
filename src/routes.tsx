@@ -24,8 +24,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <StudentPage /> },
-      { path: "prerequisites-gp1", element: <Prerequisites /> },
-      { path: "prerequisites-gp2", element: <Prerequisites /> },
+      { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
+      { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
       { path: "available-groups", element: <GroupsTable /> },
       { path: "available-supervisors", element: <SupervisorsTable /> },
       { path: "my-project", element: <ProjectDetails /> },
