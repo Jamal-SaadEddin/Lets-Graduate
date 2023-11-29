@@ -35,7 +35,7 @@ export default function GroupsTable() {
               <Grid item xs={7} sm={9}>
                 <Typography>
                   {project.students
-                    .map((student) => `${student.label}`)
+                    .map((student) => `${student.name}`)
                     .join(", ")}
                 </Typography>
               </Grid>

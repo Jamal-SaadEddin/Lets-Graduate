@@ -4,7 +4,7 @@ export interface Project {
 }
 
 export interface Student {
-  label: string;
+  name: string;
   projectId: number;
   batchNumber: number;
   address: string;
@@ -13,77 +13,77 @@ export interface Student {
 
 export const students: Student[] = [
   {
-    label: "Jamal SaadEddin",
+    name: "Jamal SaadEddin",
     projectId: 55,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Omar Qaneer",
+    name: "Omar Qaneer",
     projectId: 55,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Omar Ammar",
+    name: "Omar Ammar",
     projectId: 55,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Mohammad Hamoudeh",
+    name: "Mohammad Hamoudeh",
     projectId: 66,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Ibraheem Qadi",
+    name: "Ibraheem Qadi",
     projectId: 66,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Ahmed Qadi",
+    name: "Ahmed Qadi",
     projectId: 77,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Jamal Abdullah",
+    name: "Jamal Abdullah",
     projectId: 77,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Omar Quzmar",
+    name: "Omar Quzmar",
     projectId: 88,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Mohammad Alawni",
+    name: "Mohammad Alawni",
     projectId: 88,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Ibraheem Dwekat",
+    name: "Ibraheem Dwekat",
     projectId: 99,
     batchNumber: 119,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
-    label: "Obaida Aws",
+    name: "Obaida Aws",
     projectId: 99,
     batchNumber: 119,
     address: "Nablus",

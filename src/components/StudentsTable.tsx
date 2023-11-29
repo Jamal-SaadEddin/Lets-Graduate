@@ -50,7 +50,7 @@ export default function StudentsTable({ students }: Props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {student.label}
+                {student.name}
               </TableCell>
               <TableCell>{student.batchNumber}</TableCell>
               <TableCell>{student.address}</TableCell>
