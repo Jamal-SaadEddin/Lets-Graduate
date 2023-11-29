@@ -6,13 +6,22 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import { styled } from "@mui/material/styles";
+import { SyntheticEvent, useState } from "react";
 import { projects } from "../../constants/availableGroups";
 import useSearchboxStore from "../../state-management/searchboxStore";
 import StudentSearchbox from "../StudentSearchbox";
 import StudentsTable from "../StudentsTable";
+import FilterBox from "./FilterBox";
 
 export default function GroupsTable() {
-  const filteredStudents = useSearchboxStore((s) => s.filteredStudents);
+  const [address, setAddress] = useState<string | null>("");
+  const handleAddressChange = (_event: SyntheticEvent, value: string) => {
+    setAddress(value);
+  };
+
+  const filteredStudents = useSearchboxStore((s) => s.filteredStudents).filter(
+    (s) => (address === "" ? s : s.address === address)
+  );
   const filteredProjectsIds = filteredStudents.map((s) => s.projectId);
 
   const filteredProjects = projects.filter(
@@ -24,7 +33,14 @@ export default function GroupsTable() {
       <Typography variant="h6" paddingBottom={2} color="primary">
         Available Groups
       </Typography>
-      <StudentSearchbox />
+      <Grid container spacing={1}>
+        <Grid item xs={9}>
+          <StudentSearchbox />
+        </Grid>
+        <Grid item xs={3}>
+          <FilterBox filterValue={address} handleChange={handleAddressChange} />
+        </Grid>
+      </Grid>
       <Typography variant="caption">
         Click on group to show more details
       </Typography>

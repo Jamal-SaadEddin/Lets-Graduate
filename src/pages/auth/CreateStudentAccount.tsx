@@ -16,6 +16,7 @@ import * as React from "react";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 import { Link } from "react-router-dom";
 import { departments } from "../../constants/departments";
+import { addresses } from "../../constants/addresses";
 
 function Copyright(props: any) {
   return (
@@ -40,10 +41,7 @@ const defaultTheme = createTheme();
 
 export default function CreateStudentAccount() {
   const [department, setDepartment] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setDepartment(event.target.value as string);
-  };
+  const [address, setAddress] = React.useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -75,8 +73,8 @@ export default function CreateStudentAccount() {
           item
           xs={false}
           sm={false}
-          md={6}
-          lg={6.5}
+          md={false}
+          lg={6}
           sx={{
             backgroundImage: "url(/src/assets/nnu-bg.jpg)",
             backgroundRepeat: "no-repeat",
@@ -92,8 +90,8 @@ export default function CreateStudentAccount() {
           item
           xs={12}
           sm={12}
-          md={6}
-          lg={5.5}
+          md={12}
+          lg={6}
           component={Paper}
           elevation={6}
           square
@@ -156,32 +154,58 @@ export default function CreateStudentAccount() {
                 name="studentId"
               />
               <Box sx={{ minWidth: 120, marginY: "1rem" }}>
-                <FormControl fullWidth>
-                  <InputLabel id="department">Department</InputLabel>
+                <FormControl fullWidth required>
+                  <InputLabel id="department-label">Department</InputLabel>
                   <Select
-                    labelId="department"
+                    labelId="department-label"
                     id="department"
                     value={department}
                     label="Department"
-                    onChange={handleChange}
+                    onChange={(event: SelectChangeEvent) =>
+                      setDepartment(event.target.value as string)
+                    }
                   >
-                    {departments.map((department) => (
-                      <MenuItem key={department.name}>
+                    {departments.map((department, index) => (
+                      <MenuItem key={index} value={department.name}>
                         {department.name}
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
               </Box>
-
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="address"
-                label="Address - City/Village"
-                name="address"
-              />
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ minWidth: 120, marginY: "1rem" }}>
+                    <FormControl fullWidth required>
+                      <InputLabel id="address-label">Address</InputLabel>
+                      <Select
+                        labelId="address-label"
+                        id="address"
+                        value={address}
+                        label="Address"
+                        onChange={(event: SelectChangeEvent) =>
+                          setAddress(event.target.value as string)
+                        }
+                      >
+                        {addresses.map((address) => (
+                          <MenuItem key={address} value={address}>
+                            {address}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    margin="normal"
+                    fullWidth
+                    id="village"
+                    label="Village (optional)"
+                    name="village"
+                  />
+                </Grid>
+              </Grid>
               <TextField
                 margin="normal"
                 required
