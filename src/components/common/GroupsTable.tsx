@@ -35,9 +35,16 @@ export default function GroupsTable() {
     );
   const filteredProjectsIds = filteredStudents.map((s) => s.projectId);
 
-  const filteredProjects = projects.filter(
+  const filteredProjects = projects?.filter(
     ({ id }) => filteredProjectsIds.indexOf(id) !== -1
   );
+
+  if (!projects || projects.length === 0 || projects === null)
+    return (
+      <Typography variant="h6" paddingBottom={2} color="primary">
+        No Groups Available!
+      </Typography>
+    );
 
   return (
     <div>
@@ -68,7 +75,7 @@ export default function GroupsTable() {
       <Typography variant="caption">
         Click on group to show more details
       </Typography>
-      {filteredProjects.map((project) => (
+      {filteredProjects?.map((project) => (
         <Group key={project.id}>
           <GroupSummary>
             <Grid container>

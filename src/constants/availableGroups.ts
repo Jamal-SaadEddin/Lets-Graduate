@@ -101,7 +101,7 @@ export const batchNumbers: string[] = batchNumbersArray.filter(
   (value, index) => batchNumbersArray.indexOf(value) === index
 );
 
-export const projects: Project[] = [
+export const projects: Project[] | null | undefined = [
   {
     id: 55,
     students: students.filter((stu) => stu.projectId === 55),
