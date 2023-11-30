@@ -4,11 +4,14 @@ export interface Project {
 }
 
 export interface Student {
-  name: string;
-  projectId: number;
+  studentId?: number;
+  name?: string;
+  projectId?: number;
   batchNumber: number;
   address: string;
-  email: string;
+  email?: string;
+  mobileNumber?: string;
+  department?: string;
 }
 
 export const students: Student[] = [

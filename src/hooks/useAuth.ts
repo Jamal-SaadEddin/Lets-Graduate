@@ -18,7 +18,7 @@ const useAuth = () => ({
     lastName: "SaadEddin",
     email: "jamalsa3d2001@gmail.com",
     password: "123456",
-    department: "Computer Engineering - هندسة الحاسوب",
+    department: "Computer Engineering",
     address: "Nablus",
     mobileNumber: "0599098598",
     projectOneState: "Not started",

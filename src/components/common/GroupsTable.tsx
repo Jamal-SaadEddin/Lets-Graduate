@@ -31,7 +31,7 @@ export default function GroupsTable() {
   const filteredStudents = useSearchboxStore((s) => s.filteredStudents)
     .filter((s) => (address === "" ? s : s.address === address))
     .filter((s) =>
-      batchNumber === "" ? s : s.batchNumber.toString() === batchNumber
+      batchNumber === "" ? s : s.batchNumber?.toString() === batchNumber
     );
   const filteredProjectsIds = filteredStudents.map((s) => s.projectId);
 
