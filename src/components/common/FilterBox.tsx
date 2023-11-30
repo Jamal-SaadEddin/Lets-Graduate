@@ -1,21 +1,20 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { SyntheticEvent } from "react";
-import { addresses } from "../../constants/addresses";
 
 interface Props {
   filterValue: string | null;
   handleChange: (event: SyntheticEvent, value: string) => void;
+  label: string;
+  options: string[];
 }
 
-const FilterBox = ({ filterValue, handleChange }: Props) => {
+const FilterBox = ({ filterValue, handleChange, label, options }: Props) => {
   return (
     <Autocomplete
       disablePortal
       id="combo-box-demo"
-      options={addresses}
-      renderInput={(params) => (
-        <TextField {...params} label="Filter by Address" />
-      )}
+      options={options}
+      renderInput={(params) => <TextField {...params} label={label} />}
       value={filterValue}
       onInputChange={handleChange}
     />

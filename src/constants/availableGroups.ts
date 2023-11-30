@@ -15,14 +15,14 @@ export const students: Student[] = [
   {
     name: "Jamal SaadEddin",
     projectId: 55,
-    batchNumber: 119,
+    batchNumber: 118,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
     name: "Omar Qaneer",
     projectId: 55,
-    batchNumber: 119,
+    batchNumber: 120,
     address: "Ramallah",
     email: "jamalsa3d2001@gmail.com",
   },
@@ -43,7 +43,7 @@ export const students: Student[] = [
   {
     name: "Ibraheem Qadi",
     projectId: 66,
-    batchNumber: 119,
+    batchNumber: 118,
     address: "Ramallah",
     email: "jamalsa3d2001@gmail.com",
   },
@@ -57,21 +57,21 @@ export const students: Student[] = [
   {
     name: "Jamal Abdullah",
     projectId: 77,
-    batchNumber: 119,
+    batchNumber: 120,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
     name: "Omar Quzmar",
     projectId: 88,
-    batchNumber: 119,
+    batchNumber: 120,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
   {
     name: "Mohammad Alawni",
     projectId: 88,
-    batchNumber: 119,
+    batchNumber: 118,
     address: "Nablus",
     email: "jamalsa3d2001@gmail.com",
   },
@@ -85,11 +85,21 @@ export const students: Student[] = [
   {
     name: "Obaida Aws",
     projectId: 99,
-    batchNumber: 119,
+    batchNumber: 120,
     address: "Jerusalem",
     email: "jamalsa3d2001@gmail.com",
   },
 ];
+
+var addressesArray: string[] = students.map((s) => s.address);
+export const addresses: string[] = addressesArray.filter(
+  (value, index) => addressesArray.indexOf(value) === index
+);
+
+var batchNumbersArray: string[] = students.map((s) => s.batchNumber.toString());
+export const batchNumbers: string[] = batchNumbersArray.filter(
+  (value, index) => batchNumbersArray.indexOf(value) === index
+);
 
 export const projects: Project[] = [
   {

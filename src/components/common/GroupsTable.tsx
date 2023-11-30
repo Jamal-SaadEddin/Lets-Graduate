@@ -7,7 +7,11 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary";
 import { styled } from "@mui/material/styles";
 import { SyntheticEvent, useState } from "react";
-import { projects } from "../../constants/availableGroups";
+import {
+  addresses,
+  batchNumbers,
+  projects,
+} from "../../constants/availableGroups";
 import useSearchboxStore from "../../state-management/searchboxStore";
 import StudentSearchbox from "../StudentSearchbox";
 import StudentsTable from "../StudentsTable";
@@ -19,9 +23,16 @@ export default function GroupsTable() {
     setAddress(value);
   };
 
-  const filteredStudents = useSearchboxStore((s) => s.filteredStudents).filter(
-    (s) => (address === "" ? s : s.address === address)
-  );
+  const [batchNumber, setBatchNumber] = useState<string | null>("");
+  const handleBatchNumberChange = (_event: SyntheticEvent, value: string) => {
+    setBatchNumber(value);
+  };
+
+  const filteredStudents = useSearchboxStore((s) => s.filteredStudents)
+    .filter((s) => (address === "" ? s : s.address === address))
+    .filter((s) =>
+      batchNumber === "" ? s : s.batchNumber.toString() === batchNumber
+    );
   const filteredProjectsIds = filteredStudents.map((s) => s.projectId);
 
   const filteredProjects = projects.filter(
@@ -34,11 +45,24 @@ export default function GroupsTable() {
         Available Groups
       </Typography>
       <Grid container spacing={1}>
-        <Grid item xs={9}>
+        <Grid item xs={6}>
           <StudentSearchbox />
         </Grid>
         <Grid item xs={3}>
-          <FilterBox filterValue={address} handleChange={handleAddressChange} />
+          <FilterBox
+            filterValue={address}
+            handleChange={handleAddressChange}
+            label="Filter by Address"
+            options={addresses}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <FilterBox
+            filterValue={batchNumber}
+            handleChange={handleBatchNumberChange}
+            label="Filter by Batch Number"
+            options={batchNumbers}
+          />
         </Grid>
       </Grid>
       <Typography variant="caption">
