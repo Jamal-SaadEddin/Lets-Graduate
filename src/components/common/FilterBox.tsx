@@ -4,18 +4,17 @@ import { SyntheticEvent } from "react";
 interface Props {
   filterValue: string | null;
   handleChange: (event: SyntheticEvent, value: string) => void;
-  label: string;
+  text: string;
   options: string[];
 }
 
-const FilterBox = ({ filterValue, handleChange, label, options }: Props) => {
+const FilterBox = ({ filterValue, handleChange, text, options }: Props) => {
   return (
     <Autocomplete
       disablePortal
-      id="combo-box-demo"
       options={options}
-      renderInput={(params) => <TextField {...params} label={label} />}
-      value={filterValue}
+      renderInput={(params) => <TextField {...params} label={text} />}
+      value={filterValue === "" ? null : filterValue}
       onInputChange={handleChange}
     />
   );

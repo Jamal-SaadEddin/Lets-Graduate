@@ -9,6 +9,7 @@ export interface User {
   mobileNumber: string;
   projectOneState: string;
   projectTwoState: string;
+  projectId: number;
 }
 
 const useAuth = () => ({
@@ -23,6 +24,7 @@ const useAuth = () => ({
     mobileNumber: "0599098598",
     projectOneState: "Not started",
     projectTwoState: "In progress",
+    projectId: 55,
   },
 });
 

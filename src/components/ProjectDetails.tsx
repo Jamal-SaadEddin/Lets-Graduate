@@ -5,12 +5,6 @@ import {
   Divider,
   Grid,
   Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   TextField,
   Typography,
 } from "@mui/material";
@@ -19,6 +13,23 @@ import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import { myProject } from "../constants/myProject";
 import useAuth from "../hooks/useAuth";
+import Table from "./common/Table";
+
+const partnerHeadings = [
+  "Student Name",
+  "Registeration Number",
+  "Department",
+  "Email",
+  "Mobile Number",
+  "Address",
+];
+
+const supervisorHeadings = [
+  "Supervisor Name",
+  "Department",
+  "Email",
+  "Mobile Number",
+];
 
 const ProjectDetails = () => {
   const { user } = useAuth();
@@ -67,37 +78,7 @@ const ProjectDetails = () => {
             <Typography variant="h6" paddingBottom={2} color="primary">
               {myProject.partners?.length === 1 ? "My Partner" : "My Partners"}
             </Typography>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Student Name</TableCell>
-                    <TableCell>Registeration Number</TableCell>
-                    <TableCell>Department</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Mobile Number</TableCell>
-                    <TableCell>Address</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {myProject.partners?.map((partner, index) => (
-                    <TableRow
-                      key={index}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {partner.name}
-                      </TableCell>
-                      <TableCell>{partner.studentId}</TableCell>
-                      <TableCell>{partner.department}</TableCell>
-                      <TableCell>{partner.email}</TableCell>
-                      <TableCell>{partner.mobileNumber}</TableCell>
-                      <TableCell>{partner.address}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <Table tableHead={partnerHeadings} tableBody={myProject.partners} />
           </Grid>
           <Grid item xs={12}>
             <Divider />
@@ -108,33 +89,10 @@ const ProjectDetails = () => {
                 ? "My Supervisor"
                 : "My Supervisors"}
             </Typography>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Supervisor Name</TableCell>
-                    <TableCell>Department</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Mobile Number</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {myProject.supervisors?.map((supervisor, index) => (
-                    <TableRow
-                      key={index}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {supervisor.name}
-                      </TableCell>
-                      <TableCell>{supervisor.department}</TableCell>
-                      <TableCell>{supervisor.email}</TableCell>
-                      <TableCell>{supervisor.mobileNumber}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <Table
+              tableHead={supervisorHeadings}
+              tableBody={myProject.supervisors}
+            />
           </Grid>
           <Grid item xs={12}>
             <Divider />

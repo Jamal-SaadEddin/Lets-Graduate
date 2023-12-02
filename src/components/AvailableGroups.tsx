@@ -1,5 +1,5 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
-import GroupsTable from "./common/GroupsTable";
+import GroupsTable from "./GroupsTable";
 
 const AvailableGroups = () => {
   return (

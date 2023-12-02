@@ -13,7 +13,6 @@ import { useParams } from "react-router-dom";
 
 export default function Prerequisites() {
   const params = useParams();
-  console.log(params);
 
   const [savedPrerequisites, setSavedPrerequisites] = useState(prerequisites);
 
@@ -55,14 +54,17 @@ export default function Prerequisites() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {savedPrerequisites.map((prerequisite) => (
-                  <TableRow key={prerequisite.id}>
+                {savedPrerequisites.map((prerequisite, index) => (
+                  <TableRow key={index}>
                     <TableCell sx={{ fontSize: 16 }}>
                       {prerequisite.content}
                     </TableCell>
                     <TableCell align="right" sx={{ fontSize: 16 }}>
                       {prerequisite.answer && <DoneBadge text="Yes" />}
-                      <Checkbox onClick={() => handleClick(prerequisite.id)} />
+                      <Checkbox
+                        name={`${index}`}
+                        onClick={() => handleClick(prerequisite.id)}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}

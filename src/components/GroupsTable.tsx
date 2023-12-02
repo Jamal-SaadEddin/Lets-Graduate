@@ -11,11 +11,13 @@ import {
   addresses,
   batchNumbers,
   projects,
-} from "../../constants/availableGroups";
-import useSearchboxStore from "../../state-management/searchboxStore";
-import StudentSearchbox from "../StudentSearchbox";
-import StudentsTable from "../StudentsTable";
-import FilterBox from "./FilterBox";
+} from "../constants/availableGroups";
+import useSearchboxStore from "../state-management/searchboxStore";
+import StudentSearchbox from "./StudentSearchbox";
+import FilterBox from "./common/FilterBox";
+import Table from "./common/Table";
+
+const headings = ["Student Name", "Batch Number", "Address", "Email"];
 
 export default function GroupsTable() {
   const [address, setAddress] = useState<string | null>("");
@@ -59,7 +61,7 @@ export default function GroupsTable() {
           <FilterBox
             filterValue={address}
             handleChange={handleAddressChange}
-            label="Filter by Address"
+            text="Filter by Address"
             options={addresses}
           />
         </Grid>
@@ -67,7 +69,7 @@ export default function GroupsTable() {
           <FilterBox
             filterValue={batchNumber}
             handleChange={handleBatchNumberChange}
-            label="Filter by Batch Number"
+            text="Filter by Batch Number"
             options={batchNumbers}
           />
         </Grid>
@@ -75,8 +77,8 @@ export default function GroupsTable() {
       <Typography variant="caption">
         Click on group to show more details
       </Typography>
-      {filteredProjects?.map((project) => (
-        <Group key={project.id}>
+      {filteredProjects?.map((project, index) => (
+        <Group key={index}>
           <GroupSummary>
             <Grid container>
               <Grid item xs={7} sm={9}>
@@ -92,7 +94,11 @@ export default function GroupsTable() {
             </Grid>
           </GroupSummary>
           <GroupDetails>
-            <StudentsTable students={project.students} />
+            <Table
+              tableBody={project.students}
+              tableHead={headings}
+              withButton
+            />
           </GroupDetails>
         </Group>
       ))}

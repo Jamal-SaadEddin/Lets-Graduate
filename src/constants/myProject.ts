@@ -1,45 +1,54 @@
-import { Student } from "./availableGroups";
+import useAuth from "./../hooks/useAuth";
+import { students } from "./availableGroups";
+
+const { user } = useAuth();
 
 export interface Doctor {
-  doctorId?: number;
+  doctorId: number;
   name: string;
   email: string;
   department: string;
   mobileNumber: string;
 }
 
+export interface Partner {
+  name: string;
+  studentId: number;
+  department: string;
+  email: string;
+  mobileNumber: string;
+  address: string;
+}
+
 export interface MyProject {
   projectId: number;
   projectTitle: string;
   projectType: string;
-  partners?: Student[];
-  supervisors?: Doctor[];
+  partners: Partner[];
+  supervisors: Supervisor[];
+}
+
+export interface Supervisor {
+  name: string;
+  email: string;
+  department: string;
+  mobileNumber: string;
 }
 
 export const myProject: MyProject = {
   projectId: 55,
   projectTitle: "Mohito Maker Machine",
   projectType: "1",
-  partners: [
-    {
-      name: "Omar Qaneer",
-      studentId: 11925044,
-      department: "Computer Engineering",
-      mobileNumber: "0594656980",
-      email: "s11925044@stu.najah.edu",
-      address: "Nablus",
-      batchNumber: Number(String(11925044).substring(0, 3)),
-    },
-    {
-      name: "Abbas Surakji",
-      studentId: 11923634,
-      department: "Computer Engineering",
-      mobileNumber: "0597655234",
-      email: "s11923634@stu.najah.edu",
-      address: "Nablus",
-      batchNumber: Number(String(11923634).substring(0, 3)),
-    },
-  ],
+  partners: students
+    .filter((stu) => stu.projectId === user.projectId)
+    .map(({ name, studentId, department, email, mobileNumber, address }) => ({
+      name,
+      studentId,
+      department,
+      email,
+      mobileNumber,
+      address,
+    })),
   supervisors: [
     {
       name: "Dr. Manar Qamhiee",
