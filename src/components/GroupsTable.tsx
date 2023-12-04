@@ -39,55 +39,65 @@ export default function GroupsTable() {
     );
 
   return (
-    <div>
-      <Typography variant="h6" paddingBottom={2} color="primary">
-        Available Groups
-      </Typography>
-      <Grid container spacing={1}>
-        <Grid item xs={6}>
-          <StudentSearchbox />
-        </Grid>
-        <Grid item xs={3}>
-          <FilterBox
-            filterValue={address}
-            handleChange={handleAddressChange}
-            text="Filter by Address"
-            options={addresses}
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <FilterBox
-            filterValue={batchNumber}
-            handleChange={handleBatchNumberChange}
-            text="Filter by Batch Number"
-            options={batchNumbers}
-          />
-        </Grid>
+    <Grid container spacing={1}>
+      <Grid item xs={12}>
+        <Typography variant="h6" paddingBottom={2} color="primary">
+          Available Groups
+        </Typography>
       </Grid>
-      <Typography variant="caption">
-        Click on group to show more details
-      </Typography>
-      {filteredGroups?.map((group, index) => (
-        <Group key={index}>
-          <GroupSummary>
-            <Grid container>
-              <Grid item xs={7} sm={9}>
-                <Typography>
-                  {group.students
-                    .map((student) => `${student.name}`)
-                    .join(", ")}
-                </Typography>
+      <Grid item xs={12}>
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <StudentSearchbox />
+          </Grid>
+          <Grid item xs={3}>
+            <FilterBox
+              filterValue={address}
+              handleChange={handleAddressChange}
+              text="Filter by Address"
+              options={addresses}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <FilterBox
+              filterValue={batchNumber}
+              handleChange={handleBatchNumberChange}
+              text="Filter by Batch Number"
+              options={batchNumbers}
+            />
+          </Grid>
+        </Grid>
+        <Typography variant="caption">
+          Click on group to show more details
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        {filteredGroups?.map((group, index) => (
+          <Group key={index}>
+            <GroupSummary>
+              <Grid container>
+                <Grid item xs={7} sm={9}>
+                  <Typography>
+                    {group.students
+                      .map((student) => `${student.name}`)
+                      .join(", ")}
+                  </Typography>
+                </Grid>
+                <Grid item xs={5} sm={3} textAlign="end">
+                  <Typography>{group.students.length} Members</Typography>
+                </Grid>
               </Grid>
-              <Grid item xs={5} sm={3} textAlign="end">
-                <Typography>{group.students.length} Members</Typography>
-              </Grid>
-            </Grid>
-          </GroupSummary>
-          <GroupDetails>
-            <Table tableBody={group.students} tableHead={headings} withButton />
-          </GroupDetails>
-        </Group>
-      ))}
-    </div>
+            </GroupSummary>
+            <GroupDetails>
+              <Table
+                tableBody={group.students}
+                tableHead={headings}
+                withButton
+              />
+            </GroupDetails>
+          </Group>
+        ))}
+      </Grid>
+    </Grid>
   );
 }

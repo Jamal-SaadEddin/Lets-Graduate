@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import { availableSupervisors } from "../constants/availableSupervisors";
 import SupervisorRow from "./SupervisorRow";
+import StudentSearchbox from "./StudentSearchbox";
 
 interface Heading {
   id: "name" | "department" | "email" | "button";
@@ -52,46 +53,53 @@ export default function SupervisorsTable() {
     );
 
   return (
-    <div>
-      <Typography variant="h6" paddingBottom={2} color="primary">
-        Available Supervisors
-      </Typography>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {headings.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {availableSupervisors
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((supervisor, inedx) => (
-                  <SupervisorRow supervisor={supervisor} key={inedx} />
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          id="table-pagination"
-          rowsPerPageOptions={[10, 15, 25]}
-          component="div"
-          count={availableSupervisors.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </div>
+    <Grid container spacing={1}>
+      <Grid item xs={12}>
+        <Typography variant="h6" paddingBottom={2} color="primary">
+          Available Supervisors
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <StudentSearchbox />
+      </Grid>
+      <Grid item xs={12}>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {headings.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {availableSupervisors
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((supervisor, inedx) => (
+                    <SupervisorRow supervisor={supervisor} key={inedx} />
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            id="table-pagination"
+            rowsPerPageOptions={[10, 15, 25]}
+            component="div"
+            count={availableSupervisors.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
