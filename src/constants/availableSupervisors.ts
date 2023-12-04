@@ -4,7 +4,7 @@ export interface AvailableSupervisor {
   email: string;
 }
 
-export const availableSupervisors: AvailableSupervisor[] | null | undefined = [
+export const availableSupervisors: AvailableSupervisor[] = [
   {
     name: "Abdalla Rashed",
     department: "Computer Engineering",

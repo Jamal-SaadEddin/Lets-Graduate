@@ -9,8 +9,9 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import { availableSupervisors } from "../constants/availableSupervisors";
+import useSearchboxStore from "../state-management/searchboxStore";
 import SupervisorRow from "./SupervisorRow";
-import StudentSearchbox from "./StudentSearchbox";
+import SupervisorSeachbox from "./SupervisorSeachbox";
 
 interface Heading {
   id: "name" | "department" | "email" | "button";
@@ -27,6 +28,8 @@ const headings: readonly Heading[] = [
 ];
 
 export default function SupervisorsTable() {
+  const filteredSupervisors = useSearchboxStore((s) => s.filteredSupervisors);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -60,7 +63,7 @@ export default function SupervisorsTable() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        <StudentSearchbox />
+        <SupervisorSeachbox />
       </Grid>
       <Grid item xs={12}>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -80,7 +83,7 @@ export default function SupervisorsTable() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {availableSupervisors
+                {filteredSupervisors
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((supervisor, inedx) => (
                     <SupervisorRow supervisor={supervisor} key={inedx} />
@@ -92,7 +95,7 @@ export default function SupervisorsTable() {
             id="table-pagination"
             rowsPerPageOptions={[10, 15, 25]}
             component="div"
-            count={availableSupervisors.length}
+            count={filteredSupervisors.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
