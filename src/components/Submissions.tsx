@@ -1,3 +1,4 @@
+import NotesIcon from "@mui/icons-material/Notes";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   Button,
@@ -8,6 +9,7 @@ import {
   styled,
 } from "@mui/material";
 import { ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 
 const Submissions = () => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +52,7 @@ const Submissions = () => {
               and give you feedbacks through comments section.
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Button
               component="label"
               variant="contained"
@@ -65,8 +67,22 @@ const Submissions = () => {
               />
             </Button>
           </Grid>
+          <Grid item xs={6} textAlign="end">
+            <Link to="abstract-comments">
+              <Button
+                variant="contained"
+                size="small"
+                startIcon={<NotesIcon />}
+              >
+                Comments
+              </Button>
+            </Link>
+          </Grid>
           <Grid item xs={12}>
-            <iframe src="src/assets/pdf_test.pdf" frameBorder="0" />
+            <iframe
+              src="src/assets/Let's Graduate -Abstract.pdf"
+              frameBorder="0"
+            />
           </Grid>
         </Grid>
       </Paper>

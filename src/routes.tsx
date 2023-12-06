@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AccountSettings from "./components/AccountSettings";
 import AvailableGroups from "./components/AvailableGroups";
 import AvailableSupervisors from "./components/AvailableSupervisors";
+import Comments from "./components/Comments";
 import ProfileDetails from "./components/ProfileDetails";
 import ProjectDetails from "./components/ProjectDetails";
 import Submissions from "./components/Submissions";
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: "available-supervisors", element: <AvailableSupervisors /> },
       { path: "my-project", element: <ProjectDetails /> },
       { path: "submissions", element: <Submissions /> },
+      { path: "submissions/abstract-comments", element: <Comments /> },
       { path: "account-settings", element: <AccountSettings /> },
       { path: ":username", element: <ProfileDetails /> },
     ],
