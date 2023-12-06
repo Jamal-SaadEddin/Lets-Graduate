@@ -1,3 +1,4 @@
+import DeleteIcon from "@mui/icons-material/Delete";
 import NotesIcon from "@mui/icons-material/Notes";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
@@ -66,6 +67,15 @@ const Submissions = () => {
                 onChange={handleFileChange}
               />
             </Button>
+            <Button
+              color="error"
+              variant="outlined"
+              size="small"
+              startIcon={<DeleteIcon />}
+              sx={{ margin: 1 }}
+            >
+              Delete Abstract
+            </Button>
           </Grid>
           <Grid item xs={6} textAlign="end">
             <Link to="abstract-comments">
@@ -73,6 +83,7 @@ const Submissions = () => {
                 variant="contained"
                 size="small"
                 startIcon={<NotesIcon />}
+                sx={{ marginY: 1 }}
               >
                 Comments
               </Button>
