@@ -17,7 +17,7 @@ import Table from "./common/Table";
 
 const partnerHeadings = [
   "Student Name",
-  "Registeration Number",
+  "Registration Number",
   "Department",
   "Email",
   "Mobile Number",

@@ -126,7 +126,7 @@ const ProfileDetails = () => {
             <Grid item xs={6}>
               <TextField
                 fullWidth
-                label="Registeration Number"
+                label="Registration Number"
                 value={currentUser.id}
                 disabled
                 sx={{

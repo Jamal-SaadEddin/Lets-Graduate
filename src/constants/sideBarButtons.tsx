@@ -33,7 +33,7 @@ const sideBarButtons = [
   },
   {
     icon: <ConnectWithoutContactIcon />,
-    primaryText: "Connect to a Group",
+    primaryText: "Find a Partner",
     link: "available-groups",
   },
   {

@@ -3,12 +3,14 @@ import { Project, Student } from "../constants/availableGroups";
 export const filterStudents = (
   students: Student[],
   address: string | null,
-  batchNumber: string | null
+  academicNumber: string | null
 ): Student[] => {
   return students
     .filter((s) => (address === "" ? s : s.address === address))
     .filter((s) =>
-      batchNumber === "" ? s : s.batchNumber?.toString() === batchNumber
+      academicNumber === ""
+        ? s
+        : s.academicNumber?.toString() === academicNumber
     );
 };
 
@@ -23,12 +25,14 @@ export const filterGroups = (
   students: Student[],
   projects: Project[] | null | undefined,
   address: string | null,
-  batchNumber: string | null
+  academicNumber: string | null
 ): Project[] | null | undefined => {
   const filteredStudents = students
     .filter((s) => (address === "" ? s : s.address === address))
     .filter((s) =>
-      batchNumber === "" ? s : s.batchNumber?.toString() === batchNumber
+      academicNumber === ""
+        ? s
+        : s.academicNumber?.toString() === academicNumber
     );
 
   const filteredProjectsIds = filteredStudents.map((s) => s.projectId);

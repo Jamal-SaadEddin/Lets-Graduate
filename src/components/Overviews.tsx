@@ -155,7 +155,7 @@ const Overviews = () => {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="subtitle1">
-              Registeration Number: {11923604}
+              Registration Number: {11923604}
             </Typography>
           </Grid>
           <Grid item xs={6}>
