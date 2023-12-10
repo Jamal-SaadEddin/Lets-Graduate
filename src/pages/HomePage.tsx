@@ -1,10 +1,20 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { Dashboard, Logout } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Avatar, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import {
+  Avatar,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Tooltip,
+  createTheme,
+} from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -16,12 +26,40 @@ import { ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../components/Copyright";
-import { AppBar, Drawer, defaultTheme } from "../components/DashboardLayout";
+import { AppBar, Drawer } from "../components/DashboardLayout";
 import SideBar from "../components/common/SideBar";
 import sideBarButtons from "../constants/sideBarButtons";
 import useAuth from "../hooks/useAuth";
+import useThemeStore from "../state-management/themeStore";
 
 export default function HomePage() {
+  const mode = useThemeStore((s) => s.mode);
+  const setMode = useThemeStore((s) => s.setMode);
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+        typography: {
+          fontFamily: [
+            "-apple-system",
+            "BlinkMacSystemFont",
+            '"Segoe UI"',
+            "Roboto",
+            '"Helvetica Neue"',
+            "Arial",
+            "sans-serif",
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+          ].join(","),
+        },
+      }),
+    [mode]
+  );
+
   const navigate = useNavigate();
 
   const { user } = useAuth();
@@ -48,7 +86,7 @@ export default function HomePage() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar
@@ -83,6 +121,13 @@ export default function HomePage() {
             >
               Let's Graduate
             </Typography>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={() => setMode(mode === "light" ? "dark" : "light")}
+              color="inherit"
+            >
+              {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
@@ -139,7 +184,10 @@ export default function HomePage() {
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
                 <MenuItem onClick={() => handleCloseUserMenu(user.firstName)}>
-                  <Avatar /> Profile
+                  <ListItemIcon>
+                    <PersonIcon />
+                  </ListItemIcon>
+                  My Profile
                 </MenuItem>
                 <MenuItem onClick={() => handleCloseUserMenu("/")}>
                   <ListItemIcon>

@@ -1,6 +1,6 @@
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { styled, createTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
+import { styled } from "@mui/material/styles";
 
 const drawerWidth: number = 240;
 
@@ -51,20 +51,3 @@ export const Drawer = styled(MuiDrawer, {
     }),
   },
 }));
-
-export const defaultTheme = createTheme({
-  typography: {
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(","),
-  },
-});

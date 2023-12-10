@@ -1,7 +1,10 @@
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import EditIcon from "@mui/icons-material/Edit";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import {
   Button,
   Container,
+  Divider,
   Grid,
   IconButton,
   Paper,
@@ -14,6 +17,9 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 
 const AccountSettings = () => {
+  const mode = useThemeStore((s) => s.mode);
+  const setMode = useThemeStore((s) => s.setMode);
+
   const { user } = useAuth();
 
   return (
@@ -67,6 +73,20 @@ const AccountSettings = () => {
               }}
             />
           </Grid>
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              onClick={() => setMode(mode === "light" ? "dark" : "light")}
+              variant="outlined"
+            >
+              Switch to {mode === "dark" ? "light" : "dark"} mode
+              <IconButton color="inherit">
+                {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+              </IconButton>
+            </Button>
+          </Grid>
         </Grid>
       </Paper>
     </Container>
@@ -89,6 +109,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Link } from "react-router-dom";
+import useThemeStore from "../state-management/themeStore";
 
 export function FormDialog() {
   const { user } = useAuth();
