@@ -16,6 +16,7 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 import useThemeStore from "../state-management/themeStore";
 import ChangePasswordDialog from "./ChangePasswordDialog";
+import DeleteAccountDialog from "./DeleteAccountDialog";
 
 const AccountSettings = () => {
   const mode = useThemeStore((s) => s.mode);
@@ -23,7 +24,10 @@ const AccountSettings = () => {
 
   const { user } = useAuth();
 
-  const [open, setOpen] = React.useState(false);
+  const [openChangePasswordDialog, setOpenChangePasswordDialog] =
+    React.useState(false);
+  const [openDeleteAccountDialog, setOpenDeleteAccountDialog] =
+    React.useState(false);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -85,7 +89,7 @@ const AccountSettings = () => {
                       cursor: "pointer",
                       color: mode === "light" ? "black" : "#fff",
                     }}
-                    onClick={() => setOpen(true)}
+                    onClick={() => setOpenChangePasswordDialog(true)}
                   />
                 ),
               }}
@@ -98,7 +102,7 @@ const AccountSettings = () => {
             <Button
               variant="outlined"
               endIcon={<EditIcon />}
-              onClick={() => setOpen(true)}
+              onClick={() => setOpenChangePasswordDialog(true)}
             >
               Change Password
             </Button>
@@ -120,12 +124,24 @@ const AccountSettings = () => {
             <Divider />
           </Grid>
           <Grid item xs={12}>
-            <Button color="error" variant="outlined" endIcon={<DeleteIcon />}>
+            <Button
+              color="error"
+              variant="outlined"
+              endIcon={<DeleteIcon />}
+              onClick={() => setOpenDeleteAccountDialog(true)}
+            >
               Delete Account
             </Button>
           </Grid>
         </Grid>
-        <ChangePasswordDialog open={open} setOpen={setOpen} />
+        <ChangePasswordDialog
+          openChangePasswordDialog={openChangePasswordDialog}
+          setOpenChangePasswordDialog={setOpenChangePasswordDialog}
+        />
+        <DeleteAccountDialog
+          openDeleteAccountDialog={openDeleteAccountDialog}
+          setOpenDeleteAccountDialog={setOpenDeleteAccountDialog}
+        />
       </Paper>
     </Container>
   );

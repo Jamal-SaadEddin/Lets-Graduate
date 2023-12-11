@@ -16,11 +16,14 @@ import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 interface Props {
-  open: boolean;
-  setOpen: (open: boolean) => void;
+  openChangePasswordDialog: boolean;
+  setOpenChangePasswordDialog: (openChangePasswordDialog: boolean) => void;
 }
 
-export default function ChangePasswordDialog({ open, setOpen }: Props) {
+export default function ChangePasswordDialog({
+  openChangePasswordDialog,
+  setOpenChangePasswordDialog,
+}: Props) {
   const { user } = useAuth();
 
   const [oldPassword, setOldPassword] = React.useState("");
@@ -60,7 +63,7 @@ export default function ChangePasswordDialog({ open, setOpen }: Props) {
   };
 
   const handleUpdatePassword = () => {
-    setOpen(false);
+    setOpenChangePasswordDialog(false);
     setOpenSnackbar(true);
   };
 
@@ -79,7 +82,11 @@ export default function ChangePasswordDialog({ open, setOpen }: Props) {
 
   return (
     <React.Fragment>
-      <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
+      <Dialog
+        open={openChangePasswordDialog}
+        onClose={() => setOpenChangePasswordDialog(false)}
+        fullWidth
+      >
         <DialogTitle>Change Password</DialogTitle>
         <DialogContent>
           <TextField
