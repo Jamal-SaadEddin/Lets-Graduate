@@ -1,6 +1,7 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import EditIcon from "@mui/icons-material/Edit";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Button,
   Container,
@@ -21,6 +22,8 @@ const AccountSettings = () => {
   const setMode = useThemeStore((s) => s.setMode);
 
   const { user } = useAuth();
+
+  const [open, setOpen] = React.useState(false);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -75,7 +78,16 @@ const AccountSettings = () => {
                 },
               }}
               InputProps={{
-                endAdornment: <FormDialog />,
+                endAdornment: (
+                  <EditIcon
+                    fontSize="small"
+                    sx={{
+                      cursor: "pointer",
+                      color: mode === "light" ? "black" : "#fff",
+                    }}
+                    onClick={() => setOpen(true)}
+                  />
+                ),
               }}
             />
           </Grid>
@@ -84,16 +96,36 @@ const AccountSettings = () => {
           </Grid>
           <Grid item xs={12}>
             <Button
+              variant="outlined"
+              endIcon={<EditIcon />}
+              onClick={() => setOpen(true)}
+            >
+              Change Password
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              color="inherit"
               onClick={() => setMode(mode === "light" ? "dark" : "light")}
               variant="outlined"
+              endIcon={mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             >
               Switch to {mode === "dark" ? "light" : "dark"} mode
-              <IconButton color="inherit">
-                {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-              </IconButton>
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <Divider />
+          </Grid>
+          <Grid item xs={12}>
+            <Button color="error" variant="outlined" endIcon={<DeleteIcon />}>
+              Delete Account
             </Button>
           </Grid>
         </Grid>
+        <FormDialog open={open} setOpen={setOpen} />
       </Paper>
     </Container>
   );
@@ -117,9 +149,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Link } from "react-router-dom";
 import useThemeStore from "../state-management/themeStore";
 
-export function FormDialog() {
-  const mode = useThemeStore((s) => s.mode);
+interface Props {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
 
+export function FormDialog({ open, setOpen }: Props) {
   const { user } = useAuth();
 
   const [oldPassword, setOldPassword] = React.useState("");
@@ -158,12 +193,6 @@ export function FormDialog() {
     event.preventDefault();
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleUpdatePassword = () => {
     setOpen(false);
     setOpenSnackbar(true);
@@ -184,11 +213,6 @@ export function FormDialog() {
 
   return (
     <React.Fragment>
-      <EditIcon
-        fontSize="small"
-        sx={{ cursor: "pointer", color: mode === "light" ? "black" : "#bbb" }}
-        onClick={handleClickOpen}
-      />
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
         <DialogTitle>Change Password</DialogTitle>
         <DialogContent>
