@@ -14,9 +14,12 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import useAuth, { User } from "../hooks/useAuth";
+import useThemeStore from "../state-management/themeStore";
 import { InProgressBadge, NotStartedBadge } from "./StateBadges";
 
 const ProfileDetails = () => {
+  const mode = useThemeStore((s) => s.mode);
+
   const { user } = useAuth();
   const [currentUser, setCurrentUser] = React.useState<User>(user);
 
@@ -91,8 +94,11 @@ const ProfileDetails = () => {
               value={currentUser.firstName}
               disabled={disabled}
               sx={{
-                "& .Mui-disabled": {
-                  color: "black",
+                "& input.MuiInputBase-input:disabled": {
+                  WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                },
+                "& label.Mui-disabled": {
+                  color: mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                 },
               }}
               onChange={(event) =>
@@ -110,8 +116,11 @@ const ProfileDetails = () => {
               value={currentUser.lastName}
               disabled={disabled}
               sx={{
-                "& .Mui-disabled": {
-                  color: "black",
+                "& input.MuiInputBase-input:disabled": {
+                  WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                },
+                "& label.Mui-disabled": {
+                  color: mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                 },
               }}
               onChange={(event) =>
@@ -130,8 +139,12 @@ const ProfileDetails = () => {
                 value={currentUser.id}
                 disabled
                 sx={{
-                  "& .Mui-disabled": {
-                    color: "black",
+                  "& input.MuiInputBase-input:disabled": {
+                    WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                  },
+                  "& label.Mui-disabled": {
+                    color:
+                      mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                   },
                 }}
               />
@@ -145,8 +158,12 @@ const ProfileDetails = () => {
                 value={currentUser.department}
                 disabled
                 sx={{
-                  "& .Mui-disabled": {
-                    color: "black",
+                  "& input.MuiInputBase-input:disabled": {
+                    WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                  },
+                  "& label.Mui-disabled": {
+                    color:
+                      mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                   },
                 }}
               />
@@ -159,8 +176,11 @@ const ProfileDetails = () => {
               value={currentUser.address}
               disabled={disabled}
               sx={{
-                "& .Mui-disabled": {
-                  color: "black",
+                "& input.MuiInputBase-input:disabled": {
+                  WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                },
+                "& label.Mui-disabled": {
+                  color: mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                 },
               }}
               onChange={(event) =>
@@ -178,8 +198,11 @@ const ProfileDetails = () => {
               value={currentUser.mobileNumber}
               disabled={disabled}
               sx={{
-                "& .Mui-disabled": {
-                  color: "black",
+                "& input.MuiInputBase-input:disabled": {
+                  WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                },
+                "& label.Mui-disabled": {
+                  color: mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                 },
               }}
               onChange={(event) =>

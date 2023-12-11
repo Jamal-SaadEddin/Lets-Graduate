@@ -50,8 +50,11 @@ const AccountSettings = () => {
               value={user.email}
               disabled
               sx={{
-                "& .Mui-disabled": {
-                  color: "black",
+                "& input.MuiInputBase-input:disabled": {
+                  WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                },
+                "& label.Mui-disabled": {
+                  color: mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                 },
               }}
             />
@@ -64,8 +67,11 @@ const AccountSettings = () => {
               value={user.password}
               disabled
               sx={{
-                "& .Mui-disabled": {
-                  color: "black",
+                "& input.MuiInputBase-input:disabled": {
+                  WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                },
+                "& label.Mui-disabled": {
+                  color: mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
                 },
               }}
               InputProps={{
@@ -112,6 +118,8 @@ import { Link } from "react-router-dom";
 import useThemeStore from "../state-management/themeStore";
 
 export function FormDialog() {
+  const mode = useThemeStore((s) => s.mode);
+
   const { user } = useAuth();
 
   const [oldPassword, setOldPassword] = React.useState("");
@@ -178,7 +186,7 @@ export function FormDialog() {
     <React.Fragment>
       <EditIcon
         fontSize="small"
-        sx={{ cursor: "pointer", color: "black" }}
+        sx={{ cursor: "pointer", color: mode === "light" ? "black" : "#bbb" }}
         onClick={handleClickOpen}
       />
       <Dialog open={open} onClose={() => setOpen(false)} fullWidth>
