@@ -1,8 +1,11 @@
 import EditIcon from "@mui/icons-material/Edit";
+import NotStartedRoundedIcon from "@mui/icons-material/NotStartedRounded";
+import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import SaveIcon from "@mui/icons-material/Save";
 import {
   Avatar,
   Button,
+  Chip,
   Container,
   Divider,
   Grid,
@@ -15,7 +18,6 @@ import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import useAuth, { User } from "../hooks/useAuth";
 import useThemeStore from "../state-management/themeStore";
-import { InProgressBadge, NotStartedBadge } from "./StateBadges";
 
 const ProfileDetails = () => {
   const mode = useThemeStore((s) => s.mode);
@@ -265,12 +267,32 @@ const ProfileDetails = () => {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="subtitle1">
-              Graduation Project 1 State: <NotStartedBadge />
+              Graduation Project 1 State:{" "}
+              <Chip
+                color="default"
+                icon={<NotStartedRoundedIcon />}
+                size="small"
+                variant="filled"
+                label="Not started"
+                sx={{
+                  fontSize: "14px",
+                }}
+              />
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="subtitle1">
-              Graduation Project 2 State: <InProgressBadge />
+              Graduation Project 2 State:{" "}
+              <Chip
+                color="info"
+                icon={<RotateLeftIcon />}
+                size="small"
+                variant="filled"
+                label="In progress"
+                sx={{
+                  fontSize: "14px",
+                }}
+              />
             </Typography>
           </Grid>
         </Grid>

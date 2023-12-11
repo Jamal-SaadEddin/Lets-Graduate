@@ -1,4 +1,5 @@
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
+import { Chip, Container, Grid, Paper, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Table from "@mui/material/Table";
@@ -7,9 +8,8 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
-import { Prerequisite, prerequisites } from "../../constants/prerequisites";
-import { DoneBadge } from "../StateBadges";
 import { useParams } from "react-router-dom";
+import { Prerequisite, prerequisites } from "../../constants/prerequisites";
 
 export default function Prerequisites() {
   const params = useParams();
@@ -60,7 +60,18 @@ export default function Prerequisites() {
                       {prerequisite.content}
                     </TableCell>
                     <TableCell align="right" sx={{ fontSize: 16 }}>
-                      {prerequisite.answer && <DoneBadge text="Yes" />}
+                      {prerequisite.answer && (
+                        <Chip
+                          color="success"
+                          icon={<DoneIcon />}
+                          size="small"
+                          variant="filled"
+                          label="Yes"
+                          sx={{
+                            fontSize: "14px",
+                          }}
+                        />
+                      )}
                       <Checkbox
                         name={`${index}`}
                         onClick={() => handleClick(prerequisite.id)}
