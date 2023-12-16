@@ -5,7 +5,6 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import PersonIcon from "@mui/icons-material/Person";
 import {
   Avatar,
@@ -15,7 +14,6 @@ import {
   Tooltip,
   createTheme,
 } from "@mui/material";
-import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -27,6 +25,7 @@ import * as React from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../components/Copyright";
 import { AppBar, Drawer } from "../components/DashboardLayout";
+import NotificationsPopover from "../components/common/NotificationsPopover";
 import SideBar from "../components/common/SideBar";
 import sideBarButtons from "../constants/sideBarButtons";
 import useAuth from "../hooks/useAuth";
@@ -128,11 +127,7 @@ export default function HomePage() {
             >
               {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <NotificationsPopover />
             <Box sx={{ flexGrow: 0, mx: "1rem" }}>
               <Tooltip title="Account settings">
                 <IconButton

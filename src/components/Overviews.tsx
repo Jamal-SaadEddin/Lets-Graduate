@@ -38,12 +38,12 @@ const Overviews = () => {
             <Grid item xs={12}>
               <Typography variant="subtitle1">
                 What graduation project do you intend to register?
-                <Link to="prerequisites-gp1">
+                <Link to="prerequisites/gp/1">
                   <Button variant="contained" sx={{ m: 2 }}>
                     Graduation Project 1
                   </Button>
                 </Link>
-                <Link to="prerequisites-gp2">
+                <Link to="prerequisites/gp/2">
                   <Button variant="contained" sx={{ mx: 2 }}>
                     Graduation Project 2
                   </Button>
