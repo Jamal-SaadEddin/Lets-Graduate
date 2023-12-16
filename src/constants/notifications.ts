@@ -3,7 +3,7 @@ export interface NotificationItem {
   title: string;
   content: string;
   readStatus: "read" | "unread";
-  acceptStatus: null | "pending" | "accepted" | "rejected";
+  acceptStatus: null | "pending" | "accepted" | "declined";
   dateCreated: string;
 }
 

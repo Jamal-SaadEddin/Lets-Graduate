@@ -102,7 +102,7 @@ const NotificationsPopover = () => {
               .map((notification) => (
                 <Notification
                   key={notification.id}
-                  notification={notification}
+                  notificationItem={notification}
                 />
               ))}
           </List>
@@ -122,7 +122,10 @@ const NotificationsPopover = () => {
           {notifications
             .filter((notf) => notf.readStatus === "read")
             .map((notification) => (
-              <Notification key={notification.id} notification={notification} />
+              <Notification
+                key={notification.id}
+                notificationItem={notification}
+              />
             ))}
         </List>
 
