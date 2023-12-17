@@ -1,7 +1,8 @@
-import useAuth from "./../hooks/useAuth";
+import useAuth, { StudentInfo } from "./../hooks/useAuth";
 import { students } from "./availableGroups";
 
 const { user } = useAuth();
+const userInfo = user.info as StudentInfo;
 
 export interface Doctor {
   doctorId: number;
@@ -40,7 +41,7 @@ export const myProject: MyProject = {
   projectTitle: "Mohito Maker Machine",
   projectType: "1",
   partners: students
-    .filter((stu) => stu.projectId === user.projectId)
+    .filter((stu) => stu.projectId === userInfo.projectId)
     .map(({ name, studentId, department, email, mobileNumber, address }) => ({
       name,
       studentId,

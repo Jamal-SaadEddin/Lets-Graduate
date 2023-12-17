@@ -7,6 +7,7 @@ import AvailableSupervisors from "./components/student/AvailableSupervisors";
 import Prerequisites from "./components/student/Prerequisites";
 import ProjectDetails from "./components/student/ProjectDetails";
 import Submissions from "./components/student/Submissions";
+import useAuth from "./hooks/useAuth";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import StudentPage from "./pages/StudentPage";
@@ -17,6 +18,10 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import VerifyEmailForPassword from "./pages/auth/VerifyEmailForPassword";
+import DoctorPage from "./pages/DoctorPage";
+import AdminPage from "./pages/AdminPage";
+
+const { user } = useAuth();
 
 const router = createBrowserRouter([
   {
@@ -24,7 +29,7 @@ const router = createBrowserRouter([
     element: <HomePage />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <StudentPage /> },
+      { index: true, element: user.type === "student" ? <StudentPage /> : user.type === "doctor" ? <DoctorPage /> : <AdminPage /> },
       { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
       { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
       { path: "available-groups", element: <AvailableGroups /> },

@@ -8,9 +8,20 @@ export interface User {
   address: string;
   village?: string;
   mobileNumber: string;
-  projectOneState: string;
-  projectTwoState: string;
+  type: "student" | "doctor" | "admin";
+  info: StudentInfo | DoctorInfo;
+}
+
+export interface StudentInfo {
+  projectOneState: "Not started" | "In progress" | "Done";
+  projectTwoState: "Not started" | "In progress" | "Done";
   projectId: number;
+}
+
+export interface DoctorInfo {
+  isSupervisor: boolean;
+  isDepartmentManager: boolean;
+  isProjectsCommitteeMember: boolean;
 }
 
 const useAuth = () => ({
@@ -23,9 +34,12 @@ const useAuth = () => ({
     department: "Computer Engineering",
     address: "Nablus",
     mobileNumber: "0599098598",
-    projectOneState: "Not started",
-    projectTwoState: "In progress",
-    projectId: 55,
+    type: "student",
+    info: <StudentInfo>{
+      projectId: 55,
+      projectOneState: "Not started",
+      projectTwoState: "In progress",
+    },
   },
 });
 
