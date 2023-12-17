@@ -1,6 +1,6 @@
 export interface NotificationItem {
   id: number;
-  title: string;
+  sender: string;
   content: string;
   readStatus: "read" | "unread";
   acceptStatus: null | "pending" | "accepted" | "declined";
@@ -10,7 +10,7 @@ export interface NotificationItem {
 export const notificationItems: NotificationItem[] = [
   {
     id: 16,
-    title: "Dr. Ashraf Armoush",
+    sender: "Dr. Ashraf Armoush",
     content: "accepted to supervise your group this semester",
     readStatus: "unread",
     acceptStatus: null,
@@ -18,7 +18,7 @@ export const notificationItems: NotificationItem[] = [
   },
   {
     id: 12,
-    title: "Jamal SaadEddin",
+    sender: "Jamal SaadEddin",
     content: "is requisting to join your group",
     readStatus: "unread",
     acceptStatus: "pending",
@@ -26,7 +26,7 @@ export const notificationItems: NotificationItem[] = [
   },
   {
     id: 15,
-    title: "Your Group",
+    sender: "Your Group",
     content:
       "has been merged with another group, check your project info to see your new partners!",
     readStatus: "read",
@@ -35,7 +35,7 @@ export const notificationItems: NotificationItem[] = [
   },
   {
     id: 14,
-    title: "Projects Committee",
+    sender: "Projects Committee",
     content: "commented on your abstract",
     readStatus: "read",
     acceptStatus: null,
@@ -43,7 +43,7 @@ export const notificationItems: NotificationItem[] = [
   },
   {
     id: 13,
-    title: "Projects Committee",
+    sender: "Projects Committee",
     content:
       "accepted your abstract, you can proceed and start working on your project",
     readStatus: "read",

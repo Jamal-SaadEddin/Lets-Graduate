@@ -13,7 +13,7 @@ import Snackbar from "@mui/material/Snackbar";
 import React from "react";
 import { myProject } from "../constants/myProject";
 import useAuth from "../hooks/useAuth";
-import Table from "./common/Table";
+import Table from "./Table";
 
 const partnerHeadings = [
   "Student Name",

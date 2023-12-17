@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { comments } from "../constants/comments";
-import Comment from "./common/Comment";
+import Comment from "./Comment";
 
 const Comments = () => {
   return (

@@ -4,31 +4,45 @@ import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import SaveIcon from "@mui/icons-material/Save";
 import {
   Avatar,
+  Box,
   Button,
   Chip,
   Container,
   Divider,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
+  SelectChangeEvent,
   TextField,
   Typography,
 } from "@mui/material";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React from "react";
-import useAuth, { User } from "../hooks/useAuth";
-import useThemeStore from "../state-management/themeStore";
+import useAuth, { User } from "../../hooks/useAuth";
+import useThemeStore from "../../state-management/themeStore";
+import { addresses } from "../../constants/addresses";
 
-const ProfileDetails = () => {
+interface Props {
+  withGPStates: boolean;
+}
+
+const ProfileDetails = ({ withGPStates = false }: Props) => {
   const mode = useThemeStore((s) => s.mode);
 
   const { user } = useAuth();
   const [currentUser, setCurrentUser] = React.useState<User>(user);
 
+  const [address, setAddress] = React.useState(currentUser.address);
+
   const [disabled, setDisabled] = React.useState(true);
 
   const handleCancel = (user: User) => {
     setCurrentUser(user);
+    setAddress(user.address);
     setDisabled(!disabled);
   };
 
@@ -92,6 +106,7 @@ const ProfileDetails = () => {
           <Grid item xs={6}>
             <TextField
               fullWidth
+              required={!disabled && true}
               label="First Name"
               value={currentUser.firstName}
               disabled={disabled}
@@ -114,6 +129,7 @@ const ProfileDetails = () => {
           <Grid item xs={6}>
             <TextField
               fullWidth
+              required={!disabled && true}
               label="Last Name"
               value={currentUser.lastName}
               disabled={disabled}
@@ -137,7 +153,7 @@ const ProfileDetails = () => {
             <Grid item xs={6}>
               <TextField
                 fullWidth
-                label="Registration Number"
+                label="User Id"
                 value={currentUser.id}
                 disabled
                 sx={{
@@ -171,11 +187,51 @@ const ProfileDetails = () => {
               />
             </Grid>
           )}
-          <Grid item xs={6}>
+          <Grid item xs={3}>
+            <Box>
+              <FormControl fullWidth required={!disabled && true}>
+                <InputLabel
+                  id="address-label"
+                  sx={{
+                    color:
+                      mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
+                  }}
+                >
+                  Address
+                </InputLabel>
+                <Select
+                  labelId="address-label"
+                  id="address"
+                  value={address}
+                  label="Address"
+                  disabled={disabled}
+                  onChange={(event: SelectChangeEvent) => {
+                    setAddress(event.target.value as string);
+                    setCurrentUser({
+                      ...currentUser,
+                      address: event.target.value as string,
+                    });
+                  }}
+                  sx={{
+                    "#address": {
+                      WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                    },
+                  }}
+                >
+                  {addresses.map((address) => (
+                    <MenuItem key={address} value={address}>
+                      {address}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid item xs={3}>
             <TextField
               fullWidth
-              label="Address - City/Village"
-              value={currentUser.address}
+              label="Village"
+              value={currentUser.village}
               disabled={disabled}
               sx={{
                 "& input.MuiInputBase-input:disabled": {
@@ -188,7 +244,7 @@ const ProfileDetails = () => {
               onChange={(event) =>
                 setCurrentUser({
                   ...currentUser,
-                  address: event.target.value,
+                  village: event.target.value as string,
                 })
               }
             />
@@ -196,6 +252,7 @@ const ProfileDetails = () => {
           <Grid item xs={6}>
             <TextField
               fullWidth
+              required={!disabled && true}
               label="Mobile Phone"
               value={currentUser.mobileNumber}
               disabled={disabled}
@@ -239,7 +296,11 @@ const ProfileDetails = () => {
                 }}
                 disableElevation
                 disabled={
-                  JSON.stringify(currentUser) === JSON.stringify(user)
+                  JSON.stringify(currentUser) === JSON.stringify(user) ||
+                  currentUser.firstName.replace(/\s/g, "") === "" ||
+                  currentUser.lastName.replace(/\s/g, "") === "" ||
+                  currentUser.address.replace(/\s/g, "") === "" ||
+                  currentUser.mobileNumber.replace(/\s/g, "") === ""
                     ? true
                     : false
                 }
@@ -262,40 +323,45 @@ const ProfileDetails = () => {
               </Button>
             )}
           </Grid>
-          <Grid item xs={12}>
-            <Divider />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="subtitle1">
-              Graduation Project 1 State:{" "}
-              <Chip
-                color="default"
-                icon={<NotStartedRoundedIcon />}
-                size="small"
-                variant="filled"
-                label="Not started"
-                sx={{
-                  fontSize: "14px",
-                }}
-              />
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="subtitle1">
-              Graduation Project 2 State:{" "}
-              <Chip
-                color="info"
-                icon={<RotateLeftIcon />}
-                size="small"
-                variant="filled"
-                label="In progress"
-                sx={{
-                  fontSize: "14px",
-                }}
-              />
-            </Typography>
-          </Grid>
+          {withGPStates && (
+            <>
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="subtitle1">
+                  Graduation Project 1 State:{" "}
+                  <Chip
+                    color="default"
+                    icon={<NotStartedRoundedIcon />}
+                    size="small"
+                    variant="filled"
+                    label="Not started"
+                    sx={{
+                      fontSize: "14px",
+                    }}
+                  />
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="subtitle1">
+                  Graduation Project 2 State:{" "}
+                  <Chip
+                    color="info"
+                    icon={<RotateLeftIcon />}
+                    size="small"
+                    variant="filled"
+                    label="In progress"
+                    sx={{
+                      fontSize: "14px",
+                    }}
+                  />
+                </Typography>
+              </Grid>
+            </>
+          )}
         </Grid>
+
         <Snackbar
           open={openSnackbar}
           autoHideDuration={3000}

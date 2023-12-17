@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import AccountSettings from "./components/AccountSettings";
+import AccountSettings from "./components/common/AccountSettings";
 import AvailableGroups from "./components/AvailableGroups";
 import AvailableSupervisors from "./components/AvailableSupervisors";
 import Comments from "./components/Comments";
-import ProfileDetails from "./components/ProfileDetails";
+import ProfileDetails from "./components/common/ProfileDetails";
 import ProjectDetails from "./components/ProjectDetails";
 import Submissions from "./components/Submissions";
-import Prerequisites from "./components/common/Prerequisites";
+import Prerequisites from "./components/Prerequisites";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import StudentPage from "./pages/StudentPage";
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       { path: "submissions", element: <Submissions /> },
       { path: "submissions/abstract-comments", element: <Comments /> },
       { path: "account-settings", element: <AccountSettings /> },
-      { path: ":username", element: <ProfileDetails /> },
+      { path: ":username", element: <ProfileDetails withGPStates /> },
     ],
   },
   { path: "/login", element: <Login /> },

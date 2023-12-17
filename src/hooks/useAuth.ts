@@ -6,6 +6,7 @@ export interface User {
   password: string;
   department: string;
   address: string;
+  village?: string;
   mobileNumber: string;
   projectOneState: string;
   projectTwoState: string;

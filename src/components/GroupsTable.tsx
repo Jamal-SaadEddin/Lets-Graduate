@@ -9,8 +9,8 @@ import useFilterStudentsStore from "../state-management/filterStudentsStore";
 import useSearchboxStore from "../state-management/searchboxStore";
 import { Group, GroupDetails, GroupSummary } from "./Group";
 import StudentSearchbox from "./StudentSearchbox";
-import FilterBox from "./common/FilterBox";
-import Table from "./common/Table";
+import FilterBox from "./FilterBox";
+import Table from "./Table";
 
 const headings = ["Student Name", "Academic Number", "Address", "Email"];
 

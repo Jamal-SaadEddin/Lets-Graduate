@@ -1,14 +1,14 @@
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import {
-  ListItemButton,
-  ListItemText,
-  Typography,
-  Stack,
   Button,
   Chip,
+  ListItemButton,
+  ListItemText,
+  Stack,
+  Typography,
 } from "@mui/material";
-import { NotificationItem } from "../../constants/notifications";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { useState } from "react";
+import { NotificationItem } from "../constants/notifications";
 
 interface Props {
   notificationItem: NotificationItem;
@@ -36,7 +36,7 @@ const Notification = ({ notificationItem }: Props) => {
       <ListItemText
         primary={
           <Typography variant="subtitle2">
-            {notification.title}
+            {notification.sender}
             <Typography
               component="span"
               variant="body2"

@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Prerequisite, prerequisites } from "../../constants/prerequisites";
+import { Prerequisite, prerequisites } from "../constants/prerequisites";
 
 export default function Prerequisites() {
   const params = useParams();
