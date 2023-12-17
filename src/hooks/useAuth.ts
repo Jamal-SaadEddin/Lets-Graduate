@@ -34,7 +34,7 @@ const useAuth = () => ({
     department: "Computer Engineering",
     address: "Nablus",
     mobileNumber: "0599098598",
-    type: "student",
+    type: "doctor",
     info: <StudentInfo>{
       projectId: 55,
       projectOneState: "Not started",

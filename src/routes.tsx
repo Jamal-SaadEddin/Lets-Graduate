@@ -8,6 +8,8 @@ import Prerequisites from "./components/student/Prerequisites";
 import ProjectDetails from "./components/student/ProjectDetails";
 import Submissions from "./components/student/Submissions";
 import useAuth from "./hooks/useAuth";
+import AdminPage from "./pages/AdminPage";
+import DoctorPage from "./pages/DoctorPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import StudentPage from "./pages/StudentPage";
@@ -18,29 +20,59 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import VerifyEmailForPassword from "./pages/auth/VerifyEmailForPassword";
-import DoctorPage from "./pages/DoctorPage";
-import AdminPage from "./pages/AdminPage";
 
 const { user } = useAuth();
 
+const mainRoute =
+  user.type === "student"
+    ? {
+        element: <HomePage />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <StudentPage />,
+          },
+          { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
+          { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
+          { path: "available-groups", element: <AvailableGroups /> },
+          { path: "available-supervisors", element: <AvailableSupervisors /> },
+          { path: "my-project", element: <ProjectDetails /> },
+          { path: "submissions", element: <Submissions /> },
+          { path: "submissions/abstract-comments", element: <Comments /> },
+          { path: "account-settings", element: <AccountSettings /> },
+          { path: ":username", element: <ProfileDetails withGPStates /> },
+        ],
+      }
+    : user.type === "doctor"
+    ? {
+        element: <HomePage />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <DoctorPage />,
+          },
+        ],
+      }
+    : user.type === "admin"
+    ? {
+        element: <HomePage />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <AdminPage />,
+          },
+        ],
+      }
+    : {
+        path: "/",
+        element: <ErrorPage />,
+      };
+
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-    children: [
-      { index: true, element: user.type === "student" ? <StudentPage /> : user.type === "doctor" ? <DoctorPage /> : <AdminPage /> },
-      { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
-      { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
-      { path: "available-groups", element: <AvailableGroups /> },
-      { path: "available-supervisors", element: <AvailableSupervisors /> },
-      { path: "my-project", element: <ProjectDetails /> },
-      { path: "submissions", element: <Submissions /> },
-      { path: "submissions/abstract-comments", element: <Comments /> },
-      { path: "account-settings", element: <AccountSettings /> },
-      { path: ":username", element: <ProfileDetails withGPStates /> },
-    ],
-  },
+  mainRoute,
   { path: "/login", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/verify-email", element: <VerifyEmail /> },

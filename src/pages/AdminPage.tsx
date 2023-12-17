@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Overviews from "../components/student/Overviews";
+import Overviews from "../components/admin/Overviews";
 
 const AdminPage = () => {
   const location = useLocation();
