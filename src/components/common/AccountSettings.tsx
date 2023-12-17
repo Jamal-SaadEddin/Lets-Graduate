@@ -11,13 +11,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
 import React from "react";
 import useAuth from "../../hooks/useAuth";
 import useThemeStore from "../../state-management/themeStore";
-import ChangePasswordDialog from "../ChangePasswordDialog";
-import DeleteAccountDialog from "../DeleteAccountDialog";
-
+import ChangePasswordDialog from "./ChangePasswordDialog";
+import DeleteAccountDialog from "./DeleteAccountDialog";
 const AccountSettings = () => {
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);

@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { NotificationItem } from "../constants/notifications";
+import { NotificationItem } from "../../constants/notifications";
 
 interface Props {
   notificationItem: NotificationItem;

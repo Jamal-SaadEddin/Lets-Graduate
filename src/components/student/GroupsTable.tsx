@@ -1,15 +1,15 @@
 import { Grid, Typography } from "@mui/material";
 import {
-  addresses,
   academicNumbers,
+  addresses,
   projects,
-} from "../constants/availableGroups";
-import { filterGroups } from "../services/filterUtils";
-import useFilterStudentsStore from "../state-management/filterStudentsStore";
-import useSearchboxStore from "../state-management/searchboxStore";
+} from "../../constants/availableGroups";
+import { filterGroups } from "../../services/filterUtils";
+import useFilterStudentsStore from "../../state-management/filterStudentsStore";
+import useSearchboxStore from "../../state-management/searchboxStore";
+import FilterBox from "./FilterBox";
 import { Group, GroupDetails, GroupSummary } from "./Group";
 import StudentSearchbox from "./StudentSearchbox";
-import FilterBox from "./FilterBox";
 import Table from "./Table";
 
 const headings = ["Student Name", "Academic Number", "Address", "Email"];

@@ -22,9 +22,9 @@ import {
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React from "react";
+import { addresses } from "../../constants/addresses";
 import useAuth, { User } from "../../hooks/useAuth";
 import useThemeStore from "../../state-management/themeStore";
-import { addresses } from "../../constants/addresses";
 
 interface Props {
   withGPStates: boolean;

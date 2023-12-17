@@ -8,8 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
-import { availableSupervisors } from "../constants/availableSupervisors";
-import useSearchboxStore from "../state-management/searchboxStore";
+import { availableSupervisors } from "../../constants/availableSupervisors";
+import useSearchboxStore from "../../state-management/searchboxStore";
 import SupervisorRow from "./SupervisorRow";
 import SupervisorSeachbox from "./SupervisorSeachbox";
 

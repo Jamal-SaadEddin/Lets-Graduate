@@ -3,8 +3,8 @@ import { SyntheticEvent } from "react";
 import {
   AvailableSupervisor,
   availableSupervisors,
-} from "../constants/availableSupervisors";
-import useSearchboxStore from "../state-management/searchboxStore";
+} from "../../constants/availableSupervisors";
+import useSearchboxStore from "../../state-management/searchboxStore";
 
 const SupervisorSeachbox = () => {
   const supervisor = useSearchboxStore((s) => s.supervisor);

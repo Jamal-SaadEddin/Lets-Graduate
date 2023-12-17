@@ -1,13 +1,13 @@
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import ImageListItem from "@mui/material/ImageListItem";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 
 function Copyright(props: any) {
   return (

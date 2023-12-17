@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { comments } from "../constants/comments";
+import { comments } from "../../constants/comments";
 import Comment from "./Comment";
 
 const Comments = () => {

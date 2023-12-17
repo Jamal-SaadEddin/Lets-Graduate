@@ -2,7 +2,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import SendIcon from "@mui/icons-material/Send";
 import { Button, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
-import { AvailableSupervisor } from "../constants/availableSupervisors";
+import { AvailableSupervisor } from "../../constants/availableSupervisors";
 
 interface Props {
   supervisor: AvailableSupervisor;

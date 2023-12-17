@@ -11,7 +11,7 @@ import Popover from "@mui/material/Popover";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import { notificationItems } from "../constants/notifications";
+import { notificationItems } from "../../constants/notifications";
 import Notification from "./Notification";
 
 const NotificationsPopover = () => {

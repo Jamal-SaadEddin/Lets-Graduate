@@ -1,5 +1,5 @@
 import { Avatar, Divider, Grid, Stack, Typography } from "@mui/material";
-import { AbstractComment } from "../constants/comments";
+import { AbstractComment } from "../../constants/comments";
 
 interface Props {
   comment: AbstractComment;

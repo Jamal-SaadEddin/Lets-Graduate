@@ -1,11 +1,11 @@
-import CssBaseline from "@mui/material/CssBaseline";
+import { Link as MuiLink } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import ImageListItem from "@mui/material/ImageListItem";
 import InputLabel from "@mui/material/InputLabel";
-import { Link as MuiLink } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
@@ -13,10 +13,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 import { Link } from "react-router-dom";
-import { departments } from "../../constants/departments";
 import { addresses } from "../../constants/addresses";
+import { departments } from "../../constants/departments";
+import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 
 function Copyright(props: any) {
   return (

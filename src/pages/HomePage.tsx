@@ -1,4 +1,3 @@
-import CssBaseline from "@mui/material/CssBaseline";
 import { Dashboard, Logout } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -15,6 +14,7 @@ import {
   createTheme,
 } from "@mui/material";
 import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -23,10 +23,10 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import Copyright from "../components/Copyright";
-import { AppBar, Drawer } from "../components/DashboardLayout";
-import NotificationsPopover from "../components/NotificationsPopover";
-import SideBar from "../components/SideBar";
+import Copyright from "../components/common/Copyright";
+import { AppBar, Drawer } from "../components/common/DashboardLayout";
+import NotificationsPopover from "../components/common/NotificationsPopover";
+import SideBar from "../components/common/SideBar";
 import sideBarButtons from "../constants/sideBarButtons";
 import useAuth from "../hooks/useAuth";
 import useThemeStore from "../state-management/themeStore";

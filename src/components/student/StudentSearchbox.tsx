@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { SyntheticEvent } from "react";
-import { Student, students } from "../constants/availableGroups";
-import useSearchboxStore from "../state-management/searchboxStore";
+import { Student, students } from "../../constants/availableGroups";
+import useSearchboxStore from "../../state-management/searchboxStore";
 
 const StudentSearchbox = () => {
   const student = useSearchboxStore((s) => s.student);

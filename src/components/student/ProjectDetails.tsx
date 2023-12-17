@@ -11,8 +11,8 @@ import {
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React from "react";
-import { myProject } from "../constants/myProject";
-import useAuth from "../hooks/useAuth";
+import { myProject } from "../../constants/myProject";
+import useAuth from "../../hooks/useAuth";
 import Table from "./Table";
 
 const partnerHeadings = [

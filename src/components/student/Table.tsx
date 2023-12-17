@@ -8,8 +8,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { ReactNode, useState } from "react";
-import { AvailableGroupsStudent } from "../constants/availableGroups";
-import { Partner, Supervisor } from "../constants/myProject";
+import { AvailableGroupsStudent } from "../../constants/availableGroups";
+import { Partner, Supervisor } from "../../constants/myProject";
 
 interface Props {
   tableHead: (string | ReactNode)[];
