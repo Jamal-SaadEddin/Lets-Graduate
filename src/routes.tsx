@@ -2,6 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import AccountSettings from "./components/common/AccountSettings";
 import Comments from "./components/common/Comments";
 import ProfileDetails from "./components/common/ProfileDetails";
+import Grading from "./components/doctor/Grading";
+import MergeGroups from "./components/doctor/MergeGroups";
+import SupervisedProjects from "./components/doctor/SupervisedProjects";
+import SupervisorSubmissions from "./components/doctor/SupervisorSubmissions";
 import AvailableGroups from "./components/student/AvailableGroups";
 import AvailableSupervisors from "./components/student/AvailableSupervisors";
 import Prerequisites from "./components/student/Prerequisites";
@@ -55,6 +59,10 @@ const mainRoute =
           },
           { path: "account-settings", element: <AccountSettings /> },
           { path: ":username", element: <ProfileDetails /> },
+          { path: "supervised-projects", element: <SupervisedProjects /> },
+          { path: "submissions", element: <SupervisorSubmissions /> },
+          { path: "merge-groups", element: <MergeGroups /> },
+          { path: "grading", element: <Grading /> },
         ],
       }
     : user.type === "admin"
