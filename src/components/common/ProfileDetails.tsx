@@ -27,7 +27,7 @@ import useAuth, { User } from "../../hooks/useAuth";
 import useThemeStore from "../../state-management/themeStore";
 
 interface Props {
-  withGPStates: boolean;
+  withGPStates?: boolean;
 }
 
 const ProfileDetails = ({ withGPStates = false }: Props) => {
@@ -98,10 +98,12 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
           >
             <Avatar
               alt="Jamal SaadEddin"
-              src="/src/assets/jamal_pp.jpg"
+              src="/src/assets/avatars/ashraf.jpg"
               sx={{ width: 80, height: 80 }}
             />
-            <Typography variant="h6">{"Jamal SaadEddin"}</Typography>
+            <Typography variant="h6">
+              {user.firstName} {user.lastName}
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <TextField

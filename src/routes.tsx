@@ -53,6 +53,8 @@ const mainRoute =
             index: true,
             element: <DoctorPage />,
           },
+          { path: "account-settings", element: <AccountSettings /> },
+          { path: ":username", element: <ProfileDetails /> },
         ],
       }
     : user.type === "admin"

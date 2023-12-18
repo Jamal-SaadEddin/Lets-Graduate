@@ -26,19 +26,20 @@ export interface DoctorInfo {
 
 const useAuth = () => ({
   user: <User>{
-    id: "11923604",
-    firstName: "Jamal",
-    lastName: "SaadEddin",
-    email: "jamalsa3d2001@gmail.com",
+    id: "1001",
+    firstName: "Ashraf",
+    lastName: "Armoush",
+    email: "ashraf.armoush@gmail.com",
     password: "123456",
     department: "Computer Engineering",
     address: "Nablus",
-    mobileNumber: "0599098598",
+    village: "Aurif",
+    mobileNumber: "0598745632",
     type: "doctor",
-    info: <StudentInfo>{
-      projectId: 55,
-      projectOneState: "Not started",
-      projectTwoState: "In progress",
+    info: <DoctorInfo>{
+      isSupervisor: true,
+      isDepartmentManager: false,
+      isProjectsCommitteeMember: true,
     },
   },
 });
