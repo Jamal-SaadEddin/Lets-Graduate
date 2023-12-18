@@ -139,7 +139,7 @@ export default function HomePage() {
                 >
                   <Avatar
                     alt="Jamal SaadEddin"
-                    src="/src/assets/jamal_pp.jpg"
+                    src="/src/assets/avatars/ashraf.jpg"
                   />
                 </IconButton>
               </Tooltip>
@@ -178,7 +178,11 @@ export default function HomePage() {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={() => handleCloseUserMenu(user.firstName)}>
+                <MenuItem
+                  onClick={() =>
+                    handleCloseUserMenu(user.firstName + user.lastName)
+                  }
+                >
                   <ListItemIcon>
                     <PersonIcon />
                   </ListItemIcon>

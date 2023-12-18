@@ -25,16 +25,21 @@ import React from "react";
 import { addresses } from "../../constants/addresses";
 import useAuth, { User } from "../../hooks/useAuth";
 import useThemeStore from "../../state-management/themeStore";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   withGPStates?: boolean;
 }
 
 const ProfileDetails = ({ withGPStates = false }: Props) => {
-  const mode = useThemeStore((s) => s.mode);
-
   const { user } = useAuth();
+
+  const location = useLocation();
+  if (location.pathname !== `/${user.firstName}${user.lastName}`) throw Error;
+
   const [currentUser, setCurrentUser] = React.useState<User>(user);
+
+  const mode = useThemeStore((s) => s.mode);
 
   const [address, setAddress] = React.useState(currentUser.address);
 
