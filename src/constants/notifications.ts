@@ -1,4 +1,4 @@
-export interface NotificationItem {
+export interface NotificationElement {
   id: number;
   sender: string;
   content: string;
@@ -7,7 +7,7 @@ export interface NotificationItem {
   dateCreated: string;
 }
 
-export const notificationItems: NotificationItem[] = [
+export const notificationElements: NotificationElement[] = [
   {
     id: 16,
     sender: "Dr. Ashraf Armoush",

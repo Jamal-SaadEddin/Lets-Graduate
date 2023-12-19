@@ -6,8 +6,8 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { notificationItems as notifications } from "../../constants/notifications";
-import Notification from "./Notification";
+import { notificationElements as notifications } from "../../constants/notifications";
+import NotificationItem from "./NotificationItem";
 
 const Notifications = () => {
   const totalUnRead = notifications.filter(
@@ -59,9 +59,9 @@ const Notifications = () => {
                 {notifications
                   .filter((notf) => notf.readStatus === "unread")
                   .map((notification) => (
-                    <Notification
+                    <NotificationItem
                       key={notification.id}
-                      notificationItem={notification}
+                      notificationElement={notification}
                     />
                   ))}
               </List>
@@ -81,9 +81,9 @@ const Notifications = () => {
               {notifications
                 .filter((notf) => notf.readStatus === "read")
                 .map((notification) => (
-                  <Notification
+                  <NotificationItem
                     key={notification.id}
-                    notificationItem={notification}
+                    notificationElement={notification}
                   />
                 ))}
             </List>

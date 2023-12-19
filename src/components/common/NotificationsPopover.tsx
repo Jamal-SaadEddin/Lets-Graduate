@@ -12,11 +12,11 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { notificationItems } from "../../constants/notifications";
-import Notification from "./Notification";
+import { notificationElements } from "../../constants/notifications";
+import NotificationItem from "./NotificationItem";
 
 const NotificationsPopover = () => {
-  const [notifications, setNotifications] = useState(notificationItems);
+  const [notifications, setNotifications] = useState(notificationElements);
 
   const totalUnRead = notifications.filter(
     (item) => item.readStatus === "unread"
@@ -101,9 +101,9 @@ const NotificationsPopover = () => {
             {notifications
               .filter((notf) => notf.readStatus === "unread")
               .map((notification) => (
-                <Notification
+                <NotificationItem
                   key={notification.id}
-                  notificationItem={notification}
+                  notificationElement={notification}
                 />
               ))}
           </List>
@@ -123,9 +123,9 @@ const NotificationsPopover = () => {
           {notifications
             .filter((notf) => notf.readStatus === "read")
             .map((notification) => (
-              <Notification
+              <NotificationItem
                 key={notification.id}
-                notificationItem={notification}
+                notificationElement={notification}
               />
             ))}
         </List>

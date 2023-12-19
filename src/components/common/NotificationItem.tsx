@@ -8,14 +8,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { NotificationItem } from "../../constants/notifications";
+import { NotificationElement } from "../../constants/notifications";
 
 interface Props {
-  notificationItem: NotificationItem;
+  notificationElement: NotificationElement;
 }
 
-const Notification = ({ notificationItem }: Props) => {
-  const [notification, setNotification] = useState(notificationItem);
+const NotificationItem = ({ notificationElement }: Props) => {
+  const [notification, setNotification] = useState(notificationElement);
 
   const handleAccept = (acceptStatus: "accepted" | "declined") => {
     const updatedNotification = { ...notification, acceptStatus };
@@ -108,4 +108,4 @@ const Notification = ({ notificationItem }: Props) => {
   );
 };
 
-export default Notification;
+export default NotificationItem;
