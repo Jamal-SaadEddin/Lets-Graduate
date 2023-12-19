@@ -104,6 +104,7 @@ const NotificationsPopover = () => {
                 <NotificationItem
                   key={notification.id}
                   notificationElement={notification}
+                  handleClose={handleClose}
                 />
               ))}
           </List>
@@ -126,6 +127,7 @@ const NotificationsPopover = () => {
               <NotificationItem
                 key={notification.id}
                 notificationElement={notification}
+                handleClose={handleClose}
               />
             ))}
         </List>

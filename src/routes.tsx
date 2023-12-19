@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import AccountSettings from "./components/common/AccountSettings";
 import Comments from "./components/common/Comments";
+import Notification from "./components/common/Notification";
 import Notifications from "./components/common/Notifications";
 import ProfileDetails from "./components/common/ProfileDetails";
 import Grading from "./components/doctor/Grading";
@@ -48,6 +49,7 @@ const mainRoute =
           { path: "account-settings", element: <AccountSettings /> },
           { path: ":username", element: <ProfileDetails withGPStates /> },
           { path: "notifications", element: <Notifications /> },
+          { path: "notification/:id", element: <Notification /> },
         ],
       }
     : user.type === "doctor"
@@ -66,6 +68,7 @@ const mainRoute =
           { path: "merge-groups", element: <MergeGroups /> },
           { path: "grading", element: <Grading /> },
           { path: "notifications", element: <Notifications /> },
+          { path: "notification/:id", element: <Notification /> },
         ],
       }
     : user.type === "admin"

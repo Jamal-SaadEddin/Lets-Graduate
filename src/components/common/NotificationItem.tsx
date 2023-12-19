@@ -8,18 +8,30 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { NotificationElement } from "../../constants/notifications";
+import useNotificationStore from "../../state-management/notificationStore";
 
 interface Props {
   notificationElement: NotificationElement;
+  handleClose?: () => void;
 }
 
-const NotificationItem = ({ notificationElement }: Props) => {
+const NotificationItem = ({ notificationElement, handleClose }: Props) => {
   const [notification, setNotification] = useState(notificationElement);
+  const setCurrentNotification = useNotificationStore((s) => s.setNotification);
+
+  const navigate = useNavigate();
 
   const handleAccept = (acceptStatus: "accepted" | "declined") => {
     const updatedNotification = { ...notification, acceptStatus };
     setNotification(updatedNotification);
+  };
+
+  const handleClick = () => {
+    handleClose && handleClose();
+    setCurrentNotification(notification);
+    navigate(`/notification/${notification.id}`);
   };
 
   return (
@@ -32,6 +44,7 @@ const NotificationItem = ({ notificationElement }: Props) => {
           bgcolor: "action.selected",
         }),
       }}
+      onClick={handleClick}
     >
       <ListItemText
         primary={
