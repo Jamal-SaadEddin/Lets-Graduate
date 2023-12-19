@@ -11,6 +11,7 @@ import Popover from "@mui/material/Popover";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { notificationItems } from "../../constants/notifications";
 import Notification from "./Notification";
 
@@ -132,9 +133,11 @@ const NotificationsPopover = () => {
         <Divider sx={{ borderStyle: "dashed" }} />
 
         <Box sx={{ p: 1 }}>
-          <Button fullWidth disableRipple>
-            View All
-          </Button>
+          <Link to="/notifications">
+            <Button fullWidth onClick={handleClose}>
+              View All
+            </Button>
+          </Link>
         </Box>
       </Popover>
     </>
