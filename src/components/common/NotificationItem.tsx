@@ -90,6 +90,13 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
                 </Button>
               </Stack>
             )}
+            {notification.acceptStatus === "pendingMerge" && (
+              <Stack direction="row" spacing={1} marginTop={2}>
+                <Button variant="contained" color="inherit">
+                  Show More Details
+                </Button>
+              </Stack>
+            )}
             {notification.acceptStatus === "accepted" && (
               <Chip
                 color="primary"
