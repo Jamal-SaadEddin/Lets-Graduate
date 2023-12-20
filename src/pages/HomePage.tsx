@@ -79,7 +79,8 @@ export default function HomePage() {
     if (link) navigate(link);
   };
 
-  const [openDrawer, setOpenDrawer] = React.useState(true);
+  const defaultDrawerOpen = window.innerWidth >= 600 ? true : false;
+  const [openDrawer, setOpenDrawer] = React.useState(defaultDrawerOpen);
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);
   };

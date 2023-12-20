@@ -2,7 +2,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
 
-const drawerWidth: number = 240;
+const drawerWidth: number = 260;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -46,7 +46,7 @@ export const Drawer = styled(MuiDrawer, {
       }),
       width: theme.spacing(7),
       [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(6.5),
+        width: theme.spacing(9),
       },
     }),
   },

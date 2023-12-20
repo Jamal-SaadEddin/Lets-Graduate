@@ -18,7 +18,6 @@ const SideBar = ({ children }: Props) => {
         <ListItemButton onClick={() => navigate(item.link)} key={index}>
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText
-            sx={{ ml: "-20px" }}
             primary={item.primaryText}
             secondary={item?.secondaryText}
           />
