@@ -23,7 +23,11 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
 
   const navigate = useNavigate();
 
-  const handleAccept = (acceptStatus: "accepted" | "declined") => {
+  const handleAccept = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    acceptStatus: "accepted" | "declined"
+  ) => {
+    event.stopPropagation();
     const updatedNotification = { ...notification, acceptStatus };
     setNotification(updatedNotification);
   };
@@ -77,14 +81,14 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
               <Stack direction="row" spacing={1} marginTop={2}>
                 <Button
                   variant="contained"
-                  onClick={() => handleAccept("accepted")}
+                  onClick={(event) => handleAccept(event, "accepted")}
                 >
                   Accept
                 </Button>
                 <Button
                   variant="outlined"
                   color="inherit"
-                  onClick={() => handleAccept("declined")}
+                  onClick={(event) => handleAccept(event, "declined")}
                 >
                   Decline
                 </Button>
