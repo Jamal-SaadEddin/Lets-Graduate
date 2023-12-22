@@ -70,8 +70,8 @@ const sideBarButtons: SideBarButton[] =
         },
         {
           icon: <Groups2Icon />,
-          primaryText: "My Projects",
-          secondaryText: "Groups under my supervision",
+          primaryText: "My Groups",
+          secondaryText: "Projects under my supervision",
           link: "supervised-projects",
         },
         {
