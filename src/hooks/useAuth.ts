@@ -31,7 +31,7 @@ const useAuth = () => ({
     lastName: "Armoush",
     email: "ashraf.armoush@gmail.com",
     password: "123456",
-    department: "Computer Engineering",
+    department: "Computer Engineering - هندسة الحاسوب",
     address: "Nablus",
     village: "Aurif",
     mobileNumber: "0598745632",

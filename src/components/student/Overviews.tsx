@@ -153,21 +153,21 @@ const Overviews = () => {
             <Avatar alt="Remy Sharp" src="" sx={{ width: 80, height: 80 }} />
             <Typography variant="h6">{"Jamal SaadEddin"}</Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">
               Registration Number: {11923604}
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">
               Department: {"Computer Engineering - هندسة الحاسوب"}
             </Typography>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">Address: {"Nablus"}</Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">
               Mobile Phone: {"0599098598"}
             </Typography>
