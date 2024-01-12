@@ -13,7 +13,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { Submission } from "../../../constants/supervisorSubmissions";
+import useViewedSubmissionStore from "../../../state-management/viewedSubmissionStore";
 import { Project } from "./../../../constants/supervisedProjects";
 
 const headings = [
@@ -64,6 +66,13 @@ interface RowProps {
 
 const Row = ({ project, submission }: RowProps) => {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const setSubmission = useViewedSubmissionStore((s) => s.setSubmission);
+
+  const handleView = () => {
+    setSubmission(submission);
+    navigate(`${submission.submissionId}`);
+  };
 
   return (
     <React.Fragment>
@@ -107,6 +116,7 @@ const Row = ({ project, submission }: RowProps) => {
             size="small"
             color="info"
             disabled={!submission ? true : false}
+            onClick={handleView}
           >
             View
           </Button>

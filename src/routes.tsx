@@ -6,6 +6,7 @@ import Notifications from "./components/common/Notifications";
 import ProfileDetails from "./components/common/ProfileDetails";
 import Grading from "./components/doctor/Grading";
 import MergeGroups from "./components/doctor/MergeGroups";
+import Submission from "./components/doctor/Submission";
 import SupervisedProjects from "./components/doctor/SupervisedProjects";
 import SupervisorSubmissions from "./components/doctor/SupervisorSubmissions";
 import AvailableGroups from "./components/student/AvailableGroups";
@@ -65,6 +66,7 @@ const mainRoute =
           { path: ":username", element: <ProfileDetails /> },
           { path: "supervised-projects", element: <SupervisedProjects /> },
           { path: "submissions", element: <SupervisorSubmissions /> },
+          { path: "submissions/:id", element: <Submission /> },
           { path: "merge-groups", element: <MergeGroups /> },
           { path: "grading", element: <Grading /> },
           { path: "notifications", element: <Notifications /> },
