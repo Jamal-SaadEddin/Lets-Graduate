@@ -1,6 +1,6 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Chip } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -21,6 +21,7 @@ const headings = [
   "Group Size",
   "Submission Status",
   "Acceptance Status",
+  "View Abstract",
 ];
 
 interface CollapsibleTableProps {
@@ -82,12 +83,14 @@ const Row = ({ project, submission }: RowProps) => {
         <TableCell>{project.students.length}</TableCell>
         <TableCell>
           <Chip
+            size="small"
             color={!submission ? "error" : "success"}
             label={!submission ? "Not Submitted" : "Submitted"}
           />
         </TableCell>
         <TableCell>
           <Chip
+            size="small"
             color={
               !submission
                 ? "error"
@@ -97,6 +100,16 @@ const Row = ({ project, submission }: RowProps) => {
             }
             label={!submission ? "Not Submitted" : submission.acceptStatus}
           />
+        </TableCell>
+        <TableCell>
+          <Button
+            variant="contained"
+            size="small"
+            color="info"
+            disabled={!submission ? true : false}
+          >
+            View
+          </Button>
         </TableCell>
       </TableRow>
       <TableRow>

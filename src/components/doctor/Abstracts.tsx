@@ -11,9 +11,12 @@ import {
   projectsCommitteeSubmissions,
   supervisorSubmissions,
 } from "../../constants/supervisorSubmissions";
+import useAuth, { DoctorInfo } from "../../hooks/useAuth";
 import CollapsibleTable from "./common/CollapsibleTable";
 
 export default function Abstracts() {
+  const { user } = useAuth();
+  const userInfo = user.info as DoctorInfo;
   const [value, setValue] = React.useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -29,7 +32,9 @@ export default function Abstracts() {
           aria-label="basic tabs example"
         >
           <Tab label="My Groups" {...a11yProps(0)} />
-          <Tab label="Projects Committee" {...a11yProps(1)} />
+          {userInfo.isProjectsCommitteeMember && (
+            <Tab label="Projects Committee" {...a11yProps(1)} />
+          )}
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -38,12 +43,14 @@ export default function Abstracts() {
           submissions={supervisorSubmissions}
         />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <CollapsibleTable
-          projects={projectsCommittteeProjects}
-          submissions={projectsCommitteeSubmissions}
-        />
-      </CustomTabPanel>
+      {userInfo.isProjectsCommitteeMember && (
+        <CustomTabPanel value={value} index={1}>
+          <CollapsibleTable
+            projects={projectsCommittteeProjects}
+            submissions={projectsCommitteeSubmissions}
+          />
+        </CustomTabPanel>
+      )}
     </Box>
   );
 }
