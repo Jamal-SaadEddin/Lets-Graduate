@@ -136,7 +136,7 @@ export const students: Student[] = [
   },
 ];
 
-export const projects: Project[] | null | undefined = [
+export const supervisorProjects: Project[] | null | undefined = [
   {
     id: 55,
     title: "Mohito Maker Machine",
@@ -168,6 +168,34 @@ export const projects: Project[] | null | undefined = [
     title: "Clothes Cleaner",
     students: students
       .filter((stu) => stu.projectId === 77)
+      .map(({ name, studentId, address, email, department }) => ({
+        name,
+        studentId,
+        address,
+        email,
+        department,
+      })),
+  },
+];
+export const projectsCommittteeProjects: Project[] | null | undefined = [
+  {
+    id: 88,
+    title: "AutoPizza",
+    students: students
+      .filter((stu) => stu.projectId === 88)
+      .map(({ name, studentId, address, email, department }) => ({
+        name,
+        studentId,
+        address,
+        email,
+        department,
+      })),
+  },
+  {
+    id: 99,
+    title: "DateXpert Intelligent classification system",
+    students: students
+      .filter((stu) => stu.projectId === 99)
       .map(({ name, studentId, address, email, department }) => ({
         name,
         studentId,

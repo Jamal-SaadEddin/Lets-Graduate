@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import { projects } from "../../constants/supervisedProjects";
+import { supervisorProjects } from "../../constants/supervisedProjects";
 
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
 
@@ -14,7 +14,11 @@ const headings = [
 ];
 
 export default function GroupsTable() {
-  if (!projects || projects.length === 0 || projects === null)
+  if (
+    !supervisorProjects ||
+    supervisorProjects.length === 0 ||
+    supervisorProjects === null
+  )
     return (
       <Typography variant="h6" paddingBottom={2} color="primary">
         No Groups Available!
@@ -34,7 +38,7 @@ export default function GroupsTable() {
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        {projects?.map((group, index) => (
+        {supervisorProjects?.map((group, index) => (
           <Group key={index}>
             <GroupSummary>
               <Grid container>
