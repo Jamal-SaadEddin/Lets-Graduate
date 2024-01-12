@@ -39,7 +39,7 @@ export default function GroupsTable() {
             <GroupSummary>
               <Grid container>
                 <Grid item xs={7} sm={9}>
-                  <Typography>{group.name}</Typography>
+                  <Typography>{group.title}</Typography>
                 </Grid>
                 <Grid item xs={5} sm={3} textAlign="end">
                   <Typography>{group.students.length} Members</Typography>

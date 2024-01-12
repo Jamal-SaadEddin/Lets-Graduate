@@ -1,6 +1,6 @@
 export interface Project {
   id: number;
-  name: string;
+  title: string;
   students: SupervisedProjectsStudent[];
 }
 
@@ -139,7 +139,7 @@ export const students: Student[] = [
 export const projects: Project[] | null | undefined = [
   {
     id: 55,
-    name: "Mohito Maker Machine",
+    title: "Mohito Maker Machine",
     students: students
       .filter((stu) => stu.projectId === 55)
       .map(({ name, studentId, address, email, department }) => ({
@@ -152,7 +152,7 @@ export const projects: Project[] | null | undefined = [
   },
   {
     id: 66,
-    name: "Barille Printer",
+    title: "Barille Printer",
     students: students
       .filter((stu) => stu.projectId === 66)
       .map(({ name, studentId, address, email, department }) => ({
@@ -165,7 +165,7 @@ export const projects: Project[] | null | undefined = [
   },
   {
     id: 77,
-    name: "Clothes Cleaner",
+    title: "Clothes Cleaner",
     students: students
       .filter((stu) => stu.projectId === 77)
       .map(({ name, studentId, address, email, department }) => ({
