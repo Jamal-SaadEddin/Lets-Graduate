@@ -10,10 +10,15 @@ import TableRow from "@mui/material/TableRow";
 import { ReactNode, useState } from "react";
 import { AvailableGroupsStudent } from "../../constants/availableGroups";
 import { Partner, Supervisor } from "../../constants/myProject";
+import { SupervisedProjectsStudent } from "../../constants/supervisedProjects";
 
 interface Props {
   tableHead: (string | ReactNode)[];
-  tableBody: AvailableGroupsStudent[] | Partner[] | Supervisor[];
+  tableBody:
+    | SupervisedProjectsStudent[]
+    | AvailableGroupsStudent[]
+    | Partner[]
+    | Supervisor[];
   withButton?: boolean;
 }
 
