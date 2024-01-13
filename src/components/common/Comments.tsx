@@ -1,17 +1,41 @@
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import SendIcon from "@mui/icons-material/Send";
 import {
   Button,
   Container,
   Divider,
   Grid,
   Paper,
+  TextField,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { comments } from "../../constants/comments";
 import Comment from "./Comment";
+import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
+import { useState } from "react";
 
-const Comments = () => {
+interface Props {
+  canAddComments?: boolean;
+}
+
+const Comments = ({ canAddComments = false }: Props) => {
+  const submission = useViewedSubmissionStore((s) => s.submission);
+
+  const [newComment, setNewComment] = useState("");
+
+  const handleAddNewComment = () => {
+    if (newComment.replace(/\s/g, "").length > 0)
+      console.log(`New Comment Added: ${newComment}`);
+  };
+
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handleAddNewComment();
+    }
+  };
+
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper
@@ -30,7 +54,7 @@ const Comments = () => {
               color="primary"
               gutterBottom
             >
-              <Link to={"/submissions"}>
+              <Link to={`/submissions/${submission.submissionId}`}>
                 <Button
                   variant="text"
                   startIcon={<ArrowBackIosIcon />}
@@ -42,6 +66,30 @@ const Comments = () => {
                 : "Abstract- Comments and Feedbacks"}
             </Typography>
           </Grid>
+          {canAddComments && (
+            <Grid item xs={12}>
+              <TextField
+                multiline
+                fullWidth
+                placeholder="Write new feedback..."
+                value={newComment}
+                onChange={(event) => {
+                  if (event.target.value.length <= 1000)
+                    setNewComment(event.target.value);
+                }}
+                onKeyDown={handleKeyDown}
+                InputProps={{
+                  endAdornment: (
+                    <SendIcon
+                      color="primary"
+                      sx={{ cursor: "pointer" }}
+                      onClick={handleAddNewComment}
+                    />
+                  ),
+                }}
+              />
+            </Grid>
+          )}
 
           {comments.length >= 1 && (
             <Grid item xs={12} marginX={1}>

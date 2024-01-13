@@ -67,6 +67,10 @@ const mainRoute =
           { path: "supervised-projects", element: <SupervisedProjects /> },
           { path: "submissions", element: <SupervisorSubmissions /> },
           { path: "submissions/:id", element: <Submission /> },
+          {
+            path: "submissions/:id/comments",
+            element: <Comments canAddComments />,
+          },
           { path: "merge-groups", element: <MergeGroups /> },
           { path: "grading", element: <Grading /> },
           { path: "notifications", element: <Notifications /> },

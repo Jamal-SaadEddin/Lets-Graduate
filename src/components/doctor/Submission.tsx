@@ -56,7 +56,7 @@ const Submission = () => {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Link to={`/submissions/comments/${submission.submissionId}`}>
+            <Link to={`/submissions/${submission.submissionId}/comments`}>
               <Button
                 variant="contained"
                 size="small"

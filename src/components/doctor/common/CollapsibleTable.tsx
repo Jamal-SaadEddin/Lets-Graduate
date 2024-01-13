@@ -114,7 +114,6 @@ const Row = ({ project, submission }: RowProps) => {
           <Button
             variant="contained"
             size="small"
-            color="info"
             disabled={!submission ? true : false}
             onClick={handleView}
           >
