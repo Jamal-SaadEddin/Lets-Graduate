@@ -46,7 +46,10 @@ const mainRoute =
           { path: "available-supervisors", element: <AvailableSupervisors /> },
           { path: "my-project", element: <ProjectDetails /> },
           { path: "submissions", element: <Submissions /> },
-          { path: "submissions/abstract-comments", element: <Comments /> },
+          {
+            path: "submissions/:id/comments",
+            element: <Comments />,
+          },
           { path: "account-settings", element: <AccountSettings /> },
           { path: ":username", element: <ProfileDetails withGPStates /> },
           { path: "notifications", element: <Notifications /> },

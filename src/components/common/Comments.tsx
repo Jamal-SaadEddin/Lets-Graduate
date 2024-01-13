@@ -9,11 +9,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { comments } from "../../constants/comments";
-import Comment from "./Comment";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
-import { useState } from "react";
+import Comment from "./Comment";
 
 interface Props {
   canAddComments?: boolean;
@@ -54,7 +54,13 @@ const Comments = ({ canAddComments = false }: Props) => {
               color="primary"
               gutterBottom
             >
-              <Link to={`/submissions/${submission.submissionId}`}>
+              <Link
+                to={
+                  canAddComments
+                    ? `/submissions/${submission.submissionId}`
+                    : "/submissions"
+                }
+              >
                 <Button
                   variant="text"
                   startIcon={<ArrowBackIosIcon />}

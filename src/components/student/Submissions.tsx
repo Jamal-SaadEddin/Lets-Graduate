@@ -11,8 +11,11 @@ import {
 } from "@mui/material";
 import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
+import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 
 const Submissions = () => {
+  const submission = useViewedSubmissionStore((s) => s.submission);
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     // Handle the selected file here, e.g., log its details or send it to a server
@@ -78,7 +81,7 @@ const Submissions = () => {
             </Button>
           </Grid>
           <Grid item xs={6} textAlign="end">
-            <Link to="abstract-comments">
+            <Link to={`/submissions/${submission.submissionId}/comments`}>
               <Button
                 variant="contained"
                 size="small"
