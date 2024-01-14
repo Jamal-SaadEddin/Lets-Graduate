@@ -3,17 +3,17 @@ import { supervisorProjects } from "../../constants/supervisedProjects";
 
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
 
-import Table from "../common/Table";
-import StudentSearchbox from "../student/StudentSearchbox";
-import useFilterStudentsStore from "../../state-management/filterStudentsStore";
-import { filterGroups } from "../../services/filterUtils";
-import useSearchboxStore from "../../state-management/searchboxStore";
 import {
   academicNumbers,
   addresses,
   projects,
 } from "../../constants/availableGroups";
+import { filterGroups } from "../../services/filterUtils";
+import useFilterStudentsStore from "../../state-management/filterStudentsStore";
+import useSearchboxStore from "../../state-management/searchboxStore";
+import Table from "../common/Table";
 import FilterBox from "../student/FilterBox";
+import StudentSearchbox from "../student/StudentSearchbox";
 
 interface Props {
   projectTitle?: boolean;

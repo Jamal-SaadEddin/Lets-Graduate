@@ -1,6 +1,6 @@
 import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
-import useAuth from "../../hooks/useAuth";
 import { getDepartment } from "../../constants/departments";
+import useAuth from "../../hooks/useAuth";
 
 const Overviews = () => {
   const { user } = useAuth();

@@ -14,9 +14,9 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { SupervisedProjectsProjectItem } from "../../../constants/availableGroups";
 import { Submission } from "../../../constants/supervisorSubmissions";
 import useViewedSubmissionStore from "../../../state-management/viewedSubmissionStore";
-import { Project } from "./../../../constants/supervisedProjects";
 
 const headings = [
   "Project Title",
@@ -27,7 +27,7 @@ const headings = [
 ];
 
 interface CollapsibleTableProps {
-  projects: Project[] | null | undefined;
+  projects: SupervisedProjectsProjectItem[] | null | undefined;
   submissions: Submission[];
 }
 
@@ -60,7 +60,7 @@ const CollapsibleTable = ({ projects, submissions }: CollapsibleTableProps) => {
 };
 
 interface RowProps {
-  project: Project;
+  project: SupervisedProjectsProjectItem;
   submission: Submission;
 }
 
