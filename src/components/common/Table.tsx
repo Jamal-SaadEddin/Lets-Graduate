@@ -19,7 +19,7 @@ interface Props {
     | AvailableGroupsStudent[]
     | Partner[]
     | Supervisor[];
-  withButton?: boolean;
+  withButton?: "join-group" | "merge-group" | false;
 }
 
 export default function Table({
@@ -28,6 +28,15 @@ export default function Table({
   withButton = false,
 }: Props) {
   const [requested, setRequested] = useState(false);
+
+  var buttonText = "";
+  if (requested && withButton === "join-group") buttonText = "cancel request";
+  else if (requested && withButton === "merge-group")
+    buttonText = "cancel merge request";
+  else if (!requested && withButton === "merge-group")
+    buttonText = "send merge request";
+  else buttonText = "send request";
+
   const handleRequest = () => {
     setRequested(!requested);
   };
@@ -53,7 +62,7 @@ export default function Table({
                   size="small"
                   onClick={handleRequest}
                 >
-                  {requested ? "cancel request" : "join request"}
+                  {buttonText}
                 </Button>
               </TableCell>
             )}

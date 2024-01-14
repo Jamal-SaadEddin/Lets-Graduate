@@ -1,8 +1,4 @@
-export interface Project {
-  id: number;
-  title: string;
-  students: SupervisedProjectsStudent[];
-}
+import { SupervisedProjectsProjectItem } from "./availableGroups";
 
 export interface Student {
   studentId: number;
@@ -136,7 +132,10 @@ export const students: Student[] = [
   },
 ];
 
-export const supervisorProjects: Project[] | null | undefined = [
+export const supervisorProjects:
+  | SupervisedProjectsProjectItem[]
+  | null
+  | undefined = [
   {
     id: 55,
     title: "Mohito Maker Machine",
@@ -177,7 +176,10 @@ export const supervisorProjects: Project[] | null | undefined = [
       })),
   },
 ];
-export const projectsCommittteeProjects: Project[] | null | undefined = [
+export const projectsCommitteeProjects:
+  | SupervisedProjectsProjectItem[]
+  | null
+  | undefined = [
   {
     id: 88,
     title: "AutoPizza",

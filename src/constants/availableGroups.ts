@@ -1,6 +1,16 @@
+import { SupervisedProjectsStudent } from "./supervisedProjects";
+
 export interface Project {
   id: number;
+  title: string;
+}
+
+export interface AvailableGroupsProjectItem extends Project {
   students: AvailableGroupsStudent[];
+}
+
+export interface SupervisedProjectsProjectItem extends Project {
+  students: SupervisedProjectsStudent[];
 }
 
 export interface Student {
@@ -146,9 +156,10 @@ export const academicNumbers: string[] = academicNumbersArray.filter(
   (value, index) => academicNumbersArray.indexOf(value) === index
 );
 
-export const projects: Project[] | null | undefined = [
+export const projects: AvailableGroupsProjectItem[] | null | undefined = [
   {
     id: 55,
+    title: "Mohito Maker Machine",
     students: students
       .filter((stu) => stu.projectId === 55)
       .map(({ name, academicNumber, address, email }) => ({
@@ -160,6 +171,7 @@ export const projects: Project[] | null | undefined = [
   },
   {
     id: 66,
+    title: "Barille Printer",
     students: students
       .filter((stu) => stu.projectId === 66)
       .map(({ name, academicNumber, address, email }) => ({
@@ -171,6 +183,7 @@ export const projects: Project[] | null | undefined = [
   },
   {
     id: 77,
+    title: "Clothes Cleaner",
     students: students
       .filter((stu) => stu.projectId === 77)
       .map(({ name, academicNumber, address, email }) => ({
@@ -182,6 +195,7 @@ export const projects: Project[] | null | undefined = [
   },
   {
     id: 88,
+    title: "AutoPizza",
     students: students
       .filter((stu) => stu.projectId === 88)
       .map(({ name, academicNumber, address, email }) => ({
@@ -193,6 +207,7 @@ export const projects: Project[] | null | undefined = [
   },
   {
     id: 99,
+    title: "DateXpert Intelligent classification system",
     students: students
       .filter((stu) => stu.projectId === 99)
       .map(({ name, academicNumber, address, email }) => ({

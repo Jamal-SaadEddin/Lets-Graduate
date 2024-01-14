@@ -4,7 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {
-  projectsCommittteeProjects,
+  projectsCommitteeProjects,
   supervisorProjects,
 } from "../../constants/supervisedProjects";
 import {
@@ -46,7 +46,7 @@ export default function Abstracts() {
       {userInfo.isProjectsCommitteeMember && (
         <CustomTabPanel value={value} index={1}>
           <CollapsibleTable
-            projects={projectsCommittteeProjects}
+            projects={projectsCommitteeProjects}
             submissions={projectsCommitteeSubmissions}
           />
         </CustomTabPanel>

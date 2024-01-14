@@ -92,7 +92,7 @@ export default function GroupsTable() {
               <Table
                 tableBody={group.students}
                 tableHead={headings}
-                withButton
+                withButton="join-group"
               />
             </GroupDetails>
           </Group>

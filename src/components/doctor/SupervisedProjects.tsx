@@ -34,7 +34,7 @@ const SupervisedProjects = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <GroupsTable />
+            <GroupsTable projectTitle />
           </Grid>
         </Grid>
       </Paper>

@@ -1,4 +1,9 @@
-import { Project, Student } from "../constants/availableGroups";
+import {
+  AvailableGroupsProjectItem,
+  Project,
+  Student,
+  SupervisedProjectsProjectItem,
+} from "../constants/availableGroups";
 
 export const filterStudents = (
   students: Student[],
@@ -23,10 +28,14 @@ export const filterProjects = (
 
 export const filterGroups = (
   students: Student[],
-  projects: Project[] | null | undefined,
+  projects:
+    | AvailableGroupsProjectItem[]
+    | SupervisedProjectsProjectItem[]
+    | null
+    | undefined,
   address: string | null,
   academicNumber: string | null
-): Project[] | null | undefined => {
+) => {
   const filteredStudents = students
     .filter((s) => (address === "" ? s : s.address === address))
     .filter((s) =>
