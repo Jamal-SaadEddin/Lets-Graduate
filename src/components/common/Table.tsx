@@ -1,4 +1,5 @@
 import CancelIcon from "@mui/icons-material/Cancel";
+import MergeIcon from "@mui/icons-material/Merge";
 import SendIcon from "@mui/icons-material/Send";
 import { Button, Table as MuiTable } from "@mui/material";
 import Paper from "@mui/material/Paper";
@@ -11,6 +12,7 @@ import { ReactNode, useState } from "react";
 import { AvailableGroupsStudent } from "../../constants/availableGroups";
 import { Partner, Supervisor } from "../../constants/myProject";
 import { SupervisedProjectsStudent } from "../../constants/supervisedProjects";
+import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -28,17 +30,20 @@ export default function Table({
   withButton = false,
 }: Props) {
   const [requested, setRequested] = useState(false);
+  const [openMergeDialog, setOpenMergeDialog] = useState(false);
 
   var buttonText = "";
   if (requested && withButton === "join-group") buttonText = "cancel request";
-  else if (requested && withButton === "merge-group")
-    buttonText = "cancel merge request";
   else if (!requested && withButton === "merge-group")
-    buttonText = "send merge request";
+    buttonText = "view merge process";
   else buttonText = "send request";
 
   const handleRequest = () => {
     setRequested(!requested);
+  };
+
+  const handleStartMergeProcess = () => {
+    setOpenMergeDialog(true);
   };
 
   const propertyNames = Object.keys(
@@ -58,9 +63,19 @@ export default function Table({
                 <Button
                   variant="contained"
                   startIcon={requested && <CancelIcon />}
-                  endIcon={!requested && <SendIcon />}
+                  endIcon={
+                    !requested && withButton === "join-group" ? (
+                      <SendIcon />
+                    ) : !requested && withButton === "merge-group" ? (
+                      <MergeIcon />
+                    ) : null
+                  }
                   size="small"
-                  onClick={handleRequest}
+                  onClick={
+                    withButton === "join-group"
+                      ? handleRequest
+                      : handleStartMergeProcess
+                  }
                 >
                   {buttonText}
                 </Button>
@@ -85,6 +100,10 @@ export default function Table({
           ))}
         </TableBody>
       </MuiTable>
+      <MergeGroupsProcessDialog
+        openMergeDialog={openMergeDialog}
+        setOpenMergeDialog={setOpenMergeDialog}
+      />
     </TableContainer>
   );
 }

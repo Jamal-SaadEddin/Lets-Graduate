@@ -1,16 +1,14 @@
 import { Grid, Typography } from "@mui/material";
-import { supervisorProjects } from "../../constants/supervisedProjects";
-
-import { Group, GroupDetails, GroupSummary } from "../common/Group";
-
 import {
   academicNumbers,
   addresses,
   projects,
 } from "../../constants/availableGroups";
+import { supervisorProjects } from "../../constants/supervisedProjects";
 import { filterGroups } from "../../services/filterUtils";
 import useFilterStudentsStore from "../../state-management/filterStudentsStore";
 import useSearchboxStore from "../../state-management/searchboxStore";
+import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";
 import FilterBox from "../student/FilterBox";
 import StudentSearchbox from "../student/StudentSearchbox";
@@ -99,7 +97,9 @@ const GroupsTable = ({
               <Grid container>
                 <Grid item xs={7} sm={9}>
                   {projectTitle ? (
-                    <Typography>{group.title}</Typography>
+                    <Typography>
+                      {group.title}, ID: {group.id}
+                    </Typography>
                   ) : (
                     <Typography>
                       {group.students
