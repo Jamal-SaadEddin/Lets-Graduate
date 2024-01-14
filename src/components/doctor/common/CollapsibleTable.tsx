@@ -111,14 +111,11 @@ const Row = ({ project, submission }: RowProps) => {
           />
         </TableCell>
         <TableCell>
-          <Button
-            variant="contained"
-            size="small"
-            disabled={!submission ? true : false}
-            onClick={handleView}
-          >
-            View
-          </Button>
+          {submission && (
+            <Button variant="contained" size="small" onClick={handleView}>
+              View
+            </Button>
+          )}
         </TableCell>
       </TableRow>
       <TableRow>
