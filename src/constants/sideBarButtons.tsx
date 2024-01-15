@@ -1,3 +1,4 @@
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GradingIcon from "@mui/icons-material/Grading";
@@ -92,5 +93,26 @@ const sideBarButtons: SideBarButton[] =
         },
       ]
     : [];
+
+export const departmentManagerSideBarButtons: SideBarButton[] = [
+  {
+    icon: <QuestionAnswerIcon />,
+    primaryText: "Prerequisites",
+    secondaryText: "Graduation Project 1",
+    link: "prerequisites/gp/1",
+  },
+  {
+    icon: <QuestionAnswerIcon />,
+    primaryText: "Prerequisites",
+    secondaryText: "Graduation Project 2",
+    link: "prerequisites/gp/2",
+  },
+  {
+    icon: <AdminPanelSettingsIcon />,
+    primaryText: "Department",
+    secondaryText: "Settings and Stages",
+    link: "department-settings",
+  },
+];
 
 export default sideBarButtons;

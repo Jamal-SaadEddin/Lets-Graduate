@@ -57,7 +57,7 @@ const useAuth = () => ({
     type: "doctor",
     info: <DoctorInfo>{
       isSupervisor: true,
-      isDepartmentManager: false,
+      isDepartmentManager: true,
       isProjectsCommitteeMember: false,
     },
   },

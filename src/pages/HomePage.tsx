@@ -27,8 +27,10 @@ import Copyright from "../components/common/Copyright";
 import { AppBar, Drawer } from "../components/common/DashboardLayout";
 import NotificationsPopover from "../components/common/NotificationsPopover";
 import SideBar from "../components/common/SideBar";
-import sideBarButtons from "../constants/sideBarButtons";
-import useAuth from "../hooks/useAuth";
+import sideBarButtons, {
+  departmentManagerSideBarButtons,
+} from "../constants/sideBarButtons";
+import useAuth, { DoctorInfo } from "../hooks/useAuth";
 import useThemeStore from "../state-management/themeStore";
 
 export default function HomePage() {
@@ -62,6 +64,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   const { user } = useAuth();
+  const userInfo = user.info as DoctorInfo;
 
   if (!user) return <Navigate to="/login" />;
 
@@ -230,6 +233,13 @@ export default function HomePage() {
           <Divider />
           <List component="nav">
             <SideBar children={sideBarButtons} />
+            {userInfo.isDepartmentManager && <Divider sx={{ my: 1 }} />}
+            {userInfo.isDepartmentManager && (
+              <SideBar
+                children={departmentManagerSideBarButtons}
+                subHeader="Department Management"
+              />
+            )}
           </List>
         </Drawer>
         <Box
