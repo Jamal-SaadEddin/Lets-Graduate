@@ -4,7 +4,10 @@ import {
   addresses,
   projects,
 } from "../../constants/availableGroups";
-import { supervisorProjects } from "../../constants/supervisedProjects";
+import {
+  GradingProjectsStudent,
+  supervisorProjects,
+} from "../../constants/supervisedProjects";
 import { filterGroups } from "../../services/filterUtils";
 import useFilterStudentsStore from "../../state-management/filterStudentsStore";
 import useSearchboxStore from "../../state-management/searchboxStore";
@@ -13,6 +16,7 @@ import Table from "../common/Table";
 import FilterBox from "../student/FilterBox";
 import StudentSearchbox from "../student/StudentSearchbox";
 import { gradingProjects } from "./../../constants/supervisedProjects";
+import GradingTable from "./common/GradingTable";
 
 interface Props {
   projectTitle?: boolean;
@@ -26,7 +30,12 @@ const GroupsTable = ({
   grading = false,
 }: Props) => {
   const headings = grading
-    ? ["Student Name", "Registration Number", "Project Type", "Project Status"]
+    ? [
+        "Student Name",
+        "Registration Number",
+        "Project Type",
+        "Project Status (Evaluate here)",
+      ]
     : projectTitle
     ? ["Student Name", "Registration Number", "Address", "Email", "Department"]
     : ["Student Name", "Academic Number", "Address", "Email"];
@@ -119,11 +128,18 @@ const GroupsTable = ({
               </Grid>
             </GroupSummary>
             <GroupDetails>
-              <Table
-                tableBody={group.students}
-                tableHead={headings}
-                withButton={projectTitle ? false : "merge-group"}
-              />
+              {grading ? (
+                <GradingTable
+                  tableHead={headings}
+                  tableBody={group.students as GradingProjectsStudent[]}
+                />
+              ) : (
+                <Table
+                  tableBody={group.students}
+                  tableHead={headings}
+                  withButton={projectTitle ? false : "merge-group"}
+                />
+              )}
             </GroupDetails>
           </Group>
         ))}

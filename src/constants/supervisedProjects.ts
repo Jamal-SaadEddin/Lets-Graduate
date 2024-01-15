@@ -29,7 +29,7 @@ export interface GradingProjectsStudent {
   name: string;
   studentId: number;
   projectType: "GP1" | "GP2" | null;
-  projectStatus?: "not-registered" | "registered" | "passed";
+  projectStatus: "not-registered" | "registered" | "passed";
 }
 
 export const students: Student[] = [
