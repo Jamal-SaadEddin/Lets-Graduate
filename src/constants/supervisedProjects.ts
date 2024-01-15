@@ -132,10 +132,7 @@ export const students: Student[] = [
   },
 ];
 
-export const supervisorProjects:
-  | SupervisedProjectsProjectItem[]
-  | null
-  | undefined = [
+export const supervisorProjects: SupervisedProjectsProjectItem[] = [
   {
     id: 55,
     title: "Mohito Maker Machine",

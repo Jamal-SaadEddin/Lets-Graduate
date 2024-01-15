@@ -156,7 +156,7 @@ export const academicNumbers: string[] = academicNumbersArray.filter(
   (value, index) => academicNumbersArray.indexOf(value) === index
 );
 
-export const projects: AvailableGroupsProjectItem[] | null | undefined = [
+export const projects: AvailableGroupsProjectItem[] = [
   {
     id: 55,
     title: "Mohito Maker Machine",

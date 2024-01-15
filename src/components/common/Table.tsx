@@ -103,6 +103,7 @@ export default function Table({
       <MergeGroupsProcessDialog
         openMergeDialog={openMergeDialog}
         setOpenMergeDialog={setOpenMergeDialog}
+        requestedGroup={tableBody as AvailableGroupsStudent[]}
       />
     </TableContainer>
   );
