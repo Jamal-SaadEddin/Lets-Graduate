@@ -12,17 +12,22 @@ import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";
 import FilterBox from "../student/FilterBox";
 import StudentSearchbox from "../student/StudentSearchbox";
+import { gradingProjects } from "./../../constants/supervisedProjects";
 
 interface Props {
   projectTitle?: boolean;
   withFiltration?: boolean;
+  grading?: boolean;
 }
 
 const GroupsTable = ({
   projectTitle = false,
   withFiltration = false,
+  grading = false,
 }: Props) => {
-  const headings = projectTitle
+  const headings = grading
+    ? ["Student Name", "Registration Number", "Project Type", "Project Status"]
+    : projectTitle
     ? ["Student Name", "Registration Number", "Address", "Email", "Department"]
     : ["Student Name", "Academic Number", "Address", "Email"];
 
@@ -37,7 +42,7 @@ const GroupsTable = ({
 
   const filteredGroups = filterGroups(
     useSearchboxStore((s) => s.filteredStudents),
-    projectTitle ? supervisorProjects : projects,
+    grading ? gradingProjects : projectTitle ? supervisorProjects : projects,
     address,
     academicNumber
   );

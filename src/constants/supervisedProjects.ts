@@ -1,4 +1,7 @@
-import { SupervisedProjectsProjectItem } from "./availableGroups";
+import {
+  GradingProjectsProjectItem,
+  SupervisedProjectsProjectItem,
+} from "./availableGroups";
 
 export interface Student {
   studentId: number;
@@ -9,6 +12,9 @@ export interface Student {
   email: string;
   mobileNumber: string;
   department: string;
+  projectType: "GP1" | "GP2" | null;
+  gp1Status: "not-registered" | "registered" | "passed";
+  gp2Status: "not-registered" | "registered" | "passed";
 }
 
 export interface SupervisedProjectsStudent {
@@ -17,6 +23,13 @@ export interface SupervisedProjectsStudent {
   studentId: number;
   email: string;
   department: string;
+}
+
+export interface GradingProjectsStudent {
+  name: string;
+  studentId: number;
+  projectType: "GP1" | "GP2" | null;
+  projectStatus?: "not-registered" | "registered" | "passed";
 }
 
 export const students: Student[] = [
@@ -29,6 +42,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098598",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 12023456,
@@ -39,6 +55,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098501",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 11925044,
@@ -49,6 +68,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098502",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 11923404,
@@ -59,6 +81,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098503",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 11825077,
@@ -69,6 +94,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098504",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 11922542,
@@ -79,6 +107,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098505",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 12023064,
@@ -89,6 +120,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098506",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 12015104,
@@ -99,6 +133,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098507",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 11825864,
@@ -109,6 +146,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098508",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 11945621,
@@ -119,6 +159,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098509",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
   {
     studentId: 12078965,
@@ -129,6 +172,9 @@ export const students: Student[] = [
     email: "jamalsa3d2001@gmail.com",
     mobileNumber: "0599098510",
     department: "Computer Engineering",
+    projectType: "GP1",
+    gp1Status: "registered",
+    gp2Status: "not-registered",
   },
 ];
 
@@ -173,10 +219,8 @@ export const supervisorProjects: SupervisedProjectsProjectItem[] = [
       })),
   },
 ];
-export const projectsCommitteeProjects:
-  | SupervisedProjectsProjectItem[]
-  | null
-  | undefined = [
+
+export const projectsCommitteeProjects: SupervisedProjectsProjectItem[] = [
   {
     id: 88,
     title: "AutoPizza",
@@ -202,5 +246,47 @@ export const projectsCommitteeProjects:
         email,
         department,
       })),
+  },
+];
+
+const getGradingStudent = (s: Student) => {
+  const name = s.name;
+  const studentId = s.studentId;
+  const projectType = s.projectType;
+  const projectStatus =
+    s.projectType === "GP1"
+      ? s.gp1Status
+      : s.projectType === "GP2"
+      ? s.gp2Status
+      : "not-registered";
+  return {
+    name,
+    studentId,
+    projectType,
+    projectStatus,
+  };
+};
+
+export const gradingProjects: GradingProjectsProjectItem[] = [
+  {
+    id: 55,
+    title: "Mohito Maker Machine",
+    students: students
+      .filter((stu) => stu.projectId === 55)
+      .map((s) => getGradingStudent(s)),
+  },
+  {
+    id: 66,
+    title: "Barille Printer",
+    students: students
+      .filter((stu) => stu.projectId === 66)
+      .map((s) => getGradingStudent(s)),
+  },
+  {
+    id: 77,
+    title: "Clothes Cleaner",
+    students: students
+      .filter((stu) => stu.projectId === 77)
+      .map((s) => getGradingStudent(s)),
   },
 ];

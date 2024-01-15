@@ -1,4 +1,7 @@
-import { SupervisedProjectsStudent } from "./supervisedProjects";
+import {
+  GradingProjectsStudent,
+  SupervisedProjectsStudent,
+} from "./supervisedProjects";
 
 export interface Project {
   id: number;
@@ -11,6 +14,10 @@ export interface AvailableGroupsProjectItem extends Project {
 
 export interface SupervisedProjectsProjectItem extends Project {
   students: SupervisedProjectsStudent[];
+}
+
+export interface GradingProjectsProjectItem extends Project {
+  students: GradingProjectsStudent[];
 }
 
 export interface Student {
