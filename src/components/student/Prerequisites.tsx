@@ -9,12 +9,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Prerequisite, prerequisites } from "../../constants/prerequisites";
+import {
+  StudentPrerequisite,
+  studentPrerequisites,
+} from "../../constants/prerequisites";
 
 export default function Prerequisites() {
   const params = useParams();
 
-  const [savedPrerequisites, setSavedPrerequisites] = useState(prerequisites);
+  const [savedPrerequisites, setSavedPrerequisites] =
+    useState<StudentPrerequisite[]>(studentPrerequisites);
 
   const handleClick = (preId: number) => {
     setSavedPrerequisites(
@@ -24,7 +28,7 @@ export default function Prerequisites() {
     );
   };
 
-  if (!prerequisites || prerequisites.length === 0)
+  if (!studentPrerequisites || studentPrerequisites.length === 0)
     return (
       <Typography component="h2" variant="h5" color="primary" gutterBottom>
         No Prerequisites Available.
@@ -80,9 +84,7 @@ export default function Prerequisites() {
                   </TableRow>
                 ))}
                 {savedPrerequisites.length >= 1 &&
-                savedPrerequisites.every(
-                  (p: Prerequisite) => p.answer === true
-                ) ? (
+                savedPrerequisites.every((p) => p.answer === true) ? (
                   <TableRow key={0}>
                     <TableCell
                       sx={{
