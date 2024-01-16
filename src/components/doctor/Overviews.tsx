@@ -32,7 +32,7 @@ const Overviews = () => {
           </Grid>
           {/* Changable area based on doctor state  */}
           <Grid item xs={12}>
-            {userDepartment.currentPeriod === "create partnerships" && (
+            {userDepartment.currentPeriod === "create-partnerships" && (
               <Typography variant="subtitle1">
                 Currently, the Department of {userDepartmentName} is going
                 through a period of establishing partnerships between students,{" "}
@@ -54,7 +54,7 @@ const Overviews = () => {
                 </b>
               </Typography>
             )}
-            {userDepartment.currentPeriod === "abstract submission" && (
+            {userDepartment.currentPeriod === "abstract-submission" && (
               <Typography variant="subtitle1">
                 The {userDepartmentName} Department is currently going through
                 the period of submitting abstracts to the supervising doctors.{" "}
@@ -64,7 +64,7 @@ const Overviews = () => {
                 </b>
               </Typography>
             )}
-            {userDepartment.currentPeriod === "evaluating students" && (
+            {userDepartment.currentPeriod === "evaluating-students" && (
               <Typography variant="subtitle1">
                 After completing the graduation projects for this semester, it
                 is time to evaluate the students.{" "}

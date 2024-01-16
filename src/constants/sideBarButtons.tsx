@@ -110,7 +110,7 @@ export const departmentManagerSideBarButtons: SideBarButton[] = [
   {
     icon: <AdminPanelSettingsIcon />,
     primaryText: "Department",
-    secondaryText: "Settings and Stages",
+    secondaryText: "Settings and Info",
     link: "department-settings",
   },
 ];
