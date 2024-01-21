@@ -12,7 +12,7 @@ const StudentSearchbox = () => {
   const handleInputChange = (_event: SyntheticEvent, value: string) => {
     // Perform manual filtering and log the results
     const filtered = students.filter((option) =>
-      option.name.toLowerCase().includes(value.toLowerCase())
+      option.fullName.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredOptions(filtered);
   };
@@ -20,7 +20,7 @@ const StudentSearchbox = () => {
   return (
     <Autocomplete
       options={filteredStudents}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => option.fullName}
       renderInput={(params) => (
         <TextField
           {...params}

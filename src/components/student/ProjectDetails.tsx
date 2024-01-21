@@ -10,8 +10,7 @@ import {
 } from "@mui/material";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import React from "react";
-import { myProject } from "../../constants/myProject";
+import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Table from "../common/Table";
 
@@ -33,6 +32,10 @@ const supervisorHeadings = [
 
 const ProjectDetails = () => {
   const { user } = useAuth();
+
+  const myProjectInfo = useMyProjectInfoStore((s) => s.myProjectInfo);
+  const myPartners = usePartnersStore((s) => s.partners);
+  const mySupervisors = useSupervisorStore((s) => s.supervisors);
 
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
 
@@ -65,10 +68,11 @@ const ProjectDetails = () => {
               color="primary"
               gutterBottom
             >
-              {myProject.projectTitle}
+              {myProjectInfo.projectTitle}
             </Typography>
             <Typography>
-              {user.department} - Graduion Project {myProject.projectType}
+              {user.department} - Graduion Project{" "}
+              {myProjectInfo.projectType === "gp1" ? "1" : "2"}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -76,23 +80,18 @@ const ProjectDetails = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6" paddingBottom={2} color="primary">
-              {myProject.partners?.length === 1 ? "My Partner" : "My Partners"}
+              {myPartners.length === 1 ? "My Partner" : "My Partners"}
             </Typography>
-            <Table tableHead={partnerHeadings} tableBody={myProject.partners} />
+            <Table tableHead={partnerHeadings} tableBody={myPartners} />
           </Grid>
           <Grid item xs={12}>
             <Divider />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6" paddingBottom={2} color="primary">
-              {myProject.supervisors?.length === 1
-                ? "My Supervisor"
-                : "My Supervisors"}
+              {mySupervisors.length === 1 ? "My Supervisor" : "My Supervisors"}
             </Typography>
-            <Table
-              tableHead={supervisorHeadings}
-              tableBody={myProject.supervisors}
-            />
+            <Table tableHead={supervisorHeadings} tableBody={mySupervisors} />
           </Grid>
           <Grid item xs={12}>
             <Divider />
@@ -133,6 +132,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { updateMyProjectTitle } from "../../hooks/useMyProject";
+import useMyProjectInfoStore from "../../state-management/myProjectInfoStore";
+import usePartnersStore from "../../state-management/partnersStore";
+import useSupervisorStore from "../../state-management/supervisorsStore";
 
 export function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -143,6 +146,21 @@ export function FormDialog() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const [newProjectTitle, setNewProjectTitle] = useState("");
+
+  const myProjectInfo = useMyProjectInfoStore((s) => s.myProjectInfo);
+  const setMyProject = useMyProjectInfoStore((s) => s.setMyProject);
+
+  const handleAddNewProjectTitle = async () => {
+    if (newProjectTitle.replace(/\s/g, "").length > 0) {
+      await updateMyProjectTitle(11923604, newProjectTitle);
+      handleClose();
+      setMyProject({ ...myProjectInfo, projectTitle: newProjectTitle });
+    } else {
+      handleClose();
+    }
   };
 
   return (
@@ -168,11 +186,16 @@ export function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            value={newProjectTitle}
+            onChange={(event) => {
+              if (event.target.value.length <= 50)
+                setNewProjectTitle(event.target.value);
+            }}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+          <Button onClick={handleAddNewProjectTitle}>Save</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

@@ -1,19 +1,5 @@
-import useAuth, { StudentInfo } from "./../hooks/useAuth";
-import { students } from "./availableGroups";
-
-const { user } = useAuth();
-const userInfo = user.info as StudentInfo;
-
-export interface Doctor {
-  doctorId: number;
-  name: string;
-  email: string;
-  department: string;
-  mobileNumber: string;
-}
-
 export interface Partner {
-  name: string;
+  fullName: string;
   studentId: number;
   department: string;
   email: string;
@@ -21,41 +7,14 @@ export interface Partner {
   address: string;
 }
 
-export interface MyProject {
-  projectId: number;
+export interface MyProjectInfo {
   projectTitle: string;
   projectType: string;
-  partners: Partner[];
-  supervisors: Supervisor[];
 }
 
 export interface Supervisor {
-  name: string;
+  fullName: string;
   email: string;
   department: string;
   mobileNumber: string;
 }
-
-export const myProject: MyProject = {
-  projectId: 55,
-  projectTitle: "Mohito Maker Machine",
-  projectType: "1",
-  partners: students
-    .filter((stu) => stu.projectId === userInfo.projectId)
-    .map(({ name, studentId, department, email, mobileNumber, address }) => ({
-      name,
-      studentId,
-      department,
-      email,
-      mobileNumber,
-      address,
-    })),
-  supervisors: [
-    {
-      name: "Dr. Manar Qamhiee",
-      department: "Computer Engineering",
-      email: "manarqamhiee@gmail.com",
-      mobileNumber: "0599445683",
-    },
-  ],
-};

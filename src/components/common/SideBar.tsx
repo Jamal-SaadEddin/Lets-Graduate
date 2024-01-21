@@ -5,6 +5,11 @@ import ListSubheader from "@mui/material/ListSubheader";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { SideBarButton } from "../../constants/sideBarButtons";
+import {
+  getMyPartners,
+  getMyProjectInfo,
+  getMySupervisors,
+} from "../../hooks/useMyProject";
 import { getPrerequisites } from "../../hooks/usePrerequisites";
 
 interface Props {
@@ -19,6 +24,10 @@ const SideBar = ({ children, subHeader = false }: Props) => {
     if (item.link.includes("prerequisites/gp")) {
       const projectType = item.link === "prerequisites/gp/1" ? "gp1" : "gp2";
       await getPrerequisites("Computer Engineering", projectType);
+    } else if (item.link.includes("my-project")) {
+      await getMyPartners(11923604);
+      await getMySupervisors(11923604);
+      await getMyProjectInfo(11923604);
     }
 
     navigate(item.link);

@@ -24,44 +24,44 @@ export interface DoctorInfo {
   isProjectsCommitteeMember: boolean;
 }
 
-// const useAuth = () => ({
-//   user: <User>{
-//     id: "11923604",
-//     firstName: "Jamal",
-//     lastName: "SaadEddin",
-//     email: "jamal.saadeddin@gmail.com",
-//     password: "123456",
-//     department: "Computer Engineering - هندسة الحاسوب",
-//     address: "Nablus",
-//     mobileNumber: "0599098598",
-//     type: "student",
-//     info: <StudentInfo>{
-//       projectId: 55,
-//       projectOneState: "In progress",
-//       projectTwoState: "Done",
-//     },
-//   },
-// });
-
 const useAuth = () => ({
   user: <User>{
-    id: "1001",
-    firstName: "Ashraf",
-    lastName: "Armoush",
-    email: "ashraf.armoush@gmail.com",
+    id: "11923604",
+    firstName: "Jamal",
+    lastName: "SaadEddin",
+    email: "jamal.saadeddin@gmail.com",
     password: "123456",
     department: "Computer Engineering - هندسة الحاسوب",
     address: "Nablus",
-    village: "Aurif",
-    mobileNumber: "0598745632",
-    type: "doctor",
-    info: <DoctorInfo>{
-      isSupervisor: true,
-      isDepartmentManager: true,
-      isProjectsCommitteeMember: true,
+    mobileNumber: "0599098598",
+    type: "student",
+    info: <StudentInfo>{
+      projectId: 55,
+      projectOneState: "In progress",
+      projectTwoState: "Done",
     },
   },
 });
+
+// const useAuth = () => ({
+//   user: <User>{
+//     id: "1001",
+//     firstName: "Ashraf",
+//     lastName: "Armoush",
+//     email: "ashraf.armoush@gmail.com",
+//     password: "123456",
+//     department: "Computer Engineering - هندسة الحاسوب",
+//     address: "Nablus",
+//     village: "Aurif",
+//     mobileNumber: "0598745632",
+//     type: "doctor",
+//     info: <DoctorInfo>{
+//       isSupervisor: true,
+//       isDepartmentManager: true,
+//       isProjectsCommitteeMember: true,
+//     },
+//   },
+// });
 
 // const useAuth = () => ({ user: null });
 
