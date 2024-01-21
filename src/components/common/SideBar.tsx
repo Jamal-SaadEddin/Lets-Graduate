@@ -5,6 +5,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { SideBarButton } from "../../constants/sideBarButtons";
+import { getPrerequisites } from "../../hooks/usePrerequisites";
 
 interface Props {
   children: SideBarButton[];
@@ -14,6 +15,15 @@ interface Props {
 const SideBar = ({ children, subHeader = false }: Props) => {
   const navigate = useNavigate();
 
+  const handleClick = async (item: SideBarButton) => {
+    if (item.link.includes("prerequisites/gp")) {
+      const projectType = item.link === "prerequisites/gp/1" ? "gp1" : "gp2";
+      await getPrerequisites("Computer Engineering", projectType);
+    }
+
+    navigate(item.link);
+  };
+
   return (
     <React.Fragment>
       {subHeader && (
@@ -22,7 +32,7 @@ const SideBar = ({ children, subHeader = false }: Props) => {
         </ListSubheader>
       )}
       {children.map((item, index) => (
-        <ListItemButton onClick={() => navigate(item.link)} key={index}>
+        <ListItemButton onClick={() => handleClick(item)} key={index}>
           <ListItemIcon>{item.icon}</ListItemIcon>
           <ListItemText
             primary={item.primaryText}

@@ -14,31 +14,36 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Prerequisite } from "../../../constants/prerequisites";
+import usePrerequisitesStore from "../../../state-management/prerequisitesStore";
 import {
-  Prerequisite,
-  supervisorPrerequisites,
-} from "../../../constants/prerequisites";
+  addPrerequisite,
+  deletePrerequisite,
+} from "../../../hooks/usePrerequisites";
 
 const DepartmentPrerequisites = () => {
   const params = useParams();
 
-  const [savedPrerequisites, setSavedPrerequisites] = useState<Prerequisite[]>(
-    supervisorPrerequisites
-  );
+  const prerequisites = usePrerequisitesStore((s) => s.prerequisites);
+  const setPrerequisites = usePrerequisitesStore((s) => s.setPrerequisites);
 
   const [newPrerequisite, setNewPrerequisite] = useState<Prerequisite>({
-    id: -1,
+    prerequisiteId: -1,
     content: "",
   });
 
-  const handleAddNewPrerequisite = () => {
+  const handleAddNewPrerequisite = async () => {
     if (newPrerequisite.content.replace(/\s/g, "").length > 0) {
-      const newId = 10;
-      console.log("Generating new ID: " + newId);
-      const prerequisite = { id: newId, content: newPrerequisite.content };
+      const projectType = params["projectType"] === "1" ? "gp1" : "gp2";
+      const prerequisite = {
+        department: "Computer Engineering",
+        projectType: projectType,
+        content: newPrerequisite.content,
+      };
       setNewPrerequisite(prerequisite);
       console.log(`New Prerequisite Added: ${prerequisite.content}`);
-      setSavedPrerequisites([...savedPrerequisites, prerequisite]);
+      setPrerequisites([...prerequisites, prerequisite]);
+      await addPrerequisite(prerequisite);
     }
   };
 
@@ -52,13 +57,12 @@ const DepartmentPrerequisites = () => {
     }
   };
 
-  const handleDeletePrerequisite = (prerequisiteId: number) => {
-    console.log("Deleting Prerequisite from database: " + prerequisiteId);
-
-    const prerequisites = savedPrerequisites.filter(
-      (p) => p.id !== prerequisiteId
+  const handleDeletePrerequisite = async (prerequisiteId: number) => {
+    const newPrerequisites = prerequisites.filter(
+      (p) => p.prerequisiteId !== prerequisiteId
     );
-    setSavedPrerequisites(prerequisites);
+    setPrerequisites(newPrerequisites);
+    await deletePrerequisite(prerequisiteId);
   };
 
   return (
@@ -82,7 +86,10 @@ const DepartmentPrerequisites = () => {
               value={newPrerequisite.content}
               onChange={(event) => {
                 if (event.target.value.length <= 100)
-                  setNewPrerequisite({ content: event.target.value, id: -1 });
+                  setNewPrerequisite({
+                    content: event.target.value,
+                    prerequisiteId: -1,
+                  });
               }}
               onKeyDown={handleKeyDown}
               InputProps={{
@@ -98,7 +105,7 @@ const DepartmentPrerequisites = () => {
             <Divider sx={{ my: 3 }} />
             <Table size="medium">
               <TableBody>
-                {savedPrerequisites.map((prerequisite, index) => (
+                {prerequisites.map((prerequisite, index) => (
                   <TableRow key={index}>
                     <TableCell sx={{ fontSize: 16 }}>
                       {prerequisite.content}
@@ -107,9 +114,11 @@ const DepartmentPrerequisites = () => {
                       <Button
                         color="error"
                         variant="outlined"
-                        onClick={() =>
-                          handleDeletePrerequisite(prerequisite.id)
-                        }
+                        onClick={() => {
+                          handleDeletePrerequisite(
+                            prerequisite.prerequisiteId!
+                          );
+                        }}
                       >
                         Delete
                       </Button>

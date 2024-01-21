@@ -7,28 +7,24 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  StudentPrerequisite,
-  studentPrerequisites,
-} from "../../constants/prerequisites";
+import usePrerequisitesStore from "../../state-management/prerequisitesStore";
 
 export default function Prerequisites() {
   const params = useParams();
 
-  const [savedPrerequisites, setSavedPrerequisites] =
-    useState<StudentPrerequisite[]>(studentPrerequisites);
+  const prerequisites = usePrerequisitesStore((s) => s.prerequisites);
+  const setPrerequisites = usePrerequisitesStore((s) => s.setPrerequisites);
 
   const handleClick = (preId: number) => {
-    setSavedPrerequisites(
-      savedPrerequisites.map((pre) =>
-        pre.id === preId ? { ...pre, answer: !pre.answer } : pre
+    setPrerequisites(
+      prerequisites.map((pre) =>
+        pre.prerequisiteId === preId ? { ...pre, answer: !pre.answer } : pre
       )
     );
   };
 
-  if (!studentPrerequisites || studentPrerequisites.length === 0)
+  if (!prerequisites || prerequisites.length === 0)
     return (
       <Typography component="h2" variant="h5" color="primary" gutterBottom>
         No Prerequisites Available.
@@ -58,7 +54,7 @@ export default function Prerequisites() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {savedPrerequisites.map((prerequisite, index) => (
+                {prerequisites.map((prerequisite, index) => (
                   <TableRow key={index}>
                     <TableCell sx={{ fontSize: 16 }}>
                       {prerequisite.content}
@@ -78,13 +74,15 @@ export default function Prerequisites() {
                       )}
                       <Checkbox
                         name={`${index}`}
-                        onClick={() => handleClick(prerequisite.id)}
+                        onClick={() =>
+                          handleClick(prerequisite.prerequisiteId!)
+                        }
                       />
                     </TableCell>
                   </TableRow>
                 ))}
-                {savedPrerequisites.length >= 1 &&
-                savedPrerequisites.every((p) => p.answer === true) ? (
+                {prerequisites.length >= 1 &&
+                prerequisites.every((p) => p.answer === true) ? (
                   <TableRow key={0}>
                     <TableCell
                       sx={{
