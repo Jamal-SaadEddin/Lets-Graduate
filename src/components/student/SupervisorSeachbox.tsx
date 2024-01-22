@@ -1,9 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { SyntheticEvent } from "react";
-import {
-  AvailableSupervisor,
-  availableSupervisors,
-} from "../../constants/availableSupervisors";
+import { AvailableSupervisor } from "../../constants/availableSupervisors";
 import useSearchboxStore from "../../state-management/searchboxStore";
 
 const SupervisorSeachbox = () => {
@@ -13,11 +10,12 @@ const SupervisorSeachbox = () => {
   const setFilteredSupervisors = useSearchboxStore(
     (s) => s.setFilteredSupervisors
   );
+  const allSupervisors = useSearchboxStore((s) => s.allSupervisors);
 
   const handleInputChange = (_event: SyntheticEvent, value: string) => {
     // Perform manual filtering and log the results
-    const filtered = availableSupervisors.filter((option) =>
-      option.name.toLowerCase().includes(value.toLowerCase())
+    const filtered = allSupervisors.filter((option) =>
+      option.fullName.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredSupervisors(filtered);
   };
@@ -25,7 +23,7 @@ const SupervisorSeachbox = () => {
   return (
     <Autocomplete
       options={filteredSupervisors}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => option.fullName}
       renderInput={(params) => (
         <TextField
           {...params}

@@ -12,6 +12,7 @@ import {
 } from "../../hooks/useMyProject";
 import { getPrerequisites } from "../../hooks/usePrerequisites";
 import { getAvailableGroups } from "../../hooks/useAvailableGroups";
+import { getAvailableSupervisors } from "../../hooks/useAvailableSupervisors";
 
 interface Props {
   children: SideBarButton[];
@@ -31,6 +32,8 @@ const SideBar = ({ children, subHeader = false }: Props) => {
       await getMyProjectInfo(11923604);
     } else if (item.link.includes("available-groups")) {
       await getAvailableGroups("Computer Engineering", "gp1");
+    } else if (item.link.includes("available-supervisors")) {
+      await getAvailableSupervisors(11925044);
     }
 
     navigate(item.link);

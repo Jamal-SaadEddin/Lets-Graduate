@@ -1,9 +1,6 @@
 import { create } from "zustand";
 import { Student } from "../constants/availableGroups";
-import {
-  AvailableSupervisor,
-  availableSupervisors,
-} from "../constants/availableSupervisors";
+import { AvailableSupervisor } from "../constants/availableSupervisors";
 
 interface SearchboxStore {
   student: Student | null;
@@ -17,6 +14,8 @@ interface SearchboxStore {
   setSupervisor: (supervisor: AvailableSupervisor | null) => void;
   filteredSupervisors: AvailableSupervisor[];
   setFilteredSupervisors: (filteredSupervisors: AvailableSupervisor[]) => void;
+  allSupervisors: AvailableSupervisor[];
+  setAllSupervisors: (allSupervisors: AvailableSupervisor[]) => void;
 }
 
 const useSearchboxStore = create<SearchboxStore>((set) => ({
@@ -29,15 +28,22 @@ const useSearchboxStore = create<SearchboxStore>((set) => ({
 
   supervisor: null,
   setSupervisor: (supervisor) => set(() => ({ supervisor })),
-  filteredSupervisors: availableSupervisors,
+  filteredSupervisors: [],
   setFilteredSupervisors: (filteredSupervisors) =>
     set(() => ({ filteredSupervisors })),
+  allSupervisors: [],
+  setAllSupervisors: (allSupervisors) => set(() => ({ allSupervisors })),
 }));
 
 export default useSearchboxStore;
 
 export const setFilteredStudents = (filteredStudents: Student[]) =>
   useSearchboxStore.getState().setFilteredStudents(filteredStudents);
-
 export const setAllStudents = (allStudents: Student[]) =>
   useSearchboxStore.getState().setAllStudents(allStudents);
+
+export const setFilteredSupervisors = (
+  filteredSupervisors: AvailableSupervisor[]
+) => useSearchboxStore.getState().setFilteredSupervisors(filteredSupervisors);
+export const setAllSupervisors = (allSupervisors: AvailableSupervisor[]) =>
+  useSearchboxStore.getState().setAllSupervisors(allSupervisors);

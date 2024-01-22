@@ -16,7 +16,7 @@ const SupervisorRow = ({ supervisor }: Props) => {
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
-      <TableCell>Dr. {supervisor.name}</TableCell>
+      <TableCell>Dr. {supervisor.fullName}</TableCell>
       <TableCell>{supervisor.department}</TableCell>
       <TableCell>{supervisor.email}</TableCell>
       <TableCell align="right">

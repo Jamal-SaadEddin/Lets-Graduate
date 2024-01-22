@@ -1,72 +1,86 @@
 export interface AvailableSupervisor {
-  name: string;
+  doctorId: number;
+  fullName: string;
   department: string;
   email: string;
 }
 
 export const availableSupervisors: AvailableSupervisor[] = [
   {
-    name: "Abdalla Rashed",
+    doctorId: 1,
+    fullName: "Abdalla Rashed",
     department: "Computer Engineering",
     email: "abdallah@gmail.com",
   },
   {
-    name: "Aladdin Masri",
+    doctorId: 2,
+    fullName: "Aladdin Masri",
     department: "Computer Engineering",
     email: "aladdin@gmail.com",
   },
   {
-    name: "Amjad Abu-Hassan",
+    doctorId: 3,
+    fullName: "Amjad Abu-Hassan",
     department: "Computer Engineering",
     email: "amjad@gmail.com",
   },
   {
-    name: "Ashraf Armoush",
+    doctorId: 4,
+    fullName: "Ashraf Armoush",
     department: "Computer Engineering",
     email: "ashraf@gmail.com",
   },
   {
-    name: "Emad Natsheh",
+    doctorId: 5,
+    fullName: "Emad Natsheh",
     department: "Computer Engineering",
     email: "emad@gmail.com",
   },
   {
-    name: "Hanal abuzant",
+    doctorId: 6,
+    fullName: "Hanal abuzant",
     department: "Computer Engineering",
     email: "hanal@gmail.com",
   },
   {
-    name: "Loai Malhis",
+    doctorId: 7,
+    fullName: "Loai Malhis",
     department: "Computer Engineering",
     email: "loai@gmail.com",
   },
   {
-    name: "Manar Qamhieh",
+    doctorId: 8,
+    fullName: "Manar Qamhieh",
     department: "Computer Engineering",
     email: "manar@gmail.com",
   },
   {
-    name: "Raed Alqadi",
+    doctorId: 9,
+    fullName: "Raed Alqadi",
     department: "Computer Engineering",
     email: "raed@gmail.com",
   },
   {
-    name: "Samer Arandi",
+    doctorId: 10,
+    fullName: "Samer Arandi",
     department: "Computer Engineering",
     email: "samer@gmail.com",
   },
   {
-    name: "Sufyan Samarah",
+    doctorId: 11,
+    fullName: "Sufyan Samarah",
     department: "Computer Engineering",
     email: "sufyan@gmail.com",
   },
   {
-    name: "Haya Sammaneh",
+    doctorId: 12,
+    fullName: "Haya Sammaneh",
     department: "Computer Engineering",
     email: "haya@gmail.com",
   },
   {
-    name: "Muhanad Jabi",
+    doctorId: 13,
+    fullName: "Muhanad Jabi",
     department: "Computer Engineering",
     email: "muhanad@gmail.com",
   },

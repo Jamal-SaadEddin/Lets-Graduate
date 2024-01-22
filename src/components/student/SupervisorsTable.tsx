@@ -8,10 +8,10 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
-import { availableSupervisors } from "../../constants/availableSupervisors";
 import useSearchboxStore from "../../state-management/searchboxStore";
 import SupervisorRow from "./SupervisorRow";
 import SupervisorSeachbox from "./SupervisorSeachbox";
+import useAvailableSupervisorsStore from "../../state-management/availableSupervisorsStore";
 
 interface Heading {
   id: "name" | "department" | "email" | "button";
@@ -28,6 +28,10 @@ const headings: readonly Heading[] = [
 ];
 
 export default function SupervisorsTable() {
+  const availableSupervisors = useAvailableSupervisorsStore(
+    (s) => s.availableSupervisors
+  );
+
   const filteredSupervisors = useSearchboxStore((s) => s.filteredSupervisors);
 
   const [page, setPage] = React.useState(0);
