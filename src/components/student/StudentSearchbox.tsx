@@ -1,6 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { SyntheticEvent } from "react";
-import { Student, students } from "../../constants/availableGroups";
+import { Student } from "../../constants/availableGroups";
 import useSearchboxStore from "../../state-management/searchboxStore";
 
 const StudentSearchbox = () => {
@@ -8,10 +8,11 @@ const StudentSearchbox = () => {
   const setStudent = useSearchboxStore((s) => s.setStudent);
   const filteredStudents = useSearchboxStore((s) => s.filteredStudents);
   const setFilteredOptions = useSearchboxStore((s) => s.setFilteredStudents);
+  const allStudents = useSearchboxStore((s) => s.allStudents);
 
   const handleInputChange = (_event: SyntheticEvent, value: string) => {
     // Perform manual filtering and log the results
-    const filtered = students.filter((option) =>
+    const filtered = allStudents.filter((option) =>
       option.fullName.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredOptions(filtered);

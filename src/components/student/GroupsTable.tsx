@@ -1,10 +1,6 @@
 import { Grid, Typography } from "@mui/material";
-import {
-  academicNumbers,
-  addresses,
-  projects,
-} from "../../constants/availableGroups";
 import { filterGroups } from "../../services/filterUtils";
+import useAvailableGroupsStore from "../../state-management/availableGroupsStore";
 import useFilterStudentsStore from "../../state-management/filterStudentsStore";
 import useSearchboxStore from "../../state-management/searchboxStore";
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
@@ -15,6 +11,8 @@ import StudentSearchbox from "./StudentSearchbox";
 const headings = ["Student Name", "Academic Number", "Address", "Email"];
 
 export default function GroupsTable() {
+  const availableGroups = useAvailableGroupsStore((s) => s.availableGroups);
+
   const address = useFilterStudentsStore((s) => s.address);
   const handleAddressChange = useFilterStudentsStore(
     (s) => s.handleAddressChange
@@ -24,14 +22,32 @@ export default function GroupsTable() {
     (s) => s.handleAcademicNumberChange
   );
 
+  const allStudents = useSearchboxStore((s) => s.allStudents);
+
+  var addressesArray: string[] = allStudents.map((s) => s.address);
+  const addresses: string[] = addressesArray.filter(
+    (value, index) => addressesArray.indexOf(value) === index
+  );
+
+  var academicNumbersArray: string[] = allStudents.map((s) =>
+    s.studentId.toString().substring(0, 3)
+  );
+  const academicNumbers: string[] = academicNumbersArray.filter(
+    (value, index) => academicNumbersArray.indexOf(value) === index
+  );
+
   const filteredGroups = filterGroups(
     useSearchboxStore((s) => s.filteredStudents),
-    projects,
+    availableGroups,
     address,
     academicNumber
   );
 
-  if (!projects || projects.length === 0 || projects === null)
+  if (
+    !availableGroups ||
+    availableGroups.length === 0 ||
+    availableGroups === null
+  )
     return (
       <Typography variant="h6" paddingBottom={2} color="primary">
         No Groups Available!
@@ -79,7 +95,7 @@ export default function GroupsTable() {
                 <Grid item xs={7} sm={9}>
                   <Typography>
                     {group.students
-                      .map((student) => `${student.name}`)
+                      .map((student) => `${student.fullName}`)
                       .join(", ")}
                   </Typography>
                 </Grid>

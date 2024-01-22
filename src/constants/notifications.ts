@@ -22,7 +22,7 @@ export const notificationElements: NotificationElement[] = [
   },
   {
     id: 17,
-    sender: "Jamal SaadEddin, Omar Qaneer, Omar Ammar",
+    sender: "Jamal SaadEddin",
     content: "is requesting you to supervise their group",
     type: "requesting",
     notifyButtonText: null,

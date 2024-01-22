@@ -218,7 +218,7 @@ const MergeProcessTabs = ({
                   <Grid item xs={7} sm={9}>
                     <Typography>
                       {selectedGroup.students
-                        .map((student) => `${student.name}`)
+                        .map((student) => `${student.fullName}`)
                         .join(", ")}
                     </Typography>
                   </Grid>
@@ -247,7 +247,7 @@ const MergeProcessTabs = ({
                   <Grid item xs={7} sm={9}>
                     <Typography>
                       {requestedGroup
-                        .map((student) => `${student.name}`)
+                        .map((student) => `${student.fullName}`)
                         .join(", ")}
                     </Typography>
                   </Grid>

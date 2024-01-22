@@ -117,7 +117,7 @@ const GroupsTable = ({
                   ) : (
                     <Typography>
                       {group.students
-                        .map((student) => `${student.name}`)
+                        .map((student) => `${student.fullName}`)
                         .join(", ")}
                     </Typography>
                   )}

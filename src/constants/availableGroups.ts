@@ -22,8 +22,10 @@ export interface GradingProjectsProjectItem extends Project {
 
 export interface Student {
   studentId: number;
+  firstName?: string;
+  lastName?: string;
   fullName: string;
-  projectId: number;
+  projectId?: number;
   academicNumber: number;
   address: string;
   email: string;
@@ -32,9 +34,9 @@ export interface Student {
 }
 
 export interface AvailableGroupsStudent {
-  name: string;
-  address: string;
+  fullName: string;
   academicNumber: number;
+  address: string;
   email: string;
 }
 
@@ -169,8 +171,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "Mohito Maker Machine",
     students: students
       .filter((stu) => stu.projectId === 55)
-      .map(({ fullName: name, academicNumber, address, email }) => ({
-        name,
+      .map(({ fullName, academicNumber, address, email }) => ({
+        fullName,
         academicNumber,
         address,
         email,
@@ -181,8 +183,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "Barille Printer",
     students: students
       .filter((stu) => stu.projectId === 66)
-      .map(({ fullName: name, academicNumber, address, email }) => ({
-        name,
+      .map(({ fullName, academicNumber, address, email }) => ({
+        fullName,
         academicNumber,
         address,
         email,
@@ -193,8 +195,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "Clothes Cleaner",
     students: students
       .filter((stu) => stu.projectId === 77)
-      .map(({ fullName: name, academicNumber, address, email }) => ({
-        name,
+      .map(({ fullName, academicNumber, address, email }) => ({
+        fullName,
         academicNumber,
         address,
         email,
@@ -205,8 +207,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "AutoPizza",
     students: students
       .filter((stu) => stu.projectId === 88)
-      .map(({ fullName: name, academicNumber, address, email }) => ({
-        name,
+      .map(({ fullName, academicNumber, address, email }) => ({
+        fullName,
         academicNumber,
         address,
         email,
@@ -217,8 +219,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "DateXpert Intelligent classification system",
     students: students
       .filter((stu) => stu.projectId === 99)
-      .map(({ fullName: name, academicNumber, address, email }) => ({
-        name,
+      .map(({ fullName, academicNumber, address, email }) => ({
+        fullName,
         academicNumber,
         address,
         email,

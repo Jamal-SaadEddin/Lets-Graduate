@@ -5,7 +5,7 @@ import {
 
 export interface Student {
   studentId: number;
-  name: string;
+  fullName: string;
   projectId: number;
   academicNumber: number;
   address: string;
@@ -18,7 +18,7 @@ export interface Student {
 }
 
 export interface SupervisedProjectsStudent {
-  name: string;
+  fullName: string;
   address: string;
   studentId: number;
   email: string;
@@ -26,7 +26,7 @@ export interface SupervisedProjectsStudent {
 }
 
 export interface GradingProjectsStudent {
-  name: string;
+  fullName: string;
   studentId: number;
   projectType: "GP1" | "GP2" | null;
   projectStatus: "not-registered" | "registered" | "passed";
@@ -35,7 +35,7 @@ export interface GradingProjectsStudent {
 export const students: Student[] = [
   {
     studentId: 11923604,
-    name: "Jamal SaadEddin",
+    fullName: "Jamal SaadEddin",
     projectId: 55,
     academicNumber: Number(String(11923604).substring(0, 3)),
     address: "Nablus",
@@ -48,7 +48,7 @@ export const students: Student[] = [
   },
   {
     studentId: 12023456,
-    name: "Omar Qaneer",
+    fullName: "Omar Qaneer",
     projectId: 55,
     academicNumber: Number(String(12023456).substring(0, 3)),
     address: "Ramallah",
@@ -61,7 +61,7 @@ export const students: Student[] = [
   },
   {
     studentId: 11925044,
-    name: "Omar Ammar",
+    fullName: "Omar Ammar",
     projectId: 55,
     academicNumber: Number(String(11925044).substring(0, 3)),
     address: "Jerusalem",
@@ -74,7 +74,7 @@ export const students: Student[] = [
   },
   {
     studentId: 11923404,
-    name: "Mohammad Hamoudeh",
+    fullName: "Mohammad Hamoudeh",
     projectId: 66,
     academicNumber: Number(String(11923404).substring(0, 3)),
     address: "Jerusalem",
@@ -87,7 +87,7 @@ export const students: Student[] = [
   },
   {
     studentId: 11825077,
-    name: "Ibraheem Qadi",
+    fullName: "Ibraheem Qadi",
     projectId: 66,
     academicNumber: Number(String(11825077).substring(0, 3)),
     address: "Ramallah",
@@ -100,7 +100,7 @@ export const students: Student[] = [
   },
   {
     studentId: 11922542,
-    name: "Ahmed Qadi",
+    fullName: "Ahmed Qadi",
     projectId: 77,
     academicNumber: Number(String(11922542).substring(0, 3)),
     address: "Ramallah",
@@ -113,7 +113,7 @@ export const students: Student[] = [
   },
   {
     studentId: 12023064,
-    name: "Jamal Abdullah",
+    fullName: "Jamal Abdullah",
     projectId: 77,
     academicNumber: Number(String(12023064).substring(0, 3)),
     address: "Nablus",
@@ -126,7 +126,7 @@ export const students: Student[] = [
   },
   {
     studentId: 12015104,
-    name: "Omar Quzmar",
+    fullName: "Omar Quzmar",
     projectId: 88,
     academicNumber: Number(String(12015104).substring(0, 3)),
     address: "Nablus",
@@ -139,7 +139,7 @@ export const students: Student[] = [
   },
   {
     studentId: 11825864,
-    name: "Mohammad Alawni",
+    fullName: "Mohammad Alawni",
     projectId: 88,
     academicNumber: Number(String(11825864).substring(0, 3)),
     address: "Nablus",
@@ -152,7 +152,7 @@ export const students: Student[] = [
   },
   {
     studentId: 11945621,
-    name: "Ibraheem Dwekat",
+    fullName: "Ibraheem Dwekat",
     projectId: 99,
     academicNumber: Number(String(11945621).substring(0, 3)),
     address: "Jerusalem",
@@ -165,7 +165,7 @@ export const students: Student[] = [
   },
   {
     studentId: 12078965,
-    name: "Obaida Aws",
+    fullName: "Obaida Aws",
     projectId: 99,
     academicNumber: Number(String(12078965).substring(0, 3)),
     address: "Jerusalem",
@@ -184,8 +184,8 @@ export const supervisorProjects: SupervisedProjectsProjectItem[] = [
     title: "Mohito Maker Machine",
     students: students
       .filter((stu) => stu.projectId === 55)
-      .map(({ name, studentId, address, email, department }) => ({
-        name,
+      .map(({ fullName, studentId, address, email, department }) => ({
+        fullName,
         studentId,
         address,
         email,
@@ -197,8 +197,8 @@ export const supervisorProjects: SupervisedProjectsProjectItem[] = [
     title: "Barille Printer",
     students: students
       .filter((stu) => stu.projectId === 66)
-      .map(({ name, studentId, address, email, department }) => ({
-        name,
+      .map(({ fullName, studentId, address, email, department }) => ({
+        fullName,
         studentId,
         address,
         email,
@@ -210,8 +210,8 @@ export const supervisorProjects: SupervisedProjectsProjectItem[] = [
     title: "Clothes Cleaner",
     students: students
       .filter((stu) => stu.projectId === 77)
-      .map(({ name, studentId, address, email, department }) => ({
-        name,
+      .map(({ fullName, studentId, address, email, department }) => ({
+        fullName,
         studentId,
         address,
         email,
@@ -226,8 +226,8 @@ export const projectsCommitteeProjects: SupervisedProjectsProjectItem[] = [
     title: "AutoPizza",
     students: students
       .filter((stu) => stu.projectId === 88)
-      .map(({ name, studentId, address, email, department }) => ({
-        name,
+      .map(({ fullName, studentId, address, email, department }) => ({
+        fullName,
         studentId,
         address,
         email,
@@ -239,8 +239,8 @@ export const projectsCommitteeProjects: SupervisedProjectsProjectItem[] = [
     title: "DateXpert Intelligent classification system",
     students: students
       .filter((stu) => stu.projectId === 99)
-      .map(({ name, studentId, address, email, department }) => ({
-        name,
+      .map(({ fullName, studentId, address, email, department }) => ({
+        fullName,
         studentId,
         address,
         email,
@@ -250,7 +250,7 @@ export const projectsCommitteeProjects: SupervisedProjectsProjectItem[] = [
 ];
 
 const getGradingStudent = (s: Student) => {
-  const name = s.name;
+  const fullName = s.fullName;
   const studentId = s.studentId;
   const projectType = s.projectType;
   const projectStatus =
@@ -260,7 +260,7 @@ const getGradingStudent = (s: Student) => {
       ? s.gp2Status
       : "not-registered";
   return {
-    name,
+    fullName,
     studentId,
     projectType,
     projectStatus,
