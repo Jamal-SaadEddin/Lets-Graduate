@@ -12,7 +12,6 @@ export const getAvailableGroups = async (
   projectType: string
 ) => {
   try {
-    var projectId = 1;
     const joinedGroups = await axios.get<any[][]>(
       `http://localhost:3000/findPartners1/findGroups?department=${department}&projectType=${projectType}`
     );
@@ -20,7 +19,7 @@ export const getAvailableGroups = async (
       arr.map((s) => ({ projectId: i + 1, ...s }))
     );
     const groups: AvailableGroupsProjectItem[] = fetchedGroups.map((arr) => ({
-      id: projectId++,
+      id: fetchedGroups.filter((ar) => arr === ar)[0][0].projectId,
       title: "",
       students: arr.map((stu) => ({
         fullName: stu.fullName,
@@ -30,13 +29,15 @@ export const getAvailableGroups = async (
       })),
     }));
 
+    var projectId = -100;
     const nonJoinedStudents = await axios.get<any[]>(
       `http://localhost:3000/findPartners2/studentsNotJoined?department=${department}&projectType=${projectType}`
     );
-    const fetchedStudents = nonJoinedStudents.data.map((s, index) => ({
-      projectId: index + 1 + fetchedGroups.length,
+    const fetchedStudents = nonJoinedStudents.data.map((s) => ({
+      projectId: projectId++,
       ...s,
     }));
+    projectId = -100;
     const students: AvailableGroupsProjectItem[] = fetchedStudents.map(
       (stu) => ({
         id: projectId++,
@@ -52,7 +53,6 @@ export const getAvailableGroups = async (
       })
     );
 
-    projectId = 1;
     const allGroups = [...groups, ...students];
     setAvailableGroups(allGroups);
 
