@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { comments } from "../../constants/comments";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import Comment from "./Comment";
+import useCommentsStore from "../../state-management/commentsStore";
 
 interface Props {
   canAddComments?: boolean;
@@ -21,6 +21,7 @@ interface Props {
 
 const Comments = ({ canAddComments = false }: Props) => {
   const submission = useViewedSubmissionStore((s) => s.submission);
+  const comments = useCommentsStore((s) => s.comments);
 
   const [newComment, setNewComment] = useState("");
 

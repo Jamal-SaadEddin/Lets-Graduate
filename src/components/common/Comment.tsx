@@ -1,4 +1,4 @@
-import { Avatar, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Divider, Grid, Stack, Typography } from "@mui/material";
 import { AbstractComment } from "../../constants/comments";
 
 interface Props {
@@ -10,16 +10,14 @@ const Comment = ({ comment }: Props) => {
     <Grid container>
       <Grid item xs={12}>
         <Stack direction="row" spacing={2}>
-          <Avatar alt={comment.name} src={comment.avatar} />
           <Stack>
             <Typography fontWeight={500}>
-              {comment.name}
+              {comment.sender}
               <Typography color="gray" variant="caption" fontSize={16}>
                 {" • "}
-                {comment.date}
+                {comment.dateCreated}
               </Typography>
             </Typography>
-            <Typography variant="caption">{comment.position}</Typography>
           </Stack>
         </Stack>
       </Grid>

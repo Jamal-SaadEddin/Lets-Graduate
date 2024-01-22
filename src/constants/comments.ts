@@ -1,32 +1,36 @@
 export interface AbstractComment {
-  avatar: string;
-  name: string;
-  position: string;
-  date: string;
+  commentId: number;
+  doctorId: number;
+  projectId: number;
   content: string;
+  dateCreated: string;
+  sender: string;
 }
 
 export const comments: AbstractComment[] = [
   {
-    avatar: "/src/assets/avatars/ashraf.jpg",
-    position: "Projects Committee",
-    name: "Ashraf Armoush",
-    date: "5h",
+    commentId: 1,
+    doctorId: 1,
+    projectId: 1,
     content: "Please provide more features",
+    dateCreated: "5h",
+    sender: "Hanaal Abuzant",
   },
   {
-    avatar: "/src/assets/avatars/hanal.jpg",
-    position: "Your Supervisor",
-    name: "Hanaal Abuzanat",
-    date: "19h",
+    commentId: 2,
+    doctorId: 1,
+    projectId: 1,
     content:
       "Guys, you need to specify what hardware components you are intending to use, provide more details...",
+    dateCreated: "19h",
+    sender: "Projects Committee",
   },
   {
-    avatar: "/src/assets/avatars/ashraf.jpg",
-    position: "Projects Committee",
-    name: "Ashraf Armoush",
-    date: "2 days",
+    commentId: 3,
+    doctorId: 1,
+    projectId: 1,
     content: "Please follow abstract template rules....",
+    dateCreated: "2 days",
+    sender: "Projects Committee",
   },
 ];

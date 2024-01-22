@@ -13,6 +13,7 @@ import {
 import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
+import { getAbstractComments } from "../../hooks/useComments";
 
 const Submissions = () => {
   const submission = useViewedSubmissionStore((s) => s.submission);
@@ -111,6 +112,7 @@ const Submissions = () => {
                   size="small"
                   startIcon={<NotesIcon />}
                   sx={{ marginY: 1 }}
+                  onClick={async () => await getAbstractComments(11923604)}
                 >
                   Comments
                 </Button>
