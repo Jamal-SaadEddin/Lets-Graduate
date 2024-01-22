@@ -26,7 +26,7 @@ export const getAvailableSupervisors = async (studentId: number) => {
 
     return {};
   } catch (error) {
-    console.error("Error fetching Prerequisites:", error);
+    console.error("Error fetching available supervisors:", error);
     return {};
   }
 };

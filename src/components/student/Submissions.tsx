@@ -3,6 +3,7 @@ import NotesIcon from "@mui/icons-material/Notes";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   Button,
+  Chip,
   Container,
   Grid,
   Paper,
@@ -56,7 +57,7 @@ const Submissions = () => {
               and give you feedbacks through comments section.
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={4}>
             <Button
               component="label"
               variant="contained"
@@ -70,33 +71,54 @@ const Submissions = () => {
                 onChange={handleFileChange}
               />
             </Button>
-            <Button
-              color="error"
-              variant="outlined"
-              size="small"
-              startIcon={<DeleteIcon />}
-              sx={{ margin: 1 }}
-            >
-              Delete Abstract
-            </Button>
-          </Grid>
-          <Grid item xs={6} textAlign="end">
-            <Link to={`/submissions/${submission.submissionId}/comments`}>
+            {submission && (
               <Button
-                variant="contained"
+                color="error"
+                variant="outlined"
                 size="small"
-                startIcon={<NotesIcon />}
-                sx={{ marginY: 1 }}
+                startIcon={<DeleteIcon />}
+                sx={{ margin: 1 }}
               >
-                Comments
+                Delete Abstract
               </Button>
-            </Link>
+            )}
+          </Grid>
+          <Grid item xs={12} md={4} textAlign="center">
+            <Chip
+              size="small"
+              color={
+                !submission
+                  ? "error"
+                  : submission.acceptStatus === "Pending"
+                  ? "primary"
+                  : "success"
+              }
+              label={
+                !submission
+                  ? "Not Submitted"
+                  : submission.acceptStatus === "Pending"
+                  ? "Submitted, Not Evaluated"
+                  : "Accepted"
+              }
+              sx={{ marginTop: 1 }}
+            />
+          </Grid>
+          <Grid item xs={12} md={4} textAlign="end">
+            {submission && (
+              <Link to={`/submissions/${submission?.submissionId}/comments`}>
+                <Button
+                  variant="contained"
+                  size="small"
+                  startIcon={<NotesIcon />}
+                  sx={{ marginY: 1 }}
+                >
+                  Comments
+                </Button>
+              </Link>
+            )}
           </Grid>
           <Grid item xs={12}>
-            <iframe
-              src="src/assets/Let's Graduate -Abstract.pdf"
-              frameBorder="0"
-            />
+            <iframe src={submission?.file} frameBorder="0" />
           </Grid>
         </Grid>
       </Paper>

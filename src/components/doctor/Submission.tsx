@@ -56,7 +56,7 @@ const Submission = () => {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Link to={`/submissions/${submission.submissionId}/comments`}>
+            <Link to={`/submissions/${submission?.submissionId}/comments`}>
               <Button
                 variant="contained"
                 size="small"
@@ -69,17 +69,17 @@ const Submission = () => {
           </Grid>
           <Grid item xs={6} textAlign="end">
             {userInfo.isProjectsCommitteeMember &&
-              submission.acceptStatus === "Pending" && (
+              submission?.acceptStatus === "Pending" && (
                 <Button variant="contained" color="success">
                   Accept Abstract
                 </Button>
               )}
-            {submission.acceptStatus === "Accepted" && (
+            {submission?.acceptStatus === "Accepted" && (
               <Chip color="success" label="Accepted" />
             )}
           </Grid>
           <Grid item xs={12}>
-            <iframe src={submission.file} frameBorder="0" />
+            <iframe src={submission?.file} frameBorder="0" />
           </Grid>
         </Grid>
       </Paper>
