@@ -72,7 +72,6 @@ export const getAvailableGroups = async (
     }));
 
     const allStudents: Student[] = [...joinedStudents, ...aloneStudents];
-    console.log(allStudents);
 
     setAllStudents(allStudents);
     setFilteredStudents(allStudents);

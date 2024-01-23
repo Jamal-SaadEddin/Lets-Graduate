@@ -30,3 +30,17 @@ export const getAvailableSupervisors = async (studentId: number) => {
     return {};
   }
 };
+
+export const sendSupervisionRequest = async (body: Object) => {
+  try {
+    const response = await axios.post<{ message: string }>(
+      `http://localhost:3000/createNotification/notification`,
+      body
+    );
+
+    return response.data.message;
+  } catch (error) {
+    console.error("Error sending supervision request:", error);
+    return {};
+  }
+};
