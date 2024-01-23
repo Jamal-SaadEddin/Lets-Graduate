@@ -10,7 +10,7 @@ const usePartnersStore = create<PartnersStore>((set) => ({
   partners: [
     {
       fullName: "",
-      studentId: 0,
+      id: 0,
       department: "",
       email: "",
       mobileNumber: "",

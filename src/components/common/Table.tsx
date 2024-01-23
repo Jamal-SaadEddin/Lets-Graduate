@@ -16,6 +16,7 @@ import {
   SupervisedProjectsStudent,
 } from "../../constants/supervisedProjects";
 import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
+import { sendPartnershipRequest } from "../../hooks/useAvailableGroups";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -42,8 +43,21 @@ export default function Table({
     buttonText = "view merge process";
   else buttonText = "send request";
 
-  const handleRequest = () => {
-    setRequested(!requested);
+  const handleRequest = async () => {
+    setRequested(true);
+
+    const requestBody = {
+      reciverId: tableBody[0].id,
+      senderId: 11925044,
+      type: "requesting",
+      content: "is requesting to join your group",
+      senderType: "student",
+    };
+    await sendPartnershipRequest(requestBody);
+  };
+
+  const cancelRequest = () => {
+    setRequested(false);
   };
 
   const handleStartMergeProcess = () => {
@@ -76,9 +90,11 @@ export default function Table({
                   }
                   size="small"
                   onClick={
-                    withButton === "join-group"
+                    withButton === "join-group" && !requested
                       ? handleRequest
-                      : handleStartMergeProcess
+                      : withButton === "merge-group"
+                      ? handleStartMergeProcess
+                      : cancelRequest
                   }
                 >
                   {buttonText}
@@ -90,16 +106,19 @@ export default function Table({
         <TableBody>
           {tableBody.map((user, index) => (
             <TableRow key={index}>
-              {propertyNames.map((property, index) => (
-                <TableCell
-                  key={index}
-                  colSpan={
-                    index === propertyNames.length - 1 && withButton ? 2 : 1
-                  }
-                >
-                  {user[property]}
-                </TableCell>
-              ))}
+              {propertyNames.map(
+                (property, index) =>
+                  property !== "id" && (
+                    <TableCell
+                      key={index}
+                      colSpan={
+                        index === propertyNames.length - 1 && withButton ? 2 : 1
+                      }
+                    >
+                      {user[property]}
+                    </TableCell>
+                  )
+              )}
             </TableRow>
           ))}
         </TableBody>

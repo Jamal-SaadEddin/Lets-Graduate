@@ -30,7 +30,7 @@ export default function GroupsTable() {
   );
 
   var academicNumbersArray: string[] = allStudents.map((s) =>
-    s.studentId.toString().substring(0, 3)
+    s.academicNumber.toString()
   );
   const academicNumbers: string[] = academicNumbersArray.filter(
     (value, index) => academicNumbersArray.indexOf(value) === index

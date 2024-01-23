@@ -1,11 +1,13 @@
 import axios from "axios";
 import { setAvailableGroups } from "../state-management/availableGroupsStore";
-import { AvailableGroupsProjectItem } from "../constants/availableGroups";
+import {
+  AvailableGroupsProjectItem,
+  Student,
+} from "../constants/availableGroups";
 import {
   setAllStudents,
   setFilteredStudents,
 } from "../state-management/searchboxStore";
-import { Student } from "../constants/supervisedProjects";
 
 export const getAvailableGroups = async (
   department: string,
@@ -22,6 +24,7 @@ export const getAvailableGroups = async (
       id: fetchedGroups.filter((ar) => arr === ar)[0][0].projectId,
       title: "",
       students: arr.map((stu) => ({
+        id: stu.studentId,
         fullName: stu.fullName,
         academicNumber: Number(String(stu.studentId).substring(0, 3)),
         address: stu.address,
@@ -29,7 +32,7 @@ export const getAvailableGroups = async (
       })),
     }));
 
-    var projectId = -100;
+    var projectId = -1000;
     const nonJoinedStudents = await axios.get<any[]>(
       `http://localhost:3000/findPartners2/studentsNotJoined?department=${department}&projectType=${projectType}`
     );
@@ -37,13 +40,14 @@ export const getAvailableGroups = async (
       projectId: projectId++,
       ...s,
     }));
-    projectId = -100;
+    projectId = -1000;
     const students: AvailableGroupsProjectItem[] = fetchedStudents.map(
       (stu) => ({
         id: projectId++,
         title: "",
         students: [
           {
+            id: stu.studentId,
             fullName: stu.fullName,
             academicNumber: Number(String(stu.studentId).substring(0, 3)),
             address: stu.address,
@@ -68,6 +72,7 @@ export const getAvailableGroups = async (
     }));
 
     const allStudents: Student[] = [...joinedStudents, ...aloneStudents];
+    console.log(allStudents);
 
     setAllStudents(allStudents);
     setFilteredStudents(allStudents);
@@ -75,6 +80,20 @@ export const getAvailableGroups = async (
     return {};
   } catch (error) {
     console.error("Error fetching available groups:", error);
+    return {};
+  }
+};
+
+export const sendPartnershipRequest = async (body: Object) => {
+  try {
+    const response = await axios.post<{ message: string }>(
+      `http://localhost:3000/createNotification/notification`,
+      body
+    );
+
+    return response.data.message;
+  } catch (error) {
+    console.error("Error sending partnership request:", error);
     return {};
   }
 };

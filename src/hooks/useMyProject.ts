@@ -14,7 +14,7 @@ export const getMyPartners = async (studentId: number) => {
       fetchedPartners.map(
         ({
           fullName,
-          studentId,
+          id: studentId,
           department,
           email,
           mobileNumber,

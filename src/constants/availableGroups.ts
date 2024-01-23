@@ -21,7 +21,7 @@ export interface GradingProjectsProjectItem extends Project {
 }
 
 export interface Student {
-  studentId: number;
+  id: number;
   firstName?: string;
   lastName?: string;
   fullName: string;
@@ -34,6 +34,7 @@ export interface Student {
 }
 
 export interface AvailableGroupsStudent {
+  id: number;
   fullName: string;
   academicNumber: number;
   address: string;
@@ -42,7 +43,7 @@ export interface AvailableGroupsStudent {
 
 export const students: Student[] = [
   {
-    studentId: 11923604,
+    id: 11923604,
     fullName: "Jamal SaadEddin",
     projectId: 55,
     academicNumber: Number(String(11923604).substring(0, 3)),
@@ -52,7 +53,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 12023456,
+    id: 12023456,
     fullName: "Omar Qaneer",
     projectId: 55,
     academicNumber: Number(String(12023456).substring(0, 3)),
@@ -62,7 +63,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 11925044,
+    id: 11925044,
     fullName: "Omar Ammar",
     projectId: 55,
     academicNumber: Number(String(11925044).substring(0, 3)),
@@ -72,7 +73,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 11923404,
+    id: 11923404,
     fullName: "Mohammad Hamoudeh",
     projectId: 66,
     academicNumber: Number(String(11923404).substring(0, 3)),
@@ -82,7 +83,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 11825077,
+    id: 11825077,
     fullName: "Ibraheem Qadi",
     projectId: 66,
     academicNumber: Number(String(11825077).substring(0, 3)),
@@ -92,7 +93,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 11922542,
+    id: 11922542,
     fullName: "Ahmed Qadi",
     projectId: 77,
     academicNumber: Number(String(11922542).substring(0, 3)),
@@ -102,7 +103,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 12023064,
+    id: 12023064,
     fullName: "Jamal Abdullah",
     projectId: 77,
     academicNumber: Number(String(12023064).substring(0, 3)),
@@ -112,7 +113,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 12015104,
+    id: 12015104,
     fullName: "Omar Quzmar",
     projectId: 88,
     academicNumber: Number(String(12015104).substring(0, 3)),
@@ -122,7 +123,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 11825864,
+    id: 11825864,
     fullName: "Mohammad Alawni",
     projectId: 88,
     academicNumber: Number(String(11825864).substring(0, 3)),
@@ -132,7 +133,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 11945621,
+    id: 11945621,
     fullName: "Ibraheem Dwekat",
     projectId: 99,
     academicNumber: Number(String(11945621).substring(0, 3)),
@@ -142,7 +143,7 @@ export const students: Student[] = [
     department: "Computer Engineering",
   },
   {
-    studentId: 12078965,
+    id: 12078965,
     fullName: "Obaida Aws",
     projectId: 99,
     academicNumber: Number(String(12078965).substring(0, 3)),
@@ -171,7 +172,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "Mohito Maker Machine",
     students: students
       .filter((stu) => stu.projectId === 55)
-      .map(({ fullName, academicNumber, address, email }) => ({
+      .map(({ id, fullName, academicNumber, address, email }) => ({
+        id,
         fullName,
         academicNumber,
         address,
@@ -183,7 +185,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "Barille Printer",
     students: students
       .filter((stu) => stu.projectId === 66)
-      .map(({ fullName, academicNumber, address, email }) => ({
+      .map(({ id, fullName, academicNumber, address, email }) => ({
+        id,
         fullName,
         academicNumber,
         address,
@@ -195,7 +198,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "Clothes Cleaner",
     students: students
       .filter((stu) => stu.projectId === 77)
-      .map(({ fullName, academicNumber, address, email }) => ({
+      .map(({ id, fullName, academicNumber, address, email }) => ({
+        id,
         fullName,
         academicNumber,
         address,
@@ -207,7 +211,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "AutoPizza",
     students: students
       .filter((stu) => stu.projectId === 88)
-      .map(({ fullName, academicNumber, address, email }) => ({
+      .map(({ id, fullName, academicNumber, address, email }) => ({
+        id,
         fullName,
         academicNumber,
         address,
@@ -219,7 +224,8 @@ export const projects: AvailableGroupsProjectItem[] = [
     title: "DateXpert Intelligent classification system",
     students: students
       .filter((stu) => stu.projectId === 99)
-      .map(({ fullName, academicNumber, address, email }) => ({
+      .map(({ id, fullName, academicNumber, address, email }) => ({
+        id,
         fullName,
         academicNumber,
         address,

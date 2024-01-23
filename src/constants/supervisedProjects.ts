@@ -20,14 +20,14 @@ export interface Student {
 export interface SupervisedProjectsStudent {
   fullName: string;
   address: string;
-  studentId: number;
+  id: number;
   email: string;
   department: string;
 }
 
 export interface GradingProjectsStudent {
   fullName: string;
-  studentId: number;
+  id: number;
   projectType: "GP1" | "GP2" | null;
   projectStatus: "not-registered" | "registered" | "passed";
 }
@@ -184,9 +184,9 @@ export const supervisorProjects: SupervisedProjectsProjectItem[] = [
     title: "Mohito Maker Machine",
     students: students
       .filter((stu) => stu.projectId === 55)
-      .map(({ fullName, studentId, address, email, department }) => ({
+      .map(({ fullName, studentId: id, address, email, department }) => ({
         fullName,
-        studentId,
+        id,
         address,
         email,
         department,
@@ -197,9 +197,9 @@ export const supervisorProjects: SupervisedProjectsProjectItem[] = [
     title: "Barille Printer",
     students: students
       .filter((stu) => stu.projectId === 66)
-      .map(({ fullName, studentId, address, email, department }) => ({
+      .map(({ fullName, studentId: id, address, email, department }) => ({
         fullName,
-        studentId,
+        id,
         address,
         email,
         department,
@@ -210,9 +210,9 @@ export const supervisorProjects: SupervisedProjectsProjectItem[] = [
     title: "Clothes Cleaner",
     students: students
       .filter((stu) => stu.projectId === 77)
-      .map(({ fullName, studentId, address, email, department }) => ({
+      .map(({ fullName, studentId: id, address, email, department }) => ({
         fullName,
-        studentId,
+        id,
         address,
         email,
         department,
@@ -226,9 +226,9 @@ export const projectsCommitteeProjects: SupervisedProjectsProjectItem[] = [
     title: "AutoPizza",
     students: students
       .filter((stu) => stu.projectId === 88)
-      .map(({ fullName, studentId, address, email, department }) => ({
+      .map(({ fullName, studentId: id, address, email, department }) => ({
         fullName,
-        studentId,
+        id,
         address,
         email,
         department,
@@ -239,9 +239,9 @@ export const projectsCommitteeProjects: SupervisedProjectsProjectItem[] = [
     title: "DateXpert Intelligent classification system",
     students: students
       .filter((stu) => stu.projectId === 99)
-      .map(({ fullName, studentId, address, email, department }) => ({
+      .map(({ fullName, studentId: id, address, email, department }) => ({
         fullName,
-        studentId,
+        id,
         address,
         email,
         department,
@@ -251,7 +251,7 @@ export const projectsCommitteeProjects: SupervisedProjectsProjectItem[] = [
 
 const getGradingStudent = (s: Student) => {
   const fullName = s.fullName;
-  const studentId = s.studentId;
+  const id = s.studentId;
   const projectType = s.projectType;
   const projectStatus =
     s.projectType === "GP1"
@@ -261,7 +261,7 @@ const getGradingStudent = (s: Student) => {
       : "not-registered";
   return {
     fullName,
-    studentId,
+    id,
     projectType,
     projectStatus,
   };
