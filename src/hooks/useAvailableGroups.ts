@@ -112,3 +112,16 @@ export const cancelPartnershipRequest = async (
     return {};
   }
 };
+
+export const getIsRequesting = async (senderId: number, receiverId: number) => {
+  try {
+    const response = await axios.get<{ message: string }>(
+      `http://localhost:3000/viewJoinOrCancel/notification?senderId=${senderId}&receiverId=${receiverId}`
+    );
+
+    return response.data.message === "join" ? false : true;
+  } catch (error) {
+    console.error("Error getting button state:", error);
+    return true;
+  }
+};

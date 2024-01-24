@@ -8,7 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { AvailableGroupsStudent } from "../../constants/availableGroups";
 import { Partner, Supervisor } from "../../constants/myProject";
 import {
@@ -18,6 +18,7 @@ import {
 import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 import {
   cancelPartnershipRequest,
+  getIsRequesting,
   sendPartnershipRequest,
 } from "../../hooks/useAvailableGroups";
 
@@ -39,6 +40,16 @@ export default function Table({
 }: Props) {
   const [requested, setRequested] = useState(false);
   const [openMergeDialog, setOpenMergeDialog] = useState(false);
+
+  const handleButtonState = async () => {
+    const requesting = await getIsRequesting(11925044, tableBody[0].id);
+    setRequested(requesting);
+  };
+
+  useEffect(() => {
+    // Code here will run just like componentDidMount
+    handleButtonState();
+  }, []);
 
   var buttonText = "";
   if (requested && withButton === "join-group") buttonText = "cancel request";
@@ -74,7 +85,7 @@ export default function Table({
   ) as (keyof (typeof tableBody)[0])[];
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} onLoad={handleButtonState}>
       <MuiTable sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
