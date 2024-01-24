@@ -16,7 +16,10 @@ import {
   SupervisedProjectsStudent,
 } from "../../constants/supervisedProjects";
 import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
-import { sendPartnershipRequest } from "../../hooks/useAvailableGroups";
+import {
+  cancelPartnershipRequest,
+  sendPartnershipRequest,
+} from "../../hooks/useAvailableGroups";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -56,8 +59,10 @@ export default function Table({
     await sendPartnershipRequest(requestBody);
   };
 
-  const cancelRequest = () => {
+  const cancelRequest = async () => {
     setRequested(false);
+
+    await cancelPartnershipRequest(11925044, tableBody[0].id);
   };
 
   const handleStartMergeProcess = () => {

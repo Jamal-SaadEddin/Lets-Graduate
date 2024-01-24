@@ -96,3 +96,19 @@ export const sendPartnershipRequest = async (body: Object) => {
     return {};
   }
 };
+
+export const cancelPartnershipRequest = async (
+  senderId: number,
+  receiverId: number
+) => {
+  try {
+    const response = await axios.delete<{ message: string }>(
+      `http://localhost:3000/deleteNotifications/notification?senderId=${senderId}&receiverId=${receiverId}`
+    );
+
+    return response.data.message;
+  } catch (error) {
+    console.error("Error canceling partnership request:", error);
+    return {};
+  }
+};
