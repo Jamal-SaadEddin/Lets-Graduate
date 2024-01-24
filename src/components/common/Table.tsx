@@ -18,7 +18,7 @@ import {
 import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 import {
   cancelPartnershipRequest,
-  getIsRequesting,
+  getIsRequestingPartnership,
   sendPartnershipRequest,
 } from "../../hooks/useAvailableGroups";
 
@@ -42,7 +42,10 @@ export default function Table({
   const [openMergeDialog, setOpenMergeDialog] = useState(false);
 
   const handleButtonState = async () => {
-    const requesting = await getIsRequesting(11925044, tableBody[0].id);
+    const requesting = await getIsRequestingPartnership(
+      11925044,
+      tableBody[0].id
+    );
     setRequested(requesting);
   };
 

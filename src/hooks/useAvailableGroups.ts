@@ -103,7 +103,7 @@ export const cancelPartnershipRequest = async (
 ) => {
   try {
     const response = await axios.delete<{ message: string }>(
-      `http://localhost:3000/deleteNotifications/notification?senderId=${senderId}&receiverId=${receiverId}`
+      `http://localhost:3000/deleteNotifications/notification?senderId=${senderId}&receiverId=${receiverId}&joinType=group`
     );
 
     return response.data.message;
@@ -113,10 +113,13 @@ export const cancelPartnershipRequest = async (
   }
 };
 
-export const getIsRequesting = async (senderId: number, receiverId: number) => {
+export const getIsRequestingPartnership = async (
+  senderId: number,
+  receiverId: number
+) => {
   try {
     const response = await axios.get<{ message: string }>(
-      `http://localhost:3000/viewJoinOrCancel/notification?senderId=${senderId}&receiverId=${receiverId}`
+      `http://localhost:3000/viewJoinOrCancel/notification?senderId=${senderId}&receiverId=${receiverId}&joinType=group`
     );
 
     return response.data.message === "join" ? false : true;

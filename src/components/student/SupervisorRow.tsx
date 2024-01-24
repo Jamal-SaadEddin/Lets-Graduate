@@ -1,9 +1,13 @@
 import CancelIcon from "@mui/icons-material/Cancel";
 import SendIcon from "@mui/icons-material/Send";
 import { Button, TableCell, TableRow } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AvailableSupervisor } from "../../constants/availableSupervisors";
-import { sendSupervisionRequest } from "../../hooks/useAvailableSupervisors";
+import {
+  cancelSupervisionRequest,
+  getIsRequestingSupervision,
+  sendSupervisionRequest,
+} from "../../hooks/useAvailableSupervisors";
 
 interface Props {
   supervisor: AvailableSupervisor;
@@ -12,12 +16,25 @@ interface Props {
 const SupervisorRow = ({ supervisor }: Props) => {
   const [requested, setRequested] = useState(false);
 
+  const handleButtonState = async () => {
+    const requesting = await getIsRequestingSupervision(
+      11923604,
+      supervisor.doctorId
+    );
+    setRequested(requesting);
+  };
+
+  useEffect(() => {
+    // Code here will run just like componentDidMount
+    handleButtonState();
+  }, []);
+
   const handleRequest = async () => {
     setRequested(true);
 
     const requestBody = {
       reciverId: supervisor.doctorId,
-      senderId: 11925044,
+      senderId: 11923604,
       type: "requesting",
       content: "is requesting you to supervise their group",
       senderType: "group",
@@ -25,8 +42,10 @@ const SupervisorRow = ({ supervisor }: Props) => {
     await sendSupervisionRequest(requestBody);
   };
 
-  const cancelRequest = () => {
+  const cancelRequest = async () => {
     setRequested(false);
+
+    await cancelSupervisionRequest(11923604, supervisor.doctorId);
   };
 
   return (

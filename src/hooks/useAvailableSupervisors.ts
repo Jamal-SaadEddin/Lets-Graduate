@@ -44,3 +44,35 @@ export const sendSupervisionRequest = async (body: Object) => {
     return {};
   }
 };
+
+export const cancelSupervisionRequest = async (
+  senderId: number,
+  receiverId: number
+) => {
+  try {
+    const response = await axios.delete<{ message: string }>(
+      `http://localhost:3000/deleteNotifications/notification?senderId=${senderId}&receiverId=${receiverId}&joinType=supervisor`
+    );
+
+    return response.data.message;
+  } catch (error) {
+    console.error("Error canceling supervision request:", error);
+    return {};
+  }
+};
+
+export const getIsRequestingSupervision = async (
+  senderId: number,
+  receiverId: number
+) => {
+  try {
+    const response = await axios.get<{ message: string }>(
+      `http://localhost:3000/viewJoinOrCancel/notification?senderId=${senderId}&receiverId=${receiverId}&joinType=supervisor`
+    );
+
+    return response.data.message === "join" ? false : true;
+  } catch (error) {
+    console.error("Error getting button state:", error);
+    return true;
+  }
+};
