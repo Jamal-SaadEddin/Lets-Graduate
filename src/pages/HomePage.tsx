@@ -141,10 +141,7 @@ export default function HomePage() {
                   aria-haspopup="true"
                   aria-expanded={openMenu ? "true" : undefined}
                 >
-                  <Avatar
-                    alt="Jamal SaadEddin"
-                    src="/src/assets/avatars/ashraf.jpg"
-                  />
+                  <Avatar alt="Jamal SaadEddin" src="" />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -182,11 +179,7 @@ export default function HomePage() {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem
-                  onClick={() =>
-                    handleCloseUserMenu(user.firstName + user.lastName)
-                  }
-                >
+                <MenuItem onClick={() => handleCloseUserMenu("my-profile")}>
                   <ListItemIcon>
                     <PersonIcon />
                   </ListItemIcon>

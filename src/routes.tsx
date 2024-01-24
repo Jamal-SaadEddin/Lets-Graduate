@@ -53,7 +53,7 @@ const mainRoute =
             element: <Comments />,
           },
           { path: "account-settings", element: <AccountSettings /> },
-          { path: ":username", element: <ProfileDetails withGPStates /> },
+          { path: "my-profile", element: <ProfileDetails withGPStates /> },
           { path: "notifications", element: <Notifications /> },
           { path: "notification/:id", element: <Notification /> },
         ],
