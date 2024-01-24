@@ -12,3 +12,19 @@ export const getProfileInfo = async (studentId: number) => {
     console.error("Error getting profile info:", error);
   }
 };
+
+export const updateProfileInfo = async (body: Object) => {
+  try {
+    const response = await axios.put<{ message: string }>(
+      `http://localhost:3000/students/updateProfile`,
+      body
+    );
+
+    return response.data.message === "Student data updated successfully"
+      ? true
+      : false;
+  } catch (error) {
+    console.error("Error updating profile info:", error);
+    return false;
+  }
+};

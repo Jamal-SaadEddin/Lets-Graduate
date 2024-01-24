@@ -22,10 +22,10 @@ import {
 } from "@mui/material";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { addresses } from "../../constants/addresses";
 import { StudentInfo } from "../../constants/myProfile";
-import { getProfileInfo } from "../../hooks/useMyProfile";
+import { getProfileInfo, updateProfileInfo } from "../../hooks/useMyProfile";
 import useThemeStore from "../../state-management/themeStore";
 
 interface Props {
@@ -51,6 +51,8 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
   const [currentUser, setCurrentUser] = React.useState<StudentInfo | undefined>(
     user
   );
+
+  const [saved, setSaved] = useState(false);
 
   const handleButtonState = async () => {
     user = await getProfileInfo(11923604);
@@ -79,8 +81,19 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
     setDisabled(!disabled);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // Save Changes to Backend
+    const requestBody = {
+      studentId: currentUser?.studentId,
+      firstName: currentUser?.firstName,
+      lastName: currentUser?.lastName,
+      address: currentUser?.address,
+      mobileNumber: currentUser?.mobileNumber,
+    };
+    const isSaved = await updateProfileInfo(requestBody);
+    if (isSaved) setSaved(true);
+    else setSaved(false);
+
     setDisabled(!disabled);
     setOpenSnackbar(true);
   };
@@ -419,10 +432,10 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
         >
           <Alert
             onClose={handleCloseSnackbar}
-            severity="success"
+            severity={saved ? "success" : "error"}
             sx={{ width: "100%" }}
           >
-            Saved Changes Successfully!
+            {saved ? "Saved Changes Successfully!" : "Error Saving Changes!"}
           </Alert>
         </Snackbar>
       </Paper>
