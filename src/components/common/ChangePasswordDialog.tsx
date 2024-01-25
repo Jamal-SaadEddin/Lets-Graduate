@@ -13,6 +13,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import React from "react";
 import { Link } from "react-router-dom";
+import { updatePassword } from "../../hooks/useMyProfile";
 
 interface Props {
   openChangePasswordDialog: boolean;
@@ -23,6 +24,8 @@ export default function ChangePasswordDialog({
   openChangePasswordDialog,
   setOpenChangePasswordDialog,
 }: Props) {
+  const [saved, setSaved] = React.useState(false);
+
   const [oldPassword, setOldPassword] = React.useState("");
   const [firstPassword, setFirstPassword] = React.useState("");
   const [secondPassword, setSecondPassword] = React.useState("");
@@ -59,7 +62,16 @@ export default function ChangePasswordDialog({
     event.preventDefault();
   };
 
-  const handleUpdatePassword = () => {
+  const handleUpdatePassword = async () => {
+    const requestBody = {
+      userId: 11924066,
+      oldPassword: oldPassword,
+      newPassword: firstPassword,
+    };
+    const isSaved = await updatePassword(requestBody);
+    if (isSaved) setSaved(true);
+    else setSaved(false);
+
     setOpenChangePasswordDialog(false);
     setOpenSnackbar(true);
   };
@@ -195,10 +207,12 @@ export default function ChangePasswordDialog({
       >
         <Alert
           onClose={handleCloseSnackbar}
-          severity="success"
+          severity={saved ? "success" : "error"}
           sx={{ width: "100%" }}
         >
-          Updated Password Successfully!
+          {saved
+            ? "Updated Password Successfully!"
+            : "Error Updating Password!"}
         </Alert>
       </Snackbar>
     </React.Fragment>

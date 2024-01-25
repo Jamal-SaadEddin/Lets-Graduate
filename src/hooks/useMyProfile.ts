@@ -28,3 +28,19 @@ export const updateProfileInfo = async (body: Object) => {
     return false;
   }
 };
+
+export const updatePassword = async (body: Object) => {
+  try {
+    const response = await axios.put<{ message: string }>(
+      `http://localhost:3000/users/updatePassword`,
+      body
+    );
+
+    return response.data.message === "Password updated successfully"
+      ? true
+      : false;
+  } catch (error) {
+    console.error("Error updating password:", error);
+    return false;
+  }
+};
