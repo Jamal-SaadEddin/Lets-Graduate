@@ -6,6 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import * as React from "react";
+import { deleteAccount } from "../../hooks/useMyProfile";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   openDeleteAccountDialog: boolean;
@@ -16,9 +18,18 @@ export default function DeleteAccountDialog({
   openDeleteAccountDialog,
   setOpenDeleteAccountDialog,
 }: Props) {
+  const navigate = useNavigate();
+
   const [confirmDelete, setConfirmDelete] = React.useState("");
 
   const handleClose = () => {
+    setOpenDeleteAccountDialog(false);
+  };
+
+  const handleDeleteAccount = async () => {
+    const isDeleted = await deleteAccount(11725044);
+    if (isDeleted) navigate("/login");
+
     setOpenDeleteAccountDialog(false);
   };
 
@@ -58,7 +69,7 @@ export default function DeleteAccountDialog({
             variant="contained"
             color="error"
             disabled={confirmDelete.toLowerCase() === "delete" ? false : true}
-            onClick={handleClose}
+            onClick={handleDeleteAccount}
           >
             Delete Account
           </Button>

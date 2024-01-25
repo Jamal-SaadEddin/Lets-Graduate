@@ -44,3 +44,18 @@ export const updatePassword = async (body: Object) => {
     return false;
   }
 };
+
+export const deleteAccount = async (userId: number) => {
+  try {
+    const response = await axios.delete<{ message: string }>(
+      `http://localhost:3000/deleteAccount/account?userId=${userId}`
+    );
+
+    return response.data.message === "Account data deleted successfully"
+      ? true
+      : false;
+  } catch (error) {
+    console.error("Error in deleting account:", error);
+    return false;
+  }
+};
