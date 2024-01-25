@@ -13,7 +13,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import React from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 
 interface Props {
   openChangePasswordDialog: boolean;
@@ -24,8 +23,6 @@ export default function ChangePasswordDialog({
   openChangePasswordDialog,
   setOpenChangePasswordDialog,
 }: Props) {
-  const { user } = useAuth();
-
   const [oldPassword, setOldPassword] = React.useState("");
   const [firstPassword, setFirstPassword] = React.useState("");
   const [secondPassword, setSecondPassword] = React.useState("");
@@ -183,8 +180,6 @@ export default function ChangePasswordDialog({
                 : secondPassword === ""
                 ? true
                 : firstPassword !== secondPassword
-                ? true
-                : oldPassword !== user.password
                 ? true
                 : false
             }

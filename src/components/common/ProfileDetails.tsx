@@ -27,6 +27,7 @@ import { addresses } from "../../constants/addresses";
 import { StudentInfo } from "../../constants/myProfile";
 import { getProfileInfo, updateProfileInfo } from "../../hooks/useMyProfile";
 import useThemeStore from "../../state-management/themeStore";
+import useUserStore from "../../state-management/userStore";
 
 interface Props {
   withGPStates?: boolean;
@@ -48,13 +49,11 @@ let user: StudentInfo | undefined = {
 };
 
 const ProfileDetails = ({ withGPStates = false }: Props) => {
-  const [currentUser, setCurrentUser] = React.useState<StudentInfo | undefined>(
-    user
-  );
+  const { currentUser, setCurrentUser } = useUserStore();
 
   const [saved, setSaved] = useState(false);
 
-  const handleButtonState = async () => {
+  const handleProfileInfo = async () => {
     user = await getProfileInfo(11923604);
     setCurrentUser(user);
     setAddress(user?.address);
@@ -62,7 +61,7 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
 
   useEffect(() => {
     // Code here will run just like componentDidMount
-    handleButtonState();
+    handleProfileInfo();
   }, []);
 
   const mode = useThemeStore((s) => s.mode);

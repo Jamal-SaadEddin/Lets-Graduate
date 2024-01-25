@@ -12,15 +12,14 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import useAuth from "../../hooks/useAuth";
 import useThemeStore from "../../state-management/themeStore";
+import useUserStore from "../../state-management/userStore";
 import ChangePasswordDialog from "./ChangePasswordDialog";
 import DeleteAccountDialog from "./DeleteAccountDialog";
 const AccountSettings = () => {
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
-
-  const { user } = useAuth();
+  const { currentUser } = useUserStore();
 
   const [openChangePasswordDialog, setOpenChangePasswordDialog] =
     React.useState(false);
@@ -52,7 +51,7 @@ const AccountSettings = () => {
             <TextField
               fullWidth
               label="Email Address"
-              value={user.email}
+              value={currentUser?.email}
               disabled
               sx={{
                 "& input.MuiInputBase-input:disabled": {
@@ -69,7 +68,6 @@ const AccountSettings = () => {
               fullWidth
               label="Password"
               type="password"
-              value={user.password}
               disabled
               sx={{
                 "& input.MuiInputBase-input:disabled": {
