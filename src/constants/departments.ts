@@ -9,6 +9,8 @@ export interface Department {
     | "abstract-submission"
     | "evaluating-students"
     | "vacation";
+  supervisingDoctors: string[];
+  projectsCommitteeMembers: string[];
 }
 
 export const departments: Department[] = [
@@ -18,6 +20,17 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "evaluating-students",
+    supervisingDoctors: [
+      "Oliver Hansen - 1355",
+      "Van Henry - 2101",
+      "April Tucker - 5544",
+      "Ralph Hubbard - 2456",
+    ],
+    projectsCommitteeMembers: [
+      "Bradley Wilkerson - 7412",
+      "Virginia Andrews - 9652",
+      "Kelly Snyder - 4561",
+    ],
   },
   {
     name: "Industrial Engineering - الهندسة الصناعية",
@@ -25,6 +38,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Electrical Engineering - الهندسة الكهربائية",
@@ -32,6 +47,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Chemical Engineering - الهندسة الكيميائية",
@@ -39,6 +56,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Civil Engineering - الهندسة المدنية",
@@ -46,6 +65,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Architecture Engineering - الهندسة المعمارية",
@@ -53,6 +74,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Mechanical Engineering - الهندسة الميكانيكية",
@@ -60,6 +83,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Communications Engineering - هندسة الاتصالات",
@@ -67,6 +92,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Construction Engineering - هندسة البناء",
@@ -74,6 +101,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Planning Engineering and city technology - هندسة التخطيط وتكنولجيا المدن",
@@ -81,6 +110,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Geomatics Engineering - هندسة الجيومتكس",
@@ -88,6 +119,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Energy and environmental Engineering - هندسة الطاقة والبيئة",
@@ -95,6 +128,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Mechatronics Engineering - هندسة الميكاترونكس",
@@ -102,6 +137,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
   {
     name: "Materials science Engineering - هندسة علوم المواد",
@@ -109,6 +146,8 @@ export const departments: Department[] = [
     maxNoOfProjForDoc: 4,
     maxNoOfStuForDoc: 9,
     currentPeriod: "create-partnerships",
+    supervisingDoctors: [],
+    projectsCommitteeMembers: [],
   },
 ];
 

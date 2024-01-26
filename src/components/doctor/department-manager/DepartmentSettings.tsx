@@ -1,18 +1,22 @@
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import {
+  Box,
   Button,
+  Chip,
   Container,
   Grid,
+  OutlinedInput,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
+import { Theme, useTheme } from "@mui/material/styles";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useState } from "react";
 import {
@@ -23,7 +27,41 @@ import {
 import useAuth from "../../../hooks/useAuth";
 import useThemeStore from "../../../state-management/themeStore";
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+function getStyles(name: string, personName: readonly string[], theme: Theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
+const allDoctors = [
+  "Oliver Hansen - 1355",
+  "Van Henry - 2101",
+  "April Tucker - 5544",
+  "Ralph Hubbard - 2456",
+  "Omar Alexander - 7456",
+  "Carlos Abbott - 1598",
+  "Miriam Wagner - 3562",
+  "Bradley Wilkerson - 7412",
+  "Virginia Andrews - 9652",
+  "Kelly Snyder - 4561",
+];
+
 const DepartmentSettings = () => {
+  const theme = useTheme();
   const { user } = useAuth();
   const department = getDepartment(user.department);
 
@@ -60,6 +98,27 @@ const DepartmentSettings = () => {
     }
 
     setOpenSnackbar(false);
+  };
+
+  const handleSupervisorsChange = (event: SelectChangeEvent<string[]>) => {
+    const {
+      target: { value },
+    } = event;
+    setCurrentDepartment({
+      ...currentDepartment,
+      supervisingDoctors: typeof value === "string" ? value.split(",") : value,
+    });
+  };
+
+  const handleProjectCommitteeChange = (event: SelectChangeEvent<string[]>) => {
+    const {
+      target: { value },
+    } = event;
+    setCurrentDepartment({
+      ...currentDepartment,
+      projectsCommitteeMembers:
+        typeof value === "string" ? value.split(",") : value,
+    });
   };
 
   return (
@@ -289,6 +348,132 @@ const DepartmentSettings = () => {
               </FormControl>
             </Grid>
           )}
+          {disabled && (
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="Supervising Doctors"
+                value={currentDepartment.supervisingDoctors}
+                disabled
+                sx={{
+                  "& input.MuiInputBase-input:disabled": {
+                    WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                  },
+                  "& label.Mui-disabled": {
+                    color:
+                      mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
+                  },
+                }}
+              />
+            </Grid>
+          )}
+          {!disabled && (
+            <Grid item xs={12} md={6}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-multiple-chip-label">
+                  Supervising Doctors
+                </InputLabel>
+                <Select
+                  labelId="demo-multiple-chip-label"
+                  id="demo-multiple-chip"
+                  multiple
+                  value={currentDepartment.supervisingDoctors}
+                  onChange={handleSupervisorsChange}
+                  input={
+                    <OutlinedInput
+                      id="select-multiple-chip"
+                      label="Supervising Doctors"
+                    />
+                  }
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {allDoctors.map((name) => (
+                    <MenuItem
+                      key={name}
+                      value={name}
+                      style={getStyles(
+                        name,
+                        currentDepartment.supervisingDoctors,
+                        theme
+                      )}
+                    >
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          )}
+          {disabled && (
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="Projects Committee Members"
+                value={currentDepartment.projectsCommitteeMembers}
+                disabled
+                sx={{
+                  "& input.MuiInputBase-input:disabled": {
+                    WebkitTextFillColor: mode === "light" ? "black" : "#bbb",
+                  },
+                  "& label.Mui-disabled": {
+                    color:
+                      mode === "light" ? "black" : "#rgba(255,255,255,0.5)",
+                  },
+                }}
+              />
+            </Grid>
+          )}
+          {!disabled && (
+            <Grid item xs={12} md={6}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-multiple-chip-label">
+                  Projects Committee Members
+                </InputLabel>
+                <Select
+                  labelId="demo-multiple-chip-label"
+                  id="demo-multiple-chip"
+                  multiple
+                  value={currentDepartment.projectsCommitteeMembers}
+                  onChange={handleProjectCommitteeChange}
+                  input={
+                    <OutlinedInput
+                      id="select-multiple-chip"
+                      label="Projects Committee Members"
+                    />
+                  }
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {allDoctors.map((name) => (
+                    <MenuItem
+                      key={name}
+                      value={name}
+                      style={getStyles(
+                        name,
+                        currentDepartment.projectsCommitteeMembers,
+                        theme
+                      )}
+                    >
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          )}
 
           <Grid item xs={12}>
             {!disabled && (
@@ -323,6 +508,12 @@ const DepartmentSettings = () => {
                     .toString()
                     .replace(/\s/g, "") === "0" ||
                   currentDepartment.maxNoOfProjForDoc
+                    .toString()
+                    .replace(/\s/g, "") === "0" ||
+                  currentDepartment.supervisingDoctors
+                    .toString()
+                    .replace(/\s/g, "") === "0" ||
+                  currentDepartment.projectsCommitteeMembers
                     .toString()
                     .replace(/\s/g, "") === "0"
                     ? true
