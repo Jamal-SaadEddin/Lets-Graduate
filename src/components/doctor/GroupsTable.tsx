@@ -1,21 +1,12 @@
 import { Grid, Typography } from "@mui/material";
-import {
-  academicNumbers,
-  addresses,
-  projects,
-} from "../../constants/availableGroups";
-import {
-  GradingProjectsStudent,
-  supervisorProjects,
-} from "../../constants/supervisedProjects";
-import { filterGroups } from "../../services/filterUtils";
+import { academicNumbers, addresses } from "../../constants/availableGroups";
+import { GradingProjectsStudent } from "../../constants/supervisedProjects";
+import useMyGroupsStore from "../../state-management/Doctor/myGroupsStore";
 import useFilterStudentsStore from "../../state-management/Student/filterStudentsStore";
-import useSearchboxStore from "../../state-management/searchboxStore";
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";
 import FilterBox from "../student/FilterBox";
 import StudentSearchbox from "../student/StudentSearchbox";
-import { gradingProjects } from "./../../constants/supervisedProjects";
 import GradingTable from "./common/GradingTable";
 
 interface Props {
@@ -29,6 +20,8 @@ const GroupsTable = ({
   withFiltration = false,
   grading = false,
 }: Props) => {
+  const myGroups = useMyGroupsStore((s) => s.myGroups);
+
   const headings = grading
     ? [
         "Student Name",
@@ -49,18 +42,7 @@ const GroupsTable = ({
     (s) => s.handleAcademicNumberChange
   );
 
-  const filteredGroups = filterGroups(
-    useSearchboxStore((s) => s.filteredStudents),
-    grading ? gradingProjects : projectTitle ? supervisorProjects : projects,
-    address,
-    academicNumber
-  );
-
-  if (
-    !supervisorProjects ||
-    supervisorProjects.length === 0 ||
-    supervisorProjects === null
-  )
+  if (!myGroups || myGroups.length === 0 || myGroups === null)
     return (
       <Typography variant="h6" paddingBottom={2} color="primary">
         No Groups Available!
@@ -105,7 +87,7 @@ const GroupsTable = ({
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        {filteredGroups?.map((group, index) => (
+        {myGroups.map((group, index) => (
           <Group key={index}>
             <GroupSummary>
               <Grid container>

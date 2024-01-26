@@ -23,6 +23,7 @@ export interface SupervisedProjectsStudent {
   id: number;
   email: string;
   department: string;
+  studentId?: number;
 }
 
 export interface GradingProjectsStudent {

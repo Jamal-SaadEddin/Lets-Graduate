@@ -14,6 +14,7 @@ import { getPrerequisites } from "../../hooks/usePrerequisites";
 import { getAvailableGroups } from "../../hooks/useAvailableGroups";
 import { getAvailableSupervisors } from "../../hooks/useAvailableSupervisors";
 import { getAbstractSubmission } from "../../hooks/useSubmissions";
+import { getMyGroups } from "../../hooks/useMyGroups";
 
 interface Props {
   children: SideBarButton[];
@@ -37,6 +38,10 @@ const SideBar = ({ children, subHeader = false }: Props) => {
       await getAvailableSupervisors(11925044);
     } else if (item.link.includes("submissions")) {
       await getAbstractSubmission(11923604);
+    } else if (item.link.includes("supervised-projects")) {
+      await getMyGroups(1355);
+    } else if (item.link.includes("merge-groups")) {
+      await getAvailableGroups("Computer Engineering", "gp1");
     }
 
     navigate(item.link);

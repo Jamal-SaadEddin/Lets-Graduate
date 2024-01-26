@@ -7,10 +7,16 @@ import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";
 import FilterBox from "./FilterBox";
 import StudentSearchbox from "./StudentSearchbox";
+import { useLocation } from "react-router-dom";
 
 const headings = ["Student Name", "Academic Number", "Address", "Email"];
 
 export default function GroupsTable() {
+  const location = useLocation();
+  const withButton = location.pathname.includes("merge-groups")
+    ? "merge-group"
+    : "join-group";
+
   const availableGroups = useAvailableGroupsStore((s) => s.availableGroups);
 
   const address = useFilterStudentsStore((s) => s.address);
@@ -108,7 +114,7 @@ export default function GroupsTable() {
               <Table
                 tableBody={group.students}
                 tableHead={headings}
-                withButton="join-group"
+                withButton={withButton}
               />
             </GroupDetails>
           </Group>

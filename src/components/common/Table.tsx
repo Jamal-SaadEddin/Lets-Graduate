@@ -21,6 +21,7 @@ import {
   getIsRequestingPartnership,
   sendPartnershipRequest,
 } from "../../hooks/useAvailableGroups";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -38,6 +39,8 @@ export default function Table({
   tableBody,
   withButton = false,
 }: Props) {
+  const location = useLocation();
+
   const [requested, setRequested] = useState(false);
   const [openMergeDialog, setOpenMergeDialog] = useState(false);
 
@@ -56,8 +59,7 @@ export default function Table({
 
   var buttonText = "";
   if (requested && withButton === "join-group") buttonText = "cancel request";
-  else if (!requested && withButton === "merge-group")
-    buttonText = "view merge process";
+  else if (withButton === "merge-group") buttonText = "view merge process";
   else buttonText = "send request";
 
   const handleRequest = async () => {
@@ -99,11 +101,13 @@ export default function Table({
               <TableCell align="right">
                 <Button
                   variant="contained"
-                  startIcon={requested && <CancelIcon />}
+                  startIcon={
+                    requested && withButton === "join-group" && <CancelIcon />
+                  }
                   endIcon={
                     !requested && withButton === "join-group" ? (
                       <SendIcon />
-                    ) : !requested && withButton === "merge-group" ? (
+                    ) : withButton === "merge-group" ? (
                       <MergeIcon />
                     ) : null
                   }
@@ -125,9 +129,15 @@ export default function Table({
         <TableBody>
           {tableBody.map((user, index) => (
             <TableRow key={index}>
-              {propertyNames.map(
-                (property, index) =>
-                  property !== "id" && (
+              {propertyNames.map((property, index) => {
+                if (
+                  property === "id" &&
+                  (location.pathname.includes("available-groups") ||
+                    location.pathname.includes("merge-groups"))
+                )
+                  return null;
+                else
+                  return (
                     <TableCell
                       key={index}
                       colSpan={
@@ -136,8 +146,8 @@ export default function Table({
                     >
                       {user[property]}
                     </TableCell>
-                  )
-              )}
+                  );
+              })}
             </TableRow>
           ))}
         </TableBody>

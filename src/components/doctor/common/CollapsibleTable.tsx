@@ -137,11 +137,11 @@ const Row = ({ project, submission }: RowProps) => {
                 </TableHead>
                 <TableBody>
                   {project.students.map((student) => (
-                    <TableRow key={student.id}>
+                    <TableRow key={student.studentId}>
                       <TableCell component="th" scope="row">
                         {student.fullName}
                       </TableCell>
-                      <TableCell>{student.id}</TableCell>
+                      <TableCell>{student.studentId}</TableCell>
                       <TableCell>{student.address}</TableCell>
                       <TableCell>{student.email}</TableCell>
                       <TableCell>{student.department}</TableCell>

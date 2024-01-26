@@ -1,5 +1,5 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
-import GroupsTable from "./GroupsTable";
+import GroupsTable from "../student/GroupsTable";
 
 const MergeGroups = () => {
   return (
@@ -44,7 +44,7 @@ const MergeGroups = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <GroupsTable withFiltration />
+            <GroupsTable />
           </Grid>
         </Grid>
       </Paper>
