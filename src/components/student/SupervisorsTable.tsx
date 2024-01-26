@@ -11,7 +11,7 @@ import * as React from "react";
 import useSearchboxStore from "../../state-management/searchboxStore";
 import SupervisorRow from "./SupervisorRow";
 import SupervisorSeachbox from "./SupervisorSeachbox";
-import useAvailableSupervisorsStore from "../../state-management/availableSupervisorsStore";
+import useAvailableSupervisorsStore from "../../state-management/Student/availableSupervisorsStore";
 
 interface Heading {
   id: "name" | "department" | "email" | "button";

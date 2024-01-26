@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import Comment from "./Comment";
-import useCommentsStore from "../../state-management/commentsStore";
+import useCommentsStore from "../../state-management/Student/commentsStore";
 
 interface Props {
   canAddComments?: boolean;

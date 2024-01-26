@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AvailableSupervisor } from "../constants/availableSupervisors";
-import { setAvailableSupervisors } from "../state-management/availableSupervisorsStore";
+import { setAvailableSupervisors } from "../state-management/Student/availableSupervisorsStore";
 import {
   setAllSupervisors,
   setFilteredSupervisors,

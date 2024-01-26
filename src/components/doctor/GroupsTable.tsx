@@ -9,7 +9,7 @@ import {
   supervisorProjects,
 } from "../../constants/supervisedProjects";
 import { filterGroups } from "../../services/filterUtils";
-import useFilterStudentsStore from "../../state-management/filterStudentsStore";
+import useFilterStudentsStore from "../../state-management/Student/filterStudentsStore";
 import useSearchboxStore from "../../state-management/searchboxStore";
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";

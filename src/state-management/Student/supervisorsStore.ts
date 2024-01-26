@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Supervisor } from "../constants/myProject";
+import { Supervisor } from "../../constants/myProject";
 
 interface SupervisorStore {
   supervisors: Supervisor[];
@@ -7,14 +7,7 @@ interface SupervisorStore {
 }
 
 const useSupervisorStore = create<SupervisorStore>((set) => ({
-  supervisors: [
-    {
-      fullName: "",
-      department: "",
-      email: "",
-      mobileNumber: "",
-    },
-  ],
+  supervisors: [],
   setSupervisors: (supervisors) => set(() => ({ supervisors })),
 }));
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setAvailableGroups } from "../state-management/availableGroupsStore";
+import { setAvailableGroups } from "../state-management/Student/availableGroupsStore";
 import {
   AvailableGroupsProjectItem,
   Student,

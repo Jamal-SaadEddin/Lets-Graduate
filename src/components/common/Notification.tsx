@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
-import useNotificationStore from "../../state-management/notificationStore";
+import useNotificationStore from "../../state-management/Student/notificationStore";
 
 const Notification = () => {
   const notification = useNotificationStore((s) => s.notification);

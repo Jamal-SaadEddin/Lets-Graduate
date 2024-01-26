@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { filterGroups } from "../../services/filterUtils";
-import useAvailableGroupsStore from "../../state-management/availableGroupsStore";
-import useFilterStudentsStore from "../../state-management/filterStudentsStore";
+import useAvailableGroupsStore from "../../state-management/Student/availableGroupsStore";
+import useFilterStudentsStore from "../../state-management/Student/filterStudentsStore";
 import useSearchboxStore from "../../state-management/searchboxStore";
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";

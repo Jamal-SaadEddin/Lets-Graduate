@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { MyProjectInfo } from "../constants/myProject";
+import { MyProjectInfo } from "../../constants/myProject";
 
 interface MyProjectInfoStore {
   myProjectInfo: MyProjectInfo;

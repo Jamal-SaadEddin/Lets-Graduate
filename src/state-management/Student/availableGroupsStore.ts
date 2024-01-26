@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AvailableGroupsProjectItem } from "../constants/availableGroups";
+import { AvailableGroupsProjectItem } from "../../constants/availableGroups";
 
 interface AvailableGroupsStore {
   availableGroups: AvailableGroupsProjectItem[];

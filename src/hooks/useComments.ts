@@ -1,6 +1,6 @@
 import axios from "axios";
 import { AbstractComment } from "../constants/comments";
-import { setComments } from "../state-management/commentsStore";
+import { setComments } from "../state-management/Student/commentsStore";
 
 export const getAbstractComments = async (studentId: number) => {
   try {

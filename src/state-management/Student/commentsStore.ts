@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AbstractComment } from "../constants/comments";
+import { AbstractComment } from "../../constants/comments";
 
 interface Comments {
   comments: AbstractComment[];

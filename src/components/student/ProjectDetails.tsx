@@ -133,9 +133,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { updateMyProjectTitle } from "../../hooks/useMyProject";
-import useMyProjectInfoStore from "../../state-management/myProjectInfoStore";
-import usePartnersStore from "../../state-management/partnersStore";
-import useSupervisorStore from "../../state-management/supervisorsStore";
+import useMyProjectInfoStore from "../../state-management/Student/myProjectInfoStore";
+import usePartnersStore from "../../state-management/Student/partnersStore";
+import useSupervisorStore from "../../state-management/Student/supervisorsStore";
 
 export function FormDialog() {
   const [open, setOpen] = React.useState(false);

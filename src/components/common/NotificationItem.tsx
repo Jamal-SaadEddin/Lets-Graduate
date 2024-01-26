@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotificationElement } from "../../constants/notifications";
-import useNotificationStore from "../../state-management/notificationStore";
+import useNotificationStore from "../../state-management/Student/notificationStore";
 
 interface Props {
   notificationElement: NotificationElement;

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AvailableSupervisor } from "../constants/availableSupervisors";
+import { AvailableSupervisor } from "../../constants/availableSupervisors";
 
 interface AvailableSupervisorsStore {
   availableSupervisors: AvailableSupervisor[];

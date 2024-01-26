@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Partner } from "../constants/myProject";
+import { Partner } from "../../constants/myProject";
 
 interface PartnersStore {
   partners: Partner[];

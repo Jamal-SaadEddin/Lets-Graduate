@@ -1,8 +1,8 @@
 import axios from "axios";
 import { MyProjectInfo, Partner, Supervisor } from "../constants/myProject";
-import { setMyProjectInfo } from "../state-management/myProjectInfoStore";
-import { setPartners } from "../state-management/partnersStore";
-import { setSupervisors } from "../state-management/supervisorsStore";
+import { setMyProjectInfo } from "../state-management/Student/myProjectInfoStore";
+import { setPartners } from "../state-management/Student/partnersStore";
+import { setSupervisors } from "../state-management/Student/supervisorsStore";
 
 export const getMyPartners = async (studentId: number) => {
   try {

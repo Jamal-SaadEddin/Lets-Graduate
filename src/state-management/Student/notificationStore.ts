@@ -2,7 +2,7 @@ import { create } from "zustand";
 import {
   NotificationElement,
   notificationElements,
-} from "../constants/notifications";
+} from "../../constants/notifications";
 
 interface NotificationStore {
   notification: NotificationElement;
