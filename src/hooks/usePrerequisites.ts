@@ -46,3 +46,19 @@ export const deletePrerequisite = async (prerequisiteId: number) => {
     return {};
   }
 };
+
+export const registerProject = async (body: Object) => {
+  try {
+    const response = await axios.put<{ message: string }>(
+      `http://localhost:3000/registerProject/project`,
+      body
+    );
+
+    return response.data.message === "Student project data updated successfully"
+      ? true
+      : false;
+  } catch (error) {
+    console.error("Error registering project:", error);
+    return false;
+  }
+};

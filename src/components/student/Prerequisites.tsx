@@ -1,5 +1,12 @@
 import DoneIcon from "@mui/icons-material/Done";
-import { Chip, Container, Grid, Paper, Typography } from "@mui/material";
+import {
+  Chip,
+  Container,
+  Grid,
+  Paper,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Table from "@mui/material/Table";
@@ -7,11 +14,16 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import usePrerequisitesStore from "../../state-management/prerequisitesStore";
+import { registerProject } from "../../hooks/usePrerequisites";
+import { useState } from "react";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import React from "react";
 
 export default function Prerequisites() {
   const params = useParams();
+  const navigate = useNavigate();
 
   const prerequisites = usePrerequisitesStore((s) => s.prerequisites);
   const setPrerequisites = usePrerequisitesStore((s) => s.setPrerequisites);
@@ -22,6 +34,34 @@ export default function Prerequisites() {
         pre.prerequisiteId === preId ? { ...pre, answer: !pre.answer } : pre
       )
     );
+  };
+
+  const [registered, setRegistered] = useState(false);
+
+  const handleRegisterProject = async () => {
+    const requestBody = {
+      studentId: 11923605,
+      projectType: params["projectType"] === "1" ? "gp1" : "gp2",
+    };
+    const isRegistered = await registerProject(requestBody);
+    if (isRegistered) {
+      setRegistered(true);
+      setOpenSnackbar(true);
+      navigate("/");
+    }
+  };
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleCloseSnackbar = (
+    _event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
   };
 
   if (!prerequisites || prerequisites.length === 0)
@@ -100,6 +140,7 @@ export default function Prerequisites() {
                         variant="contained"
                         color="success"
                         sx={{ fontSize: 16 }}
+                        onClick={handleRegisterProject}
                       >
                         Yes, Register
                       </Button>
@@ -111,6 +152,28 @@ export default function Prerequisites() {
           </Grid>
         </Grid>
       </Paper>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={registered ? "success" : "error"}
+          sx={{ width: "100%" }}
+        >
+          {registered
+            ? "Project Registered Successfully!"
+            : "Error Registering Project!"}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
