@@ -11,9 +11,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useCommentsStore from "../../state-management/Student/commentsStore";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import Comment from "./Comment";
-import useCommentsStore from "../../state-management/Student/commentsStore";
+import { addNewComment } from "../../hooks/useComments";
 
 interface Props {
   canAddComments?: boolean;
@@ -23,11 +24,18 @@ const Comments = ({ canAddComments = false }: Props) => {
   const submission = useViewedSubmissionStore((s) => s.submission);
   const comments = useCommentsStore((s) => s.comments);
 
-  const [newComment, setNewComment] = useState("");
+  const [newCommentText, setNewCommentText] = useState("");
 
-  const handleAddNewComment = () => {
-    if (newComment.replace(/\s/g, "").length > 0)
-      console.log(`New Comment Added: ${newComment}`);
+  const handleAddNewComment = async () => {
+    if (newCommentText.replace(/\s/g, "").length > 0) {
+      const requestBody = {
+        doctorId: 1355,
+        projectId: submission?.projectId,
+        content: newCommentText,
+      };
+      await addNewComment(requestBody);
+      setNewCommentText("");
+    }
   };
 
   const handleKeyDown = (event: any) => {
@@ -79,10 +87,10 @@ const Comments = ({ canAddComments = false }: Props) => {
                 multiline
                 fullWidth
                 placeholder="Write new feedback..."
-                value={newComment}
+                value={newCommentText}
                 onChange={(event) => {
                   if (event.target.value.length <= 1000)
-                    setNewComment(event.target.value);
+                    setNewCommentText(event.target.value);
                 }}
                 onKeyDown={handleKeyDown}
                 InputProps={{
