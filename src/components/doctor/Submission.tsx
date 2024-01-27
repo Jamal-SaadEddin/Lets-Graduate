@@ -9,13 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import useAuth, { DoctorInfo } from "../../hooks/useAuth";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 
 const Submission = () => {
-  const { user } = useAuth();
-  const userInfo = user.info as DoctorInfo;
   const submission = useViewedSubmissionStore((s) => s.submission);
+  const projectTitle = useViewedSubmissionStore((s) => s.projectTitle);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -42,7 +40,7 @@ const Submission = () => {
                   size="small"
                 ></Button>
               </Link>
-              Abstract Submission
+              {projectTitle} - Abstract
             </Typography>
           </Grid>
           <Grid
@@ -68,7 +66,7 @@ const Submission = () => {
             </Link>
           </Grid>
           <Grid item xs={6} textAlign="end">
-            {userInfo.isProjectsCommitteeMember &&
+            {submission?.operation === "evaluating" &&
               submission?.acceptStatus === "Pending" && (
                 <Button variant="contained" color="success">
                   Accept Abstract

@@ -68,9 +68,11 @@ const Row = ({ project, submission }: RowProps) => {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const setSubmission = useViewedSubmissionStore((s) => s.setSubmission);
+  const setProjectTitle = useViewedSubmissionStore((s) => s.setProjectTitle);
 
   const handleView = () => {
     setSubmission(submission);
+    setProjectTitle(project.title);
     navigate(`${submission.submissionId}`);
   };
 
