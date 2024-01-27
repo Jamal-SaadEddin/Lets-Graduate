@@ -12,21 +12,22 @@ import CollapsibleTable from "./common/CollapsibleTable";
 export default function Abstracts() {
   const { user } = useAuth();
   const userInfo = user.info as DoctorInfo;
-  const [value, setValue] = React.useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setCurrentTab(newValue);
   };
 
   const myGroups = useMyGroupsStore((s) => s.myGroups);
   const myEvaluatingGroups = useMyGroupsStore((s) => s.myEvaluatingGroups);
   const submissions = useViewedSubmissionStore((s) => s.submissions);
+  const currentTab = useViewedSubmissionStore((s) => s.currentTab);
+  const setCurrentTab = useViewedSubmissionStore((s) => s.setCurrentTab);
 
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
-          value={value}
+          value={currentTab}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
@@ -36,14 +37,14 @@ export default function Abstracts() {
           )}
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
+      <CustomTabPanel value={currentTab} index={0}>
         <CollapsibleTable
           projects={myGroups as SupervisedProjectsProjectItem[]}
           submissions={submissions.filter((s) => s.operation === "viewing")}
         />
       </CustomTabPanel>
       {userInfo.isProjectsCommitteeMember && (
-        <CustomTabPanel value={value} index={1}>
+        <CustomTabPanel value={currentTab} index={1}>
           <CollapsibleTable
             projects={myEvaluatingGroups as SupervisedProjectsProjectItem[]}
             submissions={submissions.filter(

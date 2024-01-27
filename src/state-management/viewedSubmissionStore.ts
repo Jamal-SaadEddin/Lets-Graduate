@@ -7,6 +7,9 @@ interface ViewedSubmission {
   projectTitle: string;
   setProjectTitle: (projectTitle: string) => void;
 
+  currentTab: number;
+  setCurrentTab: (currentTab: number) => void;
+
   submissions: Submission[];
   setSubmissions: (submissions: Submission[]) => void;
 }
@@ -16,6 +19,9 @@ const useViewedSubmissionStore = create<ViewedSubmission>((set) => ({
   setSubmission: (submission) => set(() => ({ submission })),
   projectTitle: "",
   setProjectTitle: (projectTitle) => set(() => ({ projectTitle })),
+
+  currentTab: 0,
+  setCurrentTab: (currentTab) => set(() => ({ currentTab })),
 
   submissions: [],
   setSubmissions: (submissions) => set(() => ({ submissions })),
