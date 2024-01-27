@@ -15,7 +15,7 @@ const Comment = ({ comment }: Props) => {
               {comment.sender}
               <Typography color="gray" variant="caption" fontSize={16}>
                 {" • "}
-                {comment.dateCreated}
+                {comment.commentDuration}
               </Typography>
             </Typography>
           </Stack>

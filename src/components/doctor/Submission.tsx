@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import { Submission as SubmissionInterface } from "../../constants/supervisorSubmissions";
 import { updateSubmissionAcceptStatus } from "../../hooks/useSubmissions";
+import { getAbstractComments } from "../../hooks/useComments";
+import useCommentsStore from "../../state-management/Student/commentsStore";
 
 const Submission = () => {
   const submission = useViewedSubmissionStore((s) => s.submission);
@@ -19,6 +21,8 @@ const Submission = () => {
   const projectTitle = useViewedSubmissionStore((s) => s.projectTitle);
   const submissions = useViewedSubmissionStore((s) => s.submissions);
   const setSubmissions = useViewedSubmissionStore((s) => s.setSubmissions);
+  const comments = useCommentsStore((s) => s.comments);
+  const setComments = useCommentsStore((s) => s.setComments);
 
   const handleAcceptSubmission = async () => {
     const newSubmission = { ...submission, acceptStatus: "Accepted" };
@@ -84,6 +88,11 @@ const Submission = () => {
                 size="small"
                 startIcon={<NotesIcon />}
                 sx={{ marginY: 1 }}
+                onClick={async () => {
+                  if (comments[0]?.projectId !== submission?.projectId)
+                    setComments([]);
+                  await getAbstractComments(submission?.projectId);
+                }}
               >
                 Comments
               </Button>

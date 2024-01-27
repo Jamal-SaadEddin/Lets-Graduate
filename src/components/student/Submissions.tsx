@@ -59,20 +59,22 @@ const Submissions = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Button
-              component="label"
-              variant="contained"
-              startIcon={<UploadIcon />}
-              size="small"
-            >
-              Upload Abstract
-              <VisuallyHiddenInput
-                type="file"
-                accept="application/pdf"
-                onChange={handleFileChange}
-              />
-            </Button>
-            {submission && (
+            {submission?.acceptStatus !== "Accepted" && (
+              <Button
+                component="label"
+                variant="contained"
+                startIcon={<UploadIcon />}
+                size="small"
+              >
+                Upload Abstract
+                <VisuallyHiddenInput
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleFileChange}
+                />
+              </Button>
+            )}
+            {submission && submission.acceptStatus !== "Accepted" && (
               <Button
                 color="error"
                 variant="outlined"
@@ -112,16 +114,20 @@ const Submissions = () => {
                   size="small"
                   startIcon={<NotesIcon />}
                   sx={{ marginY: 1 }}
-                  onClick={async () => await getAbstractComments(11923604)}
+                  onClick={async () =>
+                    await getAbstractComments(submission.projectId)
+                  }
                 >
                   Comments
                 </Button>
               </Link>
             )}
           </Grid>
-          <Grid item xs={12}>
-            <iframe src={submission?.file} frameBorder="0" />
-          </Grid>
+          {submission && (
+            <Grid item xs={12}>
+              <iframe src={submission?.file} frameBorder="0" />
+            </Grid>
+          )}
         </Grid>
       </Paper>
     </Container>
