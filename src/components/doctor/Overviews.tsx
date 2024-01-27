@@ -5,7 +5,10 @@ import useAuth from "../../hooks/useAuth";
 const Overviews = () => {
   const { user } = useAuth();
   const userDepartment = getDepartment(user.department);
-  const userDepartmentName = userDepartment.name.replace(/[^a-zA-Z]/gm, " ");
+  const userDepartmentName = userDepartment.departmentName.replace(
+    /[^a-zA-Z]/gm,
+    " "
+  );
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
