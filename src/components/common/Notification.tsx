@@ -10,16 +10,16 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
-import useNotificationStore from "../../state-management/Student/notificationStore";
+import useNotificationsStore from "../../state-management/notificationsStore";
 
 const Notification = () => {
-  const notification = useNotificationStore((s) => s.notification);
-  const setNotification = useNotificationStore((s) => s.setNotification);
+  const notification = useNotificationsStore((s) => s.notification);
+  const setNotification = useNotificationsStore((s) => s.setNotification);
 
   const params = useParams();
   console.log(params);
 
-  if (params.id !== notification.id.toString()) throw Error;
+  if (params.id !== notification.notificationId.toString()) throw Error;
 
   const handleAccept = (acceptStatus: "accepted" | "declined") => {
     const updatedNotification = { ...notification, acceptStatus };
@@ -56,7 +56,7 @@ const Notification = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="subtitle2">
-              {notification.sender}
+              {notification.senderName}
               <Typography
                 component="span"
                 variant="body2"

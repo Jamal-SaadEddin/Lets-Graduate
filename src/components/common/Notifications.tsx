@@ -6,12 +6,17 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { notificationElements as notifications } from "../../constants/notifications";
+import useNotificationsStore from "../../state-management/notificationsStore";
 import NotificationItem from "./NotificationItem";
 
 const Notifications = () => {
+  const notifications = useNotificationsStore((s) => s.notifications);
+
   const totalUnRead = notifications.filter(
     (item) => item.readStatus === "unread"
+  ).length;
+  const totalRead = notifications.filter(
+    (item) => item.readStatus === "read"
   ).length;
 
   return (
@@ -41,53 +46,67 @@ const Notifications = () => {
             sx={{ display: "flex", alignItems: "center" }}
             gap={2}
           >
-            <Typography variant="h6">All notifications</Typography>
+            <Typography variant="h6">
+              {notifications.length === 0
+                ? "There is no new notifications"
+                : "All notifications"}
+            </Typography>
           </Grid>
-          <Grid item xs={12}>
-            {totalUnRead > 0 && (
-              <List
-                disablePadding
-                subheader={
-                  <ListSubheader
-                    disableSticky
-                    sx={{ py: 1, px: 2.5, typography: "overline" }}
-                  >
-                    New
-                  </ListSubheader>
-                }
-              >
-                {notifications
-                  .filter((notf) => notf.readStatus === "unread")
-                  .map((notification) => (
-                    <NotificationItem
-                      key={notification.id}
-                      notificationElement={notification}
-                    />
-                  ))}
-              </List>
-            )}
-
-            <List
-              disablePadding
-              subheader={
-                <ListSubheader
-                  disableSticky
-                  sx={{ py: 1, px: 2.5, typography: "overline" }}
+          {notifications.length > 0 && (
+            <Grid item xs={12}>
+              {totalUnRead > 0 && (
+                <List
+                  disablePadding
+                  subheader={
+                    <ListSubheader
+                      disableSticky
+                      sx={{ py: 1, px: 2.5, typography: "overline" }}
+                    >
+                      New
+                    </ListSubheader>
+                  }
                 >
-                  {totalUnRead === 0 ? "All Notifications" : "Before that"}
-                </ListSubheader>
-              }
-            >
-              {notifications
-                .filter((notf) => notf.readStatus === "read")
-                .map((notification) => (
-                  <NotificationItem
-                    key={notification.id}
-                    notificationElement={notification}
-                  />
-                ))}
-            </List>
-          </Grid>
+                  {notifications
+                    .filter((notf) => notf.readStatus === "unread")
+                    .map((notification) => (
+                      <NotificationItem
+                        key={notification.notificationId}
+                        notificationElement={notification}
+                      />
+                    ))}
+                </List>
+              )}
+
+              {(totalUnRead === 0 || (totalUnRead > 0 && totalRead > 0)) && (
+                <List
+                  disablePadding
+                  subheader={
+                    <ListSubheader
+                      disableSticky
+                      sx={{ py: 1, px: 2.5, typography: "overline" }}
+                    >
+                      {notifications.length === 0
+                        ? "There is no new notifications"
+                        : totalUnRead === 0
+                        ? "All Notifications"
+                        : totalUnRead > 0 && totalRead > 0
+                        ? "Before that"
+                        : ""}
+                    </ListSubheader>
+                  }
+                >
+                  {notifications
+                    .filter((notf) => notf.readStatus === "read")
+                    .map((notification) => (
+                      <NotificationItem
+                        key={notification.notificationId}
+                        notificationElement={notification}
+                      />
+                    ))}
+                </List>
+              )}
+            </Grid>
+          )}
         </Grid>
       </Paper>
     </Container>

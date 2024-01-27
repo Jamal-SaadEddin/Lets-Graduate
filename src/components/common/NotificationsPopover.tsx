@@ -12,14 +12,17 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { notificationElements } from "../../constants/notifications";
+import useNotificationsStore from "../../state-management/notificationsStore";
 import NotificationItem from "./NotificationItem";
 
 const NotificationsPopover = () => {
-  const [notifications, setNotifications] = useState(notificationElements);
+  const { notifications, setNotifications } = useNotificationsStore();
 
   const totalUnRead = notifications.filter(
     (item) => item.readStatus === "unread"
+  ).length;
+  const totalRead = notifications.filter(
+    (item) => item.readStatus === "read"
   ).length;
 
   const [open, setOpen] = useState(null);
@@ -102,7 +105,7 @@ const NotificationsPopover = () => {
               .filter((notf) => notf.readStatus === "unread")
               .map((notification) => (
                 <NotificationItem
-                  key={notification.id}
+                  key={notification.notificationId}
                   notificationElement={notification}
                   handleClose={handleClose}
                 />
@@ -110,37 +113,47 @@ const NotificationsPopover = () => {
           </List>
         )}
 
-        <List
-          disablePadding
-          subheader={
-            <ListSubheader
-              disableSticky
-              sx={{ py: 1, px: 2.5, typography: "overline" }}
-            >
-              {totalUnRead === 0 ? "All Notifications" : "Before that"}
-            </ListSubheader>
-          }
-        >
-          {notifications
-            .filter((notf) => notf.readStatus === "read")
-            .map((notification) => (
-              <NotificationItem
-                key={notification.id}
-                notificationElement={notification}
-                handleClose={handleClose}
-              />
-            ))}
-        </List>
+        {(totalUnRead === 0 || (totalUnRead > 0 && totalRead > 0)) && (
+          <List
+            disablePadding
+            subheader={
+              <ListSubheader
+                disableSticky
+                sx={{ py: 1, px: 2.5, typography: "overline" }}
+              >
+                {notifications.length === 0
+                  ? "There is no new notifications"
+                  : totalUnRead === 0
+                  ? "All Notifications"
+                  : totalUnRead > 0 && totalRead > 0
+                  ? "Before that"
+                  : ""}
+              </ListSubheader>
+            }
+          >
+            {notifications
+              .filter((notf) => notf.readStatus === "read")
+              .map((notification) => (
+                <NotificationItem
+                  key={notification.notificationId}
+                  notificationElement={notification}
+                  handleClose={handleClose}
+                />
+              ))}
+          </List>
+        )}
 
         <Divider sx={{ borderStyle: "dashed" }} />
 
-        <Box sx={{ p: 1 }}>
-          <Link to="/notifications">
-            <Button fullWidth onClick={handleClose}>
-              View All
-            </Button>
-          </Link>
-        </Box>
+        {notifications.length > 0 && (
+          <Box sx={{ p: 1 }}>
+            <Link to="/notifications">
+              <Button fullWidth onClick={handleClose}>
+                View All
+              </Button>
+            </Link>
+          </Box>
+        )}
       </Popover>
     </>
   );

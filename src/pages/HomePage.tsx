@@ -32,10 +32,21 @@ import sideBarButtons, {
 } from "../constants/sideBarButtons";
 import useAuth, { DoctorInfo } from "../hooks/useAuth";
 import useThemeStore from "../state-management/themeStore";
+import { useEffect } from "react";
+import { getNotifications } from "../hooks/useNotifications";
 
 export default function HomePage() {
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
+
+  const handleNotifications = async () => {
+    await getNotifications(11923604);
+  };
+
+  useEffect(() => {
+    // Code here will run just like componentDidMount
+    handleNotifications();
+  }, []);
 
   const theme = React.useMemo(
     () =>

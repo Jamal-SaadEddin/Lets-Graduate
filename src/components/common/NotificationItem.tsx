@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotificationElement } from "../../constants/notifications";
-import useNotificationStore from "../../state-management/Student/notificationStore";
+import useNotificationsStore from "../../state-management/notificationsStore";
 
 interface Props {
   notificationElement: NotificationElement;
@@ -19,7 +19,9 @@ interface Props {
 
 const NotificationItem = ({ notificationElement, handleClose }: Props) => {
   const [notification, setNotification] = useState(notificationElement);
-  const setCurrentNotification = useNotificationStore((s) => s.setNotification);
+  const setCurrentNotification = useNotificationsStore(
+    (s) => s.setNotification
+  );
 
   const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
   const handleClick = () => {
     handleClose && handleClose();
     setCurrentNotification(notification);
-    navigate(`/notification/${notification.id}`);
+    navigate(`/notification/${notification.notificationId}`);
   };
 
   return (
@@ -53,7 +55,7 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
       <ListItemText
         primary={
           <Typography variant="subtitle2">
-            {notification.sender}
+            {notification.senderName}
             <Typography
               component="span"
               variant="body2"
@@ -75,7 +77,7 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
               }}
             >
               <AccessTimeIcon fontSize="small" />
-              &nbsp;{notification.dateCreated}
+              &nbsp;{notification.notificationDuration}
             </Typography>
             {notification.acceptStatus === "pending" && (
               <Stack direction="row" spacing={1} marginTop={2}>
