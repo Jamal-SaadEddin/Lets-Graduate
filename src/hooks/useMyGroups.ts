@@ -36,10 +36,14 @@ export const getMyGroups = async (doctorId: number) => {
   }
 };
 
-export const updateStudentProjectStatus = async (studentId: number) => {
+export const updateStudentProjectStatus = async (
+  studentId: number,
+  body: Object
+) => {
   try {
-    const response = await axios.get<{ message: string }>(
-      `http://localhost:3000/projects/projectStatus/${studentId}`
+    const response = await axios.put<{ message: string }>(
+      `http://localhost:3000/projects/projectStatus/${studentId}`,
+      body
     );
     const message = response.data.message;
     return message === "Project status updated successfully" ? true : false;

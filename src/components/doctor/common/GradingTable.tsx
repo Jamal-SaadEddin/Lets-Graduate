@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { ReactNode, useState } from "react";
 import { SupervisedProjectsStudent } from "../../../constants/supervisedProjects";
+import { updateStudentProjectStatus } from "../../../hooks/useMyGroups";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -61,13 +62,15 @@ interface ProjectStatusSelectProps {
 const ProjectStatusSelect = ({ student }: ProjectStatusSelectProps) => {
   const [projectStatus, setProjectStatus] = useState(student.projectStatus);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = async (event: SelectChangeEvent) => {
     setProjectStatus(
-      event.target.value as "not-registered" | "registered" | "passed"
+      event.target.value as "not started" | "in progress" | "passed"
     );
-    console.log(
-      "Changing student's project status into backend..." + event.target.value
-    );
+    const requestBody = {
+      projectType: student.projectType?.toUpperCase(),
+      gpState: event.target.value,
+    };
+    await updateStudentProjectStatus(student.id, requestBody);
   };
 
   return (
@@ -81,7 +84,9 @@ const ProjectStatusSelect = ({ student }: ProjectStatusSelectProps) => {
         onChange={handleChange}
       >
         <MenuItem value="not started">Failed</MenuItem>
-        <MenuItem value="in progress">In Progress</MenuItem>
+        <MenuItem disabled value="in progress">
+          In Progress
+        </MenuItem>
         <MenuItem value="passed">Passed</MenuItem>
       </Select>
     </FormControl>
