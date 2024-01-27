@@ -10,10 +10,34 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
+import { Submission as SubmissionInterface } from "../../constants/supervisorSubmissions";
+import { updateSubmissionAcceptStatus } from "../../hooks/useSubmissions";
 
 const Submission = () => {
   const submission = useViewedSubmissionStore((s) => s.submission);
+  const setSubmission = useViewedSubmissionStore((s) => s.setSubmission);
   const projectTitle = useViewedSubmissionStore((s) => s.projectTitle);
+  const submissions = useViewedSubmissionStore((s) => s.submissions);
+  const setSubmissions = useViewedSubmissionStore((s) => s.setSubmissions);
+
+  const handleAcceptSubmission = async () => {
+    const newSubmission = { ...submission, acceptStatus: "Accepted" };
+    setSubmission(newSubmission as SubmissionInterface);
+
+    const isAccepted = await updateSubmissionAcceptStatus(
+      submission?.projectId
+    );
+    if (isAccepted) {
+      const newSubmissions = submissions.map((s) =>
+        s.submissionId === submission?.submissionId ? newSubmission : s
+      );
+      setSubmissions(newSubmissions as SubmissionInterface[]);
+      return;
+    }
+
+    const oldSubmission = { ...submission, acceptStatus: "Pending" };
+    setSubmission(oldSubmission as SubmissionInterface);
+  };
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -68,7 +92,11 @@ const Submission = () => {
           <Grid item xs={6} textAlign="end">
             {submission?.operation === "evaluating" &&
               submission?.acceptStatus === "Pending" && (
-                <Button variant="contained" color="success">
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={handleAcceptSubmission}
+                >
                   Accept Abstract
                 </Button>
               )}

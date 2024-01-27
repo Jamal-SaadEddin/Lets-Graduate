@@ -64,3 +64,18 @@ export const getMyEvaluatingGroups = async (doctorId: number) => {
     console.error("Error fetching my evaluating groups:", error);
   }
 };
+
+export const updateSubmissionAcceptStatus = async (projectId?: number) => {
+  try {
+    const response = await axios.put<{ message: string }>(
+      `http://localhost:3000/abstractSubmissions/editStatus?projectId=${projectId}`
+    );
+    const message = response.data.message;
+    return message === "Abstract accept status updated successfully"
+      ? true
+      : false;
+  } catch (error) {
+    console.error("Error updating accept status:", error);
+    return false;
+  }
+};
