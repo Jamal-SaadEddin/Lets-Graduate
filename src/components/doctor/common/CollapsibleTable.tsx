@@ -141,7 +141,7 @@ const Row = ({ project, submission }: RowProps) => {
                       <TableCell component="th" scope="row">
                         {student.fullName}
                       </TableCell>
-                      <TableCell>{student.studentId}</TableCell>
+                      <TableCell>{student.id}</TableCell>
                       <TableCell>{student.address}</TableCell>
                       <TableCell>{student.email}</TableCell>
                       <TableCell>{student.department}</TableCell>

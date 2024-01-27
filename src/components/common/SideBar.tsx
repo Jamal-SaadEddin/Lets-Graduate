@@ -13,8 +13,13 @@ import {
 import { getPrerequisites } from "../../hooks/usePrerequisites";
 import { getAvailableGroups } from "../../hooks/useAvailableGroups";
 import { getAvailableSupervisors } from "../../hooks/useAvailableSupervisors";
-import { getAbstractSubmission } from "../../hooks/useSubmissions";
+import {
+  getAbstractSubmission,
+  getMyEvaluatingGroups,
+  getSupervisorSubmissions,
+} from "../../hooks/useSubmissions";
 import { getMyGroups } from "../../hooks/useMyGroups";
+import useAuth from "../../hooks/useAuth";
 
 interface Props {
   children: SideBarButton[];
@@ -23,6 +28,7 @@ interface Props {
 
 const SideBar = ({ children, subHeader = false }: Props) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleClick = async (item: SideBarButton) => {
     if (item.link.includes("prerequisites/gp")) {
@@ -36,12 +42,16 @@ const SideBar = ({ children, subHeader = false }: Props) => {
       await getAvailableGroups("Computer Engineering", "gp1");
     } else if (item.link.includes("available-supervisors")) {
       await getAvailableSupervisors(11925044);
-    } else if (item.link.includes("submissions")) {
+    } else if (item.link.includes("submissions") && user.type === "student") {
       await getAbstractSubmission(11923604);
     } else if (item.link.includes("supervised-projects")) {
       await getMyGroups(1355);
     } else if (item.link.includes("merge-groups")) {
       await getAvailableGroups("Computer Engineering", "gp1");
+    } else if (item.link.includes("submissions") && user.type === "doctor") {
+      await getSupervisorSubmissions(1355);
+      await getMyGroups(1355);
+      await getMyEvaluatingGroups(1355);
     }
 
     navigate(item.link);

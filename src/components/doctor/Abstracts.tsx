@@ -3,15 +3,10 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import {
-  projectsCommitteeProjects,
-  supervisorProjects,
-} from "../../constants/supervisedProjects";
-import {
-  projectsCommitteeSubmissions,
-  supervisorSubmissions,
-} from "../../constants/supervisorSubmissions";
+import { SupervisedProjectsProjectItem } from "../../constants/availableGroups";
 import useAuth, { DoctorInfo } from "../../hooks/useAuth";
+import useMyGroupsStore from "../../state-management/Doctor/myGroupsStore";
+import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import CollapsibleTable from "./common/CollapsibleTable";
 
 export default function Abstracts() {
@@ -22,6 +17,10 @@ export default function Abstracts() {
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const myGroups = useMyGroupsStore((s) => s.myGroups);
+  const myEvaluatingGroups = useMyGroupsStore((s) => s.myEvaluatingGroups);
+  const submissions = useViewedSubmissionStore((s) => s.submissions);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -39,15 +38,17 @@ export default function Abstracts() {
       </Box>
       <CustomTabPanel value={value} index={0}>
         <CollapsibleTable
-          projects={supervisorProjects}
-          submissions={supervisorSubmissions}
+          projects={myGroups as SupervisedProjectsProjectItem[]}
+          submissions={submissions.filter((s) => s.operation === "viewing")}
         />
       </CustomTabPanel>
       {userInfo.isProjectsCommitteeMember && (
         <CustomTabPanel value={value} index={1}>
           <CollapsibleTable
-            projects={projectsCommitteeProjects}
-            submissions={projectsCommitteeSubmissions}
+            projects={myEvaluatingGroups as SupervisedProjectsProjectItem[]}
+            submissions={submissions.filter(
+              (s) => s.operation === "evaluating"
+            )}
           />
         </CustomTabPanel>
       )}

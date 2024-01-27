@@ -4,6 +4,7 @@ export interface Submission {
   type: "abstract";
   file: string;
   acceptStatus: "Pending" | "Accepted";
+  operation: "viewing" | "evaluating";
 }
 
 export const supervisorSubmissions: Submission[] = [
@@ -13,6 +14,7 @@ export const supervisorSubmissions: Submission[] = [
     type: "abstract",
     file: "/src/assets/Let's Graduate -Abstract.pdf",
     acceptStatus: "Pending",
+    operation: "viewing",
   },
   {
     submissionId: 3,
@@ -20,6 +22,7 @@ export const supervisorSubmissions: Submission[] = [
     type: "abstract",
     file: "/src/assets/Let's Graduate -Abstract.pdf",
     acceptStatus: "Accepted",
+    operation: "viewing",
   },
 ];
 
@@ -30,6 +33,7 @@ export const projectsCommitteeSubmissions: Submission[] = [
     type: "abstract",
     file: "/src/assets/Let's Graduate -Abstract.pdf",
     acceptStatus: "Pending",
+    operation: "evaluating",
   },
   {
     submissionId: 5,
@@ -37,5 +41,6 @@ export const projectsCommitteeSubmissions: Submission[] = [
     type: "abstract",
     file: "/src/assets/Let's Graduate -Abstract.pdf",
     acceptStatus: "Accepted",
+    operation: "evaluating",
   },
 ];
