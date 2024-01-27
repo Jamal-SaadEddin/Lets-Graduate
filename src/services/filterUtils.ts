@@ -1,6 +1,5 @@
 import {
   AvailableGroupsProjectItem,
-  GradingProjectsProjectItem,
   Project,
   Student,
   SupervisedProjectsProjectItem,
@@ -32,7 +31,6 @@ export const filterGroups = (
   projects:
     | AvailableGroupsProjectItem[]
     | SupervisedProjectsProjectItem[]
-    | GradingProjectsProjectItem[]
     | null
     | undefined,
   address: string | null,

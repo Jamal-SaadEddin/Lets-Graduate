@@ -56,9 +56,9 @@ import {
   AvailableGroupsStudent,
   SupervisedProjectsProjectItem,
 } from "../../../constants/availableGroups";
-import { supervisorProjects } from "../../../constants/supervisedProjects";
 import { Group, GroupDetails, GroupSummary } from "../../common/Group";
 import Table from "../../common/Table";
+import useMyGroupsStore from "../../../state-management/Doctor/myGroupsStore";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -121,6 +121,8 @@ const MergeProcessTabs = ({
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
+  const myGroups = useMyGroupsStore((s) => s.myGroups);
+
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -133,9 +135,7 @@ const MergeProcessTabs = ({
     });
 
   const handleSelectedGroup = (event: SelectChangeEvent) => {
-    const group = supervisorProjects.filter(
-      (p) => p.id === Number(event.target.value)
-    );
+    const group = myGroups.filter((p) => p.id === Number(event.target.value));
     setSelectedGroup(group[0]);
   };
 
@@ -189,7 +189,7 @@ const MergeProcessTabs = ({
               label="Choose your group that you want to merge"
               onChange={handleSelectedGroup}
             >
-              {supervisorProjects?.map(({ id, title }) => (
+              {myGroups?.map(({ id, title }) => (
                 <MenuItem key={id} value={id}>
                   {title}, ID: {id}
                 </MenuItem>

@@ -1,25 +1,16 @@
 import { Grid, Typography } from "@mui/material";
-import { academicNumbers, addresses } from "../../constants/availableGroups";
-import { GradingProjectsStudent } from "../../constants/supervisedProjects";
 import useMyGroupsStore from "../../state-management/Doctor/myGroupsStore";
-import useFilterStudentsStore from "../../state-management/Student/filterStudentsStore";
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";
-import FilterBox from "../student/FilterBox";
-import StudentSearchbox from "../student/StudentSearchbox";
 import GradingTable from "./common/GradingTable";
+import { SupervisedProjectsStudent } from "../../constants/supervisedProjects";
 
 interface Props {
   projectTitle?: boolean;
-  withFiltration?: boolean;
   grading?: boolean;
 }
 
-const GroupsTable = ({
-  projectTitle = false,
-  withFiltration = false,
-  grading = false,
-}: Props) => {
+const GroupsTable = ({ projectTitle = false, grading = false }: Props) => {
   const myGroups = useMyGroupsStore((s) => s.myGroups);
 
   const headings = grading
@@ -32,15 +23,6 @@ const GroupsTable = ({
     : projectTitle
     ? ["Student Name", "Registration Number", "Address", "Email", "Department"]
     : ["Student Name", "Academic Number", "Address", "Email"];
-
-  const address = useFilterStudentsStore((s) => s.address);
-  const handleAddressChange = useFilterStudentsStore(
-    (s) => s.handleAddressChange
-  );
-  const academicNumber = useFilterStudentsStore((s) => s.academicNumber);
-  const handleAcademicNumberChange = useFilterStudentsStore(
-    (s) => s.handleAcademicNumberChange
-  );
 
   if (!myGroups || myGroups.length === 0 || myGroups === null)
     return (
@@ -59,29 +41,6 @@ const GroupsTable = ({
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        {withFiltration && (
-          <Grid container spacing={1}>
-            <Grid item xs={6}>
-              <StudentSearchbox />
-            </Grid>
-            <Grid item xs={3}>
-              <FilterBox
-                filterValue={address}
-                handleChange={handleAddressChange}
-                text="Filter by Address"
-                options={addresses}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <FilterBox
-                filterValue={academicNumber}
-                handleChange={handleAcademicNumberChange}
-                text="Filter by Academic Number"
-                options={academicNumbers}
-              />
-            </Grid>
-          </Grid>
-        )}
         <Typography variant="caption">
           Click on group to show more details
         </Typography>
@@ -113,11 +72,30 @@ const GroupsTable = ({
               {grading ? (
                 <GradingTable
                   tableHead={headings}
-                  tableBody={group.students as GradingProjectsStudent[]}
+                  tableBody={
+                    group.students.map(
+                      ({ fullName, id, projectType, projectStatus }) => ({
+                        fullName,
+                        id,
+                        projectType,
+                        projectStatus,
+                      })
+                    ) as SupervisedProjectsStudent[]
+                  }
                 />
               ) : (
                 <Table
-                  tableBody={group.students}
+                  tableBody={
+                    group.students.map(
+                      ({ fullName, id, address, email, department }) => ({
+                        fullName,
+                        id,
+                        address,
+                        email,
+                        department,
+                      })
+                    ) as SupervisedProjectsStudent[]
+                  }
                   tableHead={headings}
                   withButton={projectTitle ? false : "merge-group"}
                 />

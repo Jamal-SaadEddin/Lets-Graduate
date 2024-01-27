@@ -10,11 +10,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { ReactNode, useState } from "react";
-import { GradingProjectsStudent } from "../../../constants/supervisedProjects";
+import { SupervisedProjectsStudent } from "../../../constants/supervisedProjects";
 
 interface Props {
   tableHead: (string | ReactNode)[];
-  tableBody: GradingProjectsStudent[];
+  tableBody: SupervisedProjectsStudent[];
 }
 
 const GradingTable = ({ tableHead, tableBody }: Props) => {
@@ -55,7 +55,7 @@ const GradingTable = ({ tableHead, tableBody }: Props) => {
 export default GradingTable;
 
 interface ProjectStatusSelectProps {
-  student: GradingProjectsStudent;
+  student: SupervisedProjectsStudent;
 }
 
 const ProjectStatusSelect = ({ student }: ProjectStatusSelectProps) => {
@@ -80,8 +80,8 @@ const ProjectStatusSelect = ({ student }: ProjectStatusSelectProps) => {
         label="Project Status"
         onChange={handleChange}
       >
-        <MenuItem value="not-registered">Failed</MenuItem>
-        <MenuItem value="registered">In Progress</MenuItem>
+        <MenuItem value="not started">Failed</MenuItem>
+        <MenuItem value="in progress">In Progress</MenuItem>
         <MenuItem value="passed">Passed</MenuItem>
       </Select>
     </FormControl>

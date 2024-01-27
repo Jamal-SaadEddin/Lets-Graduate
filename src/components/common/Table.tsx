@@ -11,10 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import { ReactNode, useEffect, useState } from "react";
 import { AvailableGroupsStudent } from "../../constants/availableGroups";
 import { Partner, Supervisor } from "../../constants/myProject";
-import {
-  GradingProjectsStudent,
-  SupervisedProjectsStudent,
-} from "../../constants/supervisedProjects";
+import { SupervisedProjectsStudent } from "../../constants/supervisedProjects";
 import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 import {
   cancelPartnershipRequest,
@@ -28,7 +25,6 @@ interface Props {
   tableBody:
     | SupervisedProjectsStudent[]
     | AvailableGroupsStudent[]
-    | GradingProjectsStudent[]
     | Partner[]
     | Supervisor[];
   withButton?: "join-group" | "merge-group" | false;

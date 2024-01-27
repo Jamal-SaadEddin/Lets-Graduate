@@ -44,7 +44,10 @@ const SideBar = ({ children, subHeader = false }: Props) => {
       await getAvailableSupervisors(11925044);
     } else if (item.link.includes("submissions") && user.type === "student") {
       await getAbstractSubmission(11923604);
-    } else if (item.link.includes("supervised-projects")) {
+    } else if (
+      item.link.includes("supervised-projects") ||
+      item.link.includes("grading")
+    ) {
       await getMyGroups(1355);
     } else if (item.link.includes("merge-groups")) {
       await getAvailableGroups("Computer Engineering", "gp1");

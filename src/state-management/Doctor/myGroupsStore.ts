@@ -1,11 +1,8 @@
 import { create } from "zustand";
-import {
-  GradingProjectsProjectItem,
-  SupervisedProjectsProjectItem,
-} from "../../constants/availableGroups";
+import { SupervisedProjectsProjectItem } from "../../constants/availableGroups";
 
 interface MyGroupsStore {
-  myGroups: SupervisedProjectsProjectItem[] | GradingProjectsProjectItem[];
+  myGroups: SupervisedProjectsProjectItem[];
   setMyGroups: (myGroups: SupervisedProjectsProjectItem[] | undefined) => void;
 
   myEvaluatingGroups: SupervisedProjectsProjectItem[];
