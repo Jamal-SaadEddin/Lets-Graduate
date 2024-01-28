@@ -11,7 +11,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotificationElement } from "../../constants/notifications";
 import useNotificationsStore from "../../state-management/notificationsStore";
-import { addSupervisionResponse } from "../../hooks/useNotifications";
+import {
+  addJoinResponse,
+  addSupervisionResponse,
+} from "../../hooks/useNotifications";
 
 interface Props {
   notificationElement: NotificationElement;
@@ -31,9 +34,9 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
     acceptStatus: "accepted" | "declined"
   ) => {
     event.stopPropagation();
-    if (notification.acceptStatus === "pendingSupervise") {
-      const updatedNotification = { ...notification, acceptStatus };
+    const updatedNotification = { ...notification, acceptStatus };
 
+    if (notification.acceptStatus === "pendingSupervise") {
       const requestBody = {
         senderId: notification.reciverId,
         reciverId: notification.senderId,
@@ -42,8 +45,17 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
         acceptStatus: acceptStatus,
       };
       const isSaved = await addSupervisionResponse(requestBody);
-
-      if (isSaved) setNotification(updatedNotification);
+      if (isSaved) setNotification(updatedNotification as NotificationElement);
+    } else if (notification.acceptStatus === "pendingJoin") {
+      const requestBody = {
+        senderId: notification.reciverId,
+        reciverId: notification.senderId,
+        type: "notify",
+        notificationId: notification.notificationId,
+        acceptStatus: acceptStatus,
+      };
+      const isSaved = await addJoinResponse(requestBody);
+      if (isSaved) setNotification(updatedNotification as NotificationElement);
     }
   };
 
