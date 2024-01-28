@@ -18,10 +18,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import { Theme, useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Department } from "../../../constants/departments";
 import useDepartmentSettingsStore from "../../../state-management/Doctor/departmentSettingsStore";
 import useThemeStore from "../../../state-management/themeStore";
+import {
+  getDepartmentSettings,
+  updateDepartmentSettings,
+} from "../../../hooks/useDepartmentSettings";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -47,14 +51,26 @@ function getStyles(
   };
 }
 
+let oldSettings: Department | undefined = undefined;
+
 const DepartmentSettings = () => {
   const theme = useTheme();
   const mode = useThemeStore((s) => s.mode);
 
+  const [saved, setSaved] = useState(false);
+
+  const handleDepartmentSettings = async () => {
+    oldSettings = await getDepartmentSettings(1355);
+  };
+
+  useEffect(() => {
+    // Code here will run just like componentDidMount
+    handleDepartmentSettings();
+  }, []);
+
   const departmentSettings = useDepartmentSettingsStore(
     (s) => s.departmentSettings
   );
-  let oldSettings = departmentSettings;
   const setDepartmentSettings = useDepartmentSettingsStore(
     (s) => s.setDepartmentSettings
   );
@@ -70,8 +86,21 @@ const DepartmentSettings = () => {
     setDisabled(!disabled);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     // Save Changes to Backend
+    const requestBody = {
+      departmentName: departmentSettings?.departmentName,
+      maxNoOfStuPerProj: departmentSettings?.maxNoOfStuPerProj,
+      maxNoOfProjPerDoct: departmentSettings?.maxNoOfProjPerDoct,
+      maxNoOfStuPerDoct: departmentSettings?.maxNoOfStuPerDoct,
+      currentPeriod: departmentSettings?.currentPeriod,
+      supervisingDoctors: departmentSettings?.supervisingDoctors,
+      projectsCommitteeMembers: departmentSettings?.projectsCommitteeMembers,
+    };
+    const isSaved = await updateDepartmentSettings(requestBody);
+    if (isSaved) setSaved(true);
+    else setSaved(false);
+
     setDisabled(!disabled);
     setOpenSnackbar(true);
   };
@@ -536,10 +565,10 @@ const DepartmentSettings = () => {
         >
           <Alert
             onClose={handleCloseSnackbar}
-            severity="success"
+            severity={saved ? "success" : "error"}
             sx={{ width: "100%" }}
           >
-            Saved Changes Successfully!
+            {saved ? "Saved Changes Successfully!" : "Error updating settings!"}
           </Alert>
         </Snackbar>
       </Paper>
