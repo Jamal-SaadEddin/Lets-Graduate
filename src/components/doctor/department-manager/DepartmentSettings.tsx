@@ -11,16 +11,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Theme, useTheme } from "@mui/material/styles";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
-import React, { useState } from "react";
-import { Department, getDepartment } from "../../../constants/departments";
-import useAuth from "../../../hooks/useAuth";
+import { Theme, useTheme } from "@mui/material/styles";
+import React from "react";
+import { Department } from "../../../constants/departments";
+import useDepartmentSettingsStore from "../../../state-management/Doctor/departmentSettingsStore";
 import useThemeStore from "../../../state-management/themeStore";
 
 const ITEM_HEIGHT = 48;
@@ -34,43 +34,36 @@ const MenuProps = {
   },
 };
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
+function getStyles(
+  name: string,
+  personName: readonly string[] | undefined,
+  theme: Theme
+) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      personName?.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
 }
 
-const allDoctors = [
-  "Oliver Hansen - 1355",
-  "Van Henry - 2101",
-  "April Tucker - 5544",
-  "Ralph Hubbard - 2456",
-  "Omar Alexander - 7456",
-  "Carlos Abbott - 1598",
-  "Miriam Wagner - 3562",
-  "Bradley Wilkerson - 7412",
-  "Virginia Andrews - 9652",
-  "Kelly Snyder - 4561",
-];
-
 const DepartmentSettings = () => {
   const theme = useTheme();
-  const { user } = useAuth();
-  const department = getDepartment(user.department);
-
-  const [currentDepartment, setCurrentDepartment] =
-    useState<Department>(department);
-
   const mode = useThemeStore((s) => s.mode);
+
+  const departmentSettings = useDepartmentSettingsStore(
+    (s) => s.departmentSettings
+  );
+  let oldSettings = departmentSettings;
+  const setDepartmentSettings = useDepartmentSettingsStore(
+    (s) => s.setDepartmentSettings
+  );
 
   const [disabled, setDisabled] = React.useState(true);
 
-  const handleCancel = (department: Department) => {
+  const handleCancel = (department?: Department) => {
     setDisabled(!disabled);
-    setCurrentDepartment(department);
+    setDepartmentSettings(department!);
   };
 
   const handleClick = () => {
@@ -100,21 +93,21 @@ const DepartmentSettings = () => {
     const {
       target: { value },
     } = event;
-    setCurrentDepartment({
-      ...currentDepartment,
+    setDepartmentSettings({
+      ...departmentSettings,
       supervisingDoctors: typeof value === "string" ? value.split(",") : value,
-    });
+    } as Department);
   };
 
   const handleProjectCommitteeChange = (event: SelectChangeEvent<string[]>) => {
     const {
       target: { value },
     } = event;
-    setCurrentDepartment({
-      ...currentDepartment,
+    setDepartmentSettings({
+      ...departmentSettings,
       projectsCommitteeMembers:
         typeof value === "string" ? value.split(",") : value,
-    });
+    } as Department);
   };
 
   return (
@@ -143,7 +136,7 @@ const DepartmentSettings = () => {
               <TextField
                 fullWidth
                 label="Department"
-                value={currentDepartment.departmentName}
+                value={departmentSettings?.departmentName}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -162,7 +155,7 @@ const DepartmentSettings = () => {
               <TextField
                 fullWidth
                 label="Current Number of Registered Students"
-                value={currentDepartment.noOfRegisteredStudents}
+                value={departmentSettings?.noOfRegisteredStudents}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -181,7 +174,7 @@ const DepartmentSettings = () => {
               <TextField
                 fullWidth
                 label="Current Number of Supervisors"
-                value={currentDepartment.noOfSupervisors}
+                value={departmentSettings?.noOfSupervisors}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -200,7 +193,7 @@ const DepartmentSettings = () => {
               <TextField
                 fullWidth
                 label="Current Number of Projects Committee Members"
-                value={currentDepartment.noOfProjectsCommitteeMembers}
+                value={departmentSettings?.noOfProjectsCommitteeMembers}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -219,7 +212,7 @@ const DepartmentSettings = () => {
               fullWidth
               required={!disabled && true}
               label="Maximum Number of Students per Project"
-              value={currentDepartment.maxNoOfStuPerProj}
+              value={departmentSettings?.maxNoOfStuPerProj}
               disabled={disabled}
               type="number"
               sx={{
@@ -231,10 +224,10 @@ const DepartmentSettings = () => {
                 },
               }}
               onChange={(event) =>
-                setCurrentDepartment({
-                  ...currentDepartment,
+                setDepartmentSettings({
+                  ...departmentSettings,
                   maxNoOfStuPerProj: Number(event.target.value),
-                })
+                } as Department)
               }
             />
           </Grid>
@@ -243,7 +236,7 @@ const DepartmentSettings = () => {
               fullWidth
               required={!disabled && true}
               label="Maximum Number of Students per Supervisor"
-              value={currentDepartment.maxNoOfStuPerDoct}
+              value={departmentSettings?.maxNoOfStuPerDoct}
               disabled={disabled}
               type="number"
               sx={{
@@ -255,10 +248,10 @@ const DepartmentSettings = () => {
                 },
               }}
               onChange={(event) =>
-                setCurrentDepartment({
-                  ...currentDepartment,
+                setDepartmentSettings({
+                  ...departmentSettings,
                   maxNoOfStuPerDoct: Number(event.target.value),
-                })
+                } as Department)
               }
             />
           </Grid>
@@ -267,7 +260,7 @@ const DepartmentSettings = () => {
               fullWidth
               required={!disabled && true}
               label="Maximum Number of Projects per Supervisor"
-              value={currentDepartment.maxNoOfProjPerDoct}
+              value={departmentSettings?.maxNoOfProjPerDoct}
               disabled={disabled}
               type="number"
               sx={{
@@ -279,10 +272,10 @@ const DepartmentSettings = () => {
                 },
               }}
               onChange={(event) =>
-                setCurrentDepartment({
-                  ...currentDepartment,
+                setDepartmentSettings({
+                  ...departmentSettings,
                   maxNoOfProjPerDoct: Number(event.target.value),
-                })
+                } as Department)
               }
             />
           </Grid>
@@ -292,7 +285,7 @@ const DepartmentSettings = () => {
               <TextField
                 fullWidth
                 label="Department Current Period (Current Stage)"
-                value={currentDepartment.currentPeriod}
+                value={departmentSettings?.currentPeriod}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -315,18 +308,18 @@ const DepartmentSettings = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={currentDepartment.currentPeriod}
+                  value={departmentSettings?.currentPeriod}
                   label="Department Current Period (Current Stage)"
                   onChange={(event) =>
-                    setCurrentDepartment({
-                      ...currentDepartment,
+                    setDepartmentSettings({
+                      ...departmentSettings,
                       currentPeriod: event.target.value as
                         | "create-partnerships"
                         | "registration"
                         | "abstract-submission"
                         | "evaluating-students"
                         | "vacation",
-                    })
+                    } as Department)
                   }
                 >
                   <MenuItem value="create-partnerships">
@@ -349,7 +342,7 @@ const DepartmentSettings = () => {
               <TextField
                 fullWidth
                 label="Supervising Doctors"
-                value={currentDepartment.supervisingDoctors}
+                value={departmentSettings?.supervisingDoctors}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -373,7 +366,7 @@ const DepartmentSettings = () => {
                   labelId="demo-multiple-chip-label"
                   id="demo-multiple-chip"
                   multiple
-                  value={currentDepartment.supervisingDoctors}
+                  value={departmentSettings?.supervisingDoctors}
                   onChange={handleSupervisorsChange}
                   input={
                     <OutlinedInput
@@ -390,13 +383,13 @@ const DepartmentSettings = () => {
                   )}
                   MenuProps={MenuProps}
                 >
-                  {allDoctors.map((name) => (
+                  {departmentSettings?.allDoctors.map((name) => (
                     <MenuItem
                       key={name}
                       value={name}
                       style={getStyles(
                         name,
-                        currentDepartment.supervisingDoctors,
+                        departmentSettings?.supervisingDoctors,
                         theme
                       )}
                     >
@@ -412,7 +405,7 @@ const DepartmentSettings = () => {
               <TextField
                 fullWidth
                 label="Projects Committee Members"
-                value={currentDepartment.projectsCommitteeMembers}
+                value={departmentSettings?.projectsCommitteeMembers}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -436,7 +429,7 @@ const DepartmentSettings = () => {
                   labelId="demo-multiple-chip-label"
                   id="demo-multiple-chip"
                   multiple
-                  value={currentDepartment.projectsCommitteeMembers}
+                  value={departmentSettings?.projectsCommitteeMembers}
                   onChange={handleProjectCommitteeChange}
                   input={
                     <OutlinedInput
@@ -453,13 +446,13 @@ const DepartmentSettings = () => {
                   )}
                   MenuProps={MenuProps}
                 >
-                  {allDoctors.map((name) => (
+                  {departmentSettings?.allDoctors.map((name) => (
                     <MenuItem
                       key={name}
                       value={name}
                       style={getStyles(
                         name,
-                        currentDepartment.projectsCommitteeMembers,
+                        departmentSettings?.projectsCommitteeMembers,
                         theme
                       )}
                     >
@@ -481,7 +474,7 @@ const DepartmentSettings = () => {
                   mr: 2,
                 }}
                 disableElevation
-                onClick={() => handleCancel(department)}
+                onClick={() => handleCancel(oldSettings)}
               >
                 Cancel
               </Button>
@@ -495,21 +488,21 @@ const DepartmentSettings = () => {
                 }}
                 disableElevation
                 disabled={
-                  JSON.stringify(currentDepartment) ===
-                    JSON.stringify(department) ||
-                  currentDepartment.maxNoOfStuPerProj
+                  JSON.stringify(departmentSettings) ===
+                    JSON.stringify(oldSettings) ||
+                  departmentSettings?.maxNoOfStuPerProj
                     .toString()
                     .replace(/\s/g, "") === "0" ||
-                  currentDepartment.maxNoOfStuPerDoct
+                  departmentSettings?.maxNoOfStuPerDoct
                     .toString()
                     .replace(/\s/g, "") === "0" ||
-                  currentDepartment.maxNoOfProjPerDoct
+                  departmentSettings?.maxNoOfProjPerDoct
                     .toString()
                     .replace(/\s/g, "") === "0" ||
-                  currentDepartment.supervisingDoctors
+                  departmentSettings?.supervisingDoctors
                     .toString()
                     .replace(/\s/g, "") === "0" ||
-                  currentDepartment.projectsCommitteeMembers
+                  departmentSettings?.projectsCommitteeMembers
                     .toString()
                     .replace(/\s/g, "") === "0"
                     ? true

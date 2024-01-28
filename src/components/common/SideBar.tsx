@@ -20,6 +20,7 @@ import {
 } from "../../hooks/useSubmissions";
 import { getMyGroups } from "../../hooks/useMyGroups";
 import useAuth from "../../hooks/useAuth";
+import { getDepartmentSettings } from "../../hooks/useDepartmentSettings";
 
 interface Props {
   children: SideBarButton[];
@@ -55,6 +56,8 @@ const SideBar = ({ children, subHeader = false }: Props) => {
       await getSupervisorSubmissions(1355);
       await getMyGroups(1355);
       await getMyEvaluatingGroups(1355);
+    } else if (item.link.includes("department-settings")) {
+      await getDepartmentSettings(1355);
     }
 
     navigate(item.link);

@@ -14,6 +14,7 @@ export interface Department {
     | "vacation";
   supervisingDoctors: string[];
   projectsCommitteeMembers: string[];
+  allDoctors: string[];
 }
 
 export const departments: Department[] = [
@@ -37,6 +38,7 @@ export const departments: Department[] = [
       "Virginia Andrews - 9652",
       "Kelly Snyder - 4561",
     ],
+    allDoctors: [],
   },
   {
     departmentName: "Industrial Engineering - الهندسة الصناعية",
@@ -49,6 +51,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Electrical Engineering - الهندسة الكهربائية",
@@ -61,6 +64,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Chemical Engineering - الهندسة الكيميائية",
@@ -73,6 +77,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Civil Engineering - الهندسة المدنية",
@@ -85,6 +90,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Architecture Engineering - الهندسة المعمارية",
@@ -97,6 +103,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Mechanical Engineering - الهندسة الميكانيكية",
@@ -109,6 +116,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Communications Engineering - هندسة الاتصالات",
@@ -121,6 +129,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Construction Engineering - هندسة البناء",
@@ -133,6 +142,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName:
@@ -146,6 +156,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Geomatics Engineering - هندسة الجيومتكس",
@@ -158,6 +169,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName:
@@ -171,6 +183,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Mechatronics Engineering - هندسة الميكاترونكس",
@@ -183,6 +196,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
   {
     departmentName: "Materials science Engineering - هندسة علوم المواد",
@@ -195,6 +209,7 @@ export const departments: Department[] = [
     currentPeriod: "create-partnerships",
     supervisingDoctors: [],
     projectsCommitteeMembers: [],
+    allDoctors: [],
   },
 ];
 
