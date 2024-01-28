@@ -14,6 +14,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useNotificationsStore from "../../state-management/notificationsStore";
 import NotificationItem from "./NotificationItem";
+import { NotificationElement } from "../../constants/notifications";
+import { markAllNotificationsAsRead } from "../../hooks/useNotifications";
 
 const NotificationsPopover = () => {
   const { notifications, setNotifications } = useNotificationsStore();
@@ -35,14 +37,14 @@ const NotificationsPopover = () => {
     setOpen(null);
   };
 
-  const handleMarkAllAsRead = () => {
-    setNotifications(
-      notifications.map((notification) => ({
-        ...notification,
-        readStatus: "read",
-      }))
-    );
-    console.log(notifications);
+  const handleMarkAllAsRead = async () => {
+    const updatedNotifications = notifications.map((notification) => ({
+      ...notification,
+      readStatus: "read",
+    }));
+    const isMarked = await markAllNotificationsAsRead(11923604);
+    if (isMarked)
+      setNotifications(updatedNotifications as NotificationElement[]);
   };
 
   return (

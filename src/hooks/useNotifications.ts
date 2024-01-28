@@ -48,3 +48,17 @@ export const addJoinResponse = async (body: Object) => {
     return false;
   }
 };
+
+export const markAllNotificationsAsRead = async (userId: number) => {
+  try {
+    const response = await axios.put<{ message: string }>(
+      `http://localhost:3000/allReadstatus/readstatus?userId=${userId}`
+    );
+    const message = response.data.message;
+
+    return message === "All notifications read status become read successfully";
+  } catch (error) {
+    console.error("Error marking all notifications as read:", error);
+    return false;
+  }
+};
