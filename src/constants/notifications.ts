@@ -4,7 +4,13 @@ export interface NotificationElement {
   reciverId?: number;
   readStatus: "read" | "unread";
   type: "comment" | "request" | "notify";
-  acceptStatus: null | "pending" | "pendingMerge" | "accepted" | "declined";
+  acceptStatus:
+    | null
+    | "pendingJoin"
+    | "pendingSupervise"
+    | "pendingMerge"
+    | "accepted"
+    | "declined";
   content: string;
   dateCreated: string;
   notifyButtonText: string | null;

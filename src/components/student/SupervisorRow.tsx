@@ -35,7 +35,7 @@ const SupervisorRow = ({ supervisor }: Props) => {
     const requestBody = {
       reciverId: supervisor.doctorId,
       senderId: 11923604,
-      type: "requesting",
+      type: "request",
       content: "is requesting you to supervise their group",
       senderType: "group",
     };

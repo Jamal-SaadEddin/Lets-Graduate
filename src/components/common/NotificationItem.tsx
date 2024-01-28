@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotificationElement } from "../../constants/notifications";
 import useNotificationsStore from "../../state-management/notificationsStore";
+import { addSupervisionResponse } from "../../hooks/useNotifications";
 
 interface Props {
   notificationElement: NotificationElement;
@@ -25,13 +26,25 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
 
   const navigate = useNavigate();
 
-  const handleAccept = (
+  const handleAccept = async (
     event: React.MouseEvent<HTMLButtonElement>,
     acceptStatus: "accepted" | "declined"
   ) => {
     event.stopPropagation();
-    const updatedNotification = { ...notification, acceptStatus };
-    setNotification(updatedNotification);
+    if (notification.acceptStatus === "pendingSupervise") {
+      const updatedNotification = { ...notification, acceptStatus };
+
+      const requestBody = {
+        senderId: notification.reciverId,
+        reciverId: notification.senderId,
+        type: "notify",
+        notificationId: notification.notificationId,
+        acceptStatus: acceptStatus,
+      };
+      const isSaved = await addSupervisionResponse(requestBody);
+
+      if (isSaved) setNotification(updatedNotification);
+    }
   };
 
   const handleClick = () => {
@@ -79,7 +92,8 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
               <AccessTimeIcon fontSize="small" />
               &nbsp;{notification.notificationDuration}
             </Typography>
-            {notification.acceptStatus === "pending" && (
+            {(notification.acceptStatus === "pendingJoin" ||
+              notification.acceptStatus === "pendingSupervise") && (
               <Stack direction="row" spacing={1} marginTop={2}>
                 <Button
                   variant="contained"

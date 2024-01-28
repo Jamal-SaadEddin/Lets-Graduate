@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
+import { addSupervisionResponse } from "../../hooks/useNotifications";
 import useNotificationsStore from "../../state-management/notificationsStore";
 
 const Notification = () => {
@@ -19,11 +20,23 @@ const Notification = () => {
   const params = useParams();
   console.log(params);
 
-  if (params.id !== notification.notificationId.toString()) throw Error;
+  if (params.id !== notification?.notificationId.toString()) throw Error;
 
-  const handleAccept = (acceptStatus: "accepted" | "declined") => {
-    const updatedNotification = { ...notification, acceptStatus };
-    setNotification(updatedNotification);
+  const handleAccept = async (acceptStatus: "accepted" | "declined") => {
+    if (notification?.acceptStatus === "pendingSupervise") {
+      const updatedNotification = { ...notification, acceptStatus };
+
+      const requestBody = {
+        senderId: notification.reciverId,
+        reciverId: notification.senderId,
+        type: "notify",
+        notificationId: notification.notificationId,
+        acceptStatus: acceptStatus,
+      };
+      const isSaved = await addSupervisionResponse(requestBody);
+
+      if (isSaved) setNotification(updatedNotification);
+    }
   };
 
   return (
@@ -56,13 +69,13 @@ const Notification = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="subtitle2">
-              {notification.senderName}
+              {notification?.senderName}
               <Typography
                 component="span"
                 variant="body2"
                 sx={{ color: "text.secondary" }}
               >
-                &nbsp; {notification.content}
+                &nbsp; {notification?.content}
               </Typography>
             </Typography>
             <Stack direction="row" justifyContent="space-between">
@@ -76,9 +89,10 @@ const Notification = () => {
                 }}
               >
                 <AccessTimeIcon fontSize="small" />
-                &nbsp;{notification.dateCreated}
+                &nbsp;{notification?.dateCreated}
               </Typography>
-              {notification.acceptStatus === "pending" && (
+              {(notification?.acceptStatus === "pendingJoin" ||
+                notification?.acceptStatus === "pendingSupervise") && (
                 <Stack direction="row" spacing={1} marginTop={2}>
                   <Button
                     variant="contained"
@@ -95,7 +109,7 @@ const Notification = () => {
                   </Button>
                 </Stack>
               )}
-              {notification.acceptStatus === "accepted" && (
+              {notification?.acceptStatus === "accepted" && (
                 <Chip
                   color="primary"
                   size="small"
@@ -107,7 +121,7 @@ const Notification = () => {
                   }}
                 />
               )}
-              {notification.acceptStatus === "declined" && (
+              {notification?.acceptStatus === "declined" && (
                 <Chip
                   color="default"
                   size="small"

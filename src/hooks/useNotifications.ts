@@ -18,3 +18,18 @@ export const getNotifications = async (userId: number) => {
     return {};
   }
 };
+
+export const addSupervisionResponse = async (body: Object) => {
+  try {
+    const response = await axios.put<{ message: string }>(
+      `http://localhost:3000/supervisionResponse/response`,
+      body
+    );
+    const message = response.data.message;
+
+    return message === "Supervision request processed successfully";
+  } catch (error) {
+    console.error("Error replying to group:", error);
+    return false;
+  }
+};
