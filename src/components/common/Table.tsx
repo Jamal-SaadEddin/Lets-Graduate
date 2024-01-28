@@ -63,8 +63,8 @@ export default function Table({
 
     const requestBody = {
       reciverId: tableBody[0].id,
-      senderId: 11925044,
-      type: "requesting",
+      senderId: 11925044, // userId
+      type: "request",
       content: "is requesting to join your group",
       senderType: "student",
     };

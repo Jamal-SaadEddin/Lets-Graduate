@@ -10,8 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
-import { addSupervisionResponse } from "../../hooks/useNotifications";
+import {
+  addJoinResponse,
+  addSupervisionResponse,
+} from "../../hooks/useNotifications";
 import useNotificationsStore from "../../state-management/notificationsStore";
+import { NotificationElement } from "../../constants/notifications";
 
 const Notification = () => {
   const notification = useNotificationsStore((s) => s.notification);
@@ -23,9 +27,9 @@ const Notification = () => {
   if (params.id !== notification?.notificationId.toString()) throw Error;
 
   const handleAccept = async (acceptStatus: "accepted" | "declined") => {
-    if (notification?.acceptStatus === "pendingSupervise") {
-      const updatedNotification = { ...notification, acceptStatus };
+    const updatedNotification = { ...notification, acceptStatus };
 
+    if (notification?.acceptStatus === "pendingSupervise") {
       const requestBody = {
         senderId: notification.reciverId,
         reciverId: notification.senderId,
@@ -34,8 +38,17 @@ const Notification = () => {
         acceptStatus: acceptStatus,
       };
       const isSaved = await addSupervisionResponse(requestBody);
-
-      if (isSaved) setNotification(updatedNotification);
+      if (isSaved) setNotification(updatedNotification as NotificationElement);
+    } else if (notification?.acceptStatus === "pendingJoin") {
+      const requestBody = {
+        senderId: notification.reciverId,
+        reciverId: notification.senderId,
+        type: "notify",
+        notificationId: notification.notificationId,
+        acceptStatus: acceptStatus,
+      };
+      const isSaved = await addJoinResponse(requestBody);
+      if (isSaved) setNotification(updatedNotification as NotificationElement);
     }
   };
 
