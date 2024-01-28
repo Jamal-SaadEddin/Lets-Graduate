@@ -1,7 +1,25 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import SupervisorsTable from "./SupervisorsTable";
+import { useEffect, useState } from "react";
+import { hasSupervisor } from "../../hooks/useAvailableSupervisors";
+
+let doHaveSupervisor: boolean | undefined = undefined;
 
 const AvailableSupervisors = () => {
+  const [haveSupervisor, setHaveSupervisor] = useState<boolean | undefined>(
+    undefined
+  );
+
+  const handleProfileInfo = async () => {
+    doHaveSupervisor = await hasSupervisor(11923604);
+    setHaveSupervisor(doHaveSupervisor);
+  };
+
+  useEffect(() => {
+    // Code here will run just like componentDidMount
+    handleProfileInfo();
+  }, []);
+
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper
@@ -35,7 +53,15 @@ const AvailableSupervisors = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <SupervisorsTable />
+            {haveSupervisor === undefined ? (
+              ""
+            ) : !haveSupervisor ? (
+              <SupervisorsTable />
+            ) : (
+              <Typography variant="h6">
+                You have been connected with your Supervisor.
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </Paper>

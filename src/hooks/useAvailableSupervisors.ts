@@ -76,3 +76,15 @@ export const getIsRequestingSupervision = async (
     return true;
   }
 };
+
+export const hasSupervisor = async (studentId: number) => {
+  try {
+    const response = await axios.get<{ message: string }>(
+      `http://localhost:3000/projects/hasSupervisor/${studentId}`
+    );
+
+    return response.data.message === "You have supervisor";
+  } catch (error) {
+    console.error("Error checking if the student has a supervisor:", error);
+  }
+};
