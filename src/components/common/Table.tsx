@@ -42,7 +42,7 @@ export default function Table({
 
   const handleButtonState = async () => {
     const requesting = await getIsRequestingPartnership(
-      11925044,
+      11944044,
       tableBody[0].id
     );
     setRequested(requesting);
@@ -63,7 +63,7 @@ export default function Table({
 
     const requestBody = {
       reciverId: tableBody[0].id,
-      senderId: 11925044, // userId
+      senderId: 11944044, // userId
       type: "request",
       content: "is requesting to join your group",
       senderType: "student",

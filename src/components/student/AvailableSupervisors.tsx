@@ -10,14 +10,14 @@ const AvailableSupervisors = () => {
     undefined
   );
 
-  const handleProfileInfo = async () => {
+  const handlePageInfo = async () => {
     doHaveSupervisor = await hasSupervisor(11923604);
     setHaveSupervisor(doHaveSupervisor);
   };
 
   useEffect(() => {
     // Code here will run just like componentDidMount
-    handleProfileInfo();
+    handlePageInfo();
   }, []);
 
   return (

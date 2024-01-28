@@ -42,7 +42,7 @@ export const addJoinResponse = async (body: Object) => {
     );
     const message = response.data.message;
 
-    return message === "Supervision request processed successfully"; // edit this
+    return message === "Join request edited successfully"; // edit this
   } catch (error) {
     console.error("Error replying to student:", error);
     return false;
