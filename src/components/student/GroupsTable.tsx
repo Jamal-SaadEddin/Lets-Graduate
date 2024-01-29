@@ -8,6 +8,7 @@ import Table from "../common/Table";
 import FilterBox from "./FilterBox";
 import StudentSearchbox from "./StudentSearchbox";
 import { useLocation } from "react-router-dom";
+import useMergeGroupsStore from "../../state-management/Doctor/mergeGroupsStore";
 
 const headings = ["Student Name", "Academic Number", "Address", "Email"];
 
@@ -17,7 +18,10 @@ export default function GroupsTable() {
     ? "merge-group"
     : "join-group";
 
-  const availableGroups = useAvailableGroupsStore((s) => s.availableGroups);
+  const availableGroups =
+    withButton === "join-group"
+      ? useAvailableGroupsStore((s) => s.availableGroups)
+      : useMergeGroupsStore((s) => s.availableMergeGroups);
 
   const address = useFilterStudentsStore((s) => s.address);
   const handleAddressChange = useFilterStudentsStore(

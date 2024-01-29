@@ -48,7 +48,7 @@ const sideBarButtons: SideBarButton[] =
         {
           icon: <GroupWorkIcon />,
           primaryText: "My Project",
-          secondaryText: "Informations & Details",
+          secondaryText: "Information & Details",
           link: "my-project",
         },
         {

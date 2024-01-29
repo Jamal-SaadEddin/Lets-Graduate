@@ -21,6 +21,7 @@ import {
 import { getMyGroups } from "../../hooks/useMyGroups";
 import useAuth from "../../hooks/useAuth";
 import { getDepartmentSettings } from "../../hooks/useDepartmentSettings";
+import { getAvailableMergeGroups } from "../../hooks/useMergeGroups";
 
 interface Props {
   children: SideBarButton[];
@@ -51,7 +52,7 @@ const SideBar = ({ children, subHeader = false }: Props) => {
     ) {
       await getMyGroups(1355);
     } else if (item.link.includes("merge-groups")) {
-      await getAvailableGroups("Computer Engineering", "gp1");
+      await getAvailableMergeGroups();
     } else if (item.link.includes("submissions") && user.type === "doctor") {
       await getSupervisorSubmissions(1355);
       await getMyGroups(1355);

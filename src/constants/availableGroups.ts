@@ -6,6 +6,7 @@ export interface Project {
 }
 
 export interface AvailableGroupsProjectItem extends Project {
+  doctorId?: number;
   students: AvailableGroupsStudent[];
 }
 
@@ -14,7 +15,7 @@ export interface SupervisedProjectsProjectItem extends Project {
 }
 
 export interface Student {
-  id: number;
+  id?: number;
   firstName?: string;
   lastName?: string;
   fullName: string;
@@ -22,8 +23,8 @@ export interface Student {
   academicNumber: number;
   address: string;
   email: string;
-  mobileNumber: string;
-  department: string;
+  mobileNumber?: string;
+  department?: string;
 }
 
 export interface AvailableGroupsStudent {
@@ -32,6 +33,9 @@ export interface AvailableGroupsStudent {
   academicNumber: number;
   address: string;
   email: string;
+  studentId?: number;
+  department?: string;
+  projectId?: number;
 }
 
 export const students: Student[] = [
@@ -158,71 +162,3 @@ var academicNumbersArray: string[] = students.map((s) =>
 export const academicNumbers: string[] = academicNumbersArray.filter(
   (value, index) => academicNumbersArray.indexOf(value) === index
 );
-
-export const projects: AvailableGroupsProjectItem[] = [
-  {
-    id: 55,
-    title: "Mohito Maker Machine",
-    students: students
-      .filter((stu) => stu.projectId === 55)
-      .map(({ id, fullName, academicNumber, address, email }) => ({
-        id,
-        fullName,
-        academicNumber,
-        address,
-        email,
-      })),
-  },
-  {
-    id: 66,
-    title: "Barille Printer",
-    students: students
-      .filter((stu) => stu.projectId === 66)
-      .map(({ id, fullName, academicNumber, address, email }) => ({
-        id,
-        fullName,
-        academicNumber,
-        address,
-        email,
-      })),
-  },
-  {
-    id: 77,
-    title: "Clothes Cleaner",
-    students: students
-      .filter((stu) => stu.projectId === 77)
-      .map(({ id, fullName, academicNumber, address, email }) => ({
-        id,
-        fullName,
-        academicNumber,
-        address,
-        email,
-      })),
-  },
-  {
-    id: 88,
-    title: "AutoPizza",
-    students: students
-      .filter((stu) => stu.projectId === 88)
-      .map(({ id, fullName, academicNumber, address, email }) => ({
-        id,
-        fullName,
-        academicNumber,
-        address,
-        email,
-      })),
-  },
-  {
-    id: 99,
-    title: "DateXpert Intelligent classification system",
-    students: students
-      .filter((stu) => stu.projectId === 99)
-      .map(({ id, fullName, academicNumber, address, email }) => ({
-        id,
-        fullName,
-        academicNumber,
-        address,
-        email,
-      })),
-  },
-];
