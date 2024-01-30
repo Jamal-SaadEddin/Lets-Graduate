@@ -14,8 +14,11 @@ import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import { getAbstractComments } from "../../hooks/useComments";
+import useUserStore from "../../state-management/userStore";
 
 const Submissions = () => {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  if (fetchedUser?.type !== "student") return null;
   const submission = useViewedSubmissionStore((s) => s.submission);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {

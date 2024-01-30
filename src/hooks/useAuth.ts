@@ -1,5 +1,8 @@
+import axios from "axios";
+import { setFetchedUser } from "../state-management/userStore";
+
 export interface User {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -9,13 +12,15 @@ export interface User {
   village?: string;
   mobileNumber: string;
   type: "student" | "doctor" | "admin";
+  currentPeriod: string;
   info: StudentInfo | DoctorInfo;
 }
 
 export interface StudentInfo {
+  projectId: number;
   projectOneState: "not started" | "in progress" | "passed";
   projectTwoState: "not started" | "in progress" | "passed";
-  projectId: number;
+  isWithGroup: boolean;
 }
 
 export interface DoctorInfo {
@@ -24,45 +29,17 @@ export interface DoctorInfo {
   isProjectsCommitteeMember: boolean;
 }
 
-// const useAuth = () => ({
-//   user: <User>{
-//     id: "11923604",
-//     firstName: "Jamal",
-//     lastName: "SaadEddin",
-//     email: "jamal.saadeddin@gmail.com",
-//     password: "123456",
-//     department: "Computer Engineering - هندسة الحاسوب",
-//     address: "Nablus",
-//     mobileNumber: "0599098598",
-//     type: "student",
-//     info: {
-//       projectId: 55,
-//       projectOneState: "in progress",
-//       projectTwoState: "passed",
-//     },
-//   },
-// });
+export const useAuth = async (userId: number, password: string) => {
+  try {
+    const response = await axios.get<User>(
+      `http://localhost:3000/auth/login?userId=${userId}&password=${password}`
+    );
+    const fetchedUser = response.data;
+    setFetchedUser(fetchedUser);
 
-const useAuth = () => ({
-  user: <User>{
-    id: "1001",
-    firstName: "Ashraf",
-    lastName: "Armoush",
-    email: "ashraf.armoush@gmail.com",
-    password: "123456",
-    department: "Computer Engineering - هندسة الحاسوب",
-    address: "Nablus",
-    village: "Aurif",
-    mobileNumber: "0598745632",
-    type: "doctor",
-    info: {
-      isSupervisor: true,
-      isDepartmentManager: true,
-      isProjectsCommitteeMember: true,
-    },
-  },
-});
-
-// const useAuth = () => ({ user: null });
-
-export default useAuth;
+    return fetchedUser;
+  } catch (error) {
+    console.error("Error fetching User:", error);
+    return null;
+  }
+};

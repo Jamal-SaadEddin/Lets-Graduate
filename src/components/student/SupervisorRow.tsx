@@ -8,17 +8,19 @@ import {
   getIsRequestingSupervision,
   sendSupervisionRequest,
 } from "../../hooks/useAvailableSupervisors";
+import useUserStore from "../../state-management/userStore";
 
 interface Props {
   supervisor: AvailableSupervisor;
 }
 
 const SupervisorRow = ({ supervisor }: Props) => {
+  const user = useUserStore((s) => s.fetchedUser);
   const [requested, setRequested] = useState(false);
 
   const handleButtonState = async () => {
     const requesting = await getIsRequestingSupervision(
-      11923604,
+      user?.id as number,
       supervisor.doctorId
     );
     setRequested(requesting);
@@ -34,7 +36,7 @@ const SupervisorRow = ({ supervisor }: Props) => {
 
     const requestBody = {
       reciverId: supervisor.doctorId,
-      senderId: 11923604,
+      senderId: user?.id as number,
       type: "request",
       content: "is requesting you to supervise their group",
       senderType: "group",
@@ -45,7 +47,7 @@ const SupervisorRow = ({ supervisor }: Props) => {
   const cancelRequest = async () => {
     setRequested(false);
 
-    await cancelSupervisionRequest(11923604, supervisor.doctorId);
+    await cancelSupervisionRequest(user?.id as number, supervisor.doctorId);
   };
 
   return (

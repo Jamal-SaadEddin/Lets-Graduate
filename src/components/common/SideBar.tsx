@@ -19,9 +19,10 @@ import {
   getSupervisorSubmissions,
 } from "../../hooks/useSubmissions";
 import { getMyGroups } from "../../hooks/useMyGroups";
-import useAuth from "../../hooks/useAuth";
 import { getDepartmentSettings } from "../../hooks/useDepartmentSettings";
 import { getAvailableMergeGroups } from "../../hooks/useMergeGroups";
+import useUserStore from "../../state-management/userStore";
+import { StudentInfo } from "../../hooks/useAuth";
 
 interface Props {
   children: SideBarButton[];
@@ -30,36 +31,41 @@ interface Props {
 
 const SideBar = ({ children, subHeader = false }: Props) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const user = useUserStore((s) => s.fetchedUser);
+  const studentInfo = user?.info as StudentInfo;
 
   const handleClick = async (item: SideBarButton) => {
     if (item.link.includes("prerequisites/gp")) {
       const projectType = item.link === "prerequisites/gp/1" ? "gp1" : "gp2";
-      await getPrerequisites("Computer Engineering", projectType);
+      await getPrerequisites(user?.department as string, projectType);
     } else if (item.link.includes("my-project")) {
-      await getMyPartners(11923604);
-      await getMySupervisors(11923604);
-      await getMyProjectInfo(11923604);
+      await getMyPartners(user?.id as number);
+      await getMySupervisors(user?.id as number);
+      await getMyProjectInfo(user?.id as number);
     } else if (item.link.includes("available-groups")) {
-      await getAvailableGroups("Computer Engineering", "gp1");
+      await getAvailableGroups(
+        user?.department as string,
+        studentInfo.projectOneState === "in progress" ? "gp1" : "gp2",
+        user?.id as number
+      );
     } else if (item.link.includes("available-supervisors")) {
-      await getAvailableSupervisors(11925044);
-    } else if (item.link.includes("submissions") && user.type === "student") {
-      await getAbstractSubmission(11923604);
+      await getAvailableSupervisors(user?.id as number);
+    } else if (item.link.includes("submissions") && user?.type === "student") {
+      await getAbstractSubmission(user?.id as number);
     } else if (
       item.link.includes("supervised-projects") ||
       item.link.includes("grading")
     ) {
-      await getMyGroups(1355);
+      await getMyGroups(user?.id as number);
     } else if (item.link.includes("merge-groups")) {
       await getAvailableMergeGroups();
-      await getMyGroups(1355);
-    } else if (item.link.includes("submissions") && user.type === "doctor") {
-      await getSupervisorSubmissions(1355);
-      await getMyGroups(1355);
-      await getMyEvaluatingGroups(1355);
+      await getMyGroups(user?.id as number);
+    } else if (item.link.includes("submissions") && user?.type === "doctor") {
+      await getSupervisorSubmissions(user?.id as number);
+      await getMyGroups(user?.id as number);
+      await getMyEvaluatingGroups(user?.id as number);
     } else if (item.link.includes("department-settings")) {
-      await getDepartmentSettings(1355);
+      await getDepartmentSettings(user?.id as number);
     }
 
     navigate(item.link);

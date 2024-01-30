@@ -24,18 +24,19 @@ import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useEffect, useState } from "react";
 import { addresses } from "../../constants/addresses";
-import { StudentInfo } from "../../constants/myProfile";
-import { getProfileInfo, updateProfileInfo } from "../../hooks/useMyProfile";
+import { DoctorInfo, StudentInfo } from "../../constants/myProfile";
+import {
+  getDoctorProfileInfo,
+  getStudentProfileInfo,
+  updateDoctorProfileInfo,
+  updateStudentProfileInfo,
+} from "../../hooks/useMyProfile";
 import useThemeStore from "../../state-management/themeStore";
 import useUserStore from "../../state-management/userStore";
 
-interface Props {
-  withGPStates?: boolean;
-}
-
-let user: StudentInfo | undefined = {
+let user: StudentInfo | DoctorInfo | undefined = {
   fullName: "",
-  studentId: 0,
+  id: 0,
   firstName: "",
   lastName: "",
   email: "",
@@ -48,13 +49,18 @@ let user: StudentInfo | undefined = {
   isWithGroup: false,
 };
 
-const ProfileDetails = ({ withGPStates = false }: Props) => {
+const ProfileDetails = () => {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  const withGPStates = fetchedUser?.type === "student";
   const { currentUser, setCurrentUser } = useUserStore();
+  const currentStudentUser = currentUser as StudentInfo;
 
   const [saved, setSaved] = useState(false);
 
   const handleProfileInfo = async () => {
-    user = await getProfileInfo(11923604);
+    user = withGPStates
+      ? await getStudentProfileInfo(fetchedUser?.id as number)
+      : await getDoctorProfileInfo(fetchedUser?.id as number);
     setCurrentUser(user);
     setAddress(user?.address);
   };
@@ -82,16 +88,29 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
 
   const handleSave = async () => {
     // Save Changes to Backend
-    const requestBody = {
-      studentId: currentUser?.studentId,
-      firstName: currentUser?.firstName,
-      lastName: currentUser?.lastName,
-      address: currentUser?.address,
-      mobileNumber: currentUser?.mobileNumber,
-    };
-    const isSaved = await updateProfileInfo(requestBody);
-    if (isSaved) setSaved(true);
-    else setSaved(false);
+    if (withGPStates) {
+      const requestBody = {
+        studentId: currentUser?.id,
+        firstName: currentUser?.firstName,
+        lastName: currentUser?.lastName,
+        address: currentUser?.address,
+        mobileNumber: currentUser?.mobileNumber,
+      };
+      const isSaved = await updateStudentProfileInfo(requestBody);
+      if (isSaved) setSaved(true);
+      else setSaved(false);
+    } else {
+      const requestBody = {
+        doctorId: currentUser?.id,
+        firstName: currentUser?.firstName,
+        lastName: currentUser?.lastName,
+        address: currentUser?.address,
+        mobileNumber: currentUser?.mobileNumber,
+      };
+      const isSaved = await updateDoctorProfileInfo(requestBody);
+      if (isSaved) setSaved(true);
+      else setSaved(false);
+    }
 
     setDisabled(!disabled);
     setOpenSnackbar(true);
@@ -197,7 +216,7 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
               <TextField
                 fullWidth
                 label="User Id"
-                value={currentUser?.studentId}
+                value={currentUser?.id}
                 disabled
                 sx={{
                   "& input.MuiInputBase-input:disabled": {
@@ -355,16 +374,16 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
                   Graduation Project 1 State:{" "}
                   <Chip
                     color={
-                      currentUser?.gp1State === "not started"
+                      currentStudentUser?.gp1State === "not started"
                         ? "default"
-                        : currentUser?.gp1State === "in progress"
+                        : currentStudentUser?.gp1State === "in progress"
                         ? "info"
                         : "success"
                     }
                     icon={
-                      currentUser?.gp1State === "not started" ? (
+                      currentStudentUser?.gp1State === "not started" ? (
                         <NotStartedRoundedIcon />
-                      ) : currentUser?.gp1State === "in progress" ? (
+                      ) : currentStudentUser?.gp1State === "in progress" ? (
                         <RotateLeftIcon />
                       ) : (
                         <VerifiedIcon />
@@ -373,9 +392,9 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
                     size="small"
                     variant="filled"
                     label={
-                      currentUser?.gp1State === "not started"
+                      currentStudentUser?.gp1State === "not started"
                         ? "Not started"
-                        : currentUser?.gp1State === "in progress"
+                        : currentStudentUser?.gp1State === "in progress"
                         ? "In progress"
                         : "Done"
                     }
@@ -390,16 +409,16 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
                   Graduation Project 2 State:{" "}
                   <Chip
                     color={
-                      currentUser?.gp2State === "not started"
+                      currentStudentUser?.gp2State === "not started"
                         ? "default"
-                        : currentUser?.gp2State === "in progress"
+                        : currentStudentUser?.gp2State === "in progress"
                         ? "info"
                         : "success"
                     }
                     icon={
-                      currentUser?.gp2State === "not started" ? (
+                      currentStudentUser?.gp2State === "not started" ? (
                         <NotStartedRoundedIcon />
-                      ) : currentUser?.gp2State === "in progress" ? (
+                      ) : currentStudentUser?.gp2State === "in progress" ? (
                         <RotateLeftIcon />
                       ) : (
                         <VerifiedIcon />
@@ -408,9 +427,9 @@ const ProfileDetails = ({ withGPStates = false }: Props) => {
                     size="small"
                     variant="filled"
                     label={
-                      currentUser?.gp2State === "not started"
+                      currentStudentUser?.gp2State === "not started"
                         ? "Not started"
-                        : currentUser?.gp2State === "in progress"
+                        : currentStudentUser?.gp2State === "in progress"
                         ? "In progress"
                         : "Done"
                     }

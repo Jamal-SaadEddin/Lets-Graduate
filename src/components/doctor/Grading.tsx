@@ -1,7 +1,10 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import GroupsTable from "./GroupsTable";
+import useUserStore from "../../state-management/userStore";
 
 const Grading = () => {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  if (fetchedUser?.type !== "doctor") return null;
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper

@@ -1,8 +1,8 @@
 export interface StudentInfo {
-  fullName: string;
-  studentId: number;
+  id: number;
   firstName: string;
   lastName: string;
+  fullName: string;
   email: string;
   department: string;
   address: string;
@@ -11,4 +11,15 @@ export interface StudentInfo {
   gp2State: string;
   projectType: string;
   isWithGroup: boolean;
+}
+
+export interface DoctorInfo {
+  id: number;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  email: string;
+  department: string;
+  address: string;
+  mobileNumber: string;
 }

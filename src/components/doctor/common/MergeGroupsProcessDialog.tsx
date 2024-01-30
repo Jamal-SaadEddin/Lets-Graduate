@@ -61,6 +61,7 @@ import useMyGroupsStore from "../../../state-management/Doctor/myGroupsStore";
 import { Group, GroupDetails, GroupSummary } from "../../common/Group";
 import Table from "../../common/Table";
 import { sendMergeRequest } from "../../../hooks/useMergeGroups";
+import useUserStore from "../../../state-management/userStore";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -123,6 +124,7 @@ const MergeProcessTabs = ({
   requestedGroup,
   setOpenMergeDialog,
 }: MergeProcessTabsProps) => {
+  const user = useUserStore((s) => s.fetchedUser);
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -149,7 +151,7 @@ const MergeProcessTabs = ({
   const handleMergeGroups = async () => {
     const requestBody = {
       reciverId: requestedGroup.doctorId,
-      senderId: 1355, // userId
+      senderId: user?.id as number,
       type: "merge",
       content: `is requesting to merge his/her group (${selectedGroup.id}) with your group (${requestedGroup.id})`,
       senderType: "doctor",

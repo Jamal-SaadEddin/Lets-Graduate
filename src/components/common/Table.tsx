@@ -19,6 +19,7 @@ import {
 } from "../../hooks/useAvailableGroups";
 import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 import useMergeGroupsStore from "../../state-management/Doctor/mergeGroupsStore";
+import useUserStore from "../../state-management/userStore";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -35,6 +36,7 @@ export default function Table({
   tableBody,
   withButton = false,
 }: Props) {
+  const user = useUserStore((s) => s.fetchedUser);
   const availableMergeGroups = useMergeGroupsStore(
     (s) => s.availableMergeGroups
   );
@@ -44,8 +46,8 @@ export default function Table({
 
   const handleButtonState = async () => {
     const requesting = await getIsRequestingPartnership(
-      11944044,
-      tableBody[0].id
+      user?.id as number,
+      tableBody[0].id!
     );
     setRequested(requesting);
   };
@@ -65,7 +67,7 @@ export default function Table({
 
     const requestBody = {
       reciverId: tableBody[0].id,
-      senderId: 11944044, // userId
+      senderId: user?.id as number,
       type: "request",
       content: "is requesting to join your group",
       senderType: "student",
@@ -76,7 +78,7 @@ export default function Table({
   const cancelRequest = async () => {
     setRequested(false);
 
-    await cancelPartnershipRequest(11925044, tableBody[0].id);
+    await cancelPartnershipRequest(user?.id as number, tableBody[0].id!);
   };
 
   const handleStartMergeProcess = () => {

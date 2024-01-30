@@ -8,6 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import * as React from "react";
 import { deleteAccount } from "../../hooks/useMyProfile";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../../state-management/userStore";
 
 interface Props {
   openDeleteAccountDialog: boolean;
@@ -18,6 +19,7 @@ export default function DeleteAccountDialog({
   openDeleteAccountDialog,
   setOpenDeleteAccountDialog,
 }: Props) {
+  const user = useUserStore((s) => s.fetchedUser);
   const navigate = useNavigate();
 
   const [confirmDelete, setConfirmDelete] = React.useState("");
@@ -27,7 +29,7 @@ export default function DeleteAccountDialog({
   };
 
   const handleDeleteAccount = async () => {
-    const isDeleted = await deleteAccount(11725044);
+    const isDeleted = await deleteAccount(user?.id as number);
     if (isDeleted) navigate("/login");
 
     setOpenDeleteAccountDialog(false);

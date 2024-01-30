@@ -30,17 +30,20 @@ import SideBar from "../components/common/SideBar";
 import sideBarButtons, {
   departmentManagerSideBarButtons,
 } from "../constants/sideBarButtons";
-import useAuth, { DoctorInfo } from "../hooks/useAuth";
+import { DoctorInfo } from "../hooks/useAuth";
 import useThemeStore from "../state-management/themeStore";
 import { useEffect } from "react";
 import { getNotifications } from "../hooks/useNotifications";
+import useUserStore from "../state-management/userStore";
 
 export default function HomePage() {
+  const user = useUserStore((s) => s.fetchedUser);
+  const userInfo = user?.info as DoctorInfo;
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
 
   const handleNotifications = async () => {
-    await getNotifications(1377);
+    await getNotifications(user?.id as number);
   };
 
   useEffect(() => {
@@ -73,9 +76,6 @@ export default function HomePage() {
   );
 
   const navigate = useNavigate();
-
-  const { user } = useAuth();
-  const userInfo = user.info as DoctorInfo;
 
   if (!user) return <Navigate to="/login" />;
 
@@ -236,7 +236,7 @@ export default function HomePage() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <SideBar children={sideBarButtons} />
+            <SideBar children={sideBarButtons()} />
             {userInfo.isDepartmentManager && <Divider sx={{ my: 1 }} />}
             {userInfo.isDepartmentManager && (
               <SideBar

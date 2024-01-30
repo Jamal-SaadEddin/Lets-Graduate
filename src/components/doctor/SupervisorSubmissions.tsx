@@ -1,7 +1,10 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import Abstracts from "./Abstracts";
+import useUserStore from "../../state-management/userStore";
 
 const SupervisorSubmissions = () => {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  if (fetchedUser?.type !== "doctor") return null;
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper

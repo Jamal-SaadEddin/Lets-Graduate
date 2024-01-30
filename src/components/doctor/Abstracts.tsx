@@ -4,14 +4,15 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { SupervisedProjectsProjectItem } from "../../constants/availableGroups";
-import useAuth, { DoctorInfo } from "../../hooks/useAuth";
+import { DoctorInfo } from "../../hooks/useAuth";
 import useMyGroupsStore from "../../state-management/Doctor/myGroupsStore";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import CollapsibleTable from "./common/CollapsibleTable";
+import useUserStore from "../../state-management/userStore";
 
 export default function Abstracts() {
-  const { user } = useAuth();
-  const userInfo = user.info as DoctorInfo;
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  const userInfo = fetchedUser?.info as DoctorInfo;
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);

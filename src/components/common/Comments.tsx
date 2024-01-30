@@ -15,12 +15,14 @@ import useCommentsStore from "../../state-management/Student/commentsStore";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import Comment from "./Comment";
 import { addNewComment } from "../../hooks/useComments";
+import useUserStore from "../../state-management/userStore";
 
 interface Props {
   canAddComments?: boolean;
 }
 
 const Comments = ({ canAddComments = false }: Props) => {
+  const user = useUserStore((s) => s.fetchedUser);
   const submission = useViewedSubmissionStore((s) => s.submission);
   const comments = useCommentsStore((s) => s.comments);
 
@@ -29,7 +31,7 @@ const Comments = ({ canAddComments = false }: Props) => {
   const handleAddNewComment = async () => {
     if (newCommentText.replace(/\s/g, "").length > 0) {
       const requestBody = {
-        doctorId: 1355,
+        doctorId: user?.id as number,
         projectId: submission?.projectId,
         content: newCommentText,
       };

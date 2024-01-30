@@ -9,8 +9,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
+import { useAuth } from "../../hooks/useAuth";
 
 function Copyright(props: any) {
   return (
@@ -34,13 +35,16 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("userId"),
-      password: data.get("password"),
-    });
+    const userId = data.get("userId");
+    const password = data.get("password");
+
+    const user = await useAuth(Number(userId), String(password));
+    if (user) navigate("/");
   };
 
   return (

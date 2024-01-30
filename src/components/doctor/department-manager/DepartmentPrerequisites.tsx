@@ -20,8 +20,14 @@ import {
   addPrerequisite,
   deletePrerequisite,
 } from "../../../hooks/usePrerequisites";
+import useUserStore from "../../../state-management/userStore";
+import { DoctorInfo } from "../../../hooks/useAuth";
 
 const DepartmentPrerequisites = () => {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  const userInfo = fetchedUser?.info as DoctorInfo;
+  if (fetchedUser?.type !== "doctor" || !userInfo.isDepartmentManager)
+    return null;
   const params = useParams();
 
   const prerequisites = usePrerequisitesStore((s) => s.prerequisites);
@@ -36,7 +42,7 @@ const DepartmentPrerequisites = () => {
     if (newPrerequisite.content.replace(/\s/g, "").length > 0) {
       const projectType = params["projectType"] === "1" ? "gp1" : "gp2";
       const prerequisite = {
-        department: "Computer Engineering",
+        department: fetchedUser.department,
         projectType: projectType,
         content: newPrerequisite.content,
       };

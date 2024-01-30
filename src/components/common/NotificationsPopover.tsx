@@ -16,8 +16,10 @@ import useNotificationsStore from "../../state-management/notificationsStore";
 import NotificationItem from "./NotificationItem";
 import { NotificationElement } from "../../constants/notifications";
 import { markAllNotificationsAsRead } from "../../hooks/useNotifications";
+import useUserStore from "../../state-management/userStore";
 
 const NotificationsPopover = () => {
+  const user = useUserStore((s) => s.fetchedUser);
   const { notifications, setNotifications } = useNotificationsStore();
 
   const totalUnRead = notifications.filter(
@@ -42,7 +44,7 @@ const NotificationsPopover = () => {
       ...notification,
       readStatus: "read",
     }));
-    const isMarked = await markAllNotificationsAsRead(11923604);
+    const isMarked = await markAllNotificationsAsRead(user?.id as number);
     if (isMarked)
       setNotifications(updatedNotifications as NotificationElement[]);
   };

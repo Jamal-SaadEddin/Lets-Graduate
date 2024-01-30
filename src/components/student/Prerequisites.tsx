@@ -20,8 +20,11 @@ import { registerProject } from "../../hooks/usePrerequisites";
 import { useState } from "react";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import React from "react";
+import useUserStore from "../../state-management/userStore";
 
 export default function Prerequisites() {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  if (fetchedUser?.type !== "student") return null;
   const params = useParams();
   const navigate = useNavigate();
 
@@ -40,7 +43,7 @@ export default function Prerequisites() {
 
   const handleRegisterProject = async () => {
     const requestBody = {
-      studentId: 11923605,
+      studentId: fetchedUser.id as number,
       projectType: params["projectType"] === "1" ? "gp1" : "gp2",
     };
     const isRegistered = await registerProject(requestBody);

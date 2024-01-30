@@ -11,7 +11,6 @@ import {
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useState } from "react";
-import useAuth from "../../hooks/useAuth";
 import Table from "../common/Table";
 
 const partnerHeadings = [
@@ -31,7 +30,8 @@ const supervisorHeadings = [
 ];
 
 const ProjectDetails = () => {
-  const { user } = useAuth();
+  const user = useUserStore((s) => s.fetchedUser);
+  if (user?.type !== "student") return null;
 
   const myProjectInfo = useMyProjectInfoStore((s) => s.myProjectInfo);
   const myPartners = usePartnersStore((s) => s.partners);
@@ -136,8 +136,10 @@ import { updateMyProjectTitle } from "../../hooks/useMyProject";
 import useMyProjectInfoStore from "../../state-management/Student/myProjectInfoStore";
 import usePartnersStore from "../../state-management/Student/partnersStore";
 import useSupervisorStore from "../../state-management/Student/supervisorsStore";
+import useUserStore from "../../state-management/userStore";
 
 export function FormDialog() {
+  const user = useUserStore((s) => s.fetchedUser);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -155,7 +157,7 @@ export function FormDialog() {
 
   const handleAddNewProjectTitle = async () => {
     if (newProjectTitle.replace(/\s/g, "").length > 0) {
-      await updateMyProjectTitle(11923604, newProjectTitle);
+      await updateMyProjectTitle(user?.id as number, newProjectTitle);
       handleClose();
       setMyProject({ ...myProjectInfo, projectTitle: newProjectTitle });
     } else {

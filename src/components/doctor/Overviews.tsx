@@ -1,14 +1,8 @@
 import { Avatar, Container, Grid, Paper, Typography } from "@mui/material";
-import { getDepartment } from "../../constants/departments";
-import useAuth from "../../hooks/useAuth";
+import useUserStore from "../../state-management/userStore";
 
-const Overviews = () => {
-  const { user } = useAuth();
-  const userDepartment = getDepartment(user.department);
-  const userDepartmentName = userDepartment.departmentName.replace(
-    /[^a-zA-Z]/gm,
-    " "
-  );
+export const Overviews = () => {
+  const user = useUserStore((s) => s.fetchedUser);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
@@ -16,7 +10,7 @@ const Overviews = () => {
         <Grid container spacing={3} columns={1}>
           <Grid item xs={12}>
             <Typography variant="h4">
-              Welcome {" " || "back,"} Dr. {user.firstName}!
+              Welcome {" " || "back,"} Dr. {user?.firstName}!
             </Typography>
           </Grid>
         </Grid>
@@ -35,10 +29,10 @@ const Overviews = () => {
           </Grid>
           {/* Changable area based on doctor state  */}
           <Grid item xs={12}>
-            {userDepartment.currentPeriod === "create-partnerships" && (
+            {user?.currentPeriod === "create-partnerships" && (
               <Typography variant="subtitle1">
-                Currently, the Department of {userDepartmentName} is going
-                through a period of establishing partnerships between students,{" "}
+                Currently, the Department of {user.department} is going through
+                a period of establishing partnerships between students,{" "}
                 <b>
                   so the supervising doctors must wait for the start of the
                   student registration period with the supervisors.
@@ -47,9 +41,9 @@ const Overviews = () => {
                 supervise them at that time.
               </Typography>
             )}
-            {userDepartment.currentPeriod === "registration" && (
+            {user?.currentPeriod === "registration" && (
               <Typography variant="subtitle1">
-                The {userDepartmentName} Department is currently going through a
+                The {user.department} Department is currently going through a
                 period of student registrations with the supervising doctors.{" "}
                 <b>
                   Please check the notifications periodically to see which
@@ -57,17 +51,17 @@ const Overviews = () => {
                 </b>
               </Typography>
             )}
-            {userDepartment.currentPeriod === "abstract-submission" && (
+            {user?.currentPeriod === "abstract-submission" && (
               <Typography variant="subtitle1">
-                The {userDepartmentName} Department is currently going through
-                the period of submitting abstracts to the supervising doctors.{" "}
+                The {user.department} Department is currently going through the
+                period of submitting abstracts to the supervising doctors.{" "}
                 <b>
                   Please check your students' submissions and write any comments
                   and notes if needed.
                 </b>
               </Typography>
             )}
-            {userDepartment.currentPeriod === "evaluating-students" && (
+            {user?.currentPeriod === "evaluating-students" && (
               <Typography variant="subtitle1">
                 After completing the graduation projects for this semester, it
                 is time to evaluate the students.{" "}
@@ -99,29 +93,31 @@ const Overviews = () => {
             gap={2}
           >
             <Avatar
-              alt={user.firstName + " " + user.lastName}
+              alt={user?.firstName + " " + user?.lastName}
               src=""
               sx={{ width: 80, height: 80 }}
             />
             <Typography variant="h6">
-              {user.firstName + " " + user.lastName}
+              {user?.firstName + " " + user?.lastName}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography variant="subtitle1">User Id: {user.id}</Typography>
+            <Typography variant="subtitle1">User Id: {user?.id}</Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">
-              Department: {user.department}
+              Department: {user?.department}
             </Typography>
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Typography variant="subtitle1">Address: {user.address}</Typography>
+            <Typography variant="subtitle1">
+              Address: {user?.address}
+            </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">
-              Mobile Phone: {user.mobileNumber}
+              Mobile Phone: {user?.mobileNumber}
             </Typography>
           </Grid>
         </Grid>
@@ -129,5 +125,3 @@ const Overviews = () => {
     </Container>
   );
 };
-
-export default Overviews;

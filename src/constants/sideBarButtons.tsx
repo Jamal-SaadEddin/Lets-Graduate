@@ -9,7 +9,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import { ReactNode } from "react";
-import useAuth from "../hooks/useAuth";
+import useUserStore from "../state-management/userStore";
 
 export interface SideBarButton {
   icon: ReactNode;
@@ -18,10 +18,9 @@ export interface SideBarButton {
   link: string;
 }
 
-const { user } = useAuth();
-
-const sideBarButtons: SideBarButton[] =
-  user.type === "student"
+export const sideBarButtons = () => {
+  const user = useUserStore((s) => s.fetchedUser);
+  return user?.type === "student"
     ? [
         {
           icon: <DashboardIcon />,
@@ -62,7 +61,7 @@ const sideBarButtons: SideBarButton[] =
           link: "submissions",
         },
       ]
-    : user.type === "doctor"
+    : user?.type === "doctor"
     ? [
         {
           icon: <DashboardIcon />,
@@ -78,7 +77,7 @@ const sideBarButtons: SideBarButton[] =
         {
           icon: <PictureAsPdfIcon />,
           primaryText: "Submissions",
-          link: "submissions",
+          link: "students-submissions",
         },
         {
           icon: <MergeIcon />,
@@ -93,19 +92,22 @@ const sideBarButtons: SideBarButton[] =
         },
       ]
     : [];
+};
+
+export default sideBarButtons;
 
 export const departmentManagerSideBarButtons: SideBarButton[] = [
   {
     icon: <QuestionAnswerIcon />,
     primaryText: "Prerequisites",
     secondaryText: "Graduation Project 1",
-    link: "prerequisites/gp/1",
+    link: "department-prerequisites/gp/1",
   },
   {
     icon: <QuestionAnswerIcon />,
     primaryText: "Prerequisites",
     secondaryText: "Graduation Project 2",
-    link: "prerequisites/gp/2",
+    link: "department-prerequisites/gp/2",
   },
   {
     icon: <AdminPanelSettingsIcon />,
@@ -114,5 +116,3 @@ export const departmentManagerSideBarButtons: SideBarButton[] = [
     link: "department-settings",
   },
 ];
-
-export default sideBarButtons;

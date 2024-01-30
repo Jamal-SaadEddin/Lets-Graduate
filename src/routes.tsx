@@ -16,12 +16,9 @@ import AvailableSupervisors from "./components/student/AvailableSupervisors";
 import Prerequisites from "./components/student/Prerequisites";
 import ProjectDetails from "./components/student/ProjectDetails";
 import Submissions from "./components/student/Submissions";
-import useAuth, { DoctorInfo } from "./hooks/useAuth";
-import AdminPage from "./pages/AdminPage";
-import DoctorPage from "./pages/DoctorPage";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
-import StudentPage from "./pages/StudentPage";
+import UserPage from "./pages/UserPage";
 import CreateStudentAccount from "./pages/auth/CreateStudentAccount";
 import ForgetPassword from "./pages/auth/ForgetPassword";
 import Login from "./pages/auth/Login";
@@ -30,105 +27,44 @@ import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import VerifyEmailForPassword from "./pages/auth/VerifyEmailForPassword";
 
-const { user } = useAuth();
-const userInfo = user.info as DoctorInfo;
-
-const mainRoute =
-  user.type === "student"
-    ? {
-        element: <HomePage />,
-        errorElement: <ErrorPage />,
-        children: [
-          {
-            index: true,
-            element: <StudentPage />,
-          },
-          { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
-          { path: "available-groups", element: <AvailableGroups /> },
-          { path: "available-supervisors", element: <AvailableSupervisors /> },
-          { path: "my-project", element: <ProjectDetails /> },
-          { path: "submissions", element: <Submissions /> },
-          {
-            path: "submissions/:id/comments",
-            element: <Comments />,
-          },
-          { path: "account-settings", element: <AccountSettings /> },
-          { path: "my-profile", element: <ProfileDetails withGPStates /> },
-          { path: "notifications", element: <Notifications /> },
-          { path: "notification/:id", element: <Notification /> },
-        ],
-      }
-    : user.type === "doctor" && userInfo.isDepartmentManager
-    ? {
-        element: <HomePage />,
-        errorElement: <ErrorPage />,
-        children: [
-          {
-            index: true,
-            element: <DoctorPage />,
-          },
-          { path: "account-settings", element: <AccountSettings /> },
-          { path: ":username", element: <ProfileDetails /> },
-          { path: "supervised-projects", element: <SupervisedProjects /> },
-          { path: "submissions", element: <SupervisorSubmissions /> },
-          { path: "submissions/:id", element: <Submission /> },
-          {
-            path: "submissions/:id/comments",
-            element: <Comments canAddComments />,
-          },
-          { path: "merge-groups", element: <MergeGroups /> },
-          { path: "grading", element: <Grading /> },
-          { path: "notifications", element: <Notifications /> },
-          { path: "notification/:id", element: <Notification /> },
-          {
-            path: "prerequisites/gp/:projectType",
-            element: <DepartmentPrerequisites />,
-          },
-          { path: "department-settings", element: <DepartmentSettings /> },
-        ],
-      }
-    : user.type === "doctor"
-    ? {
-        element: <HomePage />,
-        errorElement: <ErrorPage />,
-        children: [
-          {
-            index: true,
-            element: <DoctorPage />,
-          },
-          { path: "account-settings", element: <AccountSettings /> },
-          { path: ":username", element: <ProfileDetails /> },
-          { path: "supervised-projects", element: <SupervisedProjects /> },
-          { path: "submissions", element: <SupervisorSubmissions /> },
-          { path: "submissions/:id", element: <Submission /> },
-          {
-            path: "submissions/:id/comments",
-            element: <Comments canAddComments />,
-          },
-          { path: "merge-groups", element: <MergeGroups /> },
-          { path: "grading", element: <Grading /> },
-          { path: "notifications", element: <Notifications /> },
-          { path: "notification/:id", element: <Notification /> },
-        ],
-      }
-    : user.type === "admin"
-    ? {
-        element: <HomePage />,
-        errorElement: <ErrorPage />,
-        children: [
-          {
-            index: true,
-            element: <AdminPage />,
-          },
-        ],
-      }
-    : {
-        path: "/",
-        element: <ErrorPage />,
-      };
-
 const router = createBrowserRouter([
-  mainRoute,
+  {
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <UserPage />,
+      },
+      { path: "prerequisites/gp/:projectType", element: <Prerequisites /> },
+      { path: "available-groups", element: <AvailableGroups /> },
+      { path: "available-supervisors", element: <AvailableSupervisors /> },
+      { path: "my-project", element: <ProjectDetails /> },
+      { path: "submissions", element: <Submissions /> },
+      {
+        path: "submissions/:id/comments",
+        element: <Comments />,
+      },
+      { path: "account-settings", element: <AccountSettings /> },
+      { path: "my-profile", element: <ProfileDetails /> },
+      { path: "notifications", element: <Notifications /> },
+      { path: "notification/:id", element: <Notification /> },
+      { path: "supervised-projects", element: <SupervisedProjects /> },
+      { path: "students-submissions", element: <SupervisorSubmissions /> },
+      { path: "submissions/:id", element: <Submission /> },
+      {
+        path: "submissions/:id/comments",
+        element: <Comments canAddComments />,
+      },
+      { path: "merge-groups", element: <MergeGroups /> },
+      { path: "grading", element: <Grading /> },
+      {
+        path: "department-prerequisites/gp/:projectType",
+        element: <DepartmentPrerequisites />,
+      },
+      { path: "department-settings", element: <DepartmentSettings /> },
+    ],
+  },
   { path: "/login", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/verify-email", element: <VerifyEmail /> },

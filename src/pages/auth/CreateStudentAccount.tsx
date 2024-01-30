@@ -166,8 +166,8 @@ export default function CreateStudentAccount() {
                     }
                   >
                     {departments.map((department, index) => (
-                      <MenuItem key={index} value={department.departmentName}>
-                        {department.departmentName}
+                      <MenuItem key={index} value={department}>
+                        {department}
                       </MenuItem>
                     ))}
                   </Select>

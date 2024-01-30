@@ -26,6 +26,8 @@ import {
   getDepartmentSettings,
   updateDepartmentSettings,
 } from "../../../hooks/useDepartmentSettings";
+import useUserStore from "../../../state-management/userStore";
+import { DoctorInfo } from "../../../hooks/useAuth";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -54,13 +56,17 @@ function getStyles(
 let oldSettings: Department | undefined = undefined;
 
 const DepartmentSettings = () => {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  const userInfo = fetchedUser?.info as DoctorInfo;
+  if (fetchedUser?.type !== "doctor" || !userInfo.isDepartmentManager)
+    return null;
   const theme = useTheme();
   const mode = useThemeStore((s) => s.mode);
 
   const [saved, setSaved] = useState(false);
 
   const handleDepartmentSettings = async () => {
-    oldSettings = await getDepartmentSettings(1355);
+    oldSettings = await getDepartmentSettings(fetchedUser.id as number);
   };
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Overviews = () => {
+export const Overviews = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
@@ -177,5 +177,3 @@ const Overviews = () => {
     </Container>
   );
 };
-
-export default Overviews;

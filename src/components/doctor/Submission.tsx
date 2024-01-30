@@ -14,8 +14,11 @@ import { Submission as SubmissionInterface } from "../../constants/supervisorSub
 import { updateSubmissionAcceptStatus } from "../../hooks/useSubmissions";
 import { getAbstractComments } from "../../hooks/useComments";
 import useCommentsStore from "../../state-management/Student/commentsStore";
+import useUserStore from "../../state-management/userStore";
 
 const Submission = () => {
+  const fetchedUser = useUserStore((s) => s.fetchedUser);
+  if (fetchedUser?.type !== "doctor") return null;
   const submission = useViewedSubmissionStore((s) => s.submission);
   const setSubmission = useViewedSubmissionStore((s) => s.setSubmission);
   const projectTitle = useViewedSubmissionStore((s) => s.projectTitle);
