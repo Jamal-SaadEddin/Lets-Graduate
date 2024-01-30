@@ -13,8 +13,8 @@ export interface User {
 }
 
 export interface StudentInfo {
-  projectOneState: "Not started" | "In progress" | "Done";
-  projectTwoState: "Not started" | "In progress" | "Done";
+  projectOneState: "not started" | "in progress" | "passed";
+  projectTwoState: "not started" | "in progress" | "passed";
   projectId: number;
 }
 
@@ -35,10 +35,10 @@ export interface DoctorInfo {
 //     address: "Nablus",
 //     mobileNumber: "0599098598",
 //     type: "student",
-//     info: <StudentInfo>{
+//     info: {
 //       projectId: 55,
-//       projectOneState: "In progress",
-//       projectTwoState: "Done",
+//       projectOneState: "in progress",
+//       projectTwoState: "passed",
 //     },
 //   },
 // });
@@ -55,7 +55,7 @@ const useAuth = () => ({
     village: "Aurif",
     mobileNumber: "0598745632",
     type: "doctor",
-    info: <DoctorInfo>{
+    info: {
       isSupervisor: true,
       isDepartmentManager: true,
       isProjectsCommitteeMember: true,

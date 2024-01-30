@@ -10,13 +10,16 @@ import StudentSearchbox from "./StudentSearchbox";
 import { useLocation } from "react-router-dom";
 import useMergeGroupsStore from "../../state-management/Doctor/mergeGroupsStore";
 
-const headings = ["Student Name", "Academic Number", "Address", "Email"];
-
 export default function GroupsTable() {
   const location = useLocation();
   const withButton = location.pathname.includes("merge-groups")
     ? "merge-group"
     : "join-group";
+
+  const headings =
+    withButton === "join-group"
+      ? ["Student Name", "Academic Number", "Address", "Email"]
+      : ["Student Name", "Academic Number", "Address", "Email", "Department"];
 
   const availableGroups =
     withButton === "join-group"

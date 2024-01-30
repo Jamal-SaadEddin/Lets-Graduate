@@ -12,13 +12,12 @@ import { ReactNode, useEffect, useState } from "react";
 import { AvailableGroupsStudent } from "../../constants/availableGroups";
 import { Partner, Supervisor } from "../../constants/myProject";
 import { SupervisedProjectsStudent } from "../../constants/supervisedProjects";
-import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 import {
   cancelPartnershipRequest,
   getIsRequestingPartnership,
   sendPartnershipRequest,
 } from "../../hooks/useAvailableGroups";
-import { useLocation } from "react-router-dom";
+import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -35,8 +34,6 @@ export default function Table({
   tableBody,
   withButton = false,
 }: Props) {
-  const location = useLocation();
-
   const [requested, setRequested] = useState(false);
   const [openMergeDialog, setOpenMergeDialog] = useState(false);
 
@@ -126,12 +123,7 @@ export default function Table({
           {tableBody.map((user, index) => (
             <TableRow key={index}>
               {propertyNames.map((property, index) => {
-                if (
-                  property === "id" &&
-                  (location.pathname.includes("available-groups") ||
-                    location.pathname.includes("merge-groups"))
-                )
-                  return null;
+                if (property === "id" && withButton) return null;
                 else
                   return (
                     <TableCell
