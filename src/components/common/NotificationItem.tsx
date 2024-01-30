@@ -14,6 +14,7 @@ import useNotificationsStore from "../../state-management/notificationsStore";
 import {
   addJoinResponse,
   addSupervisionResponse,
+  getMergeDetails,
 } from "../../hooks/useNotifications";
 
 interface Props {
@@ -59,7 +60,13 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    if (notification.acceptStatus === "pendingMerge") {
+      const regex = /\((\d+)\).*\((\d+)\)/;
+      const match = notification.content.match(regex);
+      if (match) await getMergeDetails(Number(match[1]), Number(match[2]));
+    }
+
     handleClose && handleClose();
     setCurrentNotification(notification);
     navigate(`/notification/${notification.notificationId}`);
@@ -131,10 +138,10 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
             )}
             {notification.acceptStatus === "accepted" && (
               <Chip
-                color="primary"
+                color={notification.type === "merge" ? "warning" : "primary"}
                 size="small"
                 variant="filled"
-                label="Accepted"
+                label={notification.type === "merge" ? "Merged" : "Accepted"}
                 sx={{
                   fontSize: "14px",
                   marginTop: 2,

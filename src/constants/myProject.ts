@@ -5,6 +5,7 @@ export interface Partner {
   email: string;
   mobileNumber: string;
   address: string;
+  studentId?: number;
 }
 
 export interface MyProjectInfo {
@@ -13,7 +14,7 @@ export interface MyProjectInfo {
 }
 
 export interface Supervisor {
-  id: number;
+  id?: number;
   fullName: string;
   email: string;
   department: string;

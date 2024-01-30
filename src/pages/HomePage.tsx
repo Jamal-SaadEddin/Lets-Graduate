@@ -40,7 +40,7 @@ export default function HomePage() {
   const setMode = useThemeStore((s) => s.setMode);
 
   const handleNotifications = async () => {
-    await getNotifications(11944044);
+    await getNotifications(1377);
   };
 
   useEffect(() => {

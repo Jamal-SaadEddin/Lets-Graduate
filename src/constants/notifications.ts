@@ -3,7 +3,7 @@ export interface NotificationElement {
   senderId?: number;
   reciverId?: number;
   readStatus: "read" | "unread";
-  type: "comment" | "request" | "notify";
+  type: "comment" | "request" | "notify" | "merge";
   acceptStatus:
     | null
     | "pendingJoin"
