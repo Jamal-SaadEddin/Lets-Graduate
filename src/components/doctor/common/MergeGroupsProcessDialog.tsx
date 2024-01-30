@@ -9,7 +9,7 @@ import React from "react";
 interface Props {
   openMergeDialog: boolean;
   setOpenMergeDialog: (openMergeDialog: boolean) => void;
-  requestedGroup: AvailableGroupsStudent[];
+  requestedGroup: AvailableGroupsProjectItem;
 }
 
 const MergeGroupsProcessDialog = ({
@@ -53,12 +53,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useTheme } from "@mui/material/styles";
 import {
+  AvailableGroupsProjectItem,
   AvailableGroupsStudent,
   SupervisedProjectsProjectItem,
 } from "../../../constants/availableGroups";
+import useMyGroupsStore from "../../../state-management/Doctor/myGroupsStore";
 import { Group, GroupDetails, GroupSummary } from "../../common/Group";
 import Table from "../../common/Table";
-import useMyGroupsStore from "../../../state-management/Doctor/myGroupsStore";
+import { sendMergeRequest } from "../../../hooks/useMergeGroups";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -100,6 +102,7 @@ const headingsMyGroup = [
   "Address",
   "Email",
   "Department",
+  "Project Type",
 ];
 
 const headingsRequestedGroup = [
@@ -107,10 +110,12 @@ const headingsRequestedGroup = [
   "Academic Number",
   "Address",
   "Email",
+  "Department",
+  "Project Type",
 ];
 
 interface MergeProcessTabsProps {
-  requestedGroup: AvailableGroupsStudent[];
+  requestedGroup: AvailableGroupsProjectItem;
   setOpenMergeDialog: (openMergeDialog: boolean) => void;
 }
 
@@ -141,9 +146,16 @@ const MergeProcessTabs = ({
 
   const [confirmMerge, setConfirmMerge] = React.useState("");
 
-  const handleMergeGroups = () => {
-    console.log("Merge request to other group sent!");
-    setOpenMergeDialog(false);
+  const handleMergeGroups = async () => {
+    const requestBody = {
+      reciverId: requestedGroup.doctorId,
+      senderId: 1355, // userId
+      type: "merge",
+      content: `is requesting to merge his/her group (${selectedGroup.id}) with your group (${requestedGroup.id})`,
+      senderType: "doctor",
+    };
+    const isRequested = await sendMergeRequest(requestBody);
+    if (isRequested) setOpenMergeDialog(false);
   };
 
   return (
@@ -231,7 +243,25 @@ const MergeProcessTabs = ({
               </GroupSummary>
               <GroupDetails>
                 <Table
-                  tableBody={selectedGroup.students}
+                  tableBody={
+                    selectedGroup.students.map(
+                      ({
+                        fullName,
+                        id,
+                        address,
+                        email,
+                        department,
+                        projectType,
+                      }) => ({
+                        fullName,
+                        id,
+                        address,
+                        email,
+                        department,
+                        projectType,
+                      })
+                    ) as AvailableGroupsStudent[]
+                  }
                   tableHead={headingsMyGroup}
                 />
               </GroupDetails>
@@ -246,19 +276,39 @@ const MergeProcessTabs = ({
                 <Grid container>
                   <Grid item xs={7} sm={9}>
                     <Typography>
-                      {requestedGroup
+                      {requestedGroup.students
                         .map((student) => `${student.fullName}`)
                         .join(", ")}
                     </Typography>
                   </Grid>
                   <Grid item xs={5} sm={3} textAlign="end">
-                    <Typography>{requestedGroup.length} Members</Typography>
+                    <Typography>
+                      {requestedGroup.students.length} Members
+                    </Typography>
                   </Grid>
                 </Grid>
               </GroupSummary>
               <GroupDetails>
                 <Table
-                  tableBody={requestedGroup}
+                  tableBody={
+                    requestedGroup.students.map(
+                      ({
+                        fullName,
+                        academicNumber,
+                        address,
+                        email,
+                        department,
+                        projectType,
+                      }) => ({
+                        fullName,
+                        academicNumber,
+                        address,
+                        email,
+                        department,
+                        projectType,
+                      })
+                    ) as AvailableGroupsStudent[]
+                  }
                   tableHead={headingsRequestedGroup}
                 />
               </GroupDetails>

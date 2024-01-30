@@ -19,7 +19,14 @@ export default function GroupsTable() {
   const headings =
     withButton === "join-group"
       ? ["Student Name", "Academic Number", "Address", "Email"]
-      : ["Student Name", "Academic Number", "Address", "Email", "Department"];
+      : [
+          "Student Name",
+          "Academic Number",
+          "Address",
+          "Email",
+          "Department",
+          "Project Type",
+        ];
 
   const availableGroups =
     withButton === "join-group"

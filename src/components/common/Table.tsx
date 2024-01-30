@@ -18,6 +18,7 @@ import {
   sendPartnershipRequest,
 } from "../../hooks/useAvailableGroups";
 import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
+import useMergeGroupsStore from "../../state-management/Doctor/mergeGroupsStore";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -34,6 +35,10 @@ export default function Table({
   tableBody,
   withButton = false,
 }: Props) {
+  const availableMergeGroups = useMergeGroupsStore(
+    (s) => s.availableMergeGroups
+  );
+
   const [requested, setRequested] = useState(false);
   const [openMergeDialog, setOpenMergeDialog] = useState(false);
 
@@ -140,10 +145,15 @@ export default function Table({
           ))}
         </TableBody>
       </MuiTable>
+      {}
       <MergeGroupsProcessDialog
         openMergeDialog={openMergeDialog}
         setOpenMergeDialog={setOpenMergeDialog}
-        requestedGroup={tableBody as AvailableGroupsStudent[]}
+        requestedGroup={
+          availableMergeGroups.filter(
+            (group) => group.students === tableBody
+          )[0]
+        }
       />
     </TableContainer>
   );

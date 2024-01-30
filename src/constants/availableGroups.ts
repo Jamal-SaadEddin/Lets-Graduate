@@ -36,6 +36,7 @@ export interface AvailableGroupsStudent {
   studentId?: number;
   department?: string;
   projectId?: number;
+  projectType?: string;
 }
 
 export const students: Student[] = [

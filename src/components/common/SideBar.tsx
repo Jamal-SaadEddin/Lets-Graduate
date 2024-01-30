@@ -53,6 +53,7 @@ const SideBar = ({ children, subHeader = false }: Props) => {
       await getMyGroups(1355);
     } else if (item.link.includes("merge-groups")) {
       await getAvailableMergeGroups();
+      await getMyGroups(1355);
     } else if (item.link.includes("submissions") && user.type === "doctor") {
       await getSupervisorSubmissions(1355);
       await getMyGroups(1355);

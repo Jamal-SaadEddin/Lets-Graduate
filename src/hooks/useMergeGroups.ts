@@ -18,13 +18,14 @@ export const getAvailableMergeGroups = async () => {
     const groups: AvailableGroupsProjectItem[] = fetchedGroups.map((group) => ({
       ...group,
       students: group.students.map(
-        ({ fullName, studentId, address, email, department }) => ({
+        ({ fullName, studentId, address, email, department, projectType }) => ({
           fullName,
           academicNumber: Number(String(studentId).substring(0, 3)),
           address,
           email,
           department,
           id: studentId as number,
+          projectType,
         })
       ),
     }));
@@ -45,6 +46,7 @@ export const getAvailableMergeGroups = async () => {
         address: s.address,
         email: s.email,
         department: s.department,
+        projectType: s.projectType,
       }));
     setAllStudents(allStudents);
     setFilteredStudents(allStudents);
@@ -52,5 +54,20 @@ export const getAvailableMergeGroups = async () => {
     return {};
   } catch (error) {
     console.error("Error fetching available merge groups:", error);
+  }
+};
+
+export const sendMergeRequest = async (body: Object) => {
+  try {
+    const response = await axios.post<{ message: string }>(
+      `http://localhost:3000/merge/request`,
+      body
+    );
+    const message = response.data.message;
+
+    return message === "Notification created successfully";
+  } catch (error) {
+    console.error("Error sending merge request:", error);
+    return false;
   }
 };
