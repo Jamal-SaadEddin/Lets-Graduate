@@ -25,6 +25,25 @@ export const getAbstractSubmission = async (studentId: number) => {
   }
 };
 
+export const uploadNewAbstract = async (body: Object) => {
+  try {
+    const response = await axios.post<Submission>(
+      `http://localhost:3000/addSubmission/submission`,
+      body
+    );
+
+    const fetchedAbstract = response.data;
+    if (fetchedAbstract) {
+      setSubmission(fetchedAbstract);
+    }
+
+    return {};
+  } catch (error) {
+    console.error("Error uploading new Abstract:", error);
+    return {};
+  }
+};
+
 export const getSupervisorSubmissions = async (doctorId: number) => {
   try {
     const response = await axios.get<Submission[]>(

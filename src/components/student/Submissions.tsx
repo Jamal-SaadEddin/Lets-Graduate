@@ -15,16 +15,25 @@ import { Link } from "react-router-dom";
 import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import { getAbstractComments } from "../../hooks/useComments";
 import useUserStore from "../../state-management/userStore";
+import { StudentInfo } from "../../hooks/useAuth";
+import { uploadNewAbstract } from "../../hooks/useSubmissions";
 
 const Submissions = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
+  const userInfo = fetchedUser?.info as StudentInfo;
   if (fetchedUser?.type !== "student") return null;
   const submission = useViewedSubmissionStore((s) => s.submission);
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     // Handle the selected file here, e.g., log its details or send it to a server
     console.log("Selected File:", selectedFile);
+
+    const requestBody = {
+      projectId: userInfo.projectId,
+      file: `/src/assets/abstracts/${selectedFile?.name}`,
+    };
+    await uploadNewAbstract(requestBody);
   };
 
   return (

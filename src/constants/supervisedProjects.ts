@@ -5,6 +5,6 @@ export interface SupervisedProjectsStudent {
   email: string;
   department: string;
   studentId?: number;
-  projectType: "gp1" | "gp2" | null;
-  projectStatus: "not started" | "in progress" | "passed";
+  projectType?: "gp1" | "gp2" | null;
+  projectStatus?: "not started" | "in progress" | "passed";
 }

@@ -9,7 +9,6 @@ export interface User {
   password: string;
   department: string;
   address: string;
-  village?: string;
   mobileNumber: string;
   type: "student" | "doctor" | "admin";
   currentPeriod: string;
