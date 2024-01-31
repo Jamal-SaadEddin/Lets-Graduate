@@ -3,7 +3,7 @@ import { Submission } from "../constants/supervisorSubmissions";
 
 interface ViewedSubmission {
   submission: Submission | null;
-  setSubmission: (submission: Submission) => void;
+  setSubmission: (submission: Submission | null) => void;
   projectTitle: string;
   setProjectTitle: (projectTitle: string) => void;
 
@@ -29,7 +29,7 @@ const useViewedSubmissionStore = create<ViewedSubmission>((set) => ({
 
 export default useViewedSubmissionStore;
 
-export const setSubmission = (submission: Submission) =>
+export const setSubmission = (submission: Submission | null) =>
   useViewedSubmissionStore.getState().setSubmission(submission);
 
 export const setSubmissions = (submissions: Submission[]) =>

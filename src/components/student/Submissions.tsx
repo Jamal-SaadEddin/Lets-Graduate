@@ -16,13 +16,14 @@ import useViewedSubmissionStore from "../../state-management/viewedSubmissionSto
 import { getAbstractComments } from "../../hooks/useComments";
 import useUserStore from "../../state-management/userStore";
 import { StudentInfo } from "../../hooks/useAuth";
-import { uploadNewAbstract } from "../../hooks/useSubmissions";
+import { deleteAbstract, uploadNewAbstract } from "../../hooks/useSubmissions";
 
 const Submissions = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   const userInfo = fetchedUser?.info as StudentInfo;
   if (fetchedUser?.type !== "student") return null;
   const submission = useViewedSubmissionStore((s) => s.submission);
+  const setSubmission = useViewedSubmissionStore((s) => s.setSubmission);
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -34,6 +35,11 @@ const Submissions = () => {
       file: `/src/assets/abstracts/${selectedFile?.name}`,
     };
     await uploadNewAbstract(requestBody);
+  };
+
+  const handleDeleteAbstract = async () => {
+    const isDeleted = await deleteAbstract(submission?.submissionId as number);
+    isDeleted && setSubmission(null);
   };
 
   return (
@@ -93,6 +99,7 @@ const Submissions = () => {
                 size="small"
                 startIcon={<DeleteIcon />}
                 sx={{ margin: 1 }}
+                onClick={handleDeleteAbstract}
               >
                 Delete Abstract
               </Button>

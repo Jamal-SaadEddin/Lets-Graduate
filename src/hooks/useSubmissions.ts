@@ -28,7 +28,7 @@ export const getAbstractSubmission = async (studentId: number) => {
 export const uploadNewAbstract = async (body: Object) => {
   try {
     const response = await axios.post<Submission>(
-      `http://localhost:3000/addSubmission/submission`,
+      `http://localhost:3000/submissions/submissionAdd`,
       body
     );
 
@@ -41,6 +41,19 @@ export const uploadNewAbstract = async (body: Object) => {
   } catch (error) {
     console.error("Error uploading new Abstract:", error);
     return {};
+  }
+};
+
+export const deleteAbstract = async (submissionId: number) => {
+  try {
+    const response = await axios.delete<{ message: string }>(
+      `http://localhost:3000/submissions/submissionDelete?submissionId=${submissionId}`
+    );
+    const message = response.data.message;
+    return message === "Account data deleted successfully";
+  } catch (error) {
+    console.error("Error deleting Abstract:", error);
+    return false;
   }
 };
 
