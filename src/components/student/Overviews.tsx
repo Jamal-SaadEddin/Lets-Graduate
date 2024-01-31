@@ -8,16 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import useUserStore from "../../state-management/userStore";
 
 export const Overviews = () => {
+  const user = useUserStore((s) => s.fetchedUser);
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
         <Grid container spacing={3} columns={1}>
           <Grid item xs={12}>
-            <Typography variant="h4">
-              Welcome {" " || "back,"} {"Jamal"}!
-            </Typography>
+            <Typography variant="h4">Welcome {user?.firstName}!</Typography>
           </Grid>
         </Grid>
       </Paper>
@@ -92,45 +92,45 @@ export const Overviews = () => {
       </Paper>
       {/* Changable area based on student state  */}
       {
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            my: 4,
-          }}
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography variant="h4">Project Overview</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="subtitle1">
-                Project Title: {"Mohito Maker Machine"}
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="subtitle1">Project Members: {5}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="subtitle1">
-                Project Supervisor: {"Dr. Manar Qamhie" || "Not chosen yet"}
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="subtitle1">
-                Project Type: Graduation Project {1 || 2}
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Link to="my-project">
-                <Button variant="outlined" color="warning">
-                  Show More Details
-                </Button>
-              </Link>
-            </Grid>
-          </Grid>
-        </Paper>
+        // <Paper
+        //   sx={{
+        //     p: 2,
+        //     display: "flex",
+        //     flexDirection: "column",
+        //     my: 4,
+        //   }}
+        // >
+        //   <Grid container spacing={2}>
+        //     <Grid item xs={12}>
+        //       <Typography variant="h4">Project Overview</Typography>
+        //     </Grid>
+        //     <Grid item xs={6}>
+        //       <Typography variant="subtitle1">
+        //         Project Title: {"Mohito Maker Machine"}
+        //       </Typography>
+        //     </Grid>
+        //     <Grid item xs={6}>
+        //       <Typography variant="subtitle1">Project Members: {5}</Typography>
+        //     </Grid>
+        //     <Grid item xs={6}>
+        //       <Typography variant="subtitle1">
+        //         Project Supervisor: {"Dr. Manar Qamhie" || "Not chosen yet"}
+        //       </Typography>
+        //     </Grid>
+        //     <Grid item xs={6}>
+        //       <Typography variant="subtitle1">
+        //         Project Type: Graduation Project {1 || 2}
+        //       </Typography>
+        //     </Grid>
+        //     <Grid item xs={6}>
+        //       <Link to="my-project">
+        //         <Button variant="outlined" color="warning">
+        //           Show More Details
+        //         </Button>
+        //       </Link>
+        //     </Grid>
+        //   </Grid>
+        // </Paper>
       }
       <Paper
         sx={{
@@ -151,25 +151,29 @@ export const Overviews = () => {
             gap={2}
           >
             <Avatar alt="Remy Sharp" src="" sx={{ width: 80, height: 80 }} />
-            <Typography variant="h6">{"Jamal SaadEddin"}</Typography>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Typography variant="subtitle1">
-              Registration Number: {11923604}
+            <Typography variant="h6">
+              {user?.firstName + " " + user?.lastName}
             </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">
-              Department: {"Computer Engineering - هندسة الحاسوب"}
+              Registration Number: {user?.id}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="subtitle1">
+              Department: {user?.department}
             </Typography>
           </Grid>
 
           <Grid item xs={12} md={6}>
-            <Typography variant="subtitle1">Address: {"Nablus"}</Typography>
+            <Typography variant="subtitle1">
+              Address: {user?.address}
+            </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1">
-              Mobile Phone: {"0599098598"}
+              Mobile Phone: {user?.mobileNumber}
             </Typography>
           </Grid>
         </Grid>

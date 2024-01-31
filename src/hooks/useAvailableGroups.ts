@@ -35,7 +35,7 @@ export const getAvailableGroups = async (
 
     var projectId = -1000;
     const nonJoinedStudents = await axios.get<any[]>(
-      `http://localhost:3000/projects/fetchProject/${studentId}`
+      `http://localhost:3000/findPartners2/studentsNotJoined?studentId=${studentId}`
     );
     const fetchedStudents = nonJoinedStudents.data.map((s) => ({
       projectId: projectId++,

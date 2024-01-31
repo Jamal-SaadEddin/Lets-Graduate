@@ -51,9 +51,9 @@ const router = createBrowserRouter([
       { path: "notification/:id", element: <Notification /> },
       { path: "supervised-projects", element: <SupervisedProjects /> },
       { path: "students-submissions", element: <SupervisorSubmissions /> },
-      { path: "submissions/:id", element: <Submission /> },
+      { path: "students-submissions/:id", element: <Submission /> },
       {
-        path: "submissions/:id/comments",
+        path: "students-submissions/:id/comments",
         element: <Comments canAddComments />,
       },
       { path: "merge-groups", element: <MergeGroups /> },

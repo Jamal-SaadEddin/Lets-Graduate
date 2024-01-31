@@ -64,7 +64,7 @@ const Submission = () => {
               color="primary"
               gutterBottom
             >
-              <Link to={"/submissions"}>
+              <Link to={"/students-submissions"}>
                 <Button
                   variant="text"
                   startIcon={<ArrowBackIosIcon />}
@@ -85,7 +85,9 @@ const Submission = () => {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Link to={`/submissions/${submission?.submissionId}/comments`}>
+            <Link
+              to={`/students-submissions/${submission?.submissionId}/comments`}
+            >
               <Button
                 variant="contained"
                 size="small"

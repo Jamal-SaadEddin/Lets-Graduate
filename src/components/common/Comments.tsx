@@ -68,7 +68,7 @@ const Comments = ({ canAddComments = false }: Props) => {
               <Link
                 to={
                   canAddComments
-                    ? `/submissions/${submission?.submissionId}`
+                    ? `/students-submissions/${submission?.submissionId}`
                     : "/submissions"
                 }
               >
