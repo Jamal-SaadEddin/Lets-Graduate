@@ -1,10 +1,19 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import GroupsTable from "./GroupsTable";
 import useUserStore from "../../state-management/userStore";
+import PageNotAccessible from "../common/PageNotAccessible";
 
 const SupervisedProjects = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   if (fetchedUser?.type !== "doctor") return null;
+
+  if (
+    fetchedUser.currentPeriod === "answering-prerequisites" ||
+    fetchedUser.currentPeriod === "create-partnerships" ||
+    fetchedUser.currentPeriod === "vacation"
+  ) {
+    return <PageNotAccessible title="You don't have any groups at this time" />;
+  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper

@@ -1,10 +1,15 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import GroupsTable from "../student/GroupsTable";
 import useUserStore from "../../state-management/userStore";
+import PageNotAccessible from "../common/PageNotAccessible";
 
 const MergeGroups = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   if (fetchedUser?.type !== "doctor") return null;
+
+  if (fetchedUser.currentPeriod !== "registration-to-supervisors") {
+    return <PageNotAccessible title="Merge Groups" />;
+  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper
