@@ -7,8 +7,9 @@ export interface Department {
   maxNoOfProjPerDoct: number;
   maxNoOfStuPerDoct: number;
   currentPeriod:
+    | "answering-prerequisites"
     | "create-partnerships"
-    | "registration"
+    | "registration-to-supervisors"
     | "abstract-submission"
     | "evaluating-students"
     | "vacation";

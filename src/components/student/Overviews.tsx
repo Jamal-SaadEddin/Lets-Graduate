@@ -34,7 +34,7 @@ export const Overviews = () => {
             <Typography variant="h4">Quick Overview</Typography>
           </Grid>
           {/* Changable area based on student state  */}
-          {
+          {user?.currentPeriod === "answering-prerequisites" && (
             <Grid item xs={12}>
               <Typography variant="subtitle1">
                 What graduation project do you intend to register?
@@ -50,9 +50,9 @@ export const Overviews = () => {
                 </Link>
               </Typography>
             </Grid>
-          }
+          )}
           {/* Changable area based on student state  */}
-          {
+          {user?.currentPeriod === "create-partnerships" && (
             <Grid item xs={12}>
               <Typography variant="subtitle1">
                 Join a group of students and start developing your project with
@@ -64,9 +64,9 @@ export const Overviews = () => {
                 </Link>
               </Typography>
             </Grid>
-          }
+          )}
           {/* Changable area based on student state  */}
-          {
+          {user?.currentPeriod === "registration-to-supervisors" && (
             <Grid item xs={12}>
               <Typography variant="subtitle1">
                 Supervisors Section is Available now! Hurry up and book with
@@ -78,7 +78,7 @@ export const Overviews = () => {
                 </Link>
               </Typography>
             </Grid>
-          }
+          )}
           <Grid item xs={12}>
             <MuiLink
               href="https://eng.najah.edu/ar/study/graduation-projects"

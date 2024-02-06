@@ -11,7 +11,13 @@ export interface User {
   address: string;
   mobileNumber: string;
   type: "student" | "doctor" | "admin";
-  currentPeriod: string;
+  currentPeriod:
+    | "answering-prerequisites"
+    | "create-partnerships"
+    | "registration-to-supervisors"
+    | "abstract-submission"
+    | "evaluating-students"
+    | "vacation";
   info: StudentInfo | DoctorInfo;
 }
 

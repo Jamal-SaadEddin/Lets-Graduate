@@ -1,10 +1,15 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import GroupsTable from "./GroupsTable";
 import useUserStore from "../../state-management/userStore";
+import PageNotAccessible from "../common/PageNotAccessible";
 
 const AvailableGroups = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   if (fetchedUser?.type !== "student") return null;
+
+  if (fetchedUser.currentPeriod !== "create-partnerships") {
+    return <PageNotAccessible title="Connect to Your Partners" />;
+  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper

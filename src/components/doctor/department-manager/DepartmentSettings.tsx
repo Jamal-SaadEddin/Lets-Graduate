@@ -349,18 +349,24 @@ const DepartmentSettings = () => {
                     setDepartmentSettings({
                       ...departmentSettings,
                       currentPeriod: event.target.value as
+                        | "answering-prerequisites"
                         | "create-partnerships"
-                        | "registration"
+                        | "registration-to-supervisors"
                         | "abstract-submission"
                         | "evaluating-students"
                         | "vacation",
                     } as Department)
                   }
                 >
+                  <MenuItem value="answering-prerequisites">
+                    answering-prerequisites
+                  </MenuItem>
                   <MenuItem value="create-partnerships">
                     create-partnerships
                   </MenuItem>
-                  <MenuItem value="registration">registration</MenuItem>
+                  <MenuItem value="registration-to-supervisors">
+                    registration-to-supervisors
+                  </MenuItem>
                   <MenuItem value="abstract-submission">
                     abstract-submission
                   </MenuItem>
