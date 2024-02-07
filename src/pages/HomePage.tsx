@@ -179,12 +179,7 @@ export default function HomePage() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar
-          position="absolute"
-          color="primary"
-          open={openDrawer}
-          enableColorOnDark
-        >
+        <AppBar position="absolute" color="primary" enableColorOnDark>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -304,31 +299,33 @@ export default function HomePage() {
             </Box>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={openDrawer}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">
-            <SideBar children={sideBarButtons()} />
-            {doctorInfo?.isDepartmentManager && <Divider sx={{ my: 1 }} />}
-            {doctorInfo?.isDepartmentManager && (
-              <SideBar
-                children={departmentManagerSideBarButtons}
-                subHeader="Department Management"
-              />
-            )}
-          </List>
-        </Drawer>
+        {user.type !== "admin" && (
+          <Drawer variant="permanent" open={openDrawer}>
+            <Toolbar
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-end",
+                px: [1],
+              }}
+            >
+              <IconButton onClick={toggleDrawer}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </Toolbar>
+            <Divider />
+            <List component="nav">
+              <SideBar children={sideBarButtons()} />
+              {doctorInfo?.isDepartmentManager && <Divider sx={{ my: 1 }} />}
+              {doctorInfo?.isDepartmentManager && (
+                <SideBar
+                  children={departmentManagerSideBarButtons}
+                  subHeader="Department Management"
+                />
+              )}
+            </List>
+          </Drawer>
+        )}
         <Box
           component="main"
           sx={{
