@@ -218,7 +218,7 @@ export default function HomePage() {
             >
               {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
-            <NotificationsPopover />
+            {user.type !== "admin" && <NotificationsPopover />}
             <Box sx={{ flexGrow: 0, mx: "1rem" }}>
               <Tooltip title="Account settings">
                 <IconButton
@@ -266,12 +266,14 @@ export default function HomePage() {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={() => handleCloseUserMenu("my-profile")}>
-                  <ListItemIcon>
-                    <PersonIcon />
-                  </ListItemIcon>
-                  My Profile
-                </MenuItem>
+                {user.type !== "admin" && (
+                  <MenuItem onClick={() => handleCloseUserMenu("my-profile")}>
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    My Profile
+                  </MenuItem>
+                )}
                 <MenuItem onClick={() => handleCloseUserMenu("/")}>
                   <ListItemIcon>
                     <Dashboard />
@@ -318,8 +320,8 @@ export default function HomePage() {
           <Divider />
           <List component="nav">
             <SideBar children={sideBarButtons()} />
-            {doctorInfo.isDepartmentManager && <Divider sx={{ my: 1 }} />}
-            {doctorInfo.isDepartmentManager && (
+            {doctorInfo?.isDepartmentManager && <Divider sx={{ my: 1 }} />}
+            {doctorInfo?.isDepartmentManager && (
               <SideBar
                 children={departmentManagerSideBarButtons}
                 subHeader="Department Management"

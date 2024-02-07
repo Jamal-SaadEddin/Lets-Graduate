@@ -19,7 +19,7 @@ import DeleteAccountDialog from "./DeleteAccountDialog";
 const AccountSettings = () => {
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
-  const { currentUser } = useUserStore();
+  const { fetchedUser } = useUserStore();
 
   const [openChangePasswordDialog, setOpenChangePasswordDialog] =
     React.useState(false);
@@ -51,7 +51,7 @@ const AccountSettings = () => {
             <TextField
               fullWidth
               label="Email Address"
-              value={currentUser?.email}
+              value={fetchedUser?.email}
               disabled
               sx={{
                 "& input.MuiInputBase-input:disabled": {
@@ -119,25 +119,29 @@ const AccountSettings = () => {
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          <Grid item xs={12}>
-            <Button
-              color="error"
-              variant="outlined"
-              endIcon={<DeleteIcon />}
-              onClick={() => setOpenDeleteAccountDialog(true)}
-            >
-              Delete Account
-            </Button>
-          </Grid>
+          {fetchedUser?.type !== "admin" && (
+            <Grid item xs={12}>
+              <Button
+                color="error"
+                variant="outlined"
+                endIcon={<DeleteIcon />}
+                onClick={() => setOpenDeleteAccountDialog(true)}
+              >
+                Delete Account
+              </Button>
+            </Grid>
+          )}
         </Grid>
         <ChangePasswordDialog
           openChangePasswordDialog={openChangePasswordDialog}
           setOpenChangePasswordDialog={setOpenChangePasswordDialog}
         />
-        <DeleteAccountDialog
-          openDeleteAccountDialog={openDeleteAccountDialog}
-          setOpenDeleteAccountDialog={setOpenDeleteAccountDialog}
-        />
+        {fetchedUser?.type !== "admin" && (
+          <DeleteAccountDialog
+            openDeleteAccountDialog={openDeleteAccountDialog}
+            setOpenDeleteAccountDialog={setOpenDeleteAccountDialog}
+          />
+        )}
       </Paper>
     </Container>
   );

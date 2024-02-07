@@ -3,22 +3,22 @@ import { setFetchedUser } from "../state-management/userStore";
 
 export interface User {
   id: number;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
-  password: string;
-  department: string;
-  address: string;
-  mobileNumber: string;
+  password?: string;
+  department?: string;
+  address?: string;
+  mobileNumber?: string;
   type: "student" | "doctor" | "admin";
-  currentPeriod:
+  currentPeriod?:
     | "answering-prerequisites"
     | "create-partnerships"
     | "registration-to-supervisors"
     | "abstract-submission"
     | "evaluating-students"
     | "vacation";
-  info: StudentInfo | DoctorInfo;
+  info?: StudentInfo | DoctorInfo;
 }
 
 export interface StudentInfo {

@@ -26,6 +26,8 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import SignUp from "./pages/auth/SignUp";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import VerifyEmailForPassword from "./pages/auth/VerifyEmailForPassword";
+import CreateDoctorAccount from "./components/admin/CreateDoctorAccount";
+import DepartmentsManagers from "./components/admin/DepartmentsManagers";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,8 @@ const router = createBrowserRouter([
         element: <DepartmentPrerequisites />,
       },
       { path: "department-settings", element: <DepartmentSettings /> },
+      { path: "create-doctor-account", element: <CreateDoctorAccount /> },
+      { path: "departments-managers", element: <DepartmentsManagers /> },
     ],
   },
   { path: "/login", element: <Login /> },
