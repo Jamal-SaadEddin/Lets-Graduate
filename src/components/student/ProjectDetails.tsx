@@ -52,6 +52,7 @@ const ProjectDetails = () => {
 
   if (
     user.currentPeriod === "answering-prerequisites" ||
+    user.currentPeriod === "evaluating-students" ||
     user.currentPeriod === "vacation"
   ) {
     return <PageNotAccessible title="There is no information to display" />;
@@ -93,12 +94,16 @@ const ProjectDetails = () => {
           <Grid item xs={12}>
             <Divider />
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6" paddingBottom={2} color="primary">
-              {mySupervisors.length === 1 ? "My Supervisor" : "My Supervisors"}
-            </Typography>
-            <Table tableHead={supervisorHeadings} tableBody={mySupervisors} />
-          </Grid>
+          {user.currentPeriod !== "create-partnerships" && (
+            <Grid item xs={12}>
+              <Typography variant="h6" paddingBottom={2} color="primary">
+                {mySupervisors.length === 1
+                  ? "My Supervisor"
+                  : "My Supervisors"}
+              </Typography>
+              <Table tableHead={supervisorHeadings} tableBody={mySupervisors} />
+            </Grid>
+          )}
           <Grid item xs={12}>
             <Divider />
           </Grid>

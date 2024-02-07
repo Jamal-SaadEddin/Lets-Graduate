@@ -2,9 +2,11 @@ import { Container, Grid, Paper, Typography } from "@mui/material";
 import GroupsTable from "./GroupsTable";
 import useUserStore from "../../state-management/userStore";
 import PageNotAccessible from "../common/PageNotAccessible";
+import { StudentInfo } from "../../hooks/useAuth";
 
 const AvailableGroups = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
+  const studentInfo = fetchedUser?.info as StudentInfo;
   if (fetchedUser?.type !== "student") return null;
 
   if (fetchedUser.currentPeriod !== "create-partnerships") {
@@ -43,7 +45,19 @@ const AvailableGroups = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <GroupsTable />
+            {!studentInfo.isWithGroup && <GroupsTable />}
+            {studentInfo.isWithGroup && (
+              <Typography variant="h6">
+                You can't send any partnership requests, because you have been
+                connected with your partner/s.
+                <br />
+                If any student wants to join your group, he must be alone, and
+                he must send you the partnership request.
+                <br />
+                And you will receive the notification from him to accept or
+                decline.
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </Paper>

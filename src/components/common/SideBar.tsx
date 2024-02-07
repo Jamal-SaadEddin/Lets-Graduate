@@ -18,8 +18,16 @@ const SideBar = ({ children, subHeader = false }: Props) => {
   const user = useUserStore((s) => s.fetchedUser);
 
   const handleClick = async (item: SideBarButton) => {
-    if (item.link.includes("prerequisites/gp")) {
-      const projectType = item.link === "prerequisites/gp/1" ? "gp1" : "gp2";
+    if (
+      item.link.includes("department-prerequisites/gp") ||
+      item.link.includes("prerequisites/gp")
+    ) {
+      const projectType =
+        item.link === "department-prerequisites/gp/1"
+          ? "gp1"
+          : item.link.includes("prerequisites/gp/1")
+          ? "gp1"
+          : "gp2";
       await getPrerequisites(user?.department as string, projectType);
     }
 

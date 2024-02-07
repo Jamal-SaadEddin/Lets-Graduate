@@ -69,11 +69,12 @@ export default function HomePage() {
     if (user?.type === "student") {
       switch (user.currentPeriod) {
         case "create-partnerships":
-          await getAvailableGroups(
-            user?.department as string,
-            studentInfo.projectOneState === "in progress" ? "gp1" : "gp2",
-            user?.id as number
-          );
+          if (!studentInfo.isWithGroup)
+            await getAvailableGroups(
+              user?.department as string,
+              studentInfo.projectOneState === "in progress" ? "gp1" : "gp2",
+              user?.id as number
+            );
           await getMyPartners(user?.id as number);
           await getMyProjectInfo(user?.id as number);
           break;
@@ -286,7 +287,12 @@ export default function HomePage() {
                   </ListItemIcon>
                   Edit Account
                 </MenuItem>
-                <MenuItem onClick={() => handleCloseUserMenu("/login")}>
+                <MenuItem
+                  onClick={() => {
+                    handleCloseUserMenu("/login");
+                    window.location.reload();
+                  }}
+                >
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>

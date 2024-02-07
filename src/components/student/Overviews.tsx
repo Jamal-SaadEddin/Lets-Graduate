@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import useUserStore from "../../state-management/userStore";
+import { getPrerequisites } from "../../hooks/usePrerequisites";
 
 export const Overviews = () => {
   const user = useUserStore((s) => s.fetchedUser);
@@ -38,12 +39,22 @@ export const Overviews = () => {
             <Grid item xs={12}>
               <Typography variant="subtitle1">
                 What graduation project do you intend to register?
-                <Link to="prerequisites/gp/1">
+                <Link
+                  to="prerequisites/gp/1"
+                  onClick={async () =>
+                    await getPrerequisites(user?.department as string, "gp1")
+                  }
+                >
                   <Button variant="contained" sx={{ m: 2 }}>
                     Graduation Project 1
                   </Button>
                 </Link>
-                <Link to="prerequisites/gp/2">
+                <Link
+                  to="prerequisites/gp/2"
+                  onClick={async () =>
+                    await getPrerequisites(user?.department as string, "gp2")
+                  }
+                >
                   <Button variant="contained" sx={{ mx: 2 }}>
                     Graduation Project 2
                   </Button>
@@ -74,6 +85,34 @@ export const Overviews = () => {
                 <Link to="available-supervisors">
                   <Button variant="contained" sx={{ mx: 2 }}>
                     Show Supervisors
+                  </Button>
+                </Link>
+              </Typography>
+            </Grid>
+          )}
+          {/* Changable area based on student state  */}
+          {user?.currentPeriod === "abstract-submission" && (
+            <Grid item xs={12}>
+              <Typography variant="subtitle1">
+                Abstract Submissions period has opened! Please write a great
+                abstract and submit it to your supervisor
+                <Link to="submissions">
+                  <Button variant="contained" sx={{ mx: 2 }}>
+                    Show Submission Page
+                  </Button>
+                </Link>
+              </Typography>
+            </Grid>
+          )}
+          {/* Changable area based on student state  */}
+          {user?.currentPeriod === "evaluating-students" && (
+            <Grid item xs={12}>
+              <Typography variant="subtitle1">
+                The semester has ended, please wait for the result to appear
+                under your profile details page
+                <Link to="my-profile">
+                  <Button variant="contained" sx={{ mx: 2 }}>
+                    Show My Profile
                   </Button>
                 </Link>
               </Typography>
