@@ -1,3 +1,4 @@
+import CssBaseline from "@mui/material/CssBaseline";
 import { Dashboard, Logout } from "@mui/icons-material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -14,7 +15,6 @@ import {
   createTheme,
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -22,6 +22,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
+import { useEffect } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Copyright from "../components/common/Copyright";
 import { AppBar, Drawer } from "../components/common/DashboardLayout";
@@ -30,25 +31,99 @@ import SideBar from "../components/common/SideBar";
 import sideBarButtons, {
   departmentManagerSideBarButtons,
 } from "../constants/sideBarButtons";
-import { DoctorInfo } from "../hooks/useAuth";
-import useThemeStore from "../state-management/themeStore";
-import { useEffect } from "react";
+import { DoctorInfo, StudentInfo } from "../hooks/useAuth";
+import { getAvailableGroups } from "../hooks/useAvailableGroups";
+import { getAvailableSupervisors } from "../hooks/useAvailableSupervisors";
+import { getDepartmentSettings } from "../hooks/useDepartmentSettings";
+import { getAvailableMergeGroups } from "../hooks/useMergeGroups";
+import { getMyGroups } from "../hooks/useMyGroups";
+import {
+  getMyPartners,
+  getMyProjectInfo,
+  getMySupervisors,
+} from "../hooks/useMyProject";
 import { getNotifications } from "../hooks/useNotifications";
+import {
+  getAbstractSubmission,
+  getMyEvaluatingGroups,
+  getSupervisorSubmissions,
+} from "../hooks/useSubmissions";
+import useThemeStore from "../state-management/themeStore";
 import useUserStore from "../state-management/userStore";
+import {
+  getDoctorProfileInfo,
+  getStudentProfileInfo,
+} from "../hooks/useMyProfile";
 
 export default function HomePage() {
   const user = useUserStore((s) => s.fetchedUser);
-  const userInfo = user?.info as DoctorInfo;
+  const setCurrentUser = useUserStore((s) => s.setCurrentUser);
+  const studentInfo = user?.info as StudentInfo;
+  const doctorInfo = user?.info as DoctorInfo;
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
 
-  const handleNotifications = async () => {
+  const handleUserSite = async () => {
     await getNotifications(user?.id as number);
+
+    if (user?.type === "student") {
+      switch (user.currentPeriod) {
+        case "create-partnerships":
+          await getAvailableGroups(
+            user?.department as string,
+            studentInfo.projectOneState === "in progress" ? "gp1" : "gp2",
+            user?.id as number
+          );
+          await getMyPartners(user?.id as number);
+          await getMyProjectInfo(user?.id as number);
+          break;
+        case "registration-to-supervisors":
+          await getAvailableSupervisors(user?.id as number);
+          await getMyPartners(user?.id as number);
+          await getMySupervisors(user?.id as number);
+          await getMyProjectInfo(user?.id as number);
+          break;
+        case "abstract-submission":
+          await getAbstractSubmission(user?.id as number);
+          await getMyPartners(user?.id as number);
+          await getMySupervisors(user?.id as number);
+          await getMyProjectInfo(user?.id as number);
+          break;
+
+        default:
+          break;
+      }
+      const fetchedStudent = await getStudentProfileInfo(user?.id as number);
+      setCurrentUser(fetchedStudent);
+    } else if (user?.type === "doctor") {
+      switch (user.currentPeriod) {
+        case "registration-to-supervisors":
+          await getAvailableMergeGroups(user?.id as number);
+          await getMyGroups(user?.id as number);
+          break;
+        case "abstract-submission":
+          await getSupervisorSubmissions(user?.id as number);
+          await getMyGroups(user?.id as number);
+          if (doctorInfo.isProjectsCommitteeMember)
+            await getMyEvaluatingGroups(user?.id as number);
+          break;
+        case "evaluating-students":
+          await getMyGroups(user?.id as number);
+          break;
+
+        default:
+          break;
+      }
+      if (doctorInfo.isDepartmentManager)
+        await getDepartmentSettings(user?.id as number);
+      const fetchedDoctor = await getDoctorProfileInfo(user?.id as number);
+      setCurrentUser(fetchedDoctor);
+    }
   };
 
   useEffect(() => {
     // Code here will run just like componentDidMount
-    handleNotifications();
+    handleUserSite();
   }, []);
 
   const theme = React.useMemo(
@@ -237,8 +312,8 @@ export default function HomePage() {
           <Divider />
           <List component="nav">
             <SideBar children={sideBarButtons()} />
-            {userInfo.isDepartmentManager && <Divider sx={{ my: 1 }} />}
-            {userInfo.isDepartmentManager && (
+            {doctorInfo.isDepartmentManager && <Divider sx={{ my: 1 }} />}
+            {doctorInfo.isDepartmentManager && (
               <SideBar
                 children={departmentManagerSideBarButtons}
                 subHeader="Department Management"

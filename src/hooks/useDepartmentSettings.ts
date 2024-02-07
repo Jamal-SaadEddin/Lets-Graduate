@@ -1,6 +1,9 @@
 import axios from "axios";
 import { Department } from "../constants/departments";
-import { setDepartmentSettings } from "../state-management/Doctor/departmentSettingsStore";
+import {
+  setDepartmentSettings,
+  setOldSettings,
+} from "../state-management/Doctor/departmentSettingsStore";
 
 export const getDepartmentSettings = async (doctorId: number) => {
   try {
@@ -9,6 +12,7 @@ export const getDepartmentSettings = async (doctorId: number) => {
     );
     const fetchedDepartment = response.data;
     setDepartmentSettings(fetchedDepartment);
+    setOldSettings(fetchedDepartment);
 
     return fetchedDepartment;
   } catch (error) {

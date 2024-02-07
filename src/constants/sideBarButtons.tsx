@@ -45,15 +45,15 @@ export const sideBarButtons = () => {
           link: "available-groups",
         },
         {
+          icon: <SupervisedUserCircleIcon />,
+          primaryText: "Register to a Supervisor",
+          link: "available-supervisors",
+        },
+        {
           icon: <GroupWorkIcon />,
           primaryText: "My Project",
           secondaryText: "Information & Details",
           link: "my-project",
-        },
-        {
-          icon: <SupervisedUserCircleIcon />,
-          primaryText: "Register to a Supervisor",
-          link: "available-supervisors",
         },
         {
           icon: <PictureAsPdfIcon />,
@@ -75,14 +75,14 @@ export const sideBarButtons = () => {
           link: "supervised-projects",
         },
         {
-          icon: <PictureAsPdfIcon />,
-          primaryText: "Submissions",
-          link: "students-submissions",
-        },
-        {
           icon: <MergeIcon />,
           primaryText: "Merge Groups",
           link: "merge-groups",
+        },
+        {
+          icon: <PictureAsPdfIcon />,
+          primaryText: "Submissions",
+          link: "students-submissions",
         },
         {
           icon: <GradingIcon />,

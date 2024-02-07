@@ -9,10 +9,10 @@ import {
   setFilteredStudents,
 } from "../state-management/searchboxStore";
 
-export const getAvailableMergeGroups = async () => {
+export const getAvailableMergeGroups = async (doctorId: number) => {
   try {
     const response = await axios.get<AvailableGroupsProjectItem[]>(
-      `http://localhost:3000/allGroups/groups`
+      `http://localhost:3000/allGroups/groups?doctorId=${doctorId}`
     );
     const fetchedGroups = response.data;
     const groups: AvailableGroupsProjectItem[] = fetchedGroups.map((group) => ({

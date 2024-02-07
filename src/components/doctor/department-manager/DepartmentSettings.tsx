@@ -18,16 +18,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import { Theme, useTheme } from "@mui/material/styles";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Department } from "../../../constants/departments";
+import { DoctorInfo } from "../../../hooks/useAuth";
+import { updateDepartmentSettings } from "../../../hooks/useDepartmentSettings";
 import useDepartmentSettingsStore from "../../../state-management/Doctor/departmentSettingsStore";
 import useThemeStore from "../../../state-management/themeStore";
-import {
-  getDepartmentSettings,
-  updateDepartmentSettings,
-} from "../../../hooks/useDepartmentSettings";
 import useUserStore from "../../../state-management/userStore";
-import { DoctorInfo } from "../../../hooks/useAuth";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -53,8 +50,6 @@ function getStyles(
   };
 }
 
-let oldSettings: Department | undefined = undefined;
-
 const DepartmentSettings = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   const userInfo = fetchedUser?.info as DoctorInfo;
@@ -65,21 +60,13 @@ const DepartmentSettings = () => {
 
   const [saved, setSaved] = useState(false);
 
-  const handleDepartmentSettings = async () => {
-    oldSettings = await getDepartmentSettings(fetchedUser.id as number);
-  };
-
-  useEffect(() => {
-    // Code here will run just like componentDidMount
-    handleDepartmentSettings();
-  }, []);
-
   const departmentSettings = useDepartmentSettingsStore(
     (s) => s.departmentSettings
   );
   const setDepartmentSettings = useDepartmentSettingsStore(
     (s) => s.setDepartmentSettings
   );
+  const oldSettings = useDepartmentSettingsStore((s) => s.oldSettings);
 
   const [disabled, setDisabled] = React.useState(true);
 

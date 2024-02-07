@@ -41,7 +41,7 @@ export const Overviews = () => {
                 supervise them at that time.
               </Typography>
             )}
-            {user?.currentPeriod === "registration" && (
+            {user?.currentPeriod === "registration-to-supervisors" && (
               <Typography variant="subtitle1">
                 The {user.department} Department is currently going through a
                 period of student registrations with the supervising doctors.{" "}

@@ -22,53 +22,37 @@ import {
 } from "@mui/material";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { addresses } from "../../constants/addresses";
 import { DoctorInfo, StudentInfo } from "../../constants/myProfile";
 import {
-  getDoctorProfileInfo,
-  getStudentProfileInfo,
   updateDoctorProfileInfo,
   updateStudentProfileInfo,
 } from "../../hooks/useMyProfile";
 import useThemeStore from "../../state-management/themeStore";
 import useUserStore from "../../state-management/userStore";
 
-let user: StudentInfo | DoctorInfo | undefined = {
-  fullName: "",
-  id: 0,
-  firstName: "",
-  lastName: "",
-  email: "",
-  department: "",
-  address: "",
-  mobileNumber: "",
-  gp1State: "",
-  gp2State: "",
-  projectType: "",
-  isWithGroup: false,
-};
-
 const ProfileDetails = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   const withGPStates = fetchedUser?.type === "student";
   const { currentUser, setCurrentUser } = useUserStore();
   const currentStudentUser = currentUser as StudentInfo;
-
-  const [saved, setSaved] = useState(false);
-
-  const handleProfileInfo = async () => {
-    user = withGPStates
-      ? await getStudentProfileInfo(fetchedUser?.id as number)
-      : await getDoctorProfileInfo(fetchedUser?.id as number);
-    setCurrentUser(user);
-    setAddress(user?.address);
+  const user: StudentInfo | DoctorInfo | undefined = {
+    fullName: fetchedUser?.firstName + " " + fetchedUser?.lastName,
+    id: fetchedUser?.id as number,
+    firstName: fetchedUser?.firstName as string,
+    lastName: fetchedUser?.lastName as string,
+    email: fetchedUser?.email as string,
+    department: fetchedUser?.department as string,
+    address: fetchedUser?.address as string,
+    mobileNumber: fetchedUser?.mobileNumber as string,
+    gp1State: currentStudentUser.gp1State,
+    gp2State: currentStudentUser.gp2State,
+    projectType: currentStudentUser.projectType,
+    isWithGroup: currentStudentUser.isWithGroup,
   };
 
-  useEffect(() => {
-    // Code here will run just like componentDidMount
-    handleProfileInfo();
-  }, []);
+  const [saved, setSaved] = useState(false);
 
   const mode = useThemeStore((s) => s.mode);
 
@@ -162,7 +146,7 @@ const ProfileDetails = () => {
               sx={{ width: 80, height: 80 }}
             />
             <Typography variant="h6">
-              {currentUser?.firstName} {currentUser?.lastName}
+              {fetchedUser?.firstName} {fetchedUser?.lastName}
             </Typography>
           </Grid>
           <Grid item xs={6}>
