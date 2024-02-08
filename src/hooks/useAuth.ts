@@ -48,3 +48,16 @@ export const useAuth = async (userId: number, password: string) => {
     return null;
   }
 };
+
+export const createNewUserAccount = async (body: Object) => {
+  try {
+    const response = await axios.post<{ message: string }>(
+      `http://localhost:3000/signUp/user`,
+      body
+    );
+    const message = response.data.message;
+    return message;
+  } catch (error) {
+    console.error("Error creating new User:", error);
+  }
+};

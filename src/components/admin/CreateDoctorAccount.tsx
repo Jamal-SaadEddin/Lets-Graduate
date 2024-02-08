@@ -15,21 +15,72 @@ import * as React from "react";
 import { addresses } from "../../constants/addresses";
 import { departments } from "../../constants/departments";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
+import { createNewUserAccount } from "../../hooks/useAuth";
+import { Snackbar } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function CreateDoctorAccount() {
-  const [department, setDepartment] = React.useState("");
-  const [address, setAddress] = React.useState("");
+interface NewUserAccount {
+  userId: number | "";
+  firstName: string;
+  lastName: string;
+  email: string;
+  department: string;
+  address: string;
+  mobileNumber: string;
+  password: string;
+  type: string;
+}
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+const oldUser: NewUserAccount = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  department: "",
+  address: "",
+  mobileNumber: "",
+  password: "",
+  type: "doctor",
+};
+
+export default function CreateDoctorAccount() {
+  const [newUser, setNewUser] = React.useState(oldUser);
+  const [showIdExists, setShowIdExists] = React.useState(false);
+  const [saved, setSaved] = React.useState(false);
+  const [openSnackbar, setOpenSnackbar] = React.useState(false);
+
+  const handleCloseSnackbar = (
+    _event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("userId"),
-      password: data.get("password"),
-    });
+    const requestBody = {
+      ...newUser,
+      userId: newUser.userId.toString(),
+    };
+    const responseMessage = await createNewUserAccount(requestBody);
+    if (
+      responseMessage === "This user exisit before please try another userId"
+    ) {
+      setShowIdExists(true);
+      setSaved(false);
+    } else if (responseMessage === "New user created successfully") {
+      setSaved(true);
+      setShowIdExists(false);
+      setNewUser(oldUser);
+    }
+    setOpenSnackbar(true);
   };
 
   return (
@@ -112,6 +163,13 @@ export default function CreateDoctorAccount() {
                     label="First Name"
                     name="firstName"
                     autoFocus
+                    value={newUser.firstName}
+                    onChange={(event) =>
+                      setNewUser({
+                        ...newUser,
+                        firstName: event.target.value,
+                      })
+                    }
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -122,6 +180,13 @@ export default function CreateDoctorAccount() {
                     id="lastName"
                     label="Last Name"
                     name="lastName"
+                    value={newUser.lastName}
+                    onChange={(event) =>
+                      setNewUser({
+                        ...newUser,
+                        lastName: event.target.value,
+                      })
+                    }
                   />
                 </Grid>
               </Grid>
@@ -132,7 +197,22 @@ export default function CreateDoctorAccount() {
                 id="studentId"
                 label="University Number"
                 name="studentId"
+                type="number"
+                defaultValue={""}
+                value={newUser.userId}
+                onChange={(event) => {
+                  setNewUser({
+                    ...newUser,
+                    userId: Number(event.target.value),
+                  });
+                  setShowIdExists(false);
+                }}
               />
+              {showIdExists && (
+                <Typography variant="caption" color="red">
+                  This university number exists.
+                </Typography>
+              )}
               <TextField
                 margin="normal"
                 required
@@ -140,6 +220,13 @@ export default function CreateDoctorAccount() {
                 id="email"
                 label="Email"
                 name="email"
+                value={newUser.email}
+                onChange={(event) =>
+                  setNewUser({
+                    ...newUser,
+                    email: event.target.value,
+                  })
+                }
               />
               <Box sx={{ minWidth: 120, marginY: "1rem" }}>
                 <FormControl fullWidth required>
@@ -147,10 +234,13 @@ export default function CreateDoctorAccount() {
                   <Select
                     labelId="department-label"
                     id="department"
-                    value={department}
+                    value={newUser.department}
                     label="Department"
                     onChange={(event: SelectChangeEvent) =>
-                      setDepartment(event.target.value as string)
+                      setNewUser({
+                        ...newUser,
+                        department: event.target.value,
+                      })
                     }
                   >
                     {departments.map((department, index) => (
@@ -169,10 +259,13 @@ export default function CreateDoctorAccount() {
                       <Select
                         labelId="address-label"
                         id="address"
-                        value={address}
+                        value={newUser.address}
                         label="Address"
                         onChange={(event: SelectChangeEvent) =>
-                          setAddress(event.target.value as string)
+                          setNewUser({
+                            ...newUser,
+                            address: event.target.value,
+                          })
                         }
                       >
                         {addresses.map((address) => (
@@ -192,6 +285,13 @@ export default function CreateDoctorAccount() {
                 id="mobile"
                 label="Mobile Number"
                 name="mobile"
+                value={newUser.mobileNumber}
+                onChange={(event) =>
+                  setNewUser({
+                    ...newUser,
+                    mobileNumber: event.target.value,
+                  })
+                }
               />
               <TextField
                 margin="normal"
@@ -200,6 +300,13 @@ export default function CreateDoctorAccount() {
                 id="password"
                 label="Password"
                 name="password"
+                value={newUser.password}
+                onChange={(event) =>
+                  setNewUser({
+                    ...newUser,
+                    password: event.target.value,
+                  })
+                }
               />
 
               <Button
@@ -207,6 +314,17 @@ export default function CreateDoctorAccount() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                disabled={
+                  JSON.stringify(newUser) === JSON.stringify(oldUser) ||
+                  newUser.firstName.replace(/\s/g, "") === "0" ||
+                  newUser.lastName.replace(/\s/g, "") === "0" ||
+                  newUser.userId.toString().replace(/\s/g, "") === "0" ||
+                  newUser.email.replace(/\s/g, "") === "0" ||
+                  newUser.department.replace(/\s/g, "") === "0" ||
+                  newUser.address.replace(/\s/g, "") === "0" ||
+                  newUser.mobileNumber.replace(/\s/g, "") === "0" ||
+                  newUser.password.replace(/\s/g, "") === "0"
+                }
               >
                 Create Account
               </Button>
@@ -214,6 +332,28 @@ export default function CreateDoctorAccount() {
           </Box>
         </Grid>
       </Grid>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={saved ? "success" : "error"}
+          sx={{ width: "100%" }}
+        >
+          {saved
+            ? "New Doctor Account Created Successfully!"
+            : "Error creating doctor account!"}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
