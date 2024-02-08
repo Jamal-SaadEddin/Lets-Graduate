@@ -54,6 +54,7 @@ import {
   getDoctorProfileInfo,
   getStudentProfileInfo,
 } from "../hooks/useMyProfile";
+import { getAllDepartmentsManagersData } from "../hooks/useDepartmentsManagers";
 
 export default function HomePage() {
   const user = useUserStore((s) => s.fetchedUser);
@@ -119,6 +120,8 @@ export default function HomePage() {
         await getDepartmentSettings(user?.id as number);
       const fetchedDoctor = await getDoctorProfileInfo(user?.id as number);
       setCurrentUser(fetchedDoctor);
+    } else if (user?.type === "admin") {
+      await getAllDepartmentsManagersData();
     }
   };
 

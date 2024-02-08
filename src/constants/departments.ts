@@ -34,3 +34,9 @@ export const departments: string[] = [
   "Mechatronics Engineering",
   "Materials science Engineering",
 ];
+
+export interface AdminDepartment {
+  departmentName: string;
+  departmentManager: string;
+  allDoctors: string[];
+}
