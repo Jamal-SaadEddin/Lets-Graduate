@@ -19,7 +19,7 @@ export const getAbstractSubmission = async (_studentId: number) => {
       submissionId: 15,
       projectId: 1,
       type: "abstract",
-      file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+      file: "../../../src/assets/abstracts/Let's Graduate -Abstract.pdf",
       acceptStatus: "Pending",
     } as Submission);
     // }

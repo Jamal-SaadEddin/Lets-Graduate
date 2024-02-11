@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
+import nnuBg from "/src/assets/nnu-bg.jpg";
 import { useAuth } from "../../hooks/useAuth";
 
 function Copyright(props: any) {
@@ -71,7 +72,7 @@ export default function Login() {
           md={6}
           lg={6.5}
           sx={{
-            backgroundImage: "url(/src/assets/nnu-bg.jpg)",
+            backgroundImage: `url(${nnuBg})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
