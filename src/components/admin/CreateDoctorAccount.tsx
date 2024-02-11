@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
+import nnuBg from "/src/assets/nnu-bg.jpg";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { addresses } from "../../constants/addresses";
@@ -106,7 +107,7 @@ export default function CreateDoctorAccount() {
           md={false}
           lg={6}
           sx={{
-            backgroundImage: "url(/src/assets/nnu-bg.jpg)",
+            backgroundImage: `url(${nnuBg})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

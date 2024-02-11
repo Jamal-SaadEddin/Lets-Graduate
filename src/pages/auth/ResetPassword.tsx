@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import nnuBg from "/src/assets/nnu-bg.jpg";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 
 function Copyright(props: any) {
@@ -65,7 +66,7 @@ export default function ResetPassword() {
           md={6}
           lg={6.5}
           sx={{
-            backgroundImage: "url(/src/assets/nnu-bg.jpg)",
+            backgroundImage: `url(${nnuBg})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

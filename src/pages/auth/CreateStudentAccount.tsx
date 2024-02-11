@@ -16,6 +16,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { addresses } from "../../constants/addresses";
 import { departments } from "../../constants/departments";
+import nnuBg from "/src/assets/nnu-bg.jpg";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
 
 function Copyright(props: any) {
@@ -76,7 +77,7 @@ export default function CreateStudentAccount() {
           md={false}
           lg={6}
           sx={{
-            backgroundImage: "url(/src/assets/nnu-bg.jpg)",
+            backgroundImage: `url(${nnuBg})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
