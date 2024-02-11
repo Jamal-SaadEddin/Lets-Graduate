@@ -3,11 +3,24 @@ import { DoctorInfo, StudentInfo } from "../constants/myProfile";
 
 export const getStudentProfileInfo = async (studentId: number) => {
   try {
-    const response = await axios.get<StudentInfo>(
-      `http://localhost:3000/students/viewProfile?studentId=${studentId}`
-    );
+    // const response = await axios.get<StudentInfo>(
+    //   `http://localhost:3000/students/viewProfile?studentId=${studentId}`
+    // );
 
-    return response.data;
+    return {
+      id: 11923604,
+      firstName: "Jamal",
+      lastName: "SaadEddin",
+      fullName: "Jamal SaadEddin",
+      department: "Computer Engineering",
+      address: "Ramallah",
+      email: "s11923604@stu.najah.edu",
+      mobileNumber: "0599098598",
+      gp1State: "in progress",
+      gpState: "passed",
+      projectType: "gp1",
+      isWithGroup: true,
+    };
   } catch (error) {
     console.error("Error getting profile info:", error);
   }

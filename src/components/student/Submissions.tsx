@@ -17,7 +17,6 @@ import { getAbstractComments } from "../../hooks/useComments";
 import useUserStore from "../../state-management/userStore";
 import { StudentInfo } from "../../hooks/useAuth";
 import { deleteAbstract, uploadNewAbstract } from "../../hooks/useSubmissions";
-import PageNotAccessible from "../common/PageNotAccessible";
 
 const Submissions = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
@@ -43,9 +42,6 @@ const Submissions = () => {
     isDeleted && setSubmission(null);
   };
 
-  if (fetchedUser.currentPeriod !== "abstract-submission") {
-    return <PageNotAccessible title="Abstract Submission" />;
-  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper

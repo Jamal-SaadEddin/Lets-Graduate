@@ -36,11 +36,92 @@ export interface DoctorInfo {
 
 export const useAuth = async (userId: number, password: string) => {
   try {
-    const response = await axios.get<User>(
-      `http://localhost:3000/auth/login?userId=${userId}&password=${password}`
-    );
-    const fetchedUser = response.data;
-    setFetchedUser(fetchedUser);
+    // const response = await axios.get<User>(
+    //   `http://localhost:3000/auth/login?userId=${userId}&password=${password}`
+    // );
+    // const fetchedUser = response.data;
+    const fetchedUser =
+      userId === 101
+        ? {
+            id: 101,
+            type: "admin",
+            email: "admin@gmail.com",
+          }
+        : userId === 1355
+        ? {
+            id: 1355,
+            firstName: "Manar",
+            lastName: "Qamhieh",
+            email: "qamhiee@najah.edu",
+            department: "Computer Engineering",
+            address: "Qalqilya",
+            mobileNumber: "0595493759",
+            type: "doctor",
+            currentPeriod: "registration-to-supervisors",
+            info: {
+              isSupervisor: true,
+              isDepartmentManager: true,
+              isProjectsCommitteeMember: true,
+            },
+          }
+        : {
+            id: 11923604,
+            firstName: "Jamal",
+            lastName: "SaadEddin",
+            email: "s11923604@stu.najah.edu",
+            department: "Computer Engineering",
+            address: "Ramallah",
+            mobileNumber: "0599098598",
+            type: "student",
+            currentPeriod: "registration-to-supervisors",
+            info: {
+              projectId: 1,
+              projectOneState: "in progress",
+              projectTwoState: "passed",
+              isWithGroup: true,
+            },
+          };
+    if (userId === 101)
+      setFetchedUser({
+        id: 101,
+        type: "admin",
+        email: "admin@gmail.com",
+      });
+    if (userId === 1355)
+      setFetchedUser({
+        id: 1355,
+        firstName: "Manar",
+        lastName: "Qamhieh",
+        email: "qamhiee@najah.edu",
+        department: "Computer Engineering",
+        address: "Qalqilya",
+        mobileNumber: "0595493759",
+        type: "doctor",
+        currentPeriod: "registration-to-supervisors",
+        info: {
+          isSupervisor: true,
+          isDepartmentManager: true,
+          isProjectsCommitteeMember: true,
+        },
+      });
+    if (userId === 11923604)
+      setFetchedUser({
+        id: 11923604,
+        firstName: "Jamal",
+        lastName: "SaadEddin",
+        email: "s11923604@stu.najah.edu",
+        department: "Computer Engineering",
+        address: "Ramallah",
+        mobileNumber: "0599098598",
+        type: "student",
+        currentPeriod: "registration-to-supervisors",
+        info: {
+          projectId: 1,
+          projectOneState: "in progress",
+          projectTwoState: "passed",
+          isWithGroup: true,
+        },
+      });
 
     return fetchedUser;
   } catch (error) {

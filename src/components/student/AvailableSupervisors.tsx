@@ -3,7 +3,6 @@ import SupervisorsTable from "./SupervisorsTable";
 import { useEffect, useState } from "react";
 import { hasSupervisor } from "../../hooks/useAvailableSupervisors";
 import useUserStore from "../../state-management/userStore";
-import PageNotAccessible from "../common/PageNotAccessible";
 
 let doHaveSupervisor: boolean | undefined = undefined;
 
@@ -24,9 +23,6 @@ const AvailableSupervisors = () => {
     handlePageInfo();
   }, []);
 
-  if (fetchedUser.currentPeriod !== "registration-to-supervisors") {
-    return <PageNotAccessible title="Choose Your Supervisor" />;
-  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper
@@ -60,15 +56,7 @@ const AvailableSupervisors = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            {haveSupervisor === undefined ? (
-              ""
-            ) : !haveSupervisor ? (
-              <SupervisorsTable />
-            ) : (
-              <Typography variant="h6">
-                You have been connected with your Supervisor.
-              </Typography>
-            )}
+            <SupervisorsTable />
           </Grid>
         </Grid>
       </Paper>

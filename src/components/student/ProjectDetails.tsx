@@ -50,13 +50,6 @@ const ProjectDetails = () => {
     setOpenSnackbar(false);
   };
 
-  if (
-    user.currentPeriod === "answering-prerequisites" ||
-    user.currentPeriod === "evaluating-students" ||
-    user.currentPeriod === "vacation"
-  ) {
-    return <PageNotAccessible title="There is no information to display" />;
-  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper
@@ -148,7 +141,6 @@ import useMyProjectInfoStore from "../../state-management/Student/myProjectInfoS
 import usePartnersStore from "../../state-management/Student/partnersStore";
 import useSupervisorStore from "../../state-management/Student/supervisorsStore";
 import useUserStore from "../../state-management/userStore";
-import PageNotAccessible from "../common/PageNotAccessible";
 
 export function FormDialog() {
   const user = useUserStore((s) => s.fetchedUser);

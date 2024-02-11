@@ -21,7 +21,6 @@ import { useState } from "react";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import React from "react";
 import useUserStore from "../../state-management/userStore";
-import PageNotAccessible from "../common/PageNotAccessible";
 
 export default function Prerequisites() {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
@@ -74,14 +73,6 @@ export default function Prerequisites() {
         No Prerequisites Available.
       </Typography>
     );
-
-  if (fetchedUser.currentPeriod !== "answering-prerequisites") {
-    return (
-      <PageNotAccessible
-        title={`Prerequisites - Graduation Project ${params["projectType"]}`}
-      />
-    );
-  }
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>

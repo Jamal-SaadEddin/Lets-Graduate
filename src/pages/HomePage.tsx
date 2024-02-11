@@ -68,54 +68,37 @@ export default function HomePage() {
     await getNotifications(user?.id as number);
 
     if (user?.type === "student") {
-      switch (user.currentPeriod) {
-        case "create-partnerships":
-          if (!studentInfo.isWithGroup)
-            await getAvailableGroups(
-              user?.department as string,
-              studentInfo.projectOneState === "in progress" ? "gp1" : "gp2",
-              user?.id as number
-            );
-          await getMyPartners(user?.id as number);
-          await getMyProjectInfo(user?.id as number);
-          break;
-        case "registration-to-supervisors":
-          await getAvailableSupervisors(user?.id as number);
-          await getMyPartners(user?.id as number);
-          await getMySupervisors(user?.id as number);
-          await getMyProjectInfo(user?.id as number);
-          break;
-        case "abstract-submission":
-          await getAbstractSubmission(user?.id as number);
-          await getMyPartners(user?.id as number);
-          await getMySupervisors(user?.id as number);
-          await getMyProjectInfo(user?.id as number);
-          break;
+      await getAvailableGroups(
+        user?.department as string,
+        studentInfo.projectOneState === "in progress" ? "gp1" : "gp2",
+        user?.id as number
+      );
+      await getMyPartners(user?.id as number);
+      await getMyProjectInfo(user?.id as number);
 
-        default:
-          break;
-      }
+      await getAvailableSupervisors(user?.id as number);
+      await getMyPartners(user?.id as number);
+      await getMySupervisors(user?.id as number);
+      await getMyProjectInfo(user?.id as number);
+
+      await getAbstractSubmission(user?.id as number);
+      await getMyPartners(user?.id as number);
+      await getMySupervisors(user?.id as number);
+      await getMyProjectInfo(user?.id as number);
+
       const fetchedStudent = await getStudentProfileInfo(user?.id as number);
       setCurrentUser(fetchedStudent);
     } else if (user?.type === "doctor") {
-      switch (user.currentPeriod) {
-        case "registration-to-supervisors":
-          await getAvailableMergeGroups(user?.id as number);
-          await getMyGroups(user?.id as number);
-          break;
-        case "abstract-submission":
-          await getSupervisorSubmissions(user?.id as number);
-          await getMyGroups(user?.id as number);
-          if (doctorInfo.isProjectsCommitteeMember)
-            await getMyEvaluatingGroups(user?.id as number);
-          break;
-        case "evaluating-students":
-          await getMyGroups(user?.id as number);
-          break;
+      await getAvailableMergeGroups(user?.id as number);
+      await getMyGroups(user?.id as number);
 
-        default:
-          break;
-      }
+      await getSupervisorSubmissions(user?.id as number);
+      await getMyGroups(user?.id as number);
+      if (doctorInfo.isProjectsCommitteeMember)
+        await getMyEvaluatingGroups(user?.id as number);
+
+      await getMyGroups(user?.id as number);
+
       if (doctorInfo.isDepartmentManager)
         await getDepartmentSettings(user?.id as number);
       const fetchedDoctor = await getDoctorProfileInfo(user?.id as number);

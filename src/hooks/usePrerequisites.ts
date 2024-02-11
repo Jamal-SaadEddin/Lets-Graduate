@@ -7,11 +7,60 @@ export const getPrerequisites = async (
   projectType: string
 ) => {
   try {
-    const response = await axios.get<Prerequisite[]>(
-      `http://localhost:3000/prerequisites/filter?department=${department}&projectType=${projectType}`
-    );
-    const fetchedPrerequisites = response.data;
-    setPrerequisites(fetchedPrerequisites);
+    // const response = await axios.get<Prerequisite[]>(
+    //   `http://localhost:3000/prerequisites/filter?department=${department}&projectType=${projectType}`
+    // );
+    if (projectType === "gp1") {
+      const fetchedPrerequisites = [
+        {
+          prerequisiteId: 5,
+          department: "Computer Engineering",
+          projectType: "gp1",
+          content: "Do you finish Web course?",
+        },
+        {
+          prerequisiteId: 6,
+          department: "Computer Engineering",
+          projectType: "gp1",
+          content: "Do you finish Software Engineering Course?",
+        },
+        {
+          prerequisiteId: 7,
+          department: "Computer Engineering",
+          projectType: "gp1",
+          content: "Do you finish Database course?",
+        },
+        {
+          prerequisiteId: 8,
+          department: "Computer Engineering",
+          projectType: "gp1",
+          content: "Do you finish Data Structure course?",
+        },
+      ];
+      setPrerequisites(fetchedPrerequisites);
+    } else if (projectType === "gp2") {
+      const fetchedPrerequisites = [
+        {
+          prerequisiteId: 2,
+          department: "Computer Engineering",
+          projectType: "gp2",
+          content: "Do you finished Microcontrollers course?",
+        },
+        {
+          prerequisiteId: 3,
+          department: "Computer Engineering",
+          projectType: "gp2",
+          content: "Do you finish wireless lab?",
+        },
+        {
+          prerequisiteId: 4,
+          department: "Computer Engineering",
+          projectType: "gp2",
+          content: "Do you finished Critical thinking course?",
+        },
+      ];
+      setPrerequisites(fetchedPrerequisites);
+    }
 
     return {};
   } catch (error) {

@@ -111,6 +111,10 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            <Typography variant="h6">Use 11923604 for Student Login</Typography>
+            <Typography variant="h6">Use 1355 for Doctor Login</Typography>
+            <Typography variant="h6">Use 101 for Admin Login</Typography>
+            <Typography variant="h6">No Password</Typography>
             <Box
               component="form"
               noValidate

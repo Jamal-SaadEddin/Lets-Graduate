@@ -1,15 +1,11 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import Abstracts from "./Abstracts";
 import useUserStore from "../../state-management/userStore";
-import PageNotAccessible from "../common/PageNotAccessible";
 
 const SupervisorSubmissions = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   if (fetchedUser?.type !== "doctor") return null;
 
-  if (fetchedUser.currentPeriod !== "abstract-submission") {
-    return <PageNotAccessible title="Submissions" />;
-  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper

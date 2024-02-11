@@ -8,13 +8,131 @@ import { AvailableGroupsProjectItem } from "../constants/availableGroups";
 
 export const getNotifications = async (userId: number) => {
   try {
-    const response = await axios.get<NotificationElement[]>(
-      `http://localhost:3000/viewNotifications/notifications?userId=${userId}`
-    );
-    const fetchedNotifications = response.data.sort(
-      (a, b) => b.notificationId - a.notificationId
-    );
-    setNotifications(fetchedNotifications);
+    // const response = await axios.get<NotificationElement[]>(
+    //   `http://localhost:3000/viewNotifications/notifications?userId=${userId}`
+    // );
+    if (userId === 11923604) {
+      const fetchedNotifications = [
+        {
+          notificationId: 195,
+          senderId: 1355,
+          reciverId: 11923604,
+          readStatus: "unread",
+          type: "comment",
+          acceptStatus: null,
+          content: "commented on your abstract",
+          dateCreated: "2024-02-11T12:38:41.470Z",
+          notifyButtonText: "SHOW COMMENT",
+          senderType: "doctor",
+          senderName: "Dr. Manar Qamhieh",
+          notificationDuration: "5 minutes ago",
+        },
+        {
+          notificationId: 192,
+          senderId: 11922022,
+          reciverId: 11923604,
+          readStatus: "unread",
+          type: "request",
+          acceptStatus: "pendingJoin",
+          content: "is requesting to join your group",
+          dateCreated: "2024-02-11T12:36:29.711Z",
+          notifyButtonText: null,
+          senderType: "student",
+          senderName: "Mohammad Zaid",
+          notificationDuration: "7 minutes ago",
+        },
+        {
+          notificationId: 180,
+          senderId: 1355,
+          reciverId: 11923604,
+          readStatus: "read",
+          type: "notify",
+          acceptStatus: null,
+          content: "accepted to supervise your group this semester",
+          dateCreated: "2024-01-31T11:18:13.685Z",
+          notifyButtonText: null,
+          senderType: "doctor",
+          senderName: "Dr. Manar Qamhieh",
+          notificationDuration: "2 days ago",
+        },
+        {
+          notificationId: 178,
+          senderId: 11944044,
+          reciverId: 11923604,
+          readStatus: "read",
+          type: "notify",
+          acceptStatus: null,
+          content: "is now new member in your group",
+          dateCreated: "2024-01-31T11:16:38.224Z",
+          notifyButtonText: null,
+          senderType: "student",
+          senderName: "Ahmad Majed",
+          notificationDuration: "11 days ago",
+        },
+        {
+          notificationId: 175,
+          senderId: 11944044,
+          reciverId: 11923604,
+          readStatus: "read",
+          type: "request",
+          acceptStatus: "accepted",
+          content: "is requesting to join your group",
+          dateCreated: "2024-01-31T11:16:11.355Z",
+          notifyButtonText: null,
+          senderType: "student",
+          senderName: "Ahmad Majed",
+          notificationDuration: "11 days ago",
+        },
+      ];
+      setNotifications(fetchedNotifications);
+    } else if (userId === 1355) {
+      const fetchedNotifications = [
+        {
+          notificationId: 198,
+          senderId: 1,
+          reciverId: 1355,
+          readStatus: "unread",
+          type: "request",
+          acceptStatus: "pendingSupervise",
+          content: "is requesting you to supervise their group",
+          dateCreated: "2024-02-11T12:45:56.540Z",
+          notifyButtonText: null,
+          senderType: "group",
+          senderName: "Jamal SaadEddin, Obaida Aws, Ahmad Majed",
+          notificationDuration: "5 minutes ago",
+        },
+        {
+          notificationId: 183,
+          senderId: 1377,
+          reciverId: 1355,
+          readStatus: "unread",
+          type: "merge",
+          acceptStatus: "pendingMerge",
+          content:
+            "is requesting to merge his/her group (1) with your group (5)",
+          dateCreated: "2024-01-31T11:28:18.836Z",
+          notifyButtonText: "SHOW DETAILS",
+          senderType: "doctor",
+          senderName: "Dr. Raed Qadi",
+          notificationDuration: "7h ago",
+        },
+        {
+          notificationId: 1,
+          senderId: 2,
+          reciverId: 1355,
+          readStatus: "read",
+          type: "request",
+          acceptStatus: "accepted",
+          content: "is requesting you to supervise their group",
+          dateCreated: "2024-02-11T12:45:56.540Z",
+          notifyButtonText: null,
+          senderType: "group",
+          senderName: "Zaid SaadEldeen, Dyaa Aqrabawi",
+          notificationDuration: "3 days ago",
+        },
+      ];
+      setNotifications(fetchedNotifications);
+    }
 
     return {};
   } catch (error) {

@@ -1,7 +1,6 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import GroupsTable from "./GroupsTable";
 import useUserStore from "../../state-management/userStore";
-import PageNotAccessible from "../common/PageNotAccessible";
 import { StudentInfo } from "../../hooks/useAuth";
 
 const AvailableGroups = () => {
@@ -9,9 +8,6 @@ const AvailableGroups = () => {
   const studentInfo = fetchedUser?.info as StudentInfo;
   if (fetchedUser?.type !== "student") return null;
 
-  if (fetchedUser.currentPeriod !== "create-partnerships") {
-    return <PageNotAccessible title="Connect to Your Partners" />;
-  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper
@@ -45,19 +41,7 @@ const AvailableGroups = () => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            {!studentInfo.isWithGroup && <GroupsTable />}
-            {studentInfo.isWithGroup && (
-              <Typography variant="h6">
-                You can't send any partnership requests, because you have been
-                connected with your partner/s.
-                <br />
-                If any student wants to join your group, he must be alone, and
-                he must send you the partnership request.
-                <br />
-                And you will receive the notification from him to accept or
-                decline.
-              </Typography>
-            )}
+            <GroupsTable />
           </Grid>
         </Grid>
       </Paper>

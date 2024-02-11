@@ -1,15 +1,11 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
 import GroupsTable from "./GroupsTable";
 import useUserStore from "../../state-management/userStore";
-import PageNotAccessible from "../common/PageNotAccessible";
 
 const Grading = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   if (fetchedUser?.type !== "doctor") return null;
 
-  if (fetchedUser.currentPeriod !== "evaluating-students") {
-    return <PageNotAccessible title="Grading and Evaluation" />;
-  }
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper

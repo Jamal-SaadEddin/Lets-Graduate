@@ -9,14 +9,21 @@ import {
 
 export const getAbstractSubmission = async (studentId: number) => {
   try {
-    const response = await axios.get<Submission>(
-      `http://localhost:3000/submission/abstract?studentId=${studentId}`
-    );
+    // const response = await axios.get<Submission>(
+    //   `http://localhost:3000/submission/abstract?studentId=${studentId}`
+    // );
 
-    const fetchedAbstract = response.data;
-    if (fetchedAbstract) {
-      setSubmission(fetchedAbstract);
-    }
+    // const fetchedAbstract = response.data;
+
+    // if (fetchedAbstract) {
+    setSubmission({
+      submissionId: 15,
+      projectId: 1,
+      type: "abstract",
+      file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+      acceptStatus: "Pending",
+    });
+    // }
 
     return {};
   } catch (error) {
