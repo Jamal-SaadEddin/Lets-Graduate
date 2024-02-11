@@ -267,12 +267,7 @@ export default function HomePage() {
                   </ListItemIcon>
                   Edit Account
                 </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleCloseUserMenu("/login");
-                    window.location.reload();
-                  }}
-                >
+                <MenuItem onClick={() => handleCloseUserMenu("/login")}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
