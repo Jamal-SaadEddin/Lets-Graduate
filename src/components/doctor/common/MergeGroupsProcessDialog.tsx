@@ -156,7 +156,8 @@ const MergeProcessTabs = ({
       content: `is requesting to merge his/her group (${selectedGroup.id}) with your group (${requestedGroup.id})`,
       senderType: "doctor",
     };
-    const isRequested = await sendMergeRequest(requestBody);
+    const isRequested = true;
+    //await sendMergeRequest(requestBody);
     if (isRequested) setOpenMergeDialog(false);
   };
 

@@ -28,11 +28,20 @@ export const getStudentProfileInfo = async (studentId: number) => {
 
 export const getDoctorProfileInfo = async (doctorId: number) => {
   try {
-    const response = await axios.get<DoctorInfo>(
-      `http://localhost:3000/doctors/viewDoctorInfo?doctorId=${doctorId}`
-    );
+    // const response = await axios.get<DoctorInfo>(
+    //   `http://localhost:3000/doctors/viewDoctorInfo?doctorId=${doctorId}`
+    // );
 
-    return response.data;
+    return {
+      id: 1355,
+      firstName: "Manar",
+      lastName: "Qamhieh",
+      fullName: "Manar Qamhieh",
+      department: "Computer Engineering",
+      address: "Qalqilya",
+      email: "qamhiee@najah.edu",
+      mobileNumber: "0595493759",
+    };
   } catch (error) {
     console.error("Error getting profile info:", error);
   }

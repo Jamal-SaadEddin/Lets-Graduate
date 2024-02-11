@@ -19,10 +19,11 @@ const SupervisorRow = ({ supervisor }: Props) => {
   const [requested, setRequested] = useState(false);
 
   const handleButtonState = async () => {
-    const requesting = await getIsRequestingSupervision(
-      user?.id as number,
-      supervisor.doctorId
-    );
+    const requesting = false;
+    // await getIsRequestingSupervision(
+    //   user?.id as number,
+    //   supervisor.doctorId
+    // );
     setRequested(requesting);
   };
 
@@ -41,13 +42,13 @@ const SupervisorRow = ({ supervisor }: Props) => {
       content: "is requesting you to supervise their group",
       senderType: "group",
     };
-    await sendSupervisionRequest(requestBody);
+    //await sendSupervisionRequest(requestBody);
   };
 
   const cancelRequest = async () => {
     setRequested(false);
 
-    await cancelSupervisionRequest(user?.id as number, supervisor.doctorId);
+    //await cancelSupervisionRequest(user?.id as number, supervisor.doctorId);
   };
 
   return (

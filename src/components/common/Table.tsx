@@ -45,10 +45,11 @@ export default function Table({
   const [openMergeDialog, setOpenMergeDialog] = useState(false);
 
   const handleButtonState = async () => {
-    const requesting = await getIsRequestingPartnership(
-      user?.id as number,
-      tableBody[0].id!
-    );
+    const requesting = false;
+    // await getIsRequestingPartnership(
+    //   user?.id as number,
+    //   tableBody[0].id!
+    // );
     setRequested(requesting);
   };
 
@@ -65,20 +66,20 @@ export default function Table({
   const handleRequest = async () => {
     setRequested(true);
 
-    const requestBody = {
-      reciverId: tableBody[0].id,
-      senderId: user?.id as number,
-      type: "request",
-      content: "is requesting to join your group",
-      senderType: "student",
-    };
-    await sendPartnershipRequest(requestBody);
+    // const requestBody = {
+    //   reciverId: tableBody[0].id,
+    //   senderId: user?.id as number,
+    //   type: "request",
+    //   content: "is requesting to join your group",
+    //   senderType: "student",
+    // };
+    // await sendPartnershipRequest(requestBody);
   };
 
   const cancelRequest = async () => {
     setRequested(false);
 
-    await cancelPartnershipRequest(user?.id as number, tableBody[0].id!);
+    // await cancelPartnershipRequest(user?.id as number, tableBody[0].id!);
   };
 
   const handleStartMergeProcess = () => {

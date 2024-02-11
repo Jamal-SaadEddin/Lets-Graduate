@@ -49,7 +49,7 @@ const oldUser: NewUserAccount = {
 export default function CreateDoctorAccount() {
   const [newUser, setNewUser] = React.useState(oldUser);
   const [showIdExists, setShowIdExists] = React.useState(false);
-  const [saved, setSaved] = React.useState(false);
+  const [saved, setSaved] = React.useState(true);
   const [openSnackbar, setOpenSnackbar] = React.useState(false);
 
   const handleCloseSnackbar = (
@@ -65,21 +65,21 @@ export default function CreateDoctorAccount() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const requestBody = {
-      ...newUser,
-      userId: newUser.userId.toString(),
-    };
-    const responseMessage = await createNewUserAccount(requestBody);
-    if (
-      responseMessage === "This user exisit before please try another userId"
-    ) {
-      setShowIdExists(true);
-      setSaved(false);
-    } else if (responseMessage === "New user created successfully") {
-      setSaved(true);
-      setShowIdExists(false);
-      setNewUser(oldUser);
-    }
+    // const requestBody = {
+    //   ...newUser,
+    //   userId: newUser.userId.toString(),
+    // };
+    // const responseMessage = await createNewUserAccount(requestBody);
+    // if (
+    //   responseMessage === "This user exisit before please try another userId"
+    // ) {
+    //   setShowIdExists(true);
+    //   setSaved(false);
+    // } else if (responseMessage === "New user created successfully") {
+    // }
+    setSaved(true);
+    setShowIdExists(false);
+    setNewUser(oldUser);
     setOpenSnackbar(true);
   };
 

@@ -30,12 +30,12 @@ const Comments = ({ canAddComments = false }: Props) => {
 
   const handleAddNewComment = async () => {
     if (newCommentText.replace(/\s/g, "").length > 0) {
-      const requestBody = {
-        doctorId: user?.id as number,
-        projectId: submission?.projectId,
-        content: newCommentText,
-      };
-      await addNewComment(requestBody);
+      // const requestBody = {
+      //   doctorId: user?.id as number,
+      //   projectId: submission?.projectId,
+      //   content: newCommentText,
+      // };
+      // await addNewComment(requestBody);
       setNewCommentText("");
     }
   };

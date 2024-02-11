@@ -14,7 +14,8 @@ const AvailableSupervisors = () => {
   );
 
   const handlePageInfo = async () => {
-    doHaveSupervisor = await hasSupervisor(fetchedUser.id as number);
+    doHaveSupervisor = true;
+    //await hasSupervisor(fetchedUser.id as number);
     setHaveSupervisor(doHaveSupervisor);
   };
 

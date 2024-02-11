@@ -60,7 +60,8 @@ const Notification = () => {
         notificationId: notification.notificationId,
         acceptStatus: acceptStatus,
       };
-      const isSaved = await addSupervisionResponse(requestBody);
+      const isSaved = true;
+      // await addSupervisionResponse(requestBody);
       if (isSaved) setNotification(updatedNotification as NotificationElement);
     } else if (notification?.acceptStatus === "pendingJoin") {
       const requestBody = {
@@ -70,7 +71,8 @@ const Notification = () => {
         notificationId: notification.notificationId,
         acceptStatus: acceptStatus,
       };
-      const isSaved = await addJoinResponse(requestBody);
+      const isSaved = true;
+      //await addJoinResponse(requestBody);
       if (isSaved) setNotification(updatedNotification as NotificationElement);
     }
   };
@@ -89,7 +91,8 @@ const Notification = () => {
       notificationId: notification?.notificationId,
       acceptStatus: acceptStatus,
     };
-    const isSaved = await addMergeResponse(requestBody);
+    const isSaved = true;
+    //await addMergeResponse(requestBody);
     if (isSaved) setNotification(updatedNotification as NotificationElement);
   };
 

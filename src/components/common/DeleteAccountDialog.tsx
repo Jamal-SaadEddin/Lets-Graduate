@@ -29,7 +29,8 @@ export default function DeleteAccountDialog({
   };
 
   const handleDeleteAccount = async () => {
-    const isDeleted = await deleteAccount(user?.id as number);
+    const isDeleted = true;
+    //await deleteAccount(user?.id as number);
     if (isDeleted) navigate("/login");
 
     setOpenDeleteAccountDialog(false);

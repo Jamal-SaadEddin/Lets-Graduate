@@ -66,11 +66,11 @@ const ProjectStatusSelect = ({ student }: ProjectStatusSelectProps) => {
     setProjectStatus(
       event.target.value as "not started" | "in progress" | "passed"
     );
-    const requestBody = {
-      projectType: student.projectType?.toUpperCase(),
-      gpState: event.target.value,
-    };
-    await updateStudentProjectStatus(student.id, requestBody);
+    // const requestBody = {
+    //   projectType: student.projectType?.toUpperCase(),
+    //   gpState: event.target.value,
+    // };
+    // await updateStudentProjectStatus(student.id, requestBody);
   };
 
   return (

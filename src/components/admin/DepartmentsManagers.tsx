@@ -57,11 +57,11 @@ const DepartmentManagerSelect = ({
 
   const handleChange = async (event: SelectChangeEvent) => {
     setDepartmentManager(event.target.value as string);
-    const requestBody = {
-      department: department.departmentName,
-      newManager: event.target.value as string,
-    };
-    await updateDepartmentManager(requestBody);
+    // const requestBody = {
+    //   department: department.departmentName,
+    //   newManager: event.target.value as string,
+    // };
+    // await updateDepartmentManager(requestBody);
   };
 
   return (

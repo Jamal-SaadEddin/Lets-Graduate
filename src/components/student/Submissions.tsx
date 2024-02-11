@@ -34,11 +34,12 @@ const Submissions = () => {
       projectId: userInfo.projectId,
       file: `/src/assets/abstracts/${selectedFile?.name}`,
     };
-    await uploadNewAbstract(requestBody);
+    //await uploadNewAbstract(requestBody);
   };
 
   const handleDeleteAbstract = async () => {
-    const isDeleted = await deleteAbstract(submission?.submissionId as number);
+    const isDeleted = true;
+    //await deleteAbstract(submission?.submissionId as number);
     isDeleted && setSubmission(null);
   };
 

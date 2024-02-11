@@ -44,7 +44,8 @@ const NotificationsPopover = () => {
       ...notification,
       readStatus: "read",
     }));
-    const isMarked = await markAllNotificationsAsRead(user?.id as number);
+    const isMarked = true;
+    //await markAllNotificationsAsRead(user?.id as number);
     if (isMarked)
       setNotifications(updatedNotifications as NotificationElement[]);
   };

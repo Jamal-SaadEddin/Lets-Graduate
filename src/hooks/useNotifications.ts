@@ -190,56 +190,121 @@ export const getMergeDetails = async (
   requestedGroupId: number
 ) => {
   try {
-    const response = await axios.get<{
-      requestingGroup: AvailableGroupsProjectItem;
-      requestedGroup: AvailableGroupsProjectItem;
-    }>(
-      `http://localhost:3000/mergedGroupsDetails/groups?requestingGroupId=${requestingGroupId}&requestedGroupId=${requestedGroupId}`
-    );
-    const fetchedMergingGroups = response.data;
-    const requestingGroupStudents =
-      fetchedMergingGroups.requestingGroup.students.map(
-        ({ fullName, studentId, address, email, department, projectType }) => ({
-          studentId,
-          id: studentId as number,
-          academicNumber: Number(String(studentId).substring(0, 3)),
-          email,
-          department,
-          address,
-          projectType,
-          fullName,
-        })
-      );
-    const requestedGroupStudents =
-      fetchedMergingGroups.requestedGroup.students.map(
-        ({ fullName, studentId, address, email, department, projectType }) => ({
-          studentId,
-          id: studentId as number,
-          academicNumber: Number(String(studentId).substring(0, 3)),
-          email,
-          department,
-          address,
-          projectType,
-          fullName,
-        })
-      );
+    // const response = await axios.get<{
+    //   requestingGroup: AvailableGroupsProjectItem;
+    //   requestedGroup: AvailableGroupsProjectItem;
+    // }>(
+    //   `http://localhost:3000/mergedGroupsDetails/groups?requestingGroupId=${requestingGroupId}&requestedGroupId=${requestedGroupId}`
+    // );
+    // const fetchedMergingGroups = response.data;
+    // const requestingGroupStudents =
+    //   fetchedMergingGroups.requestingGroup.students.map(
+    //     ({ fullName, studentId, address, email, department, projectType }) => ({
+    //       studentId,
+    //       id: studentId as number,
+    //       academicNumber: Number(String(studentId).substring(0, 3)),
+    //       email,
+    //       department,
+    //       address,
+    //       projectType,
+    //       fullName,
+    //     })
+    //   );
+    // const requestedGroupStudents =
+    //   fetchedMergingGroups.requestedGroup.students.map(
+    //     ({ fullName, studentId, address, email, department, projectType }) => ({
+    //       studentId,
+    //       id: studentId as number,
+    //       academicNumber: Number(String(studentId).substring(0, 3)),
+    //       email,
+    //       department,
+    //       address,
+    //       projectType,
+    //       fullName,
+    //     })
+    //   );
 
-    const groups = {
+    // const groups = {
+    //   requestingGroup: {
+    //     id: fetchedMergingGroups.requestingGroup.id,
+    //     title: fetchedMergingGroups.requestingGroup.title,
+    //     doctorId: fetchedMergingGroups.requestingGroup.doctorId,
+    //     students: requestingGroupStudents,
+    //   },
+    //   requestedGroup: {
+    //     id: fetchedMergingGroups.requestedGroup.id,
+    //     title: fetchedMergingGroups.requestedGroup.title,
+    //     doctorId: fetchedMergingGroups.requestedGroup.doctorId,
+    //     students: requestedGroupStudents,
+    //   },
+    // };
+
+    setMergingGroups({
       requestingGroup: {
-        id: fetchedMergingGroups.requestingGroup.id,
-        title: fetchedMergingGroups.requestingGroup.title,
-        doctorId: fetchedMergingGroups.requestingGroup.doctorId,
-        students: requestingGroupStudents,
+        id: 1,
+        title: "Let's Graduate",
+        doctorId: 1355,
+        students: [
+          {
+            studentId: 11923604,
+            id: 11923604,
+            academicNumber: 119,
+            email: "s11923604@stu.najah.edu",
+            department: "Computer Engineering",
+            address: "Ramallah",
+            projectType: "gp1",
+            fullName: "Jamal SaadEddin",
+          },
+          {
+            studentId: 11925066,
+            id: 11925066,
+            academicNumber: 119,
+            email: "s11925066@stu.najah.edu",
+            department: "Computer Engineering",
+            address: "Aqraba",
+            projectType: "gp1",
+            fullName: "Obaida Aws",
+          },
+          {
+            studentId: 11944044,
+            id: 11944044,
+            academicNumber: 119,
+            email: "s11944044@stu.najah.edu",
+            department: "Computer Engineering",
+            address: "Jenin",
+            projectType: "gp1",
+            fullName: "Ahmad Majed",
+          },
+        ],
       },
       requestedGroup: {
-        id: fetchedMergingGroups.requestedGroup.id,
-        title: fetchedMergingGroups.requestedGroup.title,
-        doctorId: fetchedMergingGroups.requestedGroup.doctorId,
-        students: requestedGroupStudents,
+        id: 5,
+        title: "Medical System",
+        doctorId: 1377,
+        students: [
+          {
+            studentId: 11911122,
+            id: 11911122,
+            academicNumber: 119,
+            email: "s11911122@stu.najah.edu",
+            department: "Computer Engineering",
+            address: "Nablus",
+            projectType: "gp1",
+            fullName: "Mustafa Irshaid",
+          },
+          {
+            studentId: 11911133,
+            id: 11911133,
+            academicNumber: 119,
+            email: "s11911133@stu.najah.edu",
+            department: "Computer Engineering",
+            address: "Nablus",
+            projectType: "gp1",
+            fullName: "Aamer Qanadilo",
+          },
+        ],
       },
-    };
-
-    setMergingGroups(groups);
+    });
 
     return {};
   } catch (error) {

@@ -46,7 +46,8 @@ export default function Prerequisites() {
       studentId: fetchedUser.id as number,
       projectType: params["projectType"] === "1" ? "gp1" : "gp2",
     };
-    const isRegistered = await registerProject(requestBody);
+    const isRegistered = true;
+    //await registerProject(requestBody);
     if (isRegistered) {
       setRegistered(true);
       setOpenSnackbar(true);

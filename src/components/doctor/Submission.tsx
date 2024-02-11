@@ -31,9 +31,10 @@ const Submission = () => {
     const newSubmission = { ...submission, acceptStatus: "Accepted" };
     setSubmission(newSubmission as SubmissionInterface);
 
-    const isAccepted = await updateSubmissionAcceptStatus(
-      submission?.projectId
-    );
+    const isAccepted = true;
+    // await updateSubmissionAcceptStatus(
+    //   submission?.projectId
+    // );
     if (isAccepted) {
       const newSubmissions = submissions.map((s) =>
         s.submissionId === submission?.submissionId ? newSubmission : s

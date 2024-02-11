@@ -49,7 +49,7 @@ const DepartmentPrerequisites = () => {
       setNewPrerequisite(prerequisite);
       console.log(`New Prerequisite Added: ${prerequisite.content}`);
       setPrerequisites([...prerequisites, prerequisite]);
-      await addPrerequisite(prerequisite);
+      //await addPrerequisite(prerequisite);
     }
   };
 
@@ -68,7 +68,7 @@ const DepartmentPrerequisites = () => {
       (p) => p.prerequisiteId !== prerequisiteId
     );
     setPrerequisites(newPrerequisites);
-    await deletePrerequisite(prerequisiteId);
+    //await deletePrerequisite(prerequisiteId);
   };
 
   return (

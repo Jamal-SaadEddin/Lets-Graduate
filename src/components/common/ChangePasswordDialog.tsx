@@ -70,10 +70,10 @@ export default function ChangePasswordDialog({
       oldPassword: oldPassword,
       newPassword: firstPassword,
     };
-    const isSaved = await updatePassword(requestBody);
-    if (isSaved) setSaved(true);
-    else setSaved(false);
-
+    // const isSaved = await updatePassword(requestBody);
+    // if (isSaved) setSaved(true);
+    // else setSaved(false);
+    setSaved(true);
     setOpenChangePasswordDialog(false);
     setOpenSnackbar(true);
   };

@@ -22,7 +22,7 @@ export const getAbstractSubmission = async (studentId: number) => {
       type: "abstract",
       file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
       acceptStatus: "Pending",
-    });
+    } as Submission);
     // }
 
     return {};
@@ -66,12 +66,54 @@ export const deleteAbstract = async (submissionId: number) => {
 
 export const getSupervisorSubmissions = async (doctorId: number) => {
   try {
-    const response = await axios.get<Submission[]>(
-      `http://localhost:3000/abstractSubmissions/submissions?doctorId=${doctorId}`
-    );
+    // const response = await axios.get<Submission[]>(
+    //   `http://localhost:3000/abstractSubmissions/submissions?doctorId=${doctorId}`
+    // );
 
-    const fetchedAbstracts = response.data;
-    setSubmissions(fetchedAbstracts);
+    // const fetchedAbstracts = response.data;
+
+    setSubmissions([
+      {
+        submissionId: 15,
+        projectId: 1,
+        type: "abstract",
+        file: "/src/assets/abstracts/Hanal5.pdf",
+        acceptStatus: "Pending",
+        operation: "viewing",
+      },
+      {
+        submissionId: 2,
+        projectId: 3,
+        type: "abstract",
+        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        acceptStatus: "Pending",
+        operation: "viewing",
+      },
+      {
+        submissionId: 3,
+        projectId: 4,
+        type: "abstract",
+        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        acceptStatus: "Pending",
+        operation: "viewing",
+      },
+      {
+        submissionId: 4,
+        projectId: 5,
+        type: "abstract",
+        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        acceptStatus: "Accepted",
+        operation: "evaluating",
+      },
+      {
+        submissionId: 5,
+        projectId: 6,
+        type: "abstract",
+        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        acceptStatus: "Pending",
+        operation: "evaluating",
+      },
+    ]);
 
     return {};
   } catch (error) {
@@ -82,23 +124,106 @@ export const getSupervisorSubmissions = async (doctorId: number) => {
 
 export const getMyEvaluatingGroups = async (doctorId: number) => {
   try {
-    const response = await axios.get<SupervisedProjectsProjectItem[]>(
-      `http://localhost:3000/evaluatingsDetails/submissions?doctorId=${doctorId}`
-    );
-    const fetchedGroups = response.data.map((group) => ({
-      ...group,
-      students: group.students.map(
-        ({ fullName, studentId, address, email, department }) => ({
-          fullName,
-          id: studentId as number,
-          address,
-          email,
-          department,
-        })
-      ),
-    }));
-    setMyEvaluatingGroups(fetchedGroups);
-    return fetchedGroups;
+    // const response = await axios.get<SupervisedProjectsProjectItem[]>(
+    //   `http://localhost:3000/evaluatingsDetails/submissions?doctorId=${doctorId}`
+    // );
+    // const fetchedGroups = response.data.map((group) => ({
+    //   ...group,
+    //   students: group.students.map(
+    //     ({ fullName, studentId, address, email, department }) => ({
+    //       fullName,
+    //       id: studentId as number,
+    //       address,
+    //       email,
+    //       department,
+    //     })
+    //   ),
+    // }));
+
+    setMyEvaluatingGroups([
+      {
+        id: 5,
+        title: "Medical System",
+        students: [
+          {
+            fullName: "Mustafa Irshaid",
+            id: 11911122,
+            address: "Nablus",
+            email: "s11911122@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+          {
+            fullName: "Aamer Qanadilo",
+            id: 11911133,
+            address: "Nablus",
+            email: "s11911133@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+        ],
+      },
+      {
+        id: 6,
+        title: "E-Commerce System",
+        students: [
+          {
+            fullName: "Abas Surakji",
+            id: 11925033,
+            address: "Nablus",
+            email: "s11925033@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+          {
+            fullName: "NoorAldeen AbuShehadeh",
+            id: 11925077,
+            address: "Hwara",
+            email: "s11925077@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+        ],
+      },
+    ]);
+    return [
+      {
+        id: 5,
+        title: "Medical System",
+        students: [
+          {
+            fullName: "Mustafa Irshaid",
+            id: 11911122,
+            address: "Nablus",
+            email: "s11911122@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+          {
+            fullName: "Aamer Qanadilo",
+            id: 11911133,
+            address: "Nablus",
+            email: "s11911133@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+        ],
+      },
+      {
+        id: 6,
+        title: "E-Commerce System",
+        students: [
+          {
+            fullName: "Abas Surakji",
+            id: 11925033,
+            address: "Nablus",
+            email: "s11925033@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+          {
+            fullName: "NoorAldeen AbuShehadeh",
+            id: 11925077,
+            address: "Hwara",
+            email: "s11925077@stu.najah.edu",
+            department: "Computer Engineering",
+          },
+        ],
+      },
+    ];
   } catch (error) {
     console.error("Error fetching my evaluating groups:", error);
   }

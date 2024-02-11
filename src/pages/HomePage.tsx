@@ -77,14 +77,9 @@ export default function HomePage() {
       await getMyProjectInfo(user?.id as number);
 
       await getAvailableSupervisors(user?.id as number);
-      await getMyPartners(user?.id as number);
-      await getMySupervisors(user?.id as number);
-      await getMyProjectInfo(user?.id as number);
 
       await getAbstractSubmission(user?.id as number);
-      await getMyPartners(user?.id as number);
       await getMySupervisors(user?.id as number);
-      await getMyProjectInfo(user?.id as number);
 
       const fetchedStudent = await getStudentProfileInfo(user?.id as number);
       setCurrentUser(fetchedStudent);
@@ -93,11 +88,8 @@ export default function HomePage() {
       await getMyGroups(user?.id as number);
 
       await getSupervisorSubmissions(user?.id as number);
-      await getMyGroups(user?.id as number);
       if (doctorInfo.isProjectsCommitteeMember)
         await getMyEvaluatingGroups(user?.id as number);
-
-      await getMyGroups(user?.id as number);
 
       if (doctorInfo.isDepartmentManager)
         await getDepartmentSettings(user?.id as number);
@@ -165,7 +157,12 @@ export default function HomePage() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" color="primary" enableColorOnDark>
+        <AppBar
+          position="absolute"
+          color="primary"
+          open={user.type !== "admin" && openDrawer}
+          enableColorOnDark
+        >
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed

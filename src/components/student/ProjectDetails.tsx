@@ -161,7 +161,7 @@ export function FormDialog() {
 
   const handleAddNewProjectTitle = async () => {
     if (newProjectTitle.replace(/\s/g, "").length > 0) {
-      await updateMyProjectTitle(user?.id as number, newProjectTitle);
+      //await updateMyProjectTitle(user?.id as number, newProjectTitle);
       handleClose();
       setMyProject({ ...myProjectInfo, projectTitle: newProjectTitle });
     } else {

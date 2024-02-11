@@ -90,7 +90,8 @@ const DepartmentSettings = () => {
       supervisingDoctors: departmentSettings?.supervisingDoctors,
       projectsCommitteeMembers: departmentSettings?.projectsCommitteeMembers,
     };
-    const isSaved = await updateDepartmentSettings(requestBody);
+    const isSaved = true;
+    //await updateDepartmentSettings(requestBody);
     if (isSaved) setSaved(true);
     else setSaved(false);
 
