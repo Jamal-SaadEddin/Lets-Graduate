@@ -34,7 +34,7 @@ export interface DoctorInfo {
   isProjectsCommitteeMember: boolean;
 }
 
-export const useAuth = async (userId: number, password: string) => {
+export const useAuth = async (userId: number, _password: string) => {
   try {
     // const response = await axios.get<User>(
     //   `http://localhost:3000/auth/login?userId=${userId}&password=${password}`

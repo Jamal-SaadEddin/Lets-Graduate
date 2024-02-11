@@ -1,8 +1,7 @@
 import axios from "axios";
-import { AbstractComment } from "../constants/comments";
 import { setComments } from "../state-management/Student/commentsStore";
 
-export const getAbstractComments = async (projectId?: number) => {
+export const getAbstractComments = async (_projectId?: number) => {
   try {
     // const response = await axios.get<AbstractComment[]>(
     //   `http://localhost:3000/abstractComments/comments?id=${projectId}`

@@ -21,7 +21,6 @@ import { Theme, useTheme } from "@mui/material/styles";
 import React, { useState } from "react";
 import { Department } from "../../../constants/departments";
 import { DoctorInfo } from "../../../hooks/useAuth";
-import { updateDepartmentSettings } from "../../../hooks/useDepartmentSettings";
 import useDepartmentSettingsStore from "../../../state-management/Doctor/departmentSettingsStore";
 import useThemeStore from "../../../state-management/themeStore";
 import useUserStore from "../../../state-management/userStore";
@@ -81,15 +80,15 @@ const DepartmentSettings = () => {
 
   const handleSave = async () => {
     // Save Changes to Backend
-    const requestBody = {
-      departmentName: departmentSettings?.departmentName,
-      maxNoOfStuPerProj: departmentSettings?.maxNoOfStuPerProj,
-      maxNoOfProjPerDoct: departmentSettings?.maxNoOfProjPerDoct,
-      maxNoOfStuPerDoct: departmentSettings?.maxNoOfStuPerDoct,
-      currentPeriod: departmentSettings?.currentPeriod,
-      supervisingDoctors: departmentSettings?.supervisingDoctors,
-      projectsCommitteeMembers: departmentSettings?.projectsCommitteeMembers,
-    };
+    // const requestBody = {
+    //   departmentName: departmentSettings?.departmentName,
+    //   maxNoOfStuPerProj: departmentSettings?.maxNoOfStuPerProj,
+    //   maxNoOfProjPerDoct: departmentSettings?.maxNoOfProjPerDoct,
+    //   maxNoOfStuPerDoct: departmentSettings?.maxNoOfStuPerDoct,
+    //   currentPeriod: departmentSettings?.currentPeriod,
+    //   supervisingDoctors: departmentSettings?.supervisingDoctors,
+    //   projectsCommitteeMembers: departmentSettings?.projectsCommitteeMembers,
+    // };
     const isSaved = true;
     //await updateDepartmentSettings(requestBody);
     if (isSaved) setSaved(true);

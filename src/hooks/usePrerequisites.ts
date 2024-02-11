@@ -3,7 +3,7 @@ import { Prerequisite } from "../constants/prerequisites";
 import { setPrerequisites } from "../state-management/prerequisitesStore";
 
 export const getPrerequisites = async (
-  department: string,
+  _department: string,
   projectType: string
 ) => {
   try {

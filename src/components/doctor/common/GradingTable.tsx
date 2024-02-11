@@ -11,7 +11,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { ReactNode, useState } from "react";
 import { SupervisedProjectsStudent } from "../../../constants/supervisedProjects";
-import { updateStudentProjectStatus } from "../../../hooks/useMyGroups";
 
 interface Props {
   tableHead: (string | ReactNode)[];

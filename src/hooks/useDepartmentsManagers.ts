@@ -1,5 +1,4 @@
 import axios from "axios";
-import { AdminDepartment } from "../constants/departments";
 import { setAdminDepartments } from "../state-management/Admin/adminSettingsStore";
 
 export const getAllDepartmentsManagersData = async () => {

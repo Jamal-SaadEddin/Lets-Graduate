@@ -4,7 +4,6 @@ import {
   setMergingGroups,
   setNotifications,
 } from "../state-management/notificationsStore";
-import { AvailableGroupsProjectItem } from "../constants/availableGroups";
 
 export const getNotifications = async (userId: number) => {
   try {
@@ -84,7 +83,7 @@ export const getNotifications = async (userId: number) => {
           notificationDuration: "11 days ago",
         },
       ];
-      setNotifications(fetchedNotifications);
+      setNotifications(fetchedNotifications as NotificationElement[]);
     } else if (userId === 1355) {
       const fetchedNotifications = [
         {
@@ -131,7 +130,7 @@ export const getNotifications = async (userId: number) => {
           notificationDuration: "3 days ago",
         },
       ];
-      setNotifications(fetchedNotifications);
+      setNotifications(fetchedNotifications as NotificationElement[]);
     }
 
     return {};
@@ -186,8 +185,8 @@ export const markAllNotificationsAsRead = async (userId: number) => {
 };
 
 export const getMergeDetails = async (
-  requestingGroupId: number,
-  requestedGroupId: number
+  _requestingGroupId: number,
+  _requestedGroupId: number
 ) => {
   try {
     // const response = await axios.get<{

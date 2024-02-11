@@ -15,13 +15,9 @@ import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Prerequisite } from "../../../constants/prerequisites";
-import usePrerequisitesStore from "../../../state-management/prerequisitesStore";
-import {
-  addPrerequisite,
-  deletePrerequisite,
-} from "../../../hooks/usePrerequisites";
-import useUserStore from "../../../state-management/userStore";
 import { DoctorInfo } from "../../../hooks/useAuth";
+import usePrerequisitesStore from "../../../state-management/prerequisitesStore";
+import useUserStore from "../../../state-management/userStore";
 
 const DepartmentPrerequisites = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);

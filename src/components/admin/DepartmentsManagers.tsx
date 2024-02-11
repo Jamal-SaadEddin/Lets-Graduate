@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { AdminDepartment } from "../../constants/departments";
-import { updateDepartmentManager } from "../../hooks/useDepartmentsManagers";
 import useAdminSettingsStore from "../../state-management/Admin/adminSettingsStore";
 
 const DepartmentsManagers = () => {

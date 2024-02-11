@@ -10,12 +10,8 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NotificationElement } from "../../constants/notifications";
+import { getMergeDetails } from "../../hooks/useNotifications";
 import useNotificationsStore from "../../state-management/notificationsStore";
-import {
-  addJoinResponse,
-  addSupervisionResponse,
-  getMergeDetails,
-} from "../../hooks/useNotifications";
 
 interface Props {
   notificationElement: NotificationElement;
@@ -38,24 +34,24 @@ const NotificationItem = ({ notificationElement, handleClose }: Props) => {
     const updatedNotification = { ...notification, acceptStatus };
 
     if (notification.acceptStatus === "pendingSupervise") {
-      const requestBody = {
-        senderId: notification.reciverId,
-        reciverId: notification.senderId,
-        type: "notify",
-        notificationId: notification.notificationId,
-        acceptStatus: acceptStatus,
-      };
+      // const requestBody = {
+      //   senderId: notification.reciverId,
+      //   reciverId: notification.senderId,
+      //   type: "notify",
+      //   notificationId: notification.notificationId,
+      //   acceptStatus: acceptStatus,
+      // };
       const isSaved = true;
       //await addSupervisionResponse(requestBody);
       if (isSaved) setNotification(updatedNotification as NotificationElement);
     } else if (notification.acceptStatus === "pendingJoin") {
-      const requestBody = {
-        senderId: notification.reciverId,
-        reciverId: notification.senderId,
-        type: "notify",
-        notificationId: notification.notificationId,
-        acceptStatus: acceptStatus,
-      };
+      // const requestBody = {
+      //   senderId: notification.reciverId,
+      //   reciverId: notification.senderId,
+      //   type: "notify",
+      //   notificationId: notification.notificationId,
+      //   acceptStatus: acceptStatus,
+      // };
       const isSaved = true;
       //await addJoinResponse(requestBody);
       if (isSaved) setNotification(updatedNotification as NotificationElement);

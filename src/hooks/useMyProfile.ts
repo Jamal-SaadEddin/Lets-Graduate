@@ -1,7 +1,6 @@
 import axios from "axios";
-import { DoctorInfo, StudentInfo } from "../constants/myProfile";
 
-export const getStudentProfileInfo = async (studentId: number) => {
+export const getStudentProfileInfo = async (_studentId: number) => {
   try {
     // const response = await axios.get<StudentInfo>(
     //   `http://localhost:3000/students/viewProfile?studentId=${studentId}`
@@ -26,7 +25,7 @@ export const getStudentProfileInfo = async (studentId: number) => {
   }
 };
 
-export const getDoctorProfileInfo = async (doctorId: number) => {
+export const getDoctorProfileInfo = async (_doctorId: number) => {
   try {
     // const response = await axios.get<DoctorInfo>(
     //   `http://localhost:3000/doctors/viewDoctorInfo?doctorId=${doctorId}`

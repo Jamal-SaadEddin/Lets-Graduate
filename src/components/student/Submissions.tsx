@@ -12,15 +12,12 @@ import {
 } from "@mui/material";
 import { ChangeEvent } from "react";
 import { Link } from "react-router-dom";
-import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import { getAbstractComments } from "../../hooks/useComments";
 import useUserStore from "../../state-management/userStore";
-import { StudentInfo } from "../../hooks/useAuth";
-import { deleteAbstract, uploadNewAbstract } from "../../hooks/useSubmissions";
+import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 
 const Submissions = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
-  const userInfo = fetchedUser?.info as StudentInfo;
   if (fetchedUser?.type !== "student") return null;
   const submission = useViewedSubmissionStore((s) => s.submission);
   const setSubmission = useViewedSubmissionStore((s) => s.setSubmission);
@@ -30,10 +27,10 @@ const Submissions = () => {
     // Handle the selected file here, e.g., log its details or send it to a server
     console.log("Selected File:", selectedFile);
 
-    const requestBody = {
-      projectId: userInfo.projectId,
-      file: `/src/assets/abstracts/${selectedFile?.name}`,
-    };
+    // const requestBody = {
+    //   projectId: userInfo.projectId,
+    //   file: `/src/assets/abstracts/${selectedFile?.name}`,
+    // };
     //await uploadNewAbstract(requestBody);
   };
 

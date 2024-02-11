@@ -1,10 +1,9 @@
 import axios from "axios";
-import { MyProjectInfo, Partner, Supervisor } from "../constants/myProject";
 import { setMyProjectInfo } from "../state-management/Student/myProjectInfoStore";
 import { setPartners } from "../state-management/Student/partnersStore";
 import { setSupervisors } from "../state-management/Student/supervisorsStore";
 
-export const getMyPartners = async (studentId: number) => {
+export const getMyPartners = async (_studentId: number) => {
   try {
     // const response = await axios.get<Partner[]>(
     //   `http://localhost:3000/students/findMyPartners?studentId=${studentId}`
@@ -60,7 +59,7 @@ export const getMyPartners = async (studentId: number) => {
   }
 };
 
-export const getMySupervisors = async (studentId: number) => {
+export const getMySupervisors = async (_studentId: number) => {
   try {
     // const response = await axios.get<Supervisor[]>(
     //   `http://localhost:3000/doctors/findMySupervisorOrSupervisors?studentId=${studentId}`
@@ -88,7 +87,7 @@ export const getMySupervisors = async (studentId: number) => {
   }
 };
 
-export const getMyProjectInfo = async (studentId: number) => {
+export const getMyProjectInfo = async (_studentId: number) => {
   try {
     // const response = await axios.get<MyProjectInfo>(
     //   `http://localhost:3000/projects/fetchProject/${studentId}`

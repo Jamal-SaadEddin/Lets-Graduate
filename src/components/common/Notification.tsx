@@ -1,29 +1,24 @@
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import CallMergeIcon from "@mui/icons-material/CallMerge";
 import {
   Button,
   Chip,
   Container,
+  Divider,
   Grid,
   Paper,
   Stack,
-  Typography,
   TextField,
-  Divider,
+  Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-  addJoinResponse,
-  addMergeResponse,
-  addSupervisionResponse,
-} from "../../hooks/useNotifications";
-import useNotificationsStore from "../../state-management/notificationsStore";
-import { NotificationElement } from "../../constants/notifications";
-import CallMergeIcon from "@mui/icons-material/CallMerge";
 import { AvailableGroupsStudent } from "../../constants/availableGroups";
+import { NotificationElement } from "../../constants/notifications";
+import useNotificationsStore from "../../state-management/notificationsStore";
 import { Group, GroupDetails, GroupSummary } from "../common/Group";
 import Table from "../common/Table";
-import { useState } from "react";
 
 const headingsMyGroup = [
   "Student Name",
@@ -53,24 +48,24 @@ const Notification = () => {
     const updatedNotification = { ...notification, acceptStatus };
 
     if (notification?.acceptStatus === "pendingSupervise") {
-      const requestBody = {
-        senderId: notification.reciverId,
-        reciverId: notification.senderId,
-        type: "notify",
-        notificationId: notification.notificationId,
-        acceptStatus: acceptStatus,
-      };
+      // const requestBody = {
+      //   senderId: notification.reciverId,
+      //   reciverId: notification.senderId,
+      //   type: "notify",
+      //   notificationId: notification.notificationId,
+      //   acceptStatus: acceptStatus,
+      // };
       const isSaved = true;
       // await addSupervisionResponse(requestBody);
       if (isSaved) setNotification(updatedNotification as NotificationElement);
     } else if (notification?.acceptStatus === "pendingJoin") {
-      const requestBody = {
-        senderId: notification.reciverId,
-        reciverId: notification.senderId,
-        type: "notify",
-        notificationId: notification.notificationId,
-        acceptStatus: acceptStatus,
-      };
+      // const requestBody = {
+      //   senderId: notification.reciverId,
+      //   reciverId: notification.senderId,
+      //   type: "notify",
+      //   notificationId: notification.notificationId,
+      //   acceptStatus: acceptStatus,
+      // };
       const isSaved = true;
       //await addJoinResponse(requestBody);
       if (isSaved) setNotification(updatedNotification as NotificationElement);
@@ -84,13 +79,13 @@ const Notification = () => {
   const handleMergeResponse = async (acceptStatus: "accepted" | "declined") => {
     const updatedNotification = { ...notification, acceptStatus };
 
-    const requestBody = {
-      senderId: notification?.reciverId,
-      reciverId: notification?.senderId,
-      type: "notify",
-      notificationId: notification?.notificationId,
-      acceptStatus: acceptStatus,
-    };
+    // const requestBody = {
+    //   senderId: notification?.reciverId,
+    //   reciverId: notification?.senderId,
+    //   type: "notify",
+    //   notificationId: notification?.notificationId,
+    //   acceptStatus: acceptStatus,
+    // };
     const isSaved = true;
     //await addMergeResponse(requestBody);
     if (isSaved) setNotification(updatedNotification as NotificationElement);

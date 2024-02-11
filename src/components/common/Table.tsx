@@ -12,14 +12,8 @@ import { ReactNode, useEffect, useState } from "react";
 import { AvailableGroupsStudent } from "../../constants/availableGroups";
 import { Partner, Supervisor } from "../../constants/myProject";
 import { SupervisedProjectsStudent } from "../../constants/supervisedProjects";
-import {
-  cancelPartnershipRequest,
-  getIsRequestingPartnership,
-  sendPartnershipRequest,
-} from "../../hooks/useAvailableGroups";
-import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 import useMergeGroupsStore from "../../state-management/Doctor/mergeGroupsStore";
-import useUserStore from "../../state-management/userStore";
+import MergeGroupsProcessDialog from "../doctor/common/MergeGroupsProcessDialog";
 
 interface Props {
   tableHead: (string | ReactNode)[];
@@ -36,7 +30,6 @@ export default function Table({
   tableBody,
   withButton = false,
 }: Props) {
-  const user = useUserStore((s) => s.fetchedUser);
   const availableMergeGroups = useMergeGroupsStore(
     (s) => s.availableMergeGroups
   );

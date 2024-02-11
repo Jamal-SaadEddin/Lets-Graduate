@@ -9,12 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 import { Submission as SubmissionInterface } from "../../constants/supervisorSubmissions";
-import { updateSubmissionAcceptStatus } from "../../hooks/useSubmissions";
 import { getAbstractComments } from "../../hooks/useComments";
 import useCommentsStore from "../../state-management/Student/commentsStore";
 import useUserStore from "../../state-management/userStore";
+import useViewedSubmissionStore from "../../state-management/viewedSubmissionStore";
 
 const Submission = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);

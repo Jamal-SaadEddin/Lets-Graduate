@@ -3,19 +3,12 @@ import SendIcon from "@mui/icons-material/Send";
 import { Button, TableCell, TableRow } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AvailableSupervisor } from "../../constants/availableSupervisors";
-import {
-  cancelSupervisionRequest,
-  getIsRequestingSupervision,
-  sendSupervisionRequest,
-} from "../../hooks/useAvailableSupervisors";
-import useUserStore from "../../state-management/userStore";
 
 interface Props {
   supervisor: AvailableSupervisor;
 }
 
 const SupervisorRow = ({ supervisor }: Props) => {
-  const user = useUserStore((s) => s.fetchedUser);
   const [requested, setRequested] = useState(false);
 
   const handleButtonState = async () => {
@@ -35,13 +28,13 @@ const SupervisorRow = ({ supervisor }: Props) => {
   const handleRequest = async () => {
     setRequested(true);
 
-    const requestBody = {
-      reciverId: supervisor.doctorId,
-      senderId: user?.id as number,
-      type: "request",
-      content: "is requesting you to supervise their group",
-      senderType: "group",
-    };
+    // const requestBody = {
+    //   reciverId: supervisor.doctorId,
+    //   senderId: user?.id as number,
+    //   type: "request",
+    //   content: "is requesting you to supervise their group",
+    //   senderType: "group",
+    // };
     //await sendSupervisionRequest(requestBody);
   };
 

@@ -13,8 +13,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import React from "react";
 import { Link } from "react-router-dom";
-import { updatePassword } from "../../hooks/useMyProfile";
-import useUserStore from "../../state-management/userStore";
 
 interface Props {
   openChangePasswordDialog: boolean;
@@ -25,7 +23,6 @@ export default function ChangePasswordDialog({
   openChangePasswordDialog,
   setOpenChangePasswordDialog,
 }: Props) {
-  const user = useUserStore((s) => s.fetchedUser);
   const [saved, setSaved] = React.useState(false);
 
   const [oldPassword, setOldPassword] = React.useState("");
@@ -65,11 +62,11 @@ export default function ChangePasswordDialog({
   };
 
   const handleUpdatePassword = async () => {
-    const requestBody = {
-      userId: user?.id as number,
-      oldPassword: oldPassword,
-      newPassword: firstPassword,
-    };
+    // const requestBody = {
+    //   userId: user?.id as number,
+    //   oldPassword: oldPassword,
+    //   newPassword: firstPassword,
+    // };
     // const isSaved = await updatePassword(requestBody);
     // if (isSaved) setSaved(true);
     // else setSaved(false);

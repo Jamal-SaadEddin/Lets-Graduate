@@ -1,15 +1,12 @@
 import axios from "axios";
-import {
-  AvailableGroupsProjectItem,
-  Student,
-} from "../constants/availableGroups";
+import { Student } from "../constants/availableGroups";
 import { setAvailableMergeGroups } from "../state-management/Doctor/mergeGroupsStore";
 import {
   setAllStudents,
   setFilteredStudents,
 } from "../state-management/searchboxStore";
 
-export const getAvailableMergeGroups = async (doctorId: number) => {
+export const getAvailableMergeGroups = async (_doctorId: number) => {
   try {
     // const response = await axios.get<AvailableGroupsProjectItem[]>(
     //   `http://localhost:3000/allGroups/groups?doctorId=${doctorId}`
@@ -206,7 +203,7 @@ export const getAvailableMergeGroups = async (doctorId: number) => {
         department: "Computer Engineering",
         projectType: "gp2",
       },
-    ]);
+    ] as unknown as Student[]);
     setFilteredStudents([
       {
         id: 11911122,
@@ -278,7 +275,7 @@ export const getAvailableMergeGroups = async (doctorId: number) => {
         department: "Computer Engineering",
         projectType: "gp2",
       },
-    ]);
+    ] as unknown as Student[]);
 
     return {};
   } catch (error) {

@@ -12,14 +12,11 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { NotificationElement } from "../../constants/notifications";
 import useNotificationsStore from "../../state-management/notificationsStore";
 import NotificationItem from "./NotificationItem";
-import { NotificationElement } from "../../constants/notifications";
-import { markAllNotificationsAsRead } from "../../hooks/useNotifications";
-import useUserStore from "../../state-management/userStore";
 
 const NotificationsPopover = () => {
-  const user = useUserStore((s) => s.fetchedUser);
   const { notifications, setNotifications } = useNotificationsStore();
 
   const totalUnRead = notifications.filter(

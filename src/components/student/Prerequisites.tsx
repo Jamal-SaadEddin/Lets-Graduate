@@ -7,6 +7,7 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Table from "@mui/material/Table";
@@ -14,12 +15,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import usePrerequisitesStore from "../../state-management/prerequisitesStore";
-import { registerProject } from "../../hooks/usePrerequisites";
-import { useState } from "react";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import React from "react";
 import useUserStore from "../../state-management/userStore";
 
 export default function Prerequisites() {
@@ -42,10 +40,10 @@ export default function Prerequisites() {
   const [registered, setRegistered] = useState(false);
 
   const handleRegisterProject = async () => {
-    const requestBody = {
-      studentId: fetchedUser.id as number,
-      projectType: params["projectType"] === "1" ? "gp1" : "gp2",
-    };
+    // const requestBody = {
+    //   studentId: fetchedUser.id as number,
+    //   projectType: params["projectType"] === "1" ? "gp1" : "gp2",
+    // };
     const isRegistered = true;
     //await registerProject(requestBody);
     if (isRegistered) {

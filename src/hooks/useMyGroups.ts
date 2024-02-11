@@ -1,8 +1,7 @@
 import axios from "axios";
-import { SupervisedProjectsProjectItem } from "../constants/availableGroups";
 import { setMyGroups } from "../state-management/Doctor/myGroupsStore";
 
-export const getMyGroups = async (doctorId: number) => {
+export const getMyGroups = async (_doctorId: number) => {
   try {
     // const response = await axios.get<SupervisedProjectsProjectItem[]>(
     //   `http://localhost:3000/findMyGroups/groups?doctorId=${doctorId}`

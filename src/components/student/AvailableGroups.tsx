@@ -1,11 +1,9 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
-import GroupsTable from "./GroupsTable";
 import useUserStore from "../../state-management/userStore";
-import { StudentInfo } from "../../hooks/useAuth";
+import GroupsTable from "./GroupsTable";
 
 const AvailableGroups = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
-  const studentInfo = fetchedUser?.info as StudentInfo;
   if (fetchedUser?.type !== "student") return null;
 
   return (

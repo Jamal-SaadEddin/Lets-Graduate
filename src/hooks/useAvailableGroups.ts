@@ -1,18 +1,15 @@
 import axios from "axios";
+import { Student } from "../constants/availableGroups";
 import { setAvailableGroups } from "../state-management/Student/availableGroupsStore";
-import {
-  AvailableGroupsProjectItem,
-  Student,
-} from "../constants/availableGroups";
 import {
   setAllStudents,
   setFilteredStudents,
 } from "../state-management/searchboxStore";
 
 export const getAvailableGroups = async (
-  department: string,
-  projectType: string,
-  studentId: number
+  _department: string,
+  _projectType: string,
+  _studentId: number
 ) => {
   try {
     // const joinedGroups = await axios.get<any[][]>(
@@ -367,7 +364,7 @@ export const getAvailableGroups = async (
         address: "Jenin",
         mobileNumber: "05694444321",
       },
-    ]);
+    ] as unknown as Student[]);
     setFilteredStudents([
       {
         academicNumber: 119,
@@ -525,7 +522,7 @@ export const getAvailableGroups = async (
         address: "Jenin",
         mobileNumber: "05694444321",
       },
-    ]);
+    ] as unknown as Student[]);
 
     return {};
   } catch (error) {

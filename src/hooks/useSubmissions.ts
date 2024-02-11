@@ -1,5 +1,4 @@
 import axios from "axios";
-import { SupervisedProjectsProjectItem } from "../constants/availableGroups";
 import { Submission } from "../constants/supervisorSubmissions";
 import { setMyEvaluatingGroups } from "../state-management/Doctor/myGroupsStore";
 import {
@@ -7,7 +6,7 @@ import {
   setSubmissions,
 } from "../state-management/viewedSubmissionStore";
 
-export const getAbstractSubmission = async (studentId: number) => {
+export const getAbstractSubmission = async (_studentId: number) => {
   try {
     // const response = await axios.get<Submission>(
     //   `http://localhost:3000/submission/abstract?studentId=${studentId}`
@@ -64,7 +63,7 @@ export const deleteAbstract = async (submissionId: number) => {
   }
 };
 
-export const getSupervisorSubmissions = async (doctorId: number) => {
+export const getSupervisorSubmissions = async (_doctorId: number) => {
   try {
     // const response = await axios.get<Submission[]>(
     //   `http://localhost:3000/abstractSubmissions/submissions?doctorId=${doctorId}`
@@ -122,7 +121,7 @@ export const getSupervisorSubmissions = async (doctorId: number) => {
   }
 };
 
-export const getMyEvaluatingGroups = async (doctorId: number) => {
+export const getMyEvaluatingGroups = async (_doctorId: number) => {
   try {
     // const response = await axios.get<SupervisedProjectsProjectItem[]>(
     //   `http://localhost:3000/evaluatingsDetails/submissions?doctorId=${doctorId}`

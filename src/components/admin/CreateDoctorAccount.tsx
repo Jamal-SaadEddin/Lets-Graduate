@@ -1,6 +1,8 @@
-import CssBaseline from "@mui/material/CssBaseline";
+import { Snackbar } from "@mui/material";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -15,9 +17,6 @@ import * as React from "react";
 import { addresses } from "../../constants/addresses";
 import { departments } from "../../constants/departments";
 import letsgraduateLogo from "/src/assets/letsgraduate-logo-with-text.png";
-import { createNewUserAccount } from "../../hooks/useAuth";
-import { Snackbar } from "@mui/material";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();

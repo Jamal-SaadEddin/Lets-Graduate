@@ -1,22 +1,14 @@
 import { Container, Grid, Paper, Typography } from "@mui/material";
-import SupervisorsTable from "./SupervisorsTable";
-import { useEffect, useState } from "react";
-import { hasSupervisor } from "../../hooks/useAvailableSupervisors";
+import { useEffect } from "react";
 import useUserStore from "../../state-management/userStore";
-
-let doHaveSupervisor: boolean | undefined = undefined;
+import SupervisorsTable from "./SupervisorsTable";
 
 const AvailableSupervisors = () => {
   const fetchedUser = useUserStore((s) => s.fetchedUser);
   if (fetchedUser?.type !== "student") return null;
-  const [haveSupervisor, setHaveSupervisor] = useState<boolean | undefined>(
-    undefined
-  );
 
   const handlePageInfo = async () => {
-    doHaveSupervisor = true;
     //await hasSupervisor(fetchedUser.id as number);
-    setHaveSupervisor(doHaveSupervisor);
   };
 
   useEffect(() => {

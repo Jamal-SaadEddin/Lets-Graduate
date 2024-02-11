@@ -25,10 +25,6 @@ import Snackbar from "@mui/material/Snackbar";
 import React, { useState } from "react";
 import { addresses } from "../../constants/addresses";
 import { DoctorInfo, StudentInfo } from "../../constants/myProfile";
-import {
-  updateDoctorProfileInfo,
-  updateStudentProfileInfo,
-} from "../../hooks/useMyProfile";
 import useThemeStore from "../../state-management/themeStore";
 import useUserStore from "../../state-management/userStore";
 
@@ -73,25 +69,25 @@ const ProfileDetails = () => {
   const handleSave = async () => {
     // Save Changes to Backend
     if (withGPStates) {
-      const requestBody = {
-        studentId: currentUser?.id,
-        firstName: currentUser?.firstName,
-        lastName: currentUser?.lastName,
-        address: currentUser?.address,
-        mobileNumber: currentUser?.mobileNumber,
-      };
+      // const requestBody = {
+      //   studentId: currentUser?.id,
+      //   firstName: currentUser?.firstName,
+      //   lastName: currentUser?.lastName,
+      //   address: currentUser?.address,
+      //   mobileNumber: currentUser?.mobileNumber,
+      // };
       const isSaved = true;
       //await updateStudentProfileInfo(requestBody);
       if (isSaved) setSaved(true);
       else setSaved(false);
     } else {
-      const requestBody = {
-        doctorId: currentUser?.id,
-        firstName: currentUser?.firstName,
-        lastName: currentUser?.lastName,
-        address: currentUser?.address,
-        mobileNumber: currentUser?.mobileNumber,
-      };
+      // const requestBody = {
+      //   doctorId: currentUser?.id,
+      //   firstName: currentUser?.firstName,
+      //   lastName: currentUser?.lastName,
+      //   address: currentUser?.address,
+      //   mobileNumber: currentUser?.mobileNumber,
+      // };
       const isSaved = true;
       //await updateDoctorProfileInfo(requestBody);
       if (isSaved) setSaved(true);
