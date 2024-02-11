@@ -5,6 +5,7 @@ import {
   setSubmission,
   setSubmissions,
 } from "../state-management/viewedSubmissionStore";
+import submissionFile from "/src/assets/abstracts/Let's Graduate -Abstract.pdf";
 
 export const getAbstractSubmission = async (_studentId: number) => {
   try {
@@ -19,8 +20,8 @@ export const getAbstractSubmission = async (_studentId: number) => {
       submissionId: 15,
       projectId: 1,
       type: "abstract",
-      file: "../../../src/assets/abstracts/Let's Graduate -Abstract.pdf",
       acceptStatus: "Pending",
+      file: submissionFile,
     } as Submission);
     // }
 
@@ -76,7 +77,7 @@ export const getSupervisorSubmissions = async (_doctorId: number) => {
         submissionId: 15,
         projectId: 1,
         type: "abstract",
-        file: "/src/assets/abstracts/Hanal5.pdf",
+        file: submissionFile,
         acceptStatus: "Pending",
         operation: "viewing",
       },
@@ -84,7 +85,7 @@ export const getSupervisorSubmissions = async (_doctorId: number) => {
         submissionId: 2,
         projectId: 3,
         type: "abstract",
-        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        file: submissionFile,
         acceptStatus: "Pending",
         operation: "viewing",
       },
@@ -92,7 +93,7 @@ export const getSupervisorSubmissions = async (_doctorId: number) => {
         submissionId: 3,
         projectId: 4,
         type: "abstract",
-        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        file: submissionFile,
         acceptStatus: "Pending",
         operation: "viewing",
       },
@@ -100,7 +101,7 @@ export const getSupervisorSubmissions = async (_doctorId: number) => {
         submissionId: 4,
         projectId: 5,
         type: "abstract",
-        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        file: submissionFile,
         acceptStatus: "Accepted",
         operation: "evaluating",
       },
@@ -108,7 +109,7 @@ export const getSupervisorSubmissions = async (_doctorId: number) => {
         submissionId: 5,
         projectId: 6,
         type: "abstract",
-        file: "/src/assets/abstracts/Let's Graduate -Abstract.pdf",
+        file: submissionFile,
         acceptStatus: "Pending",
         operation: "evaluating",
       },
