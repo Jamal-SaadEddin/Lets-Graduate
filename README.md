@@ -1,27 +1,63 @@
-# React + TypeScript + Vite
+# Let's Graduate System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+"Let's Graduate" is a comprehensive digital platform designed to revolutionize the graduation project management process for the Faculty of Engineering. It facilitates efficient project registration, partner formation, supervisor connection, and abstract submission and review. This system aims to enhance the educational experience by streamlining administrative processes and fostering collaboration among students and faculty.
 
-Currently, two official plugins are available:
+## Project Link
+[Let's Graduate](https://lets-graduate.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- **Student Registration:** Allows students to register for their graduation projects.
+- **Partner Formation:** Enables students to find and form partnerships easily.
+- **Supervisor Connection:** Facilitates the connection between students and available supervisors.
+- **Abstract Submission:** Provides a platform for students to submit their project abstracts.
+- **Feedback Mechanism:** Allows supervisors to provide feedback directly on the submitted abstracts.
+- **Project Committee Evaluation:** Enables the project committee to review and approve abstracts efficiently.
 
-## Expanding the ESLint configuration
+## Technologies Used
+- **React + TypeScript:** For building the user interface with strong type checking.
+- **Material UI:** For designing a modern and responsive UI.
+- **Axios:** For making HTTP requests to back-end services.
+- **Zustand:** For state management across the application.
+- **React Router:** For navigation within the application.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Getting Started
 
-- Configure the top-level `parserOptions` property like this:
+### Prerequisites
+- Node.js
+- npm or yarn
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+### Installation and Local Setup
+1. **Clone the repository:**
+   ```
+   git clone https://github.com/your-username/lets-graduate.git
+   cd lets-graduate
+   ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. **Install dependencies:**
+   ```
+   npm install
+   ```
+
+3. **Run the application:**
+   ```
+   npm run dev
+   ```
+   
+   The application should now be running on `http://localhost:5173`.
+
+### Usage
+Navigate to the application URL in your web browser. You'll find three main sections based on the User-Id logged in:
+- **Student Side:** Where students can register projects, find partners, and submit abstracts.
+- **Doctor Side:** Doctors can review project submissions and provide feedback.
+- **Admin Side:** Admins can create new doctor accounts and assign department managers.
+
+For a live version of the application, visit [Let's Graduate](https://lets-graduate.netlify.app/).
+
+## Authors
+- [Jamal SaadEddin](https://github.com/Jamal-SaadEddin)
+- [Omar Qaneer](https://github.com/Omar-Qaneer)
+
+## Contact
+For any inquiries or suggestions, please contact us at jamalsaadeddin27@gmail.com.
+
